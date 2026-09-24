@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <style>
+    body {
+        background-color: #ffffff;
+        color: #111827;
+        font-family: system-ui, -apple-system, sans-serif;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 24px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #111827;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        color: #4b5563;
+    }
+
+    label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #4b5563;
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    input {
+        padding: 10px 12px;
+        font-size: 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        outline: none;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 12px;
+    }
+
+    input:focus {
+        border-color: #2563eb;
+    }
+
+    button {
+        padding: 10px 16px;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #ffffff;
+        background-color: #2563eb;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #1d4ed8;
+    }
+
+    .sequence-box {
+        padding: 10px 14px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        text-align: center;
+    }
+
+    .sequence-container {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-start;
+        padding: 10px 0;
+    }
+</style>
+</head>
+<body>
+    <h1>guess the fifth sequence</h1>
+    <div id="display-text">
+        
+    </div>
+    <label>answer</label>
+    <input id="answer-input" >
+    
+    <button id="submit-answer">submit</button>
+    
+    <div>
+        <h2>answer</h2>
+        
+        <label id="answer"></label>
+    </div>
+    
+    <script >
+        const $questionTextDisplay = document.getElementById("display-text")
+        const $answerTextDisplay = document.getElementById("answer")
+        const $submitBtn = document.getElementById("submit-answer")
+        const $answerInput = document.getElementById("answer-input")
+        let currSession;
+        const operators = ["+", "-", "×","÷"]
+        class session{
+            constructor(){
+                this._ = constraint(0,1)? arithmetic(): geometric()
+                this.sequence = this._.sequence
+                this.answerKey = this._.ans
+                const $ = [];
+                for (const num of this.sequence) {
+                const $span = document.createElement("span");
+
+                $span.classList.add("sequence-box");
+                $span.innerText = num;
+
+                $.push($span);
+            }
+
+            $questionTextDisplay.innerHTML = `
+                <h1>What is the next number in this sequence?</h1>
+                <div class="sequence-container">
+                    ${$.map(span => span.outerHTML).join("")}
+                </div>
+            `;
+            }
+            getAnswerKey(){
+                return this.answerKey;
+            }
+            checkStudentAnswer(answer){
+                return this.answerKey == answer
+            }
+        }
+        newSession()
+        function newSession(){
+            currSession = new session()
+            $answerTextDisplay.innerHTML=""
+            $submitBtn.addEventListener("click",
+                ()=>{
+                console.log(currSession.getAnswerKey())
+                    const isCorrect =currSession.checkStudentAnswer($answerInput.value)
+                    if(isCorrect){
+                        $answerTextDisplay.innerHTML = `<h1>Correct</h1>
+                        <h2>the answer is: ${currSession.getAnswerKey()}</h2>
+                        `
+                    }else{
+                        $answerTextDisplay.innerHTML = `<h1>Incorrect</h1>
+                        <h2>the answer is: ${currSession.getAnswerKey()}</h2>
+                        `
+                    }
+                    const $btnRefresh = document.createElement("button")
+                    $btnRefresh.onclick= newSession
+                    $btnRefresh.innerText="new question"
+                    $answerTextDisplay.append($btnRefresh)
+                }
+                )
+        }
+        
+        // returns the answer and sequence 
+        function arithmetic(){
+            const _a1 = constraint(2, 20);
+            const _d = constraint(1, 10);
+            const _operator = randOp("arithmetic: sequence");
+            const _len = 4
+            const _signed = _operator === "-"? -_d: _d
+            console.log(_a1,_d, _operator)
+            const sequence = generateSequence(_a1,_len, _d, _operator);
+            const nthNumInSequence = (n) => _a1 +((n-1) * _signed)
+            const ans = nthNumInSequence(_len+1)
+            return {sequence, ans};
+        }/*
+        function geometric() {
+    const _a1 = constraint(2, 20);
+    const _r = constraint(2, 5);
+    const _operator = randOp("geometric: sequence");
+    const _len = 4;
+
+    const r = _operator === "÷" ? 1 / _r : _r;
+
+    console.log(_a1, r, _operator);
+
+    const sequence = generateSequence(_a1, _len, _r, _operator);
+
+    const nthNumInSequence = (n) => _a1 * (r ** (n - 1));
+
+    const ans = nthNumInSequence(_len + 1);
+
+    const displaySequence = sequence.map(decimalToFraction);
+    const displayAnswer = decimalToFraction(ans);
+
+    return {
+        sequence: displaySequence,
+        ans: displayAnswer
+    };
+}
+*/
+function geometric() {
+    const _a1 = constraint(2, 20);
+    const _r = constraint(2, 5);
+    const _operator = randOp("geometric: sequence");
+    const _len = 4;
+
+    const sequence = [];
+
+    for (let i = 0; i < _len; i++) {
+        if (_operator === "×") {
+            sequence.push(
+                simplifyFraction(
+                    _a1 * (_r ** i),
+                    1
+                )
+            );
+        } else {
+            sequence.push(
+                simplifyFraction(
+                    _a1,
+                    _r ** i
+                )
+            );
+        }
+    }
+
+    let ans;
+
+    if (_operator === "×") {
+        ans = simplifyFraction(
+            _a1 * (_r ** _len),
+            1
+        );
+    } else {
+        ans = simplifyFraction(
+            _a1,
+            _r ** _len
+        );
+    }
+
+    return {
+        sequence,
+        ans
+    };
+}
+        // returns a random
+        function constraint(c1, c2){
+            // check if c1 and c2 have valid value
+            if((c1.length === 0 || c1 === null) ||  (c2.length === 0 || c2 === null)){
+                return 0;
+            }
+            if(c1 > c2){
+                return 0;
+            }
+ 
+            return Math.floor(Math.random() * (Math.floor(c2)-Math.ceil(c1)+1) )+ Math.ceil(c1)
+        }
+        function generateSequence(startingNum, length, scalar, operator){
+            const sequence= []
+            let currNum = startingNum
+            for(let i = 0; i < length; i++){
+                sequence.push(currNum)
+                currNum = toValidJsMathOperator(operator)(currNum, scalar)
+            }
+            return sequence
+        }
+        function toValidJsMathOperator(operator){
+            return {
+              '+': (a, b) => a + b,
+              '-': (a, b) => a - b,
+              '×': (a, b) => a * b,
+              '÷': (a, b) => a / b
+            }[operator];
+        }
+        // return random operation base on math type
+        function randOp(t){
+            switch(t){
+                case "arithmetic: sequence":{
+                
+                    const index = constraint(0,1)
+                    const validOperatorsForArithmeticSequence = [operators[0], operators[1]]
+                    return validOperatorsForArithmeticSequence[index]
+                    }
+                case "geometric: sequence":{
+                    const index = constraint(0,1)
+                    const validOperatorsForGeometricSequence = [operators[2], operators[3]]
+                    return validOperatorsForGeometricSequence[index]
+                    }
+            }
+        }
+       function decimalToFraction(decimal) {
+    // Keep whole numbers as normal numbers
+    if (Number.isInteger(decimal)) {
+        return String(decimal);
+    }
+
+    const string = decimal.toString();
+    const decimalPlaces = string.split(".")[1].length;
+
+    const denominator = 10 ** decimalPlaces;
+    const numerator = Math.round(decimal * denominator);
+
+    const gcd = (a, b) => {
+        while (b !== 0) {
+            [a, b] = [b, a % b];
+        }
+        return Math.abs(a);
+    };
+
+    const divisor = gcd(numerator, denominator);
+
+    return `${numerator / divisor}/${denominator / divisor}`;
+}
+function simplifyFraction(numerator, denominator) {
+    const gcd = (a, b) => {
+        a = Math.abs(a);
+        b = Math.abs(b);
+
+        while (b !== 0) {
+            [a, b] = [b, a % b];
+        }
+
+        return a;
+    };
+
+    const divisor = gcd(numerator, denominator);
+
+    numerator /= divisor;
+    denominator /= divisor;
+
+    if (denominator === 1) {
+        return String(numerator);
+    }
+
+    return `${numerator}/${denominator}`;
+}
+        /* 
+            requirements 
+                1. create 5 number sequence.
+                2. hide the last number from the sequence 
+                3. display the first 4 number 
+                4. the pattern must be arithmetic or geometric 
+                5. limit starting number arithmetic<2, 30>, geometric<2, 100>
+             
+            initial value to create sequence
+                arithmetic
+                    1. A1 = starting number, constraint<2, 20>
+                    2. D = difference, constraint<1, 10>
+                geometric 
+                    1. A1 = starting number, constraint<2, 20>
+                    2. r = ratio, constraint<-10, 10>
+         */
+        
+    </script>
+</body>
+</html>

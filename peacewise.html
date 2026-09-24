@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* border: red 1px solid; */
+}
+
+.card{
+    padding: 15px;
+    background-color: antiquewhite;
+}
+#stats{
+    display: flex;
+    justify-content: space-between;
+}
+.section{
+    height: 100vh;
+    width: 100vw;
+    padding: 2rem 10em;
+    background-color: red
+
+}
+#piecewise-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+}
+#answer-container {
+    display: grid;
+    /* place-items: center; */
+    gap: 10px;
+}
+#answer{
+     display: grid;
+    /* place-items: center; */
+    gap: 10px;
+}
+#student-information.section {
+    
+    min-height: 100vh;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 2rem;
+
+    /* background-color: transparent; */
+    
+.container {
+    width: 100%;
+    max-width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    padding: 35px;
+
+    background: navajowhite;
+    border: 1px solid #e5e5e7;
+    border-radius: 18px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.container h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin-bottom: 5px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #3a3a3c;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 48px;
+
+    padding: 0 14px;
+
+    font-size: 16px;
+    color: #1d1d1f;
+
+    background: #ffffff;
+    border: 1px solid #c7c7cc;
+    border-radius: 10px;
+
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+    color: #8e8e93;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #54141d;
+    box-shadow: 0 0 0 3px rgba(84, 20, 29, 0.12);
+}
+
+#continue {
+    width: 100%;
+    height: 48px;
+
+    margin-top: 5px;
+
+    border: none;
+    border-radius: 0.2em;
+
+    background: #54141d;
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s, transform 0.1s;
+}
+
+#create-section:hover {
+    background: #6b1a25;
+}
+
+#create-section:active {
+    transform: scale(0.98);
+}
+}
+
+
+@media (max-width: 600px) {
+    .section {
+        padding: 1rem;
+    }
+
+    .container {
+        padding: 25px;
+    }
+
+    .container h1 {
+        font-size: 24px;
+    }
+}
+</style>
+    </head>
+    <body>
+        
+        <span style="display: none;" id="debug"></span>
+        <!-- <section class="section">
+        <div class=" card" id="piecewise-card">
+            <h1>compute and answer </h1>
+        <div id="display-text">
+            
+        </div class="container">
+                <label>answer</label>
+                <input type="number" id="answer-input" >
+                
+                <button id="submit-answer">submit</button>
+                
+                <div class="container" id="answer-container">
+                    <h2>answer</h2>
+                    
+                    <label id="answer"></label>
+        </div>
+        </div>
+        </section> -->
+<section class="section" id="piecewise-information">
+    <div class="card" id="piecewise-card">
+        <div id="stats"></div>
+        <h1>Compute and Answer</h1>
+
+        <div id="display-text"></div>
+
+        <div class="container" id="answer-input-container">
+            <label for="answer-input">Answer</label>
+
+            <input
+                type="number"
+                id="answer-input"
+            >
+
+            <button id="submit-answer">
+                Submit
+            </button>
+        </div>
+
+        <div class="container" id="answer-container">
+            <h2>Answer</h2>
+            <span id="answer"></span>
+        </div>
+
+    </div>
+</section>
+<section class="section"  id="student-information">
+    <div class="container">
+
+        <h1>Student Information</h1>
+
+        <div class="form-group">
+            <label for="student-name">Student Name</label>
+            <input
+                type="text"
+                id="student-name"
+                name="studentName"
+                placeholder="Enter student name"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="section-name">Section Name</label>
+            <input
+                type="text"
+                id="section-name"
+                name="sectionName"
+                placeholder="Enter section name"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="grade-level">Grade Level</label>
+            <select id="grade-level" name="gradeLevel">
+                <option value="" disabled selected>
+                    Select grade level
+                </option>
+                <option value="11">Grade 11</option>
+                <option value="12">Grade 12</option>
+            </select>
+        </div>
+
+        <button type="button" id="continue">
+            continue
+        </button>
+
+    </div>
+</section>
+
+
+        <script type="module" src="./js/feature/piecewiseQuestion.js"></script>
+    <!-- <script>
+        const $debugDisplay = document.getElementById("debug")
+        const $questionTextDisplay = document.getElementById("display-text")
+        const $answerTextDisplay = document.getElementById("answer")
+        const $submitBtn = document.getElementById("submit-answer")
+        const $answerInput = document.getElementById("answer-input")
+
+        let currSession;
+
+const data = {
+    transportation: [
+        {
+            vehicle: "Traditional Jeepney",
+            baseDistance: 4,
+            baseFare: 13,
+            additionalFarePerKm: 2.00
+        },
+        {
+            vehicle: "Modern Jeepney",
+            baseDistance: 4,
+            baseFare: 15,
+            additionalFarePerKm: 2.50
+        },
+        {
+            vehicle: "Bus",
+            baseDistance: 5,
+            baseFare: 15,
+            additionalFarePerKm: 2.50
+        },
+        {
+            vehicle: "Air-conditioned Bus",
+            baseDistance: 5,
+            baseFare: 18,
+            additionalFarePerKm: 3.00
+        },
+        {
+            vehicle: "Taxi",
+            baseDistance: 1,
+            baseFare: 50,
+            additionalFarePerKm: 13.50
+        },
+        {
+            vehicle: "UV Express",
+            baseDistance: 4,
+            baseFare: 20,
+            additionalFarePerKm: 2.50
+        },
+        {
+            vehicle: "Tricycle",
+            baseDistance: 1,
+            baseFare: 20,
+            additionalFarePerKm: 5.00
+        },
+        {
+            vehicle: "Motorcycle Taxi",
+            baseDistance: 2,
+            baseFare: 50,
+            additionalFarePerKm: 10.00
+        }
+    ]
+};
+
+    // template question: if a {vehicle} have a base price of {basePrice},
+    // and a base distance before adding additional fare is {baseDistance} Km and your target distination is {targetDistance}. find the total fare
+        function newSession(){
+            const d =  data.transportation[constraint(0, data.transportation.length)]
+            const t = new Transportation(d.baseDistance, d.baseFare, constraint(8, 20), d.additionalFarePerKm, d.vehicle)
+             $questionTextDisplay.innerHTML = t.TemplateQuestion()
+            $answerTextDisplay.innerHTML = t.calculateTotalFare()
+    //         `<h1>
+    //     A ${t.vehicle} has a base fare of ₱${t.baseFare} 
+    //     and a base distance of ${t.baseDistance} km before 
+    //     additional fare is charged. If the target distance is 
+    //     ${t.targetDistance} km and the additional fare is 
+    //     ₱${t.additionalFarePerKm} per kilometer, 
+    //     find the total fare.</h1><br>
+    //     <h1>the answer is ${t.calculateTotalFare()}</h1>
+    // `;
+        }
+       
+
+        // a {vehivcle}  has a base fare of {baseFare} for the first {baseDistance}. and has a succedding fare of a {additionalFarePerKm}. if you travel for {targetDistance}. find the totoal fare
+class Session{
+    constructor(){
+        
+        this._templateQuestion = new TemplateQuestion(); // create the template question to use
+        this._expectedAnswer;
+    }
+}
+// function createTransportation(){
+//     let transportation = [];
+//     const _T = fetch("")
+//     console.log(_T)
+//     data.transportation.forEach(c =>{
+//         transportation.push(c)
+//     })
+//     $debugDisplay.innerHTML = transportation
+// }
+
+function constraint(c1, c2){
+            // check if c1 and c2 have valid value
+            if((c1.length === 0 || c1 === null) ||  (c2.length === 0 || c2 === null)){
+                return 0;
+            }
+            if(c1 > c2){
+                return 0;
+            }
+ 
+            return Math.floor(Math.random() * (Math.floor(c2)-Math.ceil(c1)+1) )+ Math.ceil(c1)
+        }
+
+
+
+        class Transportation {
+    constructor(baseDistance, baseFare, targetDistance, additionalFarePerKm, vehicle) {
+        this.baseDistance = baseDistance;
+        this.baseFare = baseFare;
+        this.targetDistance = targetDistance;
+        this.additionalFarePerKm = additionalFarePerKm;
+        this.vehicle = vehicle;
+    }
+
+    calculateTotalFare(){
+        let totalFare = this.baseFare;
+        for(let i = 0; i < this.targetDistance - this.baseDistance; i++){
+            totalFare +=this.additionalFarePerKm
+        }
+        return totalFare
+    }
+    TemplateQuestion(){
+        return  `A ${this.vehicle} has a base fare of ₱${this.baseFare} for the first ${this.baseDistance} kilometers. For every additional kilometer traveled, an additional fare of ₱${this.additionalFarePerKm} is charged. If a passenger travels a total distance of ${this.targetDistance} kilometers, what is the total fare?
+`
+    }
+    get baseDistance() {
+        return this._baseDistance;
+    }
+
+    set baseDistance(value) {
+        this._baseDistance = value;
+    }
+
+    get baseFare() {
+        return this._baseFare;
+    }
+
+    set baseFare(value) {
+        this._baseFare = value;
+    }
+
+    get targetDistance() {
+        return this._targetDistance;
+    }
+
+    set targetDistance(value) {
+        this._targetDistance = value;
+    }
+
+    get additionalFarePerKm() {
+        return this._additionalFarePerKm;
+    }
+
+    set additionalFarePerKm(value) {
+        this._additionalFarePerKm = value;
+    }
+
+    get vehicle() {
+        return this._vehicle;
+    }
+
+    set vehicle(value) {
+        this._vehicle = value;
+    }
+}
+function createTransportation() {
+    let transportation = [];
+    
+    data.transportation.forEach(c => {
+        let randomizedTargetDistance = constraint(c.baseDistance, 10)
+        const t = new Transportation(
+                c.baseDistance,
+                c.baseFare,
+                constraint(c.baseDistance, 10), // targetDistance will be randomized later
+                c.additionalFarePerKm,
+                c.vehicle
+            )
+            $debugDisplay.innerHTML = t.targetDistance
+        transportation.push(
+            t
+        );
+    });
+
+    console.log(transportation);
+
+    // $debugDisplay.innerHTML =
+    //     JSON.stringify(transportation, null, 2) ;
+}
+newSession()
+class PieceWise{
+    constructor(){
+        this.piece = []
+    }
+    
+    
+}
+// sub function
+class Piece{
+    constructor(func){
+        this.func = func
+    }
+}
+
+
+    </script> -->
+</body>
+</html>

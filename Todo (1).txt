@@ -1,0 +1,21 @@
+peacewise func 
+
+if a {vehicle} has a base fare of {price} for 1st km.
+and your destination is 15km how much is your final fare
+
+expected answer is 15 x 15, 
+            baseFare X distance(km)
+
+            {
+                category: transportation
+                vehicle: bus
+                unit: ""
+                
+                price : 10
+                distant: randomize
+
+            }
+            {
+                category: bills 
+            }
+

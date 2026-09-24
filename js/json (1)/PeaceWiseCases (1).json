@@ -1,0 +1,56 @@
+[
+    
+    
+    {
+
+  "transportation": [
+    {
+      "vehicle": "Traditional Jeepney",
+      "baseDistance": 4,
+      "baseFare": 13,
+      "additionalFarePerKm": 2.00
+    },
+    {
+      "vehicle": "Modern Jeepney",
+      "baseDistance": 4,
+      "baseFare": 15,
+      "additionalFarePerKm": 2.50
+    },
+    {
+      "vehicle": "Bus",
+      "baseDistance": 5,
+      "baseFare": 15,
+      "additionalFarePerKm": 2.50
+    },
+    {
+      "vehicle": "Air-conditioned Bus",
+      "baseDistance": 5,
+      "baseFare": 18,
+      "additionalFarePerKm": 3.00
+    },
+    {
+      "vehicle": "Taxi",
+      "baseDistance": 1,
+      "baseFare": 50,
+      "additionalFarePerKm": 13.50
+    },
+    {
+      "vehicle": "UV Express",
+      "baseDistance": 4,
+      "baseFare": 20,
+      "additionalFarePerKm": 2.50
+    },
+    {
+      "vehicle": "Tricycle",
+      "baseDistance": 1,
+      "baseFare": 20,
+      "additionalFarePerKm": 5.00
+    },
+    {
+      "vehicle": "Motorcycle Taxi",
+      "baseDistance": 2,
+      "baseFare": 50,
+      "additionalFarePerKm": 10.00
+    }
+  ]
+}]
