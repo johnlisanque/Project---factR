@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
+  <!-- Defines the character encoding and responsive viewport -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Page title and description for browser and search engines -->
   <title>PROJECTFACTR — Unit Conversion Mastery Quiz</title>
   <meta name="description" content="ProjectFactr — Unit Conversion Mastery Quiz for Grade 7 Mathematics.">
 
@@ -12,13 +14,14 @@
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Design.css -->
+  <!-- Connects the global stylesheet -->
   <link rel="stylesheet" href="../../assets/style/style.css">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <!-- Imports Inter and Montserrat font families -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap"
     rel="stylesheet">
@@ -28,6 +31,7 @@
 
     /* =========================================================
        PROJECTFACTR MAIN VARIABLES
+       Stores reusable colors and font families for the page.
        ========================================================= */
 
     :root {
@@ -42,6 +46,7 @@
       --border-color: #d8eade;
       --white: #ffffff;
 
+      /* Defines the fonts used for branding and regular text */
       --font-brand: 'Montserrat', sans-serif;
       --font-body: 'Inter', system-ui, -apple-system, sans-serif;
     }
@@ -49,6 +54,7 @@
 
     /* =========================================================
        BASIC RESET
+       Removes unwanted default spacing and standardizes sizing.
        ========================================================= */
 
     * {
@@ -56,11 +62,13 @@
     }
 
 
+    /* Enables smooth scrolling when navigating to page sections */
     html {
       scroll-behavior: smooth;
     }
 
 
+    /* Sets the general appearance and layout of the webpage */
     body {
       margin: 0;
       padding: 0;
@@ -79,6 +87,7 @@
 
     /* =========================================================
        NAVIGATION
+       Styles the navigation links and their hover effects.
        ========================================================= */
 
     .nav-item {
@@ -86,6 +95,7 @@
     }
 
 
+    /* Controls the appearance of individual navigation links */
     .nav-link {
       font-family: var(--font-body);
 
@@ -107,6 +117,7 @@
 
       position: relative;
 
+      /* Adds smooth animation to navigation interactions */
       transition:
         all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -118,6 +129,7 @@
     }
 
 
+    /* Creates the animated underline beneath navigation links */
     .nav-link::after {
       content: '';
 
@@ -144,6 +156,7 @@
     }
 
 
+    /* Changes the link appearance when the mouse hovers over it */
     .nav-link:hover {
       color: var(--primary-forest);
 
@@ -153,6 +166,7 @@
     }
 
 
+    /* Reveals the underline during hover */
     .nav-link:hover::after {
       transform: scaleX(1);
 
@@ -162,6 +176,7 @@
 
     /* =========================================================
        GRADE BUTTON
+       Styles the button used to display the grade navigation.
        ========================================================= */
 
     .nav-btn-toggle {
@@ -202,6 +217,7 @@
     }
 
 
+    /* Adds the underline effect to the grade button */
     .nav-btn-toggle::after {
       content: '';
 
@@ -228,6 +244,7 @@
     }
 
 
+    /* Applies hover styling to the grade dropdown button */
     .nav-item.dropdown:hover > .nav-btn-toggle {
       color: var(--primary-forest);
 
@@ -237,6 +254,7 @@
     }
 
 
+    /* Displays the underline when hovering over the grade button */
     .nav-item.dropdown:hover > .nav-btn-toggle::after {
       transform: scaleX(1);
 
@@ -246,6 +264,7 @@
 
     /* =========================================================
        ACTIVE GRADE 7
+       Highlights the currently selected grade navigation item.
        ========================================================= */
 
     .nav-btn-toggle.active {
@@ -258,6 +277,7 @@
     }
 
 
+    /* Removes the underline from the active grade button */
     .nav-btn-toggle.active::after {
       display: none;
     }
@@ -265,6 +285,7 @@
 
     /* =========================================================
        DROPDOWN
+       Controls the dropdown menu and its hover animation.
        ========================================================= */
 
     .dropdown-menu {
@@ -289,6 +310,7 @@
 
       min-width: 220px;
 
+      /* Hides the dropdown before it is activated */
       opacity: 0;
 
       visibility: hidden;
@@ -302,6 +324,7 @@
     }
 
 
+    /* Reveals the dropdown when the navigation item is hovered */
     .nav-item.dropdown:hover .dropdown-menu {
       opacity: 1;
 
@@ -311,6 +334,7 @@
     }
 
 
+    /* Styles each individual item inside the dropdown */
     .dropdown-item {
       display: block;
 
@@ -332,6 +356,7 @@
     }
 
 
+    /* Changes dropdown item colors and spacing during hover */
     .dropdown-item:hover {
       background-color: #e7f7ee;
 
@@ -343,6 +368,7 @@
 
     /* =========================================================
        HAMBURGER
+       Styles the mobile navigation toggle button.
        ========================================================= */
 
     .hamburger-btn {
@@ -367,6 +393,7 @@
     }
 
 
+    /* Adds a background highlight when hovering over the button */
     .hamburger-btn:hover {
       background-color: #e7f7ee;
     }
@@ -374,6 +401,7 @@
 
     /* =========================================================
        COVER IMAGE
+       Makes the banner image responsive across screen sizes.
        ========================================================= */
 
     .cover-section {
@@ -394,6 +422,7 @@
     }
 
 
+    /* Displays the cover image without exceeding its container */
     .cover-image {
       display: block;
 
@@ -411,6 +440,7 @@
 
     /* =========================================================
        GREEN SPACE BAR
+       Creates the green horizontal divider below the banner.
        ========================================================= */
 
     .quiz-space-bar {
@@ -428,6 +458,7 @@
 
     /* =========================================================
        QUIZ SECTION
+       Sets the main layout and spacing of the quiz content.
        ========================================================= */
 
     .quiz-section {
@@ -449,6 +480,7 @@
 
     /* =========================================================
        QUIZ TITLE
+       Controls the heading displayed above the quiz.
        ========================================================= */
 
     .quiz-title {
@@ -472,6 +504,7 @@
 
     /* =========================================================
        STUDENT START
+       Styles the initial form for entering student information.
        ========================================================= */
 
     #studentStart {
@@ -495,6 +528,7 @@
     }
 
 
+    /* Styles the student details heading */
     #studentStart h2 {
 
       margin: 0 0 20px;
@@ -511,6 +545,7 @@
     }
 
 
+    /* Styles the name and section input fields */
     #studentStart input {
 
       display: block;
@@ -535,6 +570,7 @@
     }
 
 
+    /* Highlights the input field currently being selected */
     #studentStart input:focus {
 
       border-color: #339763;
@@ -545,6 +581,7 @@
 
     /* =========================================================
        QUIZ PRIMARY BUTTON
+       Defines the main button appearance and hover interaction.
        ========================================================= */
 
     .quiz-btn {
@@ -579,12 +616,14 @@
     }
 
 
+    /* Darkens the button when hovered */
     .quiz-btn:hover {
 
       background: #073827;
     }
 
 
+    /* Adds a small pressed effect when clicking the button */
     .quiz-btn:active {
 
       transform: scale(0.98);
@@ -593,6 +632,7 @@
 
     /* =========================================================
        MODE SELECT
+       Styles the container holding the available quiz types.
        ========================================================= */
 
     #modeSelect {
@@ -616,6 +656,7 @@
     }
 
 
+    /* Styles the quiz type selection heading */
     #modeSelect h2 {
 
       margin: 0 0 20px;
@@ -632,6 +673,7 @@
     }
 
 
+    /* Arranges quiz type buttons vertically */
     .mode-btn-group {
 
       display: flex;
@@ -644,6 +686,7 @@
     }
 
 
+    /* Styles each available quiz type button */
     .mode-btn {
 
       width: 100%;
@@ -670,6 +713,7 @@
     }
 
 
+    /* Highlights a quiz type when the user hovers over it */
     .mode-btn:hover {
 
       border-color: #339763;
@@ -678,6 +722,7 @@
     }
 
 
+    /* Adds a pressed animation to quiz type buttons */
     .mode-btn:active {
 
       transform: scale(0.98);
@@ -686,6 +731,7 @@
 
     /* =========================================================
        COUNTDOWN
+       Creates the full-screen countdown overlay before the quiz.
        ========================================================= */
 
     #countdownOverlay {
@@ -712,6 +758,7 @@
 
       justify-content: center;
 
+      /* Keeps the overlay hidden until the active class is added */
       opacity: 0;
 
       pointer-events: none;
@@ -720,6 +767,7 @@
     }
 
 
+    /* Makes the countdown overlay visible */
     #countdownOverlay.active {
 
       opacity: 1;
@@ -728,6 +776,7 @@
     }
 
 
+    /* Styles the white countdown card */
     .countdown-card {
 
       background: #ffffff;
@@ -743,6 +792,7 @@
     }
 
 
+    /* Styles the GET READY heading */
     .countdown-card h3 {
 
       color: #073827;
@@ -755,6 +805,7 @@
     }
 
 
+    /* Styles the large countdown number */
     #countdownNumber {
 
       font-family: Arial, sans-serif;
@@ -769,6 +820,7 @@
 
     /* =========================================================
        STUDENT INFO
+       Displays the student's details, score, question, and timer.
        ========================================================= */
 
     #studentInfo {
@@ -790,6 +842,7 @@
       box-shadow:
         0 2px 4px rgba(7, 56, 39, 0.02);
 
+      /* Uses a two-column grid to organize student information */
       display: none;
 
       grid-template-columns: 1fr 1fr;
@@ -798,6 +851,7 @@
     }
 
 
+    /* Sets the text appearance of student information */
     #studentInfo p {
 
       font-size: 13px;
@@ -806,6 +860,7 @@
     }
 
 
+    /* Highlights the student's name and section */
     #showName,
     #showSection {
 
@@ -815,6 +870,7 @@
     }
 
 
+    /* Styles the score, question counter, and timer displays */
     #score,
     #quizCount,
     #timerDisplay {
@@ -837,6 +893,7 @@
     }
 
 
+    /* Makes the timer span both columns of the information grid */
     #timerDisplay {
 
       grid-column: span 2;
@@ -849,6 +906,7 @@
 
     /* =========================================================
        QUIZ AREA
+       Styles the main container where questions and answers appear.
        ========================================================= */
 
     #quizArea {
@@ -874,6 +932,7 @@
     }
 
 
+    /* Displays the current quiz category */
     #category {
 
       font-family: Arial, sans-serif;
@@ -890,6 +949,7 @@
     }
 
 
+    /* Creates the centered question display box */
     #displayGiven {
 
       width: 100%;
@@ -924,6 +984,7 @@
     }
 
 
+    /* Centers the answer input inside the quiz area */
     #answerBox {
 
       width: 100%;
@@ -944,6 +1005,7 @@
     }
 
 
+    /* Styles the numerical answer input */
     #answerBox input {
 
       width: 120px;
@@ -968,12 +1030,14 @@
     }
 
 
+    /* Highlights the answer input when selected */
     #answerBox input:focus {
 
       border-color: #339763;
     }
 
 
+    /* Displays the correct or incorrect answer feedback */
     #outAns {
 
       width: 100%;
@@ -1004,6 +1068,7 @@
 
     /* =========================================================
        QUIZ RESULT
+       Styles the final result card after completing the quiz.
        ========================================================= */
 
     #quizResult {
@@ -1031,6 +1096,7 @@
     }
 
 
+    /* Styles the quiz completion heading */
     #quizResult h2 {
 
       margin: 0 0 20px;
@@ -1045,6 +1111,7 @@
     }
 
 
+    /* Styles the information rows on the result screen */
     .result-info {
 
       margin: 10px 0;
@@ -1063,6 +1130,7 @@
     }
 
 
+    /* Highlights important result information */
     .result-info strong {
 
       color: #073827;
@@ -1071,6 +1139,7 @@
     }
 
 
+    /* Displays the final score prominently */
     #resultScore {
 
       margin: 20px 0;
@@ -1089,6 +1158,7 @@
 
     /* =========================================================
        FOOTER
+       Styles the bottom section of the website.
        ========================================================= */
 
     .site-footer {
@@ -1103,6 +1173,7 @@
     }
 
 
+    /* Arranges the footer copyright and platform description */
     .footer-bottom {
 
       width: 100%;
@@ -1125,16 +1196,19 @@
 
     /* =========================================================
        MOBILE NAVIGATION
+       Adjusts the navigation and footer for smaller screens.
        ========================================================= */
 
     @media (max-width: 768px) {
 
+      /* Shows the hamburger button on mobile devices */
       .hamburger-btn {
 
         display: block;
       }
 
 
+      /* Converts the navigation links into a vertical dropdown */
       .nav-links {
 
         position: absolute;
@@ -1173,6 +1247,7 @@
       }
 
 
+      /* Expands the navigation menu when mobile-open is applied */
       .nav-links.mobile-open {
 
         max-height: 550px;
@@ -1185,12 +1260,14 @@
       }
 
 
+      /* Makes each navigation item occupy the full width */
       .nav-item {
 
         width: 100%;
       }
 
 
+      /* Adjusts navigation link spacing for mobile screens */
       .nav-link,
       .nav-btn-toggle {
 
@@ -1210,6 +1287,7 @@
       }
 
 
+      /* Changes the dropdown into a menu inside the mobile navigation */
       .dropdown-menu {
 
         position: static;
@@ -1242,6 +1320,7 @@
       }
 
 
+      /* Expands the dropdown when its mobile active class is applied */
       .nav-item.dropdown.mobile-dropdown-active .dropdown-menu {
 
         max-height: 300px;
@@ -1252,6 +1331,7 @@
       }
 
 
+      /* Stacks footer content vertically on smaller screens */
       .footer-bottom {
 
         flex-direction: column;
@@ -1263,22 +1343,26 @@
 
     /* =========================================================
        QUIZ MOBILE
+       Adjusts the quiz layout for phones and narrow screens.
        ========================================================= */
 
     @media (max-width: 600px) {
 
+      /* Reduces the quiz section spacing on mobile */
       .quiz-section {
 
         padding: 30px 0 45px;
       }
 
 
+      /* Reduces the quiz title size */
       .quiz-title {
 
         font-size: 22px;
       }
 
 
+      /* Adjusts the width and padding of the quiz cards */
       #studentStart,
       #modeSelect,
       #quizArea,
@@ -1290,6 +1374,7 @@
       }
 
 
+      /* Adjusts the student information container */
       #studentInfo {
 
         width: 94%;
@@ -1298,6 +1383,7 @@
       }
 
 
+      /* Reduces the question text size */
       #displayGiven {
 
         font-size: 16px;
@@ -1306,18 +1392,21 @@
       }
 
 
+      /* Reduces the answer field width */
       #answerBox input {
 
         width: 100px;
       }
 
 
+      /* Adjusts the countdown card spacing */
       .countdown-card {
 
         padding: 35px 45px;
       }
 
 
+      /* Reduces the countdown number size */
       #countdownNumber {
 
         font-size: 4rem;
@@ -1325,26 +1414,35 @@
     }
 
 
+    /* =========================================================
+       EXTRA SMALL MOBILE
+       Additional layout adjustments for screens under 400px.
+       ========================================================= */
+
     @media (max-width: 400px) {
 
+      /* Hides the navigation tagline to save horizontal space */
       .nav-tagline {
 
         display: none;
       }
 
 
+      /* Changes student information to a single-column layout */
       #studentInfo {
 
         grid-template-columns: 1fr;
       }
 
 
+      /* Makes the timer occupy the single available column */
       #timerDisplay {
 
         grid-column: span 1;
       }
 
 
+      /* Further reduces card padding on narrow screens */
       #studentStart,
       #modeSelect,
       #quizArea,
@@ -1354,12 +1452,14 @@
       }
 
 
+      /* Reduces the quiz title size */
       .quiz-title {
 
         font-size: 20px;
       }
 
 
+      /* Adjusts the final score size for small screens */
       #resultScore {
 
         font-size: 34px;
@@ -1376,7 +1476,8 @@
 
   <!-- =========================================================
        TOP NAVIGATION
-       EXACT SAME NAVIGATION
+       Contains the navigation bar populated by the external
+       navbar.js file.
        ========================================================= -->
 
   <header class="top-nav-bar" id="navbar">
@@ -1387,19 +1488,25 @@
 
   <!-- =========================================================
        MAIN
+       Contains the main content of the Unit Conversion Quiz.
        ========================================================= -->
 
   <main>
 
 <section class="cover-section" id="cover">
       <div class="cover-wrapper">
+
+        <!-- Displays the ProjectFactr banner image -->
         <img 
           src="../../assets/img/background/Banner Of Project FACTR.png" 
           alt="ProjectFactr Mathematics Remedial Learning Platform Banner" 
           class="cover-image"
           id="main-cover-image"
         >
+
        <div class="cover-content">
+
+    <!-- Displays the topic of the current quiz -->
     <h1> Unit Conversion</h1>
 
     <h2>
@@ -1410,22 +1517,28 @@
     </section>
 
 
+    <!-- Green decorative divider below the cover -->
     <div class="quiz-space-bar"></div>
 
 
     <!-- =======================================================
          UNIT CONVERSION QUIZ
+         Main section containing all quiz screens and components.
          ======================================================= -->
 
     <section class="quiz-section">
 
 
+      <!-- Main quiz heading -->
       <h1 class="quiz-title">
         Unit Conversion Mastery Quiz
       </h1>
 
 
-      <!-- STUDENT START -->
+      <!-- =====================================================
+           STUDENT START
+           Collects the student's name and grade/section.
+           ===================================================== -->
 
       <div id="studentStart">
 
@@ -1434,6 +1547,7 @@
         </h2>
 
 
+        <!-- Input field for the student's full name -->
         <input
           type="text"
           id="fullName"
@@ -1442,6 +1556,7 @@
         >
 
 
+        <!-- Input field for the student's grade and section -->
         <input
           type="text"
           id="section"
@@ -1449,6 +1564,7 @@
         >
 
 
+        <!-- Proceeds to quiz type selection after validation -->
         <button
           class="quiz-btn"
           onclick="proceedToModeSelect()"
@@ -1459,7 +1575,10 @@
       </div>
 
 
-      <!-- QUIZ TYPE -->
+      <!-- =====================================================
+           QUIZ TYPE
+           Provides the available unit conversion categories.
+           ===================================================== -->
 
       <div
         id="modeSelect"
@@ -1471,8 +1590,10 @@
         </h2>
 
 
+        <!-- Groups all quiz type selection buttons -->
         <div class="mode-btn-group">
 
+          <!-- Starts metric length conversion questions -->
           <button
             class="mode-btn"
             onclick="startQuizWithCountdown('length','standard-system')"
@@ -1481,6 +1602,7 @@
           </button>
 
 
+          <!-- Starts English length conversion questions -->
           <button
             class="mode-btn"
             onclick="startQuizWithCountdown('length','english-system')"
@@ -1489,6 +1611,7 @@
           </button>
 
 
+          <!-- Starts conversion questions between metric and English units -->
           <button
             class="mode-btn"
             onclick="startQuizWithCountdown('length','vice-versa')"
@@ -1497,6 +1620,7 @@
           </button>
 
 
+          <!-- Starts metric mass conversion questions -->
           <button
             class="mode-btn"
             onclick="startQuizWithCountdown('mass','standard-system')"
@@ -1505,6 +1629,7 @@
           </button>
 
 
+          <!-- Starts mass conversion questions involving English units -->
           <button
             class="mode-btn"
             onclick="startQuizWithCountdown('mass','standard-to-english')"
@@ -1513,6 +1638,7 @@
           </button>
 
 
+          <!-- Starts standard metric volume conversion questions -->
           <button
             class="mode-btn"
             onclick="startQuizWithCountdown('volume','standard-system')"
@@ -1521,6 +1647,7 @@
           </button>
 
 
+          <!-- Starts volume conversion questions involving gallons -->
           <button
             class="mode-btn"
             onclick="startQuizWithCountdown('volume','standard-to-english')"
@@ -1529,6 +1656,7 @@
           </button>
 
 
+          <!-- Starts a quiz containing mixed conversion categories -->
           <button
             class="mode-btn"
             onclick="startQuizWithCountdown('mixed','all')"
@@ -1541,16 +1669,21 @@
       </div>
 
 
-      <!-- COUNTDOWN -->
+      <!-- =====================================================
+           COUNTDOWN
+           Displays the countdown before the first question begins.
+           ===================================================== -->
 
       <div id="countdownOverlay">
 
         <div class="countdown-card">
 
+          <!-- Countdown instruction -->
           <h3>
             GET READY
           </h3>
 
+          <!-- JavaScript updates this number during the countdown -->
           <div id="countdownNumber">
             3
           </div>
@@ -1560,35 +1693,43 @@
       </div>
 
 
-      <!-- STUDENT INFORMATION -->
+      <!-- =====================================================
+           STUDENT INFORMATION
+           Displays the student's details and live quiz progress.
+           ===================================================== -->
 
       <div
         id="studentInfo"
         style="display:none;"
       >
 
+        <!-- Displays the student's entered name -->
         <p>
           Name:
           <span id="showName"></span>
         </p>
 
 
+        <!-- Displays the student's entered section -->
         <p>
           Section:
           <span id="showSection"></span>
         </p>
 
 
+        <!-- Displays the current score -->
         <div id="score">
           Score: 0 / 10
         </div>
 
 
+        <!-- Displays the current question number -->
         <div id="quizCount">
           Question: 1 / 10
         </div>
 
 
+        <!-- Displays the elapsed time during the quiz -->
         <div id="timerDisplay">
           Time Elapsed: 0:00
         </div>
@@ -1596,23 +1737,29 @@
       </div>
 
 
-      <!-- QUIZ AREA -->
+      <!-- =====================================================
+           QUIZ AREA
+           Contains the question, answer field, feedback, and buttons.
+           ===================================================== -->
 
       <div
         id="quizArea"
         style="display:none;"
       >
 
+        <!-- Displays the current quiz category -->
         <div id="category">
           Unit Conversion Quiz
         </div>
 
 
+        <!-- JavaScript inserts the generated question here -->
         <div id="displayGiven">
           Question
         </div>
 
 
+        <!-- Container for the student's numerical answer -->
         <div id="answerBox">
 
           <input
@@ -1626,9 +1773,11 @@
         </div>
 
 
+        <!-- Displays whether the submitted answer is correct or incorrect -->
         <div id="outAns"></div>
 
 
+        <!-- Checks the student's submitted answer -->
         <button
           class="quiz-btn"
           id="submitBtn"
@@ -1638,6 +1787,7 @@
         </button>
 
 
+        <!-- Loads the next question or displays the final summary -->
         <button
           class="quiz-btn"
           id="nextBtn"
@@ -1648,6 +1798,7 @@
         </button>
 
 
+        <!-- Returns the student to the quiz type selection screen -->
         <button
           class="quiz-btn"
           id="backToModeBtn"
@@ -1660,15 +1811,20 @@
       </div>
 
 
-      <!-- RESULT -->
+      <!-- =====================================================
+           RESULT
+           Displays the student's final quiz performance.
+           ===================================================== -->
 
       <div id="quizResult">
 
+        <!-- Completion message -->
         <h2>
           Quiz Finished!
         </h2>
 
 
+        <!-- Displays the student's name -->
         <div class="result-info">
 
           Name:
@@ -1678,6 +1834,7 @@
         </div>
 
 
+        <!-- Displays the student's section -->
         <div class="result-info">
 
           Section:
@@ -1687,6 +1844,7 @@
         </div>
 
 
+        <!-- Displays the selected quiz category -->
         <div class="result-info">
 
           Quiz Type:
@@ -1696,11 +1854,13 @@
         </div>
 
 
+        <!-- Displays the final score out of ten -->
         <div id="resultScore">
           0/10
         </div>
 
 
+        <!-- Displays the total time taken to finish the quiz -->
         <div class="result-info">
 
           Time:
@@ -1712,6 +1872,7 @@
         </div>
 
 
+        <!-- Allows the student to return to quiz type selection -->
         <button
           class="quiz-btn"
           onclick="backToQuizType()"
@@ -1729,16 +1890,19 @@
 
   <!-- =========================================================
        FOOTER
+       Displays the copyright and platform description.
        ========================================================= -->
 
   <footer class="site-footer">
 
     <div class="footer-bottom">
 
+      <!-- Copyright information -->
       <div>
         &copy; 2026 ProjectFactr. All rights reserved.
       </div>
 
+      <!-- Platform description -->
       <div>
         Mathematics Learning &amp; Curriculum Platform
       </div>
@@ -1750,40 +1914,55 @@
 
   <!-- =========================================================
        JAVASCRIPT
+       Controls student details, quiz generation, calculations,
+       answer checking, timer, score, and results.
        ========================================================= -->
+
+<!-- Loads the shared navigation bar script -->
 <script src="../../js/helper/navbar.js"></script>
+
   <script>
+
     /* =========================================================
        QUIZ VARIABLES
+       Stores the current student information and quiz progress.
        ========================================================= */
 
+    // Stores the student's name and section
     let studentName = "";
 
     let studentSection = "";
 
+    // Stores the selected quiz category and subtype
     let selectedQuiz = "";
 
     let selectedSubtype = "all";
 
+    // Tracks the current question number and score
     let quizNumber = 0;
 
     let score = 0;
 
+    // Stores the timer interval and elapsed seconds
     let timerInterval;
 
     let secondsElapsed = 0;
 
+    // Stores the currently generated question and answer
     let currentQuestionObject = null;
 
+    // Tracks previously generated questions to avoid repetition
     let usedQuestions = new Set();
 
 
     /* =========================================================
        STUDENT DETAILS
+       Collects and validates the student's information.
        ========================================================= */
 
     function proceedToModeSelect() {
 
+      // Gets the student's name and removes extra spaces
       studentName =
         document
           .getElementById("fullName")
@@ -1791,6 +1970,7 @@
           .trim();
 
 
+      // Gets the student's grade and section
       studentSection =
         document
           .getElementById("section")
@@ -1798,6 +1978,7 @@
           .trim();
 
 
+      // Prevents proceeding when either field is empty
       if (
         !studentName ||
         !studentSection
@@ -1812,11 +1993,13 @@
       }
 
 
+      // Hides the student information form
       document.getElementById(
         "studentStart"
       ).style.display = "none";
 
 
+      // Displays the available quiz types
       document.getElementById(
         "modeSelect"
       ).style.display = "block";
@@ -1826,6 +2009,7 @@
 
     /* =========================================================
        START QUIZ WITH COUNTDOWN
+       Initializes the quiz and displays a countdown before starting.
        ========================================================= */
 
     function startQuizWithCountdown(
@@ -1833,10 +2017,12 @@
       subtype
     ) {
 
+      // Saves the selected quiz category and conversion type
       selectedQuiz = type;
 
       selectedSubtype = subtype;
 
+      // Resets the quiz progress and score
       quizNumber = 0;
 
       score = 0;
@@ -1845,57 +2031,67 @@
 
       currentQuestionObject = null;
 
+      // Clears the list of previously used questions
       usedQuestions.clear();
 
 
+      // Displays the student's name in the quiz information panel
       document.getElementById(
         "showName"
       ).textContent =
         studentName;
 
 
+      // Displays the student's section
       document.getElementById(
         "showSection"
       ).textContent =
         studentSection;
 
 
+      // Resets the score display
       document.getElementById(
         "score"
       ).textContent =
         "Score: 0 / 10";
 
 
+      // Resets the question counter
       document.getElementById(
         "quizCount"
       ).textContent =
         "Question: 1 / 10";
 
 
+      // Resets the timer display
       document.getElementById(
         "timerDisplay"
       ).textContent =
         "Time Elapsed: 0:00";
 
 
+      // Hides the quiz type selection screen
       document.getElementById(
         "modeSelect"
       ).style.display =
         "none";
 
 
+      // Hides the previous result screen
       document.getElementById(
         "quizResult"
       ).style.display =
         "none";
 
 
+      // Hides the quiz area until the countdown finishes
       document.getElementById(
         "quizArea"
       ).style.display =
         "none";
 
 
+      // Gets the countdown overlay and number display
       const overlay =
         document.getElementById(
           "countdownOverlay"
@@ -1908,11 +2104,13 @@
         );
 
 
+      // Makes the countdown overlay visible
       overlay.classList.add(
         "active"
       );
 
 
+      // Sets the initial countdown value
       let count = 3;
 
 
@@ -1920,12 +2118,14 @@
         count;
 
 
+      // Updates the countdown every second
       const countdownInterval =
         setInterval(() => {
 
           count--;
 
 
+          // Displays the remaining countdown number
           if (count > 0) {
 
             numberDisplay.textContent =
@@ -1933,6 +2133,7 @@
 
           }
 
+          // Displays GO before the quiz begins
           else if (count === 0) {
 
             numberDisplay.textContent =
@@ -1940,6 +2141,7 @@
 
           }
 
+          // Ends the countdown and starts the quiz
           else {
 
             clearInterval(
@@ -1947,23 +2149,27 @@
             );
 
 
+            // Hides the countdown overlay
             overlay.classList.remove(
               "active"
             );
 
 
+            // Displays the student information panel
             document.getElementById(
               "studentInfo"
             ).style.display =
               "grid";
 
 
+            // Displays the quiz question area
             document.getElementById(
               "quizArea"
             ).style.display =
               "block";
 
 
+            // Starts the timer and generates the first question
             startTimer();
 
             newQuestion();
@@ -1977,40 +2183,48 @@
 
     /* =========================================================
        TIMER
+       Counts the total time spent answering quiz questions.
        ========================================================= */
 
     function startTimer() {
 
+      // Clears any previously running timer
       clearInterval(
         timerInterval
       );
 
 
+      // Resets elapsed time to zero
       secondsElapsed = 0;
 
 
+      // Resets the visible timer
       document.getElementById(
         "timerDisplay"
       ).textContent =
         "Time Elapsed: 0:00";
 
 
+      // Increases the elapsed time every second
       timerInterval =
         setInterval(() => {
 
           secondsElapsed++;
 
 
+          // Calculates the elapsed minutes
           const mins =
             Math.floor(
               secondsElapsed / 60
             );
 
 
+          // Calculates the remaining seconds
           const secs =
             secondsElapsed % 60;
 
 
+          // Updates the timer display in minutes and seconds
           document.getElementById(
             "timerDisplay"
           ).textContent =
@@ -2036,6 +2250,7 @@
 
     /* =========================================================
        STOP TIMER
+       Stops the timer when the quiz is completed or exited.
        ========================================================= */
 
     function stopTimer() {
@@ -2049,6 +2264,7 @@
 
     /* =========================================================
        RANDOM INTEGER
+       Generates a random whole number within a specified range.
        ========================================================= */
 
     function randomInt(
@@ -2070,6 +2286,7 @@
 
     /* =========================================================
        ROUND ANSWER
+       Rounds a numerical result to the requested decimal places.
        ========================================================= */
 
     function roundTo(
@@ -2077,6 +2294,7 @@
       decimals
     ) {
 
+      // Calculates the decimal multiplier
       const factor =
         Math.pow(
           10,
@@ -2084,6 +2302,7 @@
         );
 
 
+      // Rounds the value using the multiplier
       return Math.round(
         value * factor
       ) / factor;
@@ -2093,12 +2312,15 @@
 
     /* =========================================================
        LENGTH QUESTIONS
+       Generates metric, English, and metric-to-English
+       length conversion questions.
        ========================================================= */
 
     function generateLengthQuestion(
       subtype
     ) {
 
+      // Variables for the given value, question, answer, and unit
       let v;
 
       let q;
@@ -2108,11 +2330,13 @@
       let unit;
 
 
+      // Generates questions involving metric length units
       if (
         subtype ===
         "standard-system"
       ) {
 
+        // Randomly selects one of four conversion operations
         const op =
           randomInt(
             0,
@@ -2120,6 +2344,7 @@
           );
 
 
+        // Meters to centimeters
         if (op === 0) {
 
           v =
@@ -2142,6 +2367,7 @@
 
         }
 
+        // Meters to millimeters
         else if (op === 1) {
 
           v =
@@ -2164,6 +2390,7 @@
 
         }
 
+        // Kilometers to meters
         else if (op === 2) {
 
           v =
@@ -2186,6 +2413,7 @@
 
         }
 
+        // Centimeters to meters
         else {
 
           v =
@@ -2214,6 +2442,7 @@
       }
 
 
+      // Generates questions involving English length units
       else if (
         subtype ===
         "english-system"
@@ -2226,6 +2455,7 @@
           );
 
 
+        // Feet to inches
         if (op === 0) {
 
           v =
@@ -2248,6 +2478,7 @@
 
         }
 
+        // Yards to feet
         else if (op === 1) {
 
           v =
@@ -2270,6 +2501,7 @@
 
         }
 
+        // Inches to feet
         else if (op === 2) {
 
           v =
@@ -2295,6 +2527,7 @@
 
         }
 
+        // Miles to yards
         else {
 
           v =
@@ -2320,6 +2553,7 @@
       }
 
 
+      // Generates questions converting between metric and English units
       else if (
         subtype ===
         "vice-versa"
@@ -2332,6 +2566,7 @@
           );
 
 
+        // Inches to centimeters
         if (op === 0) {
 
           v =
@@ -2357,6 +2592,7 @@
 
         }
 
+        // Feet to meters
         else if (op === 1) {
 
           v =
@@ -2382,6 +2618,7 @@
 
         }
 
+        // Centimeters to inches
         else if (op === 2) {
 
           v =
@@ -2407,6 +2644,7 @@
 
         }
 
+        // Meters to feet
         else {
 
           v =
@@ -2435,6 +2673,7 @@
       }
 
 
+      // Provides a default question if no subtype matches
       else {
 
         q =
@@ -2451,6 +2690,7 @@
       }
 
 
+      // Returns the generated question and its correct answer
       return {
         q,
         ans,
@@ -2462,6 +2702,8 @@
 
     /* =========================================================
        MASS QUESTIONS
+       Generates metric mass and metric-to-English conversion
+       questions.
        ========================================================= */
 
     function generateMassQuestion(
@@ -2477,6 +2719,7 @@
       let unit;
 
 
+      // Generates metric mass conversion questions
       if (
         subtype ===
         "standard-system"
@@ -2489,6 +2732,7 @@
           );
 
 
+        // Kilograms to grams
         if (op === 0) {
 
           v =
@@ -2511,6 +2755,7 @@
 
         }
 
+        // Grams to milligrams
         else if (op === 1) {
 
           v =
@@ -2533,6 +2778,7 @@
 
         }
 
+        // Milligrams to grams
         else {
 
           v =
@@ -2561,6 +2807,7 @@
       }
 
 
+      // Generates metric-to-English mass conversion questions
       else if (
         subtype ===
         "standard-to-english"
@@ -2573,6 +2820,7 @@
           );
 
 
+        // Kilograms to pounds
         if (op === 0) {
 
           v =
@@ -2598,6 +2846,7 @@
 
         }
 
+        // Kilograms to metric tons
         else {
 
           v =
@@ -2626,6 +2875,7 @@
       }
 
 
+      // Generates reverse conversion questions
       else if (
         subtype ===
         "vice-versa"
@@ -2638,6 +2888,7 @@
           );
 
 
+        // Pounds to kilograms
         if (op === 0) {
 
           v =
@@ -2663,6 +2914,7 @@
 
         }
 
+        // Metric tons to kilograms
         else {
 
           v =
@@ -2688,6 +2940,7 @@
       }
 
 
+      // Default mass conversion question
       else {
 
         q =
@@ -2704,6 +2957,7 @@
       }
 
 
+      // Returns the generated mass question
       return {
         q,
         ans,
@@ -2715,6 +2969,8 @@
 
     /* =========================================================
        VOLUME QUESTIONS
+       Generates metric liquid volume and gallon conversion
+       questions.
        ========================================================= */
 
     function generateVolumeQuestion(
@@ -2730,6 +2986,7 @@
       let unit;
 
 
+      // Generates standard metric volume questions
       if (
         subtype ===
         "standard-system"
@@ -2742,6 +2999,7 @@
           );
 
 
+        // Liters to milliliters
         if (op === 0) {
 
           v =
@@ -2764,6 +3022,7 @@
 
         }
 
+        // Liters to centiliters
         else if (op === 1) {
 
           v =
@@ -2786,6 +3045,7 @@
 
         }
 
+        // Centiliters to milliliters
         else if (op === 2) {
 
           v =
@@ -2808,6 +3068,7 @@
 
         }
 
+        // Cubic centimeters to milliliters
         else {
 
           v =
@@ -2833,6 +3094,7 @@
       }
 
 
+      // Generates conversions between liters and gallons
       else if (
         subtype ===
         "standard-to-english"
@@ -2845,6 +3107,7 @@
           );
 
 
+        // Liters to gallons
         if (op === 0) {
 
           v =
@@ -2870,6 +3133,7 @@
 
         }
 
+        // Gallons to liters
         else {
 
           v =
@@ -2898,6 +3162,7 @@
       }
 
 
+      // Default volume conversion question
       else {
 
         q =
@@ -2914,6 +3179,7 @@
       }
 
 
+      // Returns the generated volume question and answer
       return {
         q,
         ans,
@@ -2925,10 +3191,13 @@
 
     /* =========================================================
        GENERATE QUESTION
+       Selects the appropriate question generator, updates the
+       display, and prevents repeated questions.
        ========================================================= */
 
     function newQuestion() {
 
+      // Ends question generation after ten questions
       if (
         quizNumber >= 10
       ) {
@@ -2940,6 +3209,7 @@
       }
 
 
+      // Hides and clears previous answer feedback
       document.getElementById(
         "outAns"
       ).style.display =
@@ -2952,6 +3222,7 @@
         "";
 
 
+      // Shows the submit button and hides the next button
       document.getElementById(
         "submitBtn"
       ).style.display =
@@ -2964,24 +3235,22 @@
         "none";
 
 
-      document.getElementById(
-        "backToModeBtn"
-      ).style.display =
-        "none";
-
-
+      // Gets the answer input field
       const input =
         document.getElementById(
           "answerInput"
         );
 
 
+      // Clears the previous answer
       input.value = "";
 
 
+      // Enables the input for the next question
       input.disabled = false;
 
 
+      // Updates the question counter
       document.getElementById(
         "quizCount"
       ).textContent =
@@ -2993,6 +3262,7 @@
         " / 10";
 
 
+      // Updates the score display
       document.getElementById(
         "score"
       ).textContent =
@@ -3004,6 +3274,7 @@
         " / 10";
 
 
+      // Stores the selected category and subtype
       let targetQuiz =
         selectedQuiz;
 
@@ -3022,6 +3293,7 @@
         "mixed"
       ) {
 
+        // Available categories for the mixed quiz
         const types = [
           "length",
           "mass",
@@ -3029,6 +3301,7 @@
         ];
 
 
+        // Randomly chooses one of the three categories
         targetQuiz =
           types[
             randomInt(
@@ -3049,6 +3322,7 @@
       }
 
 
+      // Stores the generated question object
       let generatedQuestion;
 
 
@@ -3057,11 +3331,13 @@
         question does not appear again.
       */
 
+      // Counts how many times a question is generated
       let attempts = 0;
 
 
       do {
 
+        // Generates a length question
         if (
           targetQuiz ===
           "length"
@@ -3074,6 +3350,7 @@
 
         }
 
+        // Generates a mass question
         else if (
           targetQuiz ===
           "mass"
@@ -3086,6 +3363,7 @@
 
         }
 
+        // Generates a volume question
         else {
 
           generatedQuestion =
@@ -3104,6 +3382,7 @@
           unique question key.
         */
 
+        // Combines category, subtype, and question text
         const questionKey =
           targetQuiz +
           "|" +
@@ -3112,12 +3391,14 @@
           generatedQuestion.q;
 
 
+        // Checks whether the question has already appeared
         if (
           !usedQuestions.has(
             questionKey
           )
         ) {
 
+          // Saves the question to prevent repetition
           usedQuestions.add(
             questionKey
           );
@@ -3132,17 +3413,20 @@
       );
 
 
+      // Saves the generated question for answer checking
       currentQuestionObject =
         generatedQuestion;
 
 
       /* =====================================================
          CATEGORY TITLE
+         Determines which category name appears above the question.
          ===================================================== */
 
       let categoryText = "";
 
 
+      // Sets the category title for length questions
       if (
         targetQuiz ===
         "length"
@@ -3153,6 +3437,7 @@
 
       }
 
+      // Sets the category title for mass questions
       else if (
         targetQuiz ===
         "mass"
@@ -3163,6 +3448,7 @@
 
       }
 
+      // Sets the category title for volume questions
       else {
 
         categoryText =
@@ -3171,6 +3457,7 @@
       }
 
 
+      // Uses a general title for the mixed challenge
       if (
         selectedQuiz ===
         "mixed"
@@ -3182,18 +3469,21 @@
       }
 
 
+      // Updates the category heading
       document.getElementById(
         "category"
       ).textContent =
         categoryText;
 
 
+      // Displays the generated question
       document.getElementById(
         "displayGiven"
       ).textContent =
         generatedQuestion.q;
 
 
+      // Places the cursor in the answer field
       document.getElementById(
         "answerInput"
       ).focus();
@@ -3203,22 +3493,27 @@
 
     /* =========================================================
        CHECK ANSWER
+       Validates the student's input, checks correctness,
+       updates the score, and displays feedback.
        ========================================================= */
 
     function checkAns() {
 
+      // Gets the answer input element
       const input =
         document.getElementById(
           "answerInput"
         );
 
 
+      // Converts the student's input into a number
       const userAnswer =
         Number(
           input.value
         );
 
 
+      // Prevents submission when the answer is empty or invalid
       if (
         input.value.trim() === "" ||
         Number.isNaN(userAnswer)
@@ -3233,14 +3528,17 @@
       }
 
 
+      // Retrieves the correct answer from the question object
       const correctAnswer =
         currentQuestionObject.ans;
 
 
+      // Allows a small difference for decimal answers
       const tolerance =
         0.05;
 
 
+      // Checks whether the student's answer is within the tolerance
       const isCorrect =
         Math.abs(
           userAnswer -
@@ -3248,14 +3546,18 @@
         ) <= tolerance;
 
 
+      // Stores the feedback message
       let feedback = "";
 
 
+      // Executes when the student's answer is correct
       if (isCorrect) {
 
+        // Adds one point to the score
         score++;
 
 
+        // Creates the correct answer feedback
         feedback =
 
           '<span style="color:#16623d;font-weight:700;">' +
@@ -3274,8 +3576,10 @@
 
       }
 
+      // Executes when the student's answer is incorrect
       else {
 
+        // Displays the incorrect answer feedback
         feedback =
 
           '<span style="color:#dc2626;font-weight:700;">' +
@@ -3295,24 +3599,29 @@
       }
 
 
+      // Inserts the feedback into the answer result container
       document.getElementById(
         "outAns"
       ).innerHTML =
         feedback;
 
 
+      // Makes the feedback visible
       document.getElementById(
         "outAns"
       ).style.display =
         "block";
 
 
+      // Prevents the student from changing the submitted answer
       input.disabled = true;
 
 
+      // Advances the question counter
       quizNumber++;
 
 
+      // Updates the student's current score
       document.getElementById(
         "score"
       ).textContent =
@@ -3324,6 +3633,7 @@
         " / 10";
 
 
+      // Updates the question progress display
       document.getElementById(
         "quizCount"
       ).textContent =
@@ -3335,12 +3645,14 @@
         " / 10";
 
 
+      // Hides the submit button after answering
       document.getElementById(
         "submitBtn"
       ).style.display =
         "none";
 
 
+      // Prepares the next question or final summary button
       prepareNextButton();
 
     }
@@ -3348,6 +3660,7 @@
 
     /* =========================================================
        ENTER KEY SUPPORT
+       Allows the student to submit an answer using the Enter key.
        ========================================================= */
 
     document.getElementById(
@@ -3356,17 +3669,20 @@
       "keydown",
       function(event) {
 
+        // Checks whether the pressed key is Enter
         if (
           event.key ===
           "Enter"
         ) {
 
+          // Gets the submit button
           const submitButton =
             document.getElementById(
               "submitBtn"
             );
 
 
+          // Submits the answer only while the button is visible
           if (
             submitButton.style.display !==
             "none"
@@ -3384,26 +3700,31 @@
 
     /* =========================================================
        NEXT BUTTON
+       Changes the button behavior depending on quiz progress.
        ========================================================= */
 
     function prepareNextButton() {
 
+      // Displays the next button after an answer is submitted
       document.getElementById(
         "nextBtn"
       ).style.display =
         "block";
 
 
+      // Checks whether the student has answered all ten questions
       if (
         quizNumber >= 10
       ) {
 
+        // Changes the button label to show the final result
         document.getElementById(
           "nextBtn"
         ).textContent =
           "Show Summary Result";
 
 
+        // Connects the button to the summary function
         document.getElementById(
           "nextBtn"
         ).onclick =
@@ -3411,14 +3732,17 @@
 
       }
 
+      // Executes when there are remaining questions
       else {
 
+        // Sets the normal next question label
         document.getElementById(
           "nextBtn"
         ).textContent =
           "Next Question";
 
 
+        // Connects the button to the question generator
         document.getElementById(
           "nextBtn"
         ).onclick =
@@ -3431,23 +3755,28 @@
 
     /* =========================================================
        SUMMARY
+       Stops the timer and displays the student's final results.
        ========================================================= */
 
     function showQuizSummary() {
 
+      // Stops the running quiz timer
       stopTimer();
 
 
+      // Calculates the total minutes
       const mins =
         Math.floor(
           secondsElapsed / 60
         );
 
 
+      // Calculates the remaining seconds
       const secs =
         secondsElapsed % 60;
 
 
+      // Formats the final time using two-digit minutes and seconds
       const finalTime =
 
         mins
@@ -3467,14 +3796,17 @@
           );
 
 
+      // Stores the readable name of the selected quiz type
       let quizTypeName = "";
 
 
+      // Determines the selected length conversion type
       if (
         selectedQuiz ===
         "length"
       ) {
 
+        // Metric length quiz
         if (
           selectedSubtype ===
           "standard-system"
@@ -3485,6 +3817,7 @@
 
         }
 
+        // English length quiz
         else if (
           selectedSubtype ===
           "english-system"
@@ -3495,6 +3828,7 @@
 
         }
 
+        // Metric and English length quiz
         else {
 
           quizTypeName =
@@ -3505,11 +3839,13 @@
       }
 
 
+      // Determines the selected mass conversion type
       else if (
         selectedQuiz ===
         "mass"
       ) {
 
+        // Standard metric mass quiz
         if (
           selectedSubtype ===
           "standard-system"
@@ -3520,6 +3856,7 @@
 
         }
 
+        // Mass conversion involving English units
         else {
 
           quizTypeName =
@@ -3530,11 +3867,13 @@
       }
 
 
+      // Determines the selected volume conversion type
       else if (
         selectedQuiz ===
         "volume"
       ) {
 
+        // Standard metric volume quiz
         if (
           selectedSubtype ===
           "standard-system"
@@ -3545,6 +3884,7 @@
 
         }
 
+        // Volume conversion involving English units
         else {
 
           quizTypeName =
@@ -3555,6 +3895,7 @@
       }
 
 
+      // Sets the name of the mixed conversion quiz
       else if (
         selectedQuiz ===
         "mixed"
@@ -3566,48 +3907,56 @@
       }
 
 
+      // Displays the student's name in the final result
       document.getElementById(
         "resultName"
       ).textContent =
         studentName;
 
 
+      // Displays the student's section in the final result
       document.getElementById(
         "resultSection"
       ).textContent =
         studentSection;
 
 
+      // Displays the selected quiz type
       document.getElementById(
         "resultQuizType"
       ).textContent =
         quizTypeName;
 
 
+      // Displays the final score out of ten
       document.getElementById(
         "resultScore"
       ).textContent =
         score + "/10";
 
 
+      // Displays the formatted completion time
       document.getElementById(
         "resultTime"
       ).textContent =
         finalTime;
 
 
+      // Hides the student information panel
       document.getElementById(
         "studentInfo"
       ).style.display =
         "none";
 
 
+      // Hides the question area
       document.getElementById(
         "quizArea"
       ).style.display =
         "none";
 
 
+      // Displays the final quiz result card
       document.getElementById(
         "quizResult"
       ).style.display =
@@ -3618,37 +3967,45 @@
 
     /* =========================================================
        BACK TO QUIZ TYPES
+       Resets the current quiz and returns the student to the
+       quiz selection screen.
        ========================================================= */
 
     function backToQuizType() {
 
+      // Stops the timer before leaving the current quiz
       stopTimer();
 
 
+      // Hides the quiz question area
       document.getElementById(
         "quizArea"
       ).style.display =
         "none";
 
 
+      // Hides the student information panel
       document.getElementById(
         "studentInfo"
       ).style.display =
         "none";
 
 
+      // Hides the final result screen
       document.getElementById(
         "quizResult"
       ).style.display =
         "none";
 
 
+      // Returns to the quiz type selection screen
       document.getElementById(
         "modeSelect"
       ).style.display =
         "block";
 
 
+      // Resets all quiz progress variables
       quizNumber = 0;
 
       score = 0;
@@ -3661,27 +4018,32 @@
 
       currentQuestionObject = null;
 
+      // Clears the previously used question list
       usedQuestions.clear();
 
 
+      // Resets the score display
       document.getElementById(
         "score"
       ).textContent =
         "Score: 0 / 10";
 
 
+      // Resets the question counter
       document.getElementById(
         "quizCount"
       ).textContent =
         "Question: 1 / 10";
 
 
+      // Resets the timer display
       document.getElementById(
         "timerDisplay"
       ).textContent =
         "Time Elapsed: 0:00";
 
 
+      // Hides and clears the previous answer feedback
       document.getElementById(
         "outAns"
       ).style.display =
@@ -3694,30 +4056,35 @@
         "";
 
 
+      // Restores the default question placeholder
       document.getElementById(
         "displayGiven"
       ).textContent =
         "Question";
 
 
+      // Clears the answer field
       document.getElementById(
         "answerInput"
       ).value =
         "";
 
 
+      // Enables the answer field for the next quiz
       document.getElementById(
         "answerInput"
       ).disabled =
         false;
 
 
+      // Hides the next question button
       document.getElementById(
         "nextBtn"
       ).style.display =
         "none";
 
 
+      // Restores the submit button
       document.getElementById(
         "submitBtn"
       ).style.display =
