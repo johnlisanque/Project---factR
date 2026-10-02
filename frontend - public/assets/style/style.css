@@ -48,7 +48,11 @@ body {
   padding: 14px 32px;
   animation: slideDownNav 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
+.nav-btn-toggle.active {
+    color: var(--white);
+    background-color: var(--primary-forest);
+    box-shadow: 0 4px 14px rgba(22, 98, 61, 0.25);
+}
 
 @keyframes slideDownNav {
   from {

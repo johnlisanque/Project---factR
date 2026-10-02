@@ -1,6 +1,7 @@
 import { Transportation } from "../class/transportation.js";
 import { Piece } from "../class/PieceWise.js";
 import { constraint } from "../helper/constraint.js";
+import { saveResultsPdf } from "../helper/resultsPdf.js";
 const $debugDisplay = document.getElementById("debug")
 const $questionTextDisplay = document.getElementById("display-text")
 const $answerTextDisplay = document.getElementById("answer")
@@ -406,12 +407,19 @@ class Session {
                     <div><dt>Percentage</dt><dd>${Math.round(this.data.sessionData.score / this.#questions.length * 100)}%</dd></div>
                 </dl>
             </div>
+            <button type="button" id="downloadResultsPdf" data-html2canvas-ignore="true">Download Results PDF</button>
         `;
 
         $answerTextDisplay.innerHTML = "";
         document.getElementById("finish-student").textContent = this.data.sessionData.studentName;
         document.getElementById("finish-section").textContent = this.data.sessionData.section;
         document.getElementById("finish-grade").textContent = this.data.sessionData.gradeLevel;
+        document.getElementById("downloadResultsPdf").addEventListener("click", () => {
+            saveResultsPdf(
+                document.querySelector(".completion-summary"),
+                "grade11-piecewise-quiz-results.pdf"
+            );
+        });
         document.getElementById("answer-input-container").hidden = true;
         document.getElementById("answer-container").hidden = true;
     }

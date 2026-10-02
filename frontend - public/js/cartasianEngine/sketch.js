@@ -1,4 +1,5 @@
 import { Linear, Plane, Quiz } from "./js/engine/plane.js";
+import { saveResultsPdf } from "../helper/resultsPdf.js";
 
 let plane;
 let ctx;
@@ -30,6 +31,12 @@ window.setup = function () {
     m = new Quiz()
     plane = m.instance();
     setupQuizControls();
+    document.getElementById("downloadResultsPdf").addEventListener("click", () => {
+        saveResultsPdf(
+            document.querySelector("#quizResult .result-card"),
+            "grade11-cartesian-quiz-results.pdf"
+        );
+    });
     document.getElementById("studentStartForm").addEventListener("submit", (event) => {
         event.preventDefault();
         studentName = document.getElementById("studentName").value.trim();
@@ -100,6 +107,7 @@ function setupQuizControls() {
             }
 
             document.getElementById("check-answer").disabled = true;
+            document.getElementById("next-question").hidden = false;
             document.getElementById("next-question").textContent =
                 currentQuestion === totalQuestions ? "View Results" : "Next Question";
         }
