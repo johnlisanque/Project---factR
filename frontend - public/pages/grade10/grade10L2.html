@@ -20,10 +20,13 @@
 <!-- Load your quiz JavaScript -->
 <script src="script.js"></script>
 
+
 <style>
+/* =========================================================
+   1. ROOT VARIABLES
+========================================================= */
 
 :root {
-
     --primary-dark: #073827;
     --primary-forest: #16623d;
     --primary-accent: #339763;
@@ -52,1373 +55,776 @@
     --font-brand: "Montserrat", Arial, sans-serif;
     --font-body: Arial, sans-serif;
 
-    --shadow-sm:
-        0 2px 4px rgba(7, 56, 39, .03);
-
-    --shadow-md:
-        0 10px 25px -5px rgba(7, 56, 39, .08);
-
-    --shadow-lg:
-        0 20px 40px -10px rgba(7, 56, 39, .12);
+    --shadow-sm: 0 2px 4px rgba(7, 56, 39, .03);
+    --shadow-md: 0 10px 25px -5px rgba(7, 56, 39, .08);
+    --shadow-lg: 0 20px 40px -10px rgba(7, 56, 39, .12);
 
     --radius: 16px;
-
 }
 
+/* =========================================================
+   2. GLOBAL RESET
+========================================================= */
 
 *,
 *::before,
 *::after {
-
     box-sizing: border-box;
-
     margin: 0;
-
     padding: 0;
-
 }
-
 
 html,
 body {
-
     width: 100%;
-
     min-height: 100vh;
-
     background: #f7faf8;
-
     font-family: var(--font-body);
-
     color: var(--text-body);
-
     overflow-x: hidden;
-
 }
-
 
 button,
 input,
-select {
-
+select,
+textarea {
     font-family: inherit;
-
 }
-
-.top-nav-bar {
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 100;
-
-    width: 100%;
-
-    background:
-        rgba(255, 255, 255, .94);
-
-    border-bottom:
-        1px solid var(--border-color);
-
-    padding:
-        16px 32px;
-
-    backdrop-filter:
-        blur(10px);
-
-}
-
-
-.nav-container {
-
-    width: 100%;
-
-    max-width: 1200px;
-
-    margin: auto;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-}
-
-
-.nav-logo {
-
-    font-family:
-        var(--font-brand);
-
-    font-size:
-        1.25rem;
-
-    font-weight:
-        800;
-
-    color:
-        var(--primary-forest);
-
-    text-decoration:
-        none;
-
-}
-
-
-.nav-tagline {
-
-    font-size:
-        .75rem;
-
-    font-weight:
-        500;
-
-    color:
-        var(--text-muted);
-
-    border-left:
-        1px solid var(--border-color);
-
-    padding-left:
-        12px;
-
-}
-
 
 /* =========================================================
-   PAGE TITLE
+   3. NAVIGATION BAR
+========================================================= */
+
+.top-nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background: rgba(255, 255, 255, .94);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 32px;
+    backdrop-filter: blur(10px);
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    font-family: var(--font-brand);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-forest);
+    text-decoration: none;
+}
+
+.nav-tagline {
+    font-size: .75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-left: 1px solid var(--border-color);
+    padding-left: 12px;
+}
+
+/* =========================================================
+   4. PAGE TITLE
 ========================================================= */
 
 .page-title {
-
+    display: none;
     width: 92%;
-
     max-width: 600px;
-
-    margin:
-        30px auto 15px;
-
-    font-family:
-        var(--font-brand);
-
-    color:
-        var(--primary-dark);
-
-    font-size:
-        26px;
-
-    font-weight:
-        800;
-
-    text-align:
-        center;
-
+    margin: 30px auto 15px;
+    font-family: var(--font-brand);
+    color: var(--primary-dark);
+    font-size: 26px;
+    font-weight: 800;
+    text-align: center;
 }
 
-
 /* =========================================================
-   MAIN CARDS
+   5. MAIN CARDS
 ========================================================= */
 
 #studentStart,
 #quizArea,
 #finishMessage {
-
     width: 92%;
-
     max-width: 580px;
-
     margin-left: auto;
-
     margin-right: auto;
-
-    background:
-        var(--card-bg);
-
-    border:
-        1px solid var(--border-color);
-
-    border-radius:
-        var(--radius);
-
-    box-shadow:
-        var(--shadow-md);
-
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
 }
 
-
 /* =========================================================
-   STUDENT START
+   6. STUDENT START SCREEN
+   Matches the Absolute Value Equations design
 ========================================================= */
 
 #studentStart {
-
-    max-width: 440px;
-
-    margin-top:
-        10px;
-
-    margin-bottom:
-        40px;
-
-    padding:
-        35px;
-
+    display: block;
+    width: 440px;
+    max-width: calc(100% - 32px);
+    margin: 40px auto 28px;
+    padding: 28px 24px 30px;
+    background: #ffffff;
+    border: 1px solid #dce9e0;
+    border-radius: 17px;
+    box-shadow: 0 8px 24px rgba(7, 56, 39, .05);
 }
 
+/* Main heading */
+
+#studentStart h1 {
+    margin: 0 0 8px;
+    text-align: center;
+    font-family: var(--font-brand);
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--primary-dark);
+}
+
+/* Quiz subtitle */
 
 #studentStart h2 {
-
-    margin-bottom:
-        20px;
-
-    font-family:
-        var(--font-brand);
-
-    color:
-        var(--primary-dark);
-
-    font-size:
-        20px;
-
-    font-weight:
-        700;
-
-    text-align:
-        center;
-
+    margin: 0 0 28px;
+    text-align: center;
+    font-family: var(--font-brand);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--primary-forest);
 }
 
+/* Student form groups */
 
-.student-label {
-
-    display: block;
-
-    margin:
-        0 0 7px;
-
-    color:
-        var(--primary-dark);
-
-    font-size:
-        13px;
-
-    font-weight:
-        700;
-
+#studentStart .form-group {
+    width: 100%;
+    margin-bottom: 17px;
 }
 
+/* Student labels */
+
+.student-label,
+#studentStart label {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 18px !important;
+    text-align: left;
+    font-weight: 700;
+}
+
+/* Student inputs and dropdown */
 
 #studentStart input,
-#questionLimit,
-#studentStart #startButton {
+#studentStart select,
+#studentStart #questionLimit {
     display: block;
-    width: 205px !important;
-    height: 48px !important;
-    min-height: 48px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100% !important;
+    height: 49px !important;
+    min-height: 49px;
+    margin: 0 0 16px;
+    padding: 0 16px;
     box-sizing: border-box;
-}
-
-#studentStart input,
-#questionLimit {
-    margin-bottom: 16px;
-    padding: 10px 16px;
     background: var(--tint-light);
     border: 1px solid var(--border-color);
     border-radius: 10px;
     color: var(--text-body);
-    font-size: 15px;
+    font-family: var(--font-body);
+    font-size: 14px;
     outline: none;
 }
 
-#studentStart #startButton {
-    padding: 0 16px;
-    border-radius: 10px;
-    box-sizing: border-box;
+/* Input placeholder */
+
+#studentStart input::placeholder {
+    color: #87958e;
+    opacity: 1;
 }
 
+/* Student input focus */
+
+#studentStart input:focus,
+#studentStart select:focus {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 2px rgba(51, 151, 99, .12);
+}
+
+/* Start quiz button */
+
+#studentStart #startButton {
+    display: block;
+    width: 100% !important;
+    height: 48px !important;
+    min-height: 48px;
+    margin: 34px 0 0;
+    padding: 0 16px;
+    box-sizing: border-box;
+    background: var(--primary-forest);
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    font-family: var(--font-brand);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s ease;
+}
+
+#studentStart #startButton:hover {
+    background: var(--primary-dark);
+    transform: none;
+}
+
+#studentStart #startButton:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+    transform: none;
+}
 
 /* =========================================================
-   BUTTONS
+   7. GENERAL BUTTONS
 ========================================================= */
 
 .btn-primary {
-
-    display:
-        block;
-
-    width:
-        100%;
-
-    min-height:
-        48px;
-
-    margin-top:
-        16px;
-
-    padding:
-        10px 15px;
-
-    background:
-        var(--primary-forest);
-
-    color:
-        white;
-
-    border:
-        none;
-
-    border-radius:
-        10px;
-
-    font-family:
-        var(--font-brand);
-
-    font-size:
-        15px;
-
-    font-weight:
-        600;
-
-    cursor:
-        pointer;
-
-    transition:
-        .2s ease;
-
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 16px;
+    padding: 10px 15px;
+    background: var(--primary-forest);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-brand);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s ease;
 }
-
 
 .btn-primary:hover {
-
-    background:
-        var(--primary-dark);
-
-    transform:
-        translateY(-1px);
-
+    background: var(--primary-dark);
+    transform: translateY(-1px);
 }
-
 
 .btn-primary:disabled {
-
-    opacity:
-        .55;
-
-    cursor:
-        not-allowed;
-
-    transform:
-        none;
-
+    opacity: .55;
+    cursor: not-allowed;
+    transform: none;
 }
 
-
 /* =========================================================
-   COUNTDOWN
+   8. COUNTDOWN OVERLAY
 ========================================================= */
 
 #countdownOverlay {
-
-    position:
-        fixed;
-
-    inset:
-        0;
-
-    width:
-        100vw;
-
-    height:
-        100vh;
-
-    z-index:
-        9999;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    background:
-        rgba(7, 56, 39, .76);
-
-    backdrop-filter:
-        blur(8px);
-
-    opacity:
-        0;
-
-    pointer-events:
-        none;
-
-    transition:
-        .25s ease;
-
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(7, 56, 39, .76);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s ease;
 }
-
 
 #countdownOverlay.active {
-
-    opacity:
-        1;
-
-    pointer-events:
-        auto;
-
+    opacity: 1;
+    pointer-events: auto;
 }
-
 
 .countdown-card {
-
-    padding:
-        40px 60px;
-
-    background:
-        white;
-
-    border-radius:
-        20px;
-
-    text-align:
-        center;
-
-    box-shadow:
-        var(--shadow-lg);
-
+    padding: 40px 60px;
+    background: white;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
 }
-
 
 .countdown-card h3 {
-
-    margin-bottom:
-        8px;
-
-    font-family:
-        var(--font-brand);
-
-    color:
-        var(--text-muted);
-
-    font-size:
-        14px;
-
+    margin-bottom: 8px;
+    font-family: var(--font-brand);
+    color: var(--text-muted);
+    font-size: 14px;
 }
-
 
 #countdownNumber {
-
-    font-family:
-        var(--font-brand);
-
-    font-size:
-        80px;
-
-    font-weight:
-        800;
-
-    color:
-        var(--primary-forest);
-
+    font-family: var(--font-brand);
+    font-size: 80px;
+    font-weight: 800;
+    color: var(--primary-forest);
 }
 
-
 /* =========================================================
-   STUDENT INFORMATION BAR
+   9. STUDENT INFORMATION BAR
 ========================================================= */
 
 #studentInfo {
-
-    width:
-        92%;
-
-    max-width:
-        580px;
-
-    margin:
-        0 auto 16px;
-
-    padding:
-        18px 20px;
-
-    background:
-        white;
-
-    border:
-        1px solid var(--border-color);
-
-    border-radius:
-        var(--radius);
-
-    box-shadow:
-        var(--shadow-sm);
-
-    display:
-        none;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:
-        12px;
-
+    width: 92%;
+    max-width: 580px;
+    margin: 0 auto 16px;
+    padding: 18px 20px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
 }
-
 
 #studentInfo p {
-
-    font-size:
-        13px;
-
-    font-weight:
-        500;
-
+    font-size: 13px;
+    font-weight: 500;
 }
-
 
 #showName,
 #showSection {
-
-    color:
-        var(--primary-dark);
-
-    font-weight:
-        700;
-
+    color: var(--primary-dark);
+    font-weight: 700;
 }
-
 
 #score,
 #quizCount {
-
-    padding:
-        8px 12px;
-
-    background:
-        var(--tint-light);
-
-    border:
-        1px solid var(--border-color);
-
-    border-radius:
-        8px;
-
-    color:
-        var(--primary-forest);
-
-    text-align:
-        center;
-
-    font-size:
-        13px;
-
-    font-weight:
-        600;
-
+    padding: 8px 12px;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--primary-forest);
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
 }
-
 
 #timerDisplay {
-
-    grid-column:
-        span 2;
-
-    padding:
-        8px 12px;
-
-    background:
-        var(--primary-dark);
-
-    border-radius:
-        8px;
-
-    color:
-        white;
-
-    text-align:
-        center;
-
-    font-size:
-        13px;
-
-    font-weight:
-        600;
-
+    grid-column: span 2;
+    padding: 8px 12px;
+    background: var(--primary-dark);
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
 }
 
-
 /* =========================================================
-   QUIZ AREA
+   10. QUIZ AREA
 ========================================================= */
 
 #quizArea {
-
-    display:
-        none;
-
-    margin-bottom:
-        40px;
-
-    padding:
-        35px;
-
+    display: none;
+    margin-bottom: 40px;
+    padding: 35px;
 }
-
 
 #category {
-
-    margin-bottom:
-        16px;
-
-    font-family:
-        var(--font-brand);
-
-    color:
-        var(--primary-dark);
-
-    font-size:
-        18px;
-
-    font-weight:
-        700;
-
-    text-align:
-        center;
-
+    margin-bottom: 16px;
+    font-family: var(--font-brand);
+    color: var(--primary-dark);
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
 }
 
+/* Given quadratic inequality */
 
 #displayGiven {
-
-    width:
-        100%;
-
-    min-height:
-        70px;
-
-    margin-bottom:
-        20px;
-
-    padding:
-        16px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    background:
-        var(--tint-light);
-
-    border:
-        1px solid var(--border-color);
-
-    border-radius:
-        12px;
-
-    color:
-        var(--primary-dark);
-
-    font-size:
-        22px;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.4;
-
-    text-align:
-        center;
-
+    width: 100%;
+    min-height: 70px;
+    margin-bottom: 20px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--primary-dark);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
 }
 
-
 /* =========================================================
-   QUESTION DESCRIPTION
+   11. QUESTION DESCRIPTION
 ========================================================= */
 
 .question-instruction {
-
-    width:
-        100%;
-
-    margin:
-        0 0 15px;
-
-    padding:
-        12px 14px;
-
-    background:
-        white;
-
-    border:
-        1px solid var(--border-color);
-
-    border-radius:
-        10px;
-
-    color:
-        var(--text-muted);
-
-    font-size:
-        13px;
-
-    line-height:
-        1.5;
-
-    text-align:
-        center;
-
+    width: 100%;
+    margin: 0 0 15px;
+    padding: 12px 14px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
 }
 
-
 /* =========================================================
-   ANSWER BOX
+   12. ANSWER BOX
 ========================================================= */
 
 .answer-box {
-
-    width:
-        100%;
-
-    padding:
-        15px;
-
-    margin:
-        15px 0;
-
-    background:
-        var(--tint-light);
-
-    border:
-        1px solid var(--border-color);
-
-    border-radius:
-        12px;
-
-    transition:
-        .2s ease;
-
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: .2s ease;
 }
-
 
 .answer-box p {
-
-    margin-bottom:
-        9px;
-
-    color:
-        var(--primary-dark);
-
-    font-size:
-        13px;
-
-    font-weight:
-        700;
-
+    margin-bottom: 9px;
+    color: var(--primary-dark);
+    font-size: 13px;
+    font-weight: 700;
 }
-
 
 .answer-box input {
-
-    width:
-        100%;
-
-    height:
-        48px;
-
-    padding:
-        10px 14px;
-
-    background:
-        white;
-
-    border:
-        2px solid var(--border-color);
-
-    border-radius:
-        10px;
-
-    color:
-        var(--primary-dark);
-
-    font-size:
-        17px;
-
-    outline:
-        none;
-
+    width: 100%;
+    height: 48px;
+    padding: 10px 14px;
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--primary-dark);
+    font-size: 17px;
+    outline: none;
 }
-
 
 .answer-box input:focus {
-
-    border-color:
-        var(--primary-accent);
-
+    border-color: var(--primary-accent);
 }
-
 
 .answer-box.input-error {
-
-    background:
-        var(--wrong-bg);
-
-    border-color:
-        var(--wrong-border);
-
+    background: var(--wrong-bg);
+    border-color: var(--wrong-border);
 }
-
 
 .answer-box.input-error input {
-
-    border-color:
-        var(--wrong-border);
-
+    border-color: var(--wrong-border);
 }
-
 
 .answer-box.input-correct-format {
-
-    border-color:
-        var(--correct-border);
-
+    border-color: var(--correct-border);
 }
 
+/* Input error message */
 
 .input-error-message {
-
-    margin-top:
-        9px;
-
-    padding:
-        9px 10px;
-
-    background:
-        var(--wrong-bg);
-
-    border:
-        1px solid #f3aaaa;
-
-    border-radius:
-        8px;
-
-    color:
-        var(--wrong-text);
-
-    font-size:
-        12px;
-
-    font-weight:
-        700;
-
-    line-height:
-        1.4;
-
+    margin-top: 9px;
+    padding: 9px 10px;
+    background: var(--wrong-bg);
+    border: 1px solid #f3aaaa;
+    border-radius: 8px;
+    color: var(--wrong-text);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
 }
 
-
 /* =========================================================
-   SYMBOL PANEL
+   13. SYMBOL PANEL
 ========================================================= */
 
 .symbol-panel {
-
-    width:
-        100%;
-
-    margin:
-        15px 0;
-
-    padding:
-        15px;
-
-    background:
-        var(--tint-light);
-
-    border:
-        1px solid var(--border-color);
-
-    border-radius:
-        12px;
-
+    width: 100%;
+    margin: 15px 0;
+    padding: 15px;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
 }
-
 
 .symbol-title {
-
-    margin-bottom:
-        5px;
-
-    color:
-        var(--primary-dark);
-
-    font-family:
-        var(--font-brand);
-
-    font-size:
-        14px;
-
-    font-weight:
-        700;
-
-    text-align:
-        center;
-
+    margin-bottom: 5px;
+    color: var(--primary-dark);
+    font-family: var(--font-brand);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
 }
-
 
 .symbol-description {
-
-    margin-bottom:
-        12px;
-
-    color:
-        var(--text-muted);
-
-    font-size:
-        11px;
-
-    text-align:
-        center;
-
+    margin-bottom: 12px;
+    color: var(--text-muted);
+    font-size: 11px;
+    text-align: center;
 }
-
 
 .symbol-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(7, 1fr);
-
-    gap:
-        7px;
-
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 7px;
 }
-
 
 .symbol-button {
-
-    min-height:
-        42px;
-
-    margin:
-        0;
-
-    padding:
-        8px 4px;
-
-    background:
-        white;
-
-    border:
-        1px solid var(--border-color);
-
-    border-radius:
-        8px;
-
-    color:
-        var(--primary-dark);
-
-    font-size:
-        16px;
-
-    font-weight:
-        700;
-
-    cursor:
-        pointer;
-
-    transition:
-        .2s ease;
-
+    min-height: 42px;
+    margin: 0;
+    padding: 8px 4px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--primary-dark);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s ease;
 }
-
 
 .symbol-button:hover {
-
-    background:
-        var(--tint-light);
-
-    border-color:
-        var(--primary-accent);
-
-    transform:
-        translateY(-1px);
-
+    background: var(--tint-light);
+    border-color: var(--primary-accent);
+    transform: translateY(-1px);
 }
-
 
 .symbol-button.infinity {
-
-    font-size:
-        19px;
-
+    font-size: 19px;
 }
-
 
 .symbol-button.union {
-
-    font-size:
-        21px;
-
+    font-size: 21px;
 }
-
 
 .symbol-button.vertical-line {
-
-    font-size:
-        20px;
-
+    font-size: 20px;
 }
 
-
 /* =========================================================
-   FEEDBACK
+   14. FEEDBACK
 ========================================================= */
 
 #feedback {
-
-    width:
-        100%;
-
-    margin:
-        16px 0;
-
-    padding:
-        14px;
-
-    border-radius:
-        10px;
-
-    font-size:
-        13px;
-
-    line-height:
-        1.5;
-
-    text-align:
-        center;
-
+    width: 100%;
+    margin: 16px 0;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
 }
-
 
 .correct {
-
-    background:
-        var(--correct-bg);
-
-    border:
-        1px solid var(--correct-border);
-
-    color:
-        var(--correct-text);
-
+    background: var(--correct-bg);
+    border: 1px solid var(--correct-border);
+    color: var(--correct-text);
 }
-
 
 .wrong {
-
-    background:
-        var(--wrong-bg);
-
-    border:
-        1px solid var(--wrong-border);
-
-    color:
-        var(--wrong-text);
-
+    background: var(--wrong-bg);
+    border: 1px solid var(--wrong-border);
+    color: var(--wrong-text);
 }
-
 
 .syntax-warning {
-
-    background:
-        var(--warning-bg);
-
-    border:
-        1px solid var(--warning-border);
-
-    color:
-        var(--warning-text);
-
+    background: var(--warning-bg);
+    border: 1px solid var(--warning-border);
+    color: var(--warning-text);
 }
 
-
 /* =========================================================
-   RESULT SCREEN
+   15. RESULT SCREEN
 ========================================================= */
 
 #finishMessage {
-
-    display:
-        none;
-
-    margin:
-        0 auto 40px;
-
-    padding:
-        35px;
-
-    text-align:
-        center;
-
+    display: none;
+    margin: 0 auto 40px;
+    padding: 35px;
+    text-align: center;
 }
-
 
 #finishMessage h2 {
-
-    margin:
-        0 0 20px;
-
-    color:
-        var(--primary-dark);
-
-    font-family:
-        var(--font-brand);
-
-    font-size:
-        22px;
-
-    font-weight:
-        800;
-
+    margin: 0 0 20px;
+    color: var(--primary-dark);
+    font-family: var(--font-brand);
+    font-size: 22px;
+    font-weight: 800;
 }
-
 
 .summary-item {
-
-    margin:
-        10px 0;
-
-    padding:
-        12px;
-
-    background:
-        var(--tint-light);
-
-    border:
-        1px solid var(--border-color);
-
-    border-radius:
-        10px;
-
-    color:
-        var(--text-body);
-
-    font-size:
-        14px;
-
+    margin: 10px 0;
+    padding: 12px;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-body);
+    font-size: 14px;
 }
-
 
 .summary-item strong {
-
-    color:
-        var(--primary-dark);
-
-    font-weight:
-        700;
-
+    color: var(--primary-dark);
+    font-weight: 700;
 }
-
 
 .final-score {
-
-    margin:
-        20px 0;
-
-    color:
-        var(--primary-forest);
-
-    font-size:
-        42px;
-
-    font-weight:
-        800;
-
-    line-height:
-        1;
-
+    margin: 20px 0;
+    color: var(--primary-forest);
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1;
 }
 
-
 /* =========================================================
-   HIDDEN
+   16. HIDDEN ELEMENTS
 ========================================================= */
 
 .hidden {
-
-    display:
-        none !important;
-
+    display: none !important;
 }
-
 
 /* =========================================================
-   MOBILE
+   17. TABLES AND PDF SUPPORT
 ========================================================= */
 
-@media(max-width:600px) {
+table {
+    max-width: 100%;
+}
+
+@media print {
+    body {
+        background: #ffffff;
+    }
+
+    .top-nav-bar,
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* =========================================================
+   18. MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
 
     .top-nav-bar {
-
-        padding:
-            14px 18px;
-
+        padding: 14px 18px;
     }
-
 
     .nav-tagline {
-
-        font-size:
-            10px;
-
+        font-size: 10px;
     }
-
 
     .page-title {
-
-        font-size:
-            22px;
-
-        margin-top:
-            24px;
-
+        font-size: 22px;
+        margin-top: 24px;
     }
 
+    #studentStart {
+        width: calc(100% - 32px);
+        max-width: 440px;
+        margin: 24px auto;
+        padding: 26px 20px;
+    }
 
-    #studentStart,
+    #studentStart h1 {
+        font-size: 23px;
+    }
+
+    #studentStart h2 {
+        font-size: 14px;
+    }
+
     #quizArea {
-
-        padding:
-            25px 20px;
-
+        padding: 25px 20px;
     }
-
 
     #studentInfo {
-
-        grid-template-columns:
-            1fr;
-
+        grid-template-columns: 1fr;
     }
-
 
     #timerDisplay {
-
-        grid-column:
-            span 1;
-
+        grid-column: span 1;
     }
-
 
     #displayGiven {
-
-        font-size:
-            19px;
-
+        font-size: 19px;
     }
-
 
     .symbol-grid {
-
-        grid-template-columns:
-            repeat(4, 1fr);
-
+        grid-template-columns: repeat(4, 1fr);
     }
-
 
     .countdown-card {
-
-        padding:
-            35px 50px;
-
+        padding: 35px 50px;
     }
-
 
     #countdownNumber {
-
-        font-size:
-            70px;
-
+        font-size: 70px;
     }
-
 
     #finishMessage {
-
-        width:
-            94%;
-
-        padding:
-            24px;
-
+        width: 94%;
+        padding: 24px;
     }
-
 
     #finishMessage h2 {
-
-        font-size:
-            20px;
-
+        font-size: 20px;
     }
-
 
     .summary-item {
-
-        font-size:
-            13px;
-
-        padding:
-            11px;
-
+        font-size: 13px;
+        padding: 11px;
     }
-
 
     .final-score {
-
-        font-size:
-            38px;
-
+        font-size: 38px;
     }
-
 }
 
+/* =========================================================
+   19. SMALL MOBILE SCREENS
+========================================================= */
 
-@media(max-width:400px) {
+@media (max-width: 400px) {
+
+    #studentStart {
+        padding: 24px 16px;
+    }
+
+    #studentStart h1 {
+        font-size: 21px;
+    }
+
+    #studentStart h2 {
+        font-size: 13px;
+    }
 
     #finishMessage {
-
-        padding:
-            20px;
-
+        padding: 20px;
     }
-
 
     .final-score {
-
-        font-size:
-            34px;
-
+        font-size: 34px;
     }
 
-}
+    .countdown-card {
+        padding: 30px 35px;
+    }
 
+    #countdownNumber {
+        font-size: 60px;
+    }
+}
 </style>
 <link rel="stylesheet" href="../../assets/style/style.css">
 <link rel="stylesheet"
@@ -1474,9 +880,11 @@ select {
 ========================================================= -->
 
 <div id="studentStart">
-
+<h1>
+    GRADE 10
+    </h1>
     <h2>
-        Enter Student Details
+        QUADRATIC INEQUALITIES
     </h2>
 
 
