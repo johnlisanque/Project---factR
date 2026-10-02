@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,10 +19,13 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap"
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap"
     rel="stylesheet">
 
   <style>
+
     /* =========================================================
        PROJECTFACTR VARIABLES
        ========================================================= */
@@ -739,6 +743,7 @@
        ========================================================= */
 
     @media (max-width: 768px) {
+
       .hamburger-btn {
         display: flex;
       }
@@ -750,6 +755,7 @@
     }
 
     @media (max-width: 600px) {
+
       .quiz-section {
         padding: 30px 0 45px;
       }
@@ -790,6 +796,7 @@
     }
 
     @media (max-width: 400px) {
+
       .nav-tagline {
         display: none;
       }
@@ -825,22 +832,20 @@
         font-size: 17px;
       }
     }
+
   </style>
 </head>
 
 <body>
 
-  <!-- =========================================================
-       TOP NAVIGATION
-       ========================================================= -->
-
+  <!-- TOP NAVIGATION -->
   <header class="top-nav-bar" id="navbar"></header>
 
   <main>
 
     <!-- COVER IMAGE -->
-
     <section class="cover-section" id="cover">
+
       <div class="cover-wrapper">
 
         <img
@@ -856,22 +861,20 @@
         </div>
 
       </div>
+
     </section>
 
     <!-- GREEN BAR -->
-
     <div class="quiz-space-bar"></div>
 
-    <!-- =========================================================
-         QUIZ SECTION
-         ========================================================= -->
-
+    <!-- QUIZ SECTION -->
     <section class="quiz-section">
 
-      <h1 class="quiz-title">Operations on Integers Quiz</h1>
+      <h1 class="quiz-title">
+        Operations on Integers Quiz
+      </h1>
 
       <!-- STUDENT DETAILS -->
-
       <div id="studentStart">
 
         <h2>Enter Student Details</h2>
@@ -902,7 +905,6 @@
       </div>
 
       <!-- QUIZ TYPE SELECTION -->
-
       <div id="modeSelect">
 
         <h2>Select Quiz Type</h2>
@@ -930,18 +932,19 @@
       </div>
 
       <!-- COUNTDOWN -->
-
       <div id="countdownOverlay">
 
         <div class="countdown-card">
+
           <h3>GET READY</h3>
+
           <div id="countdownNumber">3</div>
+
         </div>
 
       </div>
 
       <!-- STUDENT INFORMATION -->
-
       <div id="studentInfo">
 
         <p>
@@ -963,7 +966,6 @@
       </div>
 
       <!-- QUIZ AREA -->
-
       <div id="quizArea">
 
         <div id="category">Topic</div>
@@ -1003,7 +1005,6 @@
       </div>
 
       <!-- QUIZ RESULT -->
-
       <div id="quizResult">
 
         <h2>Quiz Finished!</h2>
@@ -1044,10 +1045,7 @@
 
   </main>
 
-  <!-- =========================================================
-       FOOTER
-       ========================================================= -->
-
+  <!-- FOOTER -->
   <footer class="site-footer">
 
     <div class="footer-bottom">
@@ -1069,6 +1067,7 @@
        ========================================================= -->
 
   <script>
+
     "use strict";
 
     /* =========================================================
@@ -1078,14 +1077,11 @@
     let studentName = "";
     let studentSection = "";
     let selectedMode = "";
-
     let quizNumber = 0;
     let score = 0;
     let secondsElapsed = 0;
-
     let correctAnswer = null;
     let answered = false;
-
     let timerInterval = null;
     let countdownInterval = null;
 
@@ -1109,8 +1105,10 @@
       studentSection = $("section").value.trim();
 
       if (!studentName || !studentSection) {
+
         alert("Please enter your name and section before choosing a quiz type.");
         return;
+
       }
 
       $("studentStart").style.display = "none";
@@ -1120,6 +1118,7 @@
         behavior: "smooth",
         block: "center"
       });
+
     }
 
     /* =========================================================
@@ -1132,7 +1131,6 @@
       clearInterval(countdownInterval);
 
       selectedMode = mode;
-
       quizNumber = 0;
       score = 0;
       secondsElapsed = 0;
@@ -1186,6 +1184,7 @@
         }
 
       }, 1000);
+
     }
 
     /* =========================================================
@@ -1210,6 +1209,7 @@
           String(secs).padStart(2, "0");
 
       }, 1000);
+
     }
 
     /* =========================================================
@@ -1235,6 +1235,7 @@
       }
 
       return number;
+
     }
 
     /* =========================================================
@@ -1274,6 +1275,7 @@
         operation: "÷",
         answer: quotient
       };
+
     }
 
     /* =========================================================
@@ -1283,8 +1285,10 @@
     function newQuestion() {
 
       if (quizNumber >= TOTAL_QUESTIONS) {
+
         showQuizSummary();
         return;
+
       }
 
       answered = false;
@@ -1303,7 +1307,6 @@
         "Score: " + score + " / 10";
 
       let a, b, operation, answer;
-
       let questionKey = "";
       let attempts = 0;
 
@@ -1420,6 +1423,7 @@
             questionKey = "random-division-" + a + "-" + b;
 
           }
+
         }
 
         if (!usedQuestions.has(questionKey)) {
@@ -1428,6 +1432,7 @@
           break;
 
         }
+
       }
 
       /* FALLBACK IF UNIQUE QUESTION LIMIT IS REACHED */
@@ -1472,6 +1477,7 @@
       input.placeholder = "Enter answer";
       input.inputMode = "numeric";
       input.autocomplete = "off";
+
       input.setAttribute("aria-label", "Your answer");
 
       $("answerBox").replaceChildren(input);
@@ -1479,6 +1485,7 @@
       correctAnswer = answer;
 
       input.focus();
+
     }
 
     /* =========================================================
@@ -1572,6 +1579,7 @@
         quizNumber >= TOTAL_QUESTIONS
           ? "Show Summary Result"
           : "Next Question";
+
     }
 
     /* =========================================================
@@ -1617,6 +1625,7 @@
         behavior: "smooth",
         block: "center"
       });
+
     }
 
     /* =========================================================
@@ -1639,7 +1648,6 @@
       quizNumber = 0;
       score = 0;
       secondsElapsed = 0;
-
       selectedMode = "";
       correctAnswer = null;
       answered = false;
@@ -1661,6 +1669,7 @@
         behavior: "smooth",
         block: "center"
       });
+
     }
 
     /* =========================================================
@@ -1758,6 +1767,7 @@
         }
 
       });
+
     }
 
     /* =========================================================
@@ -1780,7 +1790,6 @@
   </script>
 
   <!-- PROJECTFACTR NAVIGATION SCRIPT -->
-
   <script src="../../js/helper/navbar.js"></script>
 
 </body>
