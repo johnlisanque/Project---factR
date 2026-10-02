@@ -1,1215 +1,1787 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>PROJECTFACTR — Operations on Integers Quiz</title>
-<meta name="description" content="ProjectFactr — Operations on Integers Quiz for Grade 7 Mathematics.">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="../../assets/style/style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --primary-dark:#073827;
-  --primary-forest:#16623d;
-  --primary-accent:#339763;
-  --tint-light:#e7f7ee;
-  --card-bg:#f7faf8;
-  --text-main:#073827;
-  --text-body:#2d473b;
-  --text-muted:#567e6c;
-  --border-color:#d8eade;
-  --white:#ffffff;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior:smooth;
-}
-
-body {
-  margin:0;
-  padding:0;
-  min-height:100vh;
-  background:#f7faf8;
-  color:var(--text-body);
-  font-family:'Inter',system-ui,-apple-system,sans-serif;
-  overflow-x:hidden;
-}
-
-button,input {
-  font:inherit;
-}
-
-button {
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
-  cursor:pointer;
-}
-
-.cover-section,
-.cover-wrapper {
-  width:100%;
-  margin:0;
-  padding:0;
-}
-
-.cover-image {
-  display:block;
-  width:100%;
-  height:auto;
-  max-width:100%;
-  margin:0;
-}
-
-.quiz-space-bar {
-  width:100%;
-  height:32px;
-  background:#16623d;
-}
-
-.quiz-section {
-  width:100%;
-  min-height:500px;
-  padding:45px 15px 60px;
-  background:#f7faf8;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.quiz-title {
-  width:92%;
-  max-width:700px;
-  margin:0 auto 20px;
-  color:#073827;
-  font-family:Arial,sans-serif;
-  font-size:28px;
-  font-weight:800;
-  text-align:center;
-}
-
-#studentStart,
-#modeSelect,
-#quizArea,
-#quizResult {
-  width:92%;
-  max-width:440px;
-  margin:10px auto 40px;
-  padding:35px;
-  background:#fff;
-  border:1px solid #e2ede6;
-  border-radius:16px;
-  box-shadow:0 10px 25px -5px rgba(7,56,39,.07);
-}
-
-#modeSelect,
-#quizArea,
-#quizResult {
-  display:none;
-}
-
-#studentStart h2,
-#modeSelect h2 {
-  margin:0 0 20px;
-  color:#073827;
-  font-family:Arial,sans-serif;
-  font-size:20px;
-  font-weight:700;
-  text-align:center;
-}
-
-#studentStart input {
-  display:block;
-  width:100%;
-  height:48px;
-  margin-bottom:16px;
-  padding:10px 16px;
-  background:#f0f7f3;
-  border:1px solid #e2ede6;
-  border-radius:10px;
-  font-size:15px;
-  outline:none;
-}
-
-#studentStart input:focus {
-  border-color:#339763;
-  background:#fff;
-}
-
-.quiz-btn {
-  display:block;
-  width:100%;
-  min-height:48px;
-  margin-top:16px;
-  padding:10px 16px;
-  background:#16623d;
-  color:#fff;
-  border:0;
-  border-radius:10px;
-  font-family:Arial,sans-serif;
-  font-size:15px;
-  font-weight:600;
-  cursor:pointer;
-  transition:background .2s ease, transform .2s ease;
-}
-
-.quiz-btn:hover {
-  background:#073827;
-}
-
-.quiz-btn:active {
-  transform:scale(.98);
-}
-
-.quiz-btn:disabled {
-  opacity:.6;
-  cursor:not-allowed;
-}
-
-.mode-btn-group {
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  margin-top:15px;
-}
-
-.mode-btn {
-  width:100%;
-  min-height:48px;
-  padding:14px;
-  background:#f0f7f3;
-  border:2px solid #e2ede6;
-  color:#073827;
-  border-radius:10px;
-  font-family:Arial,sans-serif;
-  font-weight:700;
-  font-size:14px;
-  cursor:pointer;
-  transition:all .2s ease;
-}
-
-.mode-btn:hover {
-  border-color:#339763;
-  background:#fff;
-}
-
-.mode-btn:active {
-  transform:scale(.98);
-}
-
-#countdownOverlay {
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  background:rgba(7,56,39,.75);
-  z-index:99999;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  transition:opacity .25s ease,visibility .25s ease;
-}
-
-#countdownOverlay.active {
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-}
-
-.countdown-card {
-  background:#fff;
-  padding:40px 60px;
-  border-radius:20px;
-  text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,.15);
-}
-
-.countdown-card h3 {
-  color:#073827;
-  font-family:Arial,sans-serif;
-  margin-bottom:10px;
-  font-size:18px;
-}
-
-#countdownNumber {
-  font-family:Arial,sans-serif;
-  font-size:5rem;
-  font-weight:800;
-  color:#16623d;
-}
-
-#studentInfo {
-  width:92%;
-  max-width:580px;
-  margin:0 auto 16px;
-  padding:18px 20px;
-  background:#fff;
-  border:1px solid #e2ede6;
-  border-radius:16px;
-  box-shadow:0 2px 4px rgba(7,56,39,.02);
-  display:none;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-#studentInfo p {
-  font-size:13px;
-  font-weight:500;
-}
-
-#showName,
-#showSection {
-  color:#073827;
-  font-weight:700;
-}
-
-#score,
-#quizCount,
-#timerDisplay {
-  background:#f0f7f3;
-  padding:8px 12px;
-  border-radius:8px;
-  border:1px solid #e2ede6;
-  text-align:center;
-  font-size:13px;
-  font-weight:600;
-  color:#16623d;
-}
-
-#timerDisplay {
-  grid-column:span 2;
-  background:#073827;
-  color:#fff;
-}
-
-#quizArea {
-  max-width:580px;
-}
-
-#category {
-  font-family:Arial,sans-serif;
-  margin-bottom:16px;
-  color:#073827;
-  font-size:18px;
-  font-weight:700;
-  text-align:center;
-}
-
-#displayGiven {
-  width:100%;
-  min-height:70px;
-  margin-bottom:20px;
-  padding:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#073827;
-  background:#f0f7f3;
-  border:1px solid #e2ede6;
-  border-radius:12px;
-  font-size:22px;
-  font-weight:700;
-  text-align:center;
-  line-height:1.5;
-  overflow-wrap:anywhere;
-}
-
-#answerBox {
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:8px;
-  margin:20px 0 16px;
-}
-
-#answerBox input {
-  width:120px;
-  height:48px;
-  padding:10px;
-  font-size:18px;
-  font-weight:700;
-  text-align:center;
-  border:2px solid #e2ede6;
-  border-radius:10px;
-  background:#fff;
-  outline:none;
-}
-
-#answerBox input:focus {
-  border-color:#339763;
-}
-
-#outAns {
-  width:100%;
-  margin:16px 0;
-  padding:14px;
-  background:#f0f7f3;
-  border:1px solid #e2ede6;
-  border-radius:10px;
-  color:#073827;
-  font-size:13px;
-  font-weight:500;
-  text-align:center;
-  display:none;
-  line-height:1.5;
-}
-
-#quizResult {
-  max-width:580px;
-  display:none;
-  text-align:center;
-}
-
-#quizResult h2 {
-  margin:0 0 20px;
-  color:#073827;
-  font-family:Arial,sans-serif;
-  font-size:22px;
-  font-weight:800;
-}
-
-.result-info {
-  margin:10px 0;
-  padding:12px;
-  background:#f0f7f3;
-  border:1px solid #e2ede6;
-  border-radius:10px;
-  color:#334d42;
-  font-size:14px;
-}
-
-.result-info strong {
-  color:#073827;
-  font-weight:700;
-}
-
-#resultScore {
-  margin:20px 0;
-  color:#16623d;
-  font-family:Arial,sans-serif;
-  font-size:42px;
-  font-weight:800;
-  line-height:1;
-}
-
-.site-footer {
-  width:100%;
-  background:#073827;
-  color:#fff;
-  padding:25px 32px;
-}
-
-.footer-bottom {
-  width:100%;
-  max-width:1200px;
-  margin:0 auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  font-size:.8rem;
-}
-
-.top-nav-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  width: 100%;
-  min-height: 58px;
-  background-color: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-color);
-  padding: 14px 32px;
-  animation: slideDownNav 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.nav-btn-toggle.active {
-  color: var(--white);
-  background-color: var(--primary-forest);
-  box-shadow: 0 4px 14px rgba(22, 98, 61, 0.25);
-}
-
-@keyframes slideDownNav {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.nav-container {
-  width: 100%;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-}
-
-.nav-container > nav {
-  margin-left: auto;
-}
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  flex-shrink: 0;
-}
-
-.nav-logo {
-  font-family: var(--font-brand);
-  font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  color: var(--primary-forest);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: transform 0.3s ease;
-}
-
-.nav-logo:hover {
-  transform: scale(1.03);
-}
-
-.nav-tagline {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--text-muted);
-  border-left: 1px solid var(--border-color);
-  padding-left: 9px;
-  white-space: nowrap;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  list-style: none;
-}
-
-.nav-item {
-  position: relative;
-}
-
-.nav-link,
-.nav-btn-toggle {
-  min-height: 34px;
-  padding: 0 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  line-height: 1.2;
-  color: var(--text-body);
-  text-decoration: none;
-  white-space: nowrap;
-  border: none;
-  border-radius: 5px;
-  background: transparent;
-  position: relative;
-  cursor: pointer;
-  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
-}
-
-.nav-link::after,
-.nav-btn-toggle::after {
-  content: '';
-  position: absolute;
-  bottom: 3px;
-  left: 10px;
-  right: 10px;
-  height: 2px;
-  background-color: var(--primary-accent);
-  border-radius: 2px;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.25s ease;
-}
-
-.nav-link:hover,
-.nav-btn-toggle:hover {
-  color: var(--primary-forest);
-  background-color: var(--tint-light);
-}
-
-.nav-link:hover::after,
-.nav-btn-toggle:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.nav-link.active,
-.nav-btn-toggle.active {
-  color: var(--white);
-  background-color: var(--primary-forest);
-  box-shadow: 0 3px 10px rgba(22, 98, 61, 0.18);
-}
-
-.nav-link.active::after,
-.nav-btn-toggle.active::after {
-  display: none;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 0;
-  width: max-content;
-  min-width: 210px;
-  max-width: min(320px, calc(100vw - 24px));
-  padding: 6px;
-  list-style: none;
-  background-color: var(--white);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(7, 56, 39, 0.10);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateY(6px);
-  transition: all 0.2s ease;
-  z-index: 1001;
-}
-
-.nav-item.dropdown:hover > .dropdown-menu,
-.nav-item.dropdown:focus-within > .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-.dropdown-item {
-  display: block;
-  width: 100%;
-  padding: 8px 11px;
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--text-body);
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.dropdown-item:hover {
-  background-color: var(--tint-light);
-  color: var(--primary-forest);
-}
-
-.hamburger-btn {
-  display: none;
-  width: 36px;
-  height: 36px;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-forest);
-  background: transparent;
-  border: none;
-  border-radius: 6px;
-  font-size: 1.25rem;
-  cursor: pointer;
-}
-
-@media(max-width:768px) {
-  .hamburger-btn {
-    display:flex;
-  }
-  .footer-bottom {
-    flex-direction:column;
-    text-align:center;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PROJECTFACTR — Operations on Integers Quiz</title>
+  <meta name="description" content="ProjectFactr — Operations on Integers Quiz for Grade 7 Mathematics.">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- ProjectFactr Global Styles -->
+  <link rel="stylesheet" href="../../assets/style/style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       PROJECTFACTR VARIABLES
+       ========================================================= */
+
+    :root {
+      --primary-dark: #073827;
+      --primary-forest: #16623d;
+      --primary-accent: #339763;
+      --tint-light: #e7f7ee;
+      --card-bg: #f7faf8;
+      --text-main: #073827;
+      --text-body: #2d473b;
+      --text-muted: #567e6c;
+      --border-color: #d8eade;
+      --white: #ffffff;
+    }
+
+    /* =========================================================
+       BASIC RESET
+       ========================================================= */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: var(--card-bg);
+      color: var(--text-body);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       COVER IMAGE
+       ========================================================= */
+
+    .cover-section,
+    .cover-wrapper {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .cover-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      margin: 0;
+    }
+
+    .cover-content {
+      display: none;
+    }
+
+    /* =========================================================
+       GREEN SPACE BAR
+       ========================================================= */
+
+    .quiz-space-bar {
+      width: 100%;
+      height: 32px;
+      background: var(--primary-forest);
+    }
+
+    /* =========================================================
+       QUIZ SECTION
+       ========================================================= */
+
+    .quiz-section {
+      width: 100%;
+      min-height: 500px;
+      padding: 45px 15px 60px;
+      background: var(--card-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .quiz-title {
+      width: 92%;
+      max-width: 700px;
+      margin: 0 auto 20px;
+      color: var(--primary-dark);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* =========================================================
+       QUIZ CARDS
+       ========================================================= */
+
+    #studentStart,
+    #modeSelect,
+    #quizArea,
+    #quizResult {
+      width: 92%;
+      max-width: 440px;
+      margin: 10px auto 40px;
+      padding: 35px;
+      background: var(--white);
+      border: 1px solid #e2ede6;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(7, 56, 39, 0.07);
+    }
+
+    #modeSelect,
+    #quizArea,
+    #quizResult {
+      display: none;
+    }
+
+    #studentStart h2,
+    #modeSelect h2 {
+      margin: 0 0 20px;
+      color: var(--primary-dark);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* =========================================================
+       STUDENT INPUTS
+       ========================================================= */
+
+    #studentStart input {
+      display: block;
+      width: 100%;
+      height: 48px;
+      margin-bottom: 16px;
+      padding: 10px 16px;
+      background: #f0f7f3;
+      border: 1px solid #e2ede6;
+      border-radius: 10px;
+      font-size: 15px;
+      color: var(--primary-dark);
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    #studentStart input:focus {
+      border-color: var(--primary-accent);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(51, 151, 99, 0.10);
+    }
+
+    /* =========================================================
+       PRIMARY BUTTON
+       ========================================================= */
+
+    .quiz-btn {
+      display: block;
+      width: 100%;
+      min-height: 48px;
+      margin-top: 16px;
+      padding: 10px 16px;
+      background: var(--primary-forest);
+      color: var(--white);
+      border: 0;
+      border-radius: 10px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .quiz-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .quiz-btn:active {
+      transform: scale(0.98);
+    }
+
+    .quiz-btn:focus-visible,
+    .mode-btn:focus-visible {
+      outline: 3px solid var(--primary-accent);
+      outline-offset: 3px;
+    }
+
+    .quiz-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* =========================================================
+       QUIZ TYPE BUTTONS
+       ========================================================= */
+
+    .mode-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .mode-btn {
+      width: 100%;
+      min-height: 48px;
+      padding: 14px;
+      background: #f0f7f3;
+      border: 2px solid #e2ede6;
+      color: var(--primary-dark);
+      border-radius: 10px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .mode-btn:hover {
+      border-color: var(--primary-accent);
+      background: var(--white);
+      color: var(--primary-forest);
+    }
+
+    .mode-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* =========================================================
+       COUNTDOWN
+       ========================================================= */
+
+    #countdownOverlay {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 56, 39, 0.75);
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    #countdownOverlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .countdown-card {
+      width: min(90%, 360px);
+      background: var(--white);
+      padding: 40px 60px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .countdown-card h3 {
+      color: var(--primary-dark);
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    #countdownNumber {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 5rem;
+      font-weight: 800;
+      color: var(--primary-forest);
+    }
+
+    /* =========================================================
+       STUDENT INFORMATION
+       ========================================================= */
+
+    #studentInfo {
+      width: 92%;
+      max-width: 580px;
+      margin: 0 auto 16px;
+      padding: 18px 20px;
+      background: var(--white);
+      border: 1px solid #e2ede6;
+      border-radius: 16px;
+      box-shadow: 0 2px 4px rgba(7, 56, 39, 0.02);
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    #studentInfo p {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+
+    #showName,
+    #showSection {
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    #score,
+    #quizCount,
+    #timerDisplay {
+      background: #f0f7f3;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #e2ede6;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-forest);
+    }
+
+    #timerDisplay {
+      grid-column: span 2;
+      background: var(--primary-dark);
+      color: var(--white);
+    }
+
+    /* =========================================================
+       QUIZ AREA
+       ========================================================= */
+
+    #quizArea {
+      max-width: 580px;
+    }
+
+    #category {
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin-bottom: 16px;
+      color: var(--primary-dark);
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    #displayGiven {
+      width: 100%;
+      min-height: 70px;
+      margin-bottom: 20px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-dark);
+      background: #f0f7f3;
+      border: 1px solid #e2ede6;
+      border-radius: 12px;
+      font-size: 22px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    /* =========================================================
+       ANSWER BOX
+       ========================================================= */
+
+    #answerBox {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0 16px;
+    }
+
+    #answerBox input {
+      width: 120px;
+      max-width: 100%;
+      height: 48px;
+      padding: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      color: var(--primary-dark);
+      border: 2px solid #e2ede6;
+      border-radius: 10px;
+      background: var(--white);
+      outline: none;
+    }
+
+    #answerBox input:focus {
+      border-color: var(--primary-accent);
+      box-shadow: 0 0 0 3px rgba(51, 151, 99, 0.10);
+    }
+
+    #outAns {
+      width: 100%;
+      margin: 16px 0;
+      padding: 14px;
+      background: #f0f7f3;
+      border: 1px solid #e2ede6;
+      border-radius: 10px;
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      display: none;
+      line-height: 1.7;
+    }
+
+    /* =========================================================
+       QUIZ RESULT
+       ========================================================= */
+
+    #quizResult {
+      max-width: 580px;
+      display: none;
+      text-align: center;
+    }
+
+    #quizResult h2 {
+      margin: 0 0 20px;
+      color: var(--primary-dark);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .result-info {
+      margin: 10px 0;
+      padding: 12px;
+      background: #f0f7f3;
+      border: 1px solid #e2ede6;
+      border-radius: 10px;
+      color: #334d42;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .result-info strong {
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    #resultScore {
+      margin: 20px 0;
+      color: var(--primary-forest);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    .site-footer {
+      width: 100%;
+      background: var(--primary-dark);
+      color: var(--white);
+      padding: 25px 32px;
+    }
+
+    .footer-bottom {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: #e7f7ee;
+    }
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+
+    .top-nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      width: 100%;
+      min-height: 58px;
+      background-color: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 32px;
+      animation: slideDownNav 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideDownNav {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .nav-container {
+      width: 100%;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .nav-container > nav {
+      margin-left: auto;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--primary-forest);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-logo:hover {
+      transform: scale(1.03);
+    }
+
+    .nav-tagline {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text-muted);
+      border-left: 1px solid var(--border-color);
+      padding-left: 9px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      list-style: none;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link,
+    .nav-btn-toggle {
+      min-height: 34px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+      color: var(--text-body);
+      text-decoration: none;
+      white-space: nowrap;
+      border: none;
+      border-radius: 5px;
+      background: transparent;
+      position: relative;
+      cursor: pointer;
+      transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-link::after,
+    .nav-btn-toggle::after {
+      content: '';
+      position: absolute;
+      bottom: 3px;
+      left: 10px;
+      right: 10px;
+      height: 2px;
+      background-color: var(--primary-accent);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.25s ease;
+    }
+
+    .nav-link:hover,
+    .nav-btn-toggle:hover {
+      color: var(--primary-forest);
+      background-color: var(--tint-light);
+    }
+
+    .nav-link:hover::after,
+    .nav-btn-toggle:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .nav-link.active,
+    .nav-btn-toggle.active {
+      color: var(--white);
+      background-color: var(--primary-forest);
+      box-shadow: 0 3px 10px rgba(22, 98, 61, 0.18);
+    }
+
+    .nav-link.active::after,
+    .nav-btn-toggle.active::after {
+      display: none;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      width: max-content;
+      min-width: 210px;
+      max-width: min(320px, calc(100vw - 24px));
+      padding: 6px;
+      list-style: none;
+      background-color: var(--white);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(7, 56, 39, 0.10);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: all 0.2s ease;
+      z-index: 1001;
+    }
+
+    .nav-item.dropdown:hover > .dropdown-menu,
+    .nav-item.dropdown:focus-within > .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: block;
+      width: 100%;
+      padding: 8px 11px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--text-body);
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--tint-light);
+      color: var(--primary-forest);
+    }
+
+    .hamburger-btn {
+      display: none;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-forest);
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       MOBILE RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 768px) {
+      .hamburger-btn {
+        display: flex;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .quiz-section {
+        padding: 30px 0 45px;
+      }
+
+      .quiz-title {
+        font-size: 22px;
+      }
+
+      #studentStart,
+      #modeSelect,
+      #quizArea,
+      #quizResult {
+        width: 94%;
+        padding: 24px;
+      }
+
+      #studentInfo {
+        width: 94%;
+        padding: 15px;
+      }
+
+      #displayGiven {
+        font-size: 19px;
+        min-height: 65px;
+      }
+
+      #answerBox input {
+        width: 100px;
+      }
+
+      .countdown-card {
+        padding: 35px 45px;
+      }
+
+      #countdownNumber {
+        font-size: 4rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .nav-tagline {
+        display: none;
+      }
+
+      #studentInfo {
+        grid-template-columns: 1fr;
+      }
+
+      #timerDisplay {
+        grid-column: span 1;
+      }
+
+      #studentStart,
+      #modeSelect,
+      #quizArea,
+      #quizResult {
+        padding: 20px;
+      }
+
+      .quiz-title {
+        font-size: 20px;
+      }
+
+      #resultScore {
+        font-size: 34px;
+      }
+
+      #answerBox input {
+        width: 90px;
+      }
+
+      #displayGiven {
+        font-size: 17px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="top-nav-bar" id="navbar"></header>
+  <!-- =========================================================
+       TOP NAVIGATION
+       ========================================================= -->
 
-<main>
+  <header class="top-nav-bar" id="navbar"></header>
 
-<section class="cover-section" id="cover">
-  <div class="cover-wrapper">
-    <!-- CRITICAL FIX: Ensure file names with spaces or capitalization match exactly on remote servers -->
-    <img
-      src="../../assets/img/background/Banner%20Of%20Project%20FACTR.png"
-      alt="ProjectFactr Mathematics Learning Platform Banner"
-      class="cover-image"
-      id="main-cover-image"
-    >
+  <main>
 
-    <div class="cover-content">
-      <h1>Operations on Integers</h1>
-      <h2></h2>
+    <!-- COVER IMAGE -->
+
+    <section class="cover-section" id="cover">
+      <div class="cover-wrapper">
+
+        <img
+          src="../../assets/img/background/Banner%20Of%20Project%20FACTR.png"
+          alt="ProjectFactr Mathematics Learning Platform Banner"
+          class="cover-image"
+          id="main-cover-image"
+        >
+
+        <div class="cover-content">
+          <h1>Operations on Integers</h1>
+          <h2></h2>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GREEN BAR -->
+
+    <div class="quiz-space-bar"></div>
+
+    <!-- =========================================================
+         QUIZ SECTION
+         ========================================================= -->
+
+    <section class="quiz-section">
+
+      <h1 class="quiz-title">Operations on Integers Quiz</h1>
+
+      <!-- STUDENT DETAILS -->
+
+      <div id="studentStart">
+
+        <h2>Enter Student Details</h2>
+
+        <input
+          type="text"
+          id="fullName"
+          placeholder="Full Name"
+          autocomplete="name"
+          maxlength="100"
+        >
+
+        <input
+          type="text"
+          id="section"
+          placeholder="Grade & Section"
+          maxlength="50"
+        >
+
+        <button
+          type="button"
+          id="nextToModeBtn"
+          class="quiz-btn"
+        >
+          Next: Choose Quiz Type
+        </button>
+
+      </div>
+
+      <!-- QUIZ TYPE SELECTION -->
+
+      <div id="modeSelect">
+
+        <h2>Select Quiz Type</h2>
+
+        <div class="mode-btn-group">
+
+          <button type="button" class="mode-btn" data-mode="add_sub">
+            Addition &amp; Subtraction of Integers
+          </button>
+
+          <button type="button" class="mode-btn" data-mode="multiplication">
+            Multiplication of Integers
+          </button>
+
+          <button type="button" class="mode-btn" data-mode="division">
+            Division of Integers
+          </button>
+
+          <button type="button" class="mode-btn" data-mode="randomize">
+            Randomize (All Operations)
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- COUNTDOWN -->
+
+      <div id="countdownOverlay">
+
+        <div class="countdown-card">
+          <h3>GET READY</h3>
+          <div id="countdownNumber">3</div>
+        </div>
+
+      </div>
+
+      <!-- STUDENT INFORMATION -->
+
+      <div id="studentInfo">
+
+        <p>
+          Name:
+          <span id="showName"></span>
+        </p>
+
+        <p>
+          Section:
+          <span id="showSection"></span>
+        </p>
+
+        <div id="score">Score: 0 / 10</div>
+
+        <div id="quizCount">Question: 1 / 10</div>
+
+        <div id="timerDisplay">Time Elapsed: 0:00</div>
+
+      </div>
+
+      <!-- QUIZ AREA -->
+
+      <div id="quizArea">
+
+        <div id="category">Topic</div>
+
+        <div id="displayGiven">Question</div>
+
+        <div id="answerBox"></div>
+
+        <div id="outAns"></div>
+
+        <button
+          type="button"
+          class="quiz-btn"
+          id="submitBtn"
+        >
+          Submit Answer
+        </button>
+
+        <button
+          type="button"
+          class="quiz-btn"
+          id="nextBtn"
+          style="display:none;background:#339763;"
+        >
+          Next Question
+        </button>
+
+        <button
+          type="button"
+          class="quiz-btn"
+          id="backToModeBtn"
+          style="display:none;background:#073827;"
+        >
+          Back to Quiz Type
+        </button>
+
+      </div>
+
+      <!-- QUIZ RESULT -->
+
+      <div id="quizResult">
+
+        <h2>Quiz Finished!</h2>
+
+        <div class="result-info">
+          Name:
+          <strong id="resultName"></strong>
+        </div>
+
+        <div class="result-info">
+          Section:
+          <strong id="resultSection"></strong>
+        </div>
+
+        <div class="result-info">
+          Quiz Type:
+          <strong id="resultQuizType"></strong>
+        </div>
+
+        <div id="resultScore">0/10</div>
+
+        <div class="result-info">
+          Time:
+          <strong id="resultTime">00:00</strong>
+        </div>
+
+        <button
+          type="button"
+          class="quiz-btn"
+          id="resultBackBtn"
+        >
+          Back to Quiz Types
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+
+  <footer class="site-footer">
+
+    <div class="footer-bottom">
+
+      <div>
+        &copy; 2026 ProjectFactr. All rights reserved.
+      </div>
+
+      <div>
+        Mathematics Learning &amp; Curriculum Platform
+      </div>
+
     </div>
-  </div>
-</section>
 
-<div class="quiz-space-bar"></div>
+  </footer>
 
-<section class="quiz-section">
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
 
-<h1 class="quiz-title">Operations on Integers Quiz</h1>
+  <script>
+    "use strict";
 
-<div id="studentStart">
-  <h2>Enter Student Details</h2>
+    /* =========================================================
+       QUIZ VARIABLES
+       ========================================================= */
 
-  <input
-    type="text"
-    id="fullName"
-    placeholder="Full Name"
-    autocomplete="name"
-  >
+    let studentName = "";
+    let studentSection = "";
+    let selectedMode = "";
 
-  <input
-    type="text"
-    id="section"
-    placeholder="Grade & Section"
-  >
+    let quizNumber = 0;
+    let score = 0;
+    let secondsElapsed = 0;
 
-  <button type="button" id="nextToModeBtn" class="quiz-btn">
-    Next: Choose Quiz Type
-  </button>
-</div>
+    let correctAnswer = null;
+    let answered = false;
 
-<div id="modeSelect">
-  <h2>Select Quiz Type</h2>
+    let timerInterval = null;
+    let countdownInterval = null;
 
-  <div class="mode-btn-group">
-    <button type="button" class="mode-btn" data-mode="add_sub">
-      Addition &amp; Subtraction of Integers
-    </button>
+    let usedQuestions = new Set();
 
-    <button type="button" class="mode-btn" data-mode="multiplication">
-      Multiplication of Integers
-    </button>
+    const TOTAL_QUESTIONS = 10;
 
-    <button type="button" class="mode-btn" data-mode="division">
-      Division of Integers
-    </button>
+    /* =========================================================
+       GET ELEMENT BY ID
+       ========================================================= */
 
-    <button type="button" class="mode-btn" data-mode="randomize">
-      Randomize (All Operations)
-    </button>
-  </div>
-</div>
+    const $ = id => document.getElementById(id);
 
-<div id="countdownOverlay">
-  <div class="countdown-card">
-    <h3>GET READY</h3>
-    <div id="countdownNumber">3</div>
-  </div>
-</div>
+    /* =========================================================
+       STUDENT DETAILS
+       ========================================================= */
 
-<div id="studentInfo">
-  <p>Name: <span id="showName"></span></p>
-  <p>Section: <span id="showSection"></span></p>
+    function proceedToModeSelect() {
 
-  <div id="score">Score: 0 / 10</div>
-  <div id="quizCount">Question: 1 / 10</div>
-  <div id="timerDisplay">Time Elapsed: 0:00</div>
-</div>
+      studentName = $("fullName").value.trim();
+      studentSection = $("section").value.trim();
 
-<div id="quizArea">
-  <div id="category">Topic</div>
-  <div id="displayGiven">Question</div>
+      if (!studentName || !studentSection) {
+        alert("Please enter your name and section before choosing a quiz type.");
+        return;
+      }
 
-  <div id="answerBox"></div>
-  <div id="outAns"></div>
+      $("studentStart").style.display = "none";
+      $("modeSelect").style.display = "block";
 
-  <button type="button" class="quiz-btn" id="submitBtn">
-    Submit Answer
-  </button>
-
-  <button
-    type="button"
-    class="quiz-btn"
-    id="nextBtn"
-    style="display:none;background:#339763;"
-  >
-    Next Question
-  </button>
-
-  <button
-    type="button"
-    class="quiz-btn"
-    id="backToModeBtn"
-    style="display:none;background:#073827;"
-  >
-    Back to Quiz Type
-  </button>
-</div>
-
-<div id="quizResult">
-  <h2>Quiz Finished!</h2>
-
-  <div class="result-info">
-    Name: <strong id="resultName"></strong>
-  </div>
-
-  <div class="result-info">
-    Section: <strong id="resultSection"></strong>
-  </div>
-
-  <div class="result-info">
-    Quiz Type: <strong id="resultQuizType"></strong>
-  </div>
-
-  <div id="resultScore">0/10</div>
-
-  <div class="result-info">
-    Time: <strong id="resultTime">00:00</strong>
-  </div>
-
-  <button type="button" class="quiz-btn" id="resultBackBtn">
-    Back to Quiz Types
-  </button>
-</div>
-
-</section>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-bottom">
-    <div>&copy; 2026 ProjectFactr. All rights reserved.</div>
-    <div>Mathematics Learning &amp; Curriculum Platform</div>
-  </div>
-</footer>
-
-<script>
-"use strict";
-
-let studentName = "";
-let studentSection = "";
-let selectedMode = "";
-
-let quizNumber = 0;
-let score = 0;
-let secondsElapsed = 0;
-
-let correctAnswer = null;
-let answered = false;
-
-let timerInterval = null;
-let countdownInterval = null;
-
-let usedQuestions = new Set();
-
-const TOTAL_QUESTIONS = 10;
-const $ = id => document.getElementById(id);
-
-function proceedToModeSelect() {
-  studentName = $("fullName").value.trim();
-  studentSection = $("section").value.trim();
-
-  if (!studentName || !studentSection) {
-    alert("Please enter your name and section before choosing a quiz type.");
-    return;
-  }
-
-  $("studentStart").style.display = "none";
-  $("modeSelect").style.display = "block";
-}
-
-function startQuizWithCountdown(mode) {
-  clearInterval(timerInterval);
-  clearInterval(countdownInterval);
-
-  selectedMode = mode;
-  quizNumber = 0;
-  score = 0;
-  secondsElapsed = 0;
-  answered = false;
-  usedQuestions.clear();
-
-  $("showName").textContent = studentName;
-  $("showSection").textContent = studentSection;
-
-  $("score").textContent = "Score: 0 / 10";
-  $("quizCount").textContent = "Question: 1 / 10";
-  $("timerDisplay").textContent = "Time Elapsed: 0:00";
-
-  $("modeSelect").style.display = "none";
-  $("quizResult").style.display = "none";
-  $("quizArea").style.display = "none";
-  $("studentInfo").style.display = "none";
-
-  $("countdownOverlay").classList.add("active");
-
-  let count = 3;
-  $("countdownNumber").textContent = count;
-
-  countdownInterval = setInterval(() => {
-    count--;
-
-    if (count > 0) {
-      $("countdownNumber").textContent = count;
-    } else if (count === 0) {
-      $("countdownNumber").textContent = "GO!";
-    } else {
-      clearInterval(countdownInterval);
-      countdownInterval = null;
-
-      $("countdownOverlay").classList.remove("active");
-      $("studentInfo").style.display = "grid";
-      $("quizArea").style.display = "block";
-
-      startTimer();
-      newQuestion();
+      $("modeSelect").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
     }
-  }, 1000);
-}
 
-function startTimer() {
-  clearInterval(timerInterval);
+    /* =========================================================
+       START QUIZ WITH COUNTDOWN
+       ========================================================= */
 
-  timerInterval = setInterval(() => {
-    secondsElapsed++;
-    const mins = Math.floor(secondsElapsed / 60);
-    const secs = secondsElapsed % 60;
+    function startQuizWithCountdown(mode) {
 
-    $("timerDisplay").textContent =
-      "Time Elapsed: " + mins + ":" + String(secs).padStart(2, "0");
-  }, 1000);
-}
+      clearInterval(timerInterval);
+      clearInterval(countdownInterval);
 
-function getRandomInteger(forceTwoDigit = false) {
-  let number;
-  if (forceTwoDigit) {
-    number = Math.floor(Math.random() * 21) + 10;
-  } else {
-    number = Math.floor(Math.random() * 9) + 1;
-  }
+      selectedMode = mode;
 
-  if (Math.random() < 0.5) {
-    number *= -1;
-  }
-  return number;
-}
+      quizNumber = 0;
+      score = 0;
+      secondsElapsed = 0;
+      answered = false;
 
-function formatInt(number) {
-  return number < 0 ? "(" + number + ")" : String(number);
-}
+      usedQuestions.clear();
 
-function generateDivision(twoDigit = false) {
-  const quotient = getRandomInteger(false);
-  let divisor;
+      $("showName").textContent = studentName;
+      $("showSection").textContent = studentSection;
 
-  do {
-    divisor = getRandomInteger(twoDigit);
-  } while (divisor === 0 || Math.abs(divisor * quotient) > 30);
+      $("score").textContent = "Score: 0 / 10";
+      $("quizCount").textContent = "Question: 1 / 10";
+      $("timerDisplay").textContent = "Time Elapsed: 0:00";
 
-  return {
-    a: divisor * quotient,
-    b: divisor,
-    operation: "÷",
-    answer: quotient
-  };
-}
+      $("modeSelect").style.display = "none";
+      $("quizResult").style.display = "none";
+      $("quizArea").style.display = "none";
+      $("studentInfo").style.display = "none";
 
-function newQuestion() {
-  if (quizNumber >= TOTAL_QUESTIONS) {
-    showQuizSummary();
-    return;
-  }
+      $("countdownOverlay").classList.add("active");
 
-  answered = false;
+      let count = 3;
 
-  $("outAns").style.display = "none";
-  $("outAns").textContent = "";
+      $("countdownNumber").textContent = count;
 
-  $("submitBtn").style.display = "block";
-  $("nextBtn").style.display = "none";
-  $("backToModeBtn").style.display = "none";
+      countdownInterval = setInterval(() => {
 
-  $("quizCount").textContent = "Question: " + (quizNumber + 1) + " / " + TOTAL_QUESTIONS;
-  $("score").textContent = "Score: " + score + " / 10";
+        count--;
 
-  let a, b, operation, answer;
-  let questionKey = "";
-  let attempts = 0;
+        if (count > 0) {
 
-  while (attempts < 1000) {
-    attempts++;
+          $("countdownNumber").textContent = count;
 
-    const firstTwoDigit = (quizNumber + 1) % 2 === 0;
-    const secondTwoDigit = !firstTwoDigit;
+        } else if (count === 0) {
 
-    if (selectedMode === "add_sub") {
-      a = getRandomInteger(firstTwoDigit);
-      b = getRandomInteger(secondTwoDigit);
-      operation = Math.random() < 0.5 ? "+" : "−";
-      answer = operation === "+" ? a + b : a - b;
-      questionKey = "addsub-" + a + operation + b;
-    } else if (selectedMode === "multiplication") {
-      a = getRandomInteger(firstTwoDigit);
-      b = getRandomInteger(secondTwoDigit);
-      operation = "×";
-      answer = a * b;
-      questionKey = "multiply-" + a + "x" + b;
-    } else if (selectedMode === "division") {
-      const q = generateDivision(quizNumber % 2 === 0);
-      a = q.a;
-      b = q.b;
-      operation = q.operation;
-      answer = q.answer;
-      questionKey = "division-" + a + "div" + b;
-    } else if (selectedMode === "randomize") {
-      const operations = ["addition", "subtraction", "multiplication", "division"];
-      const randomOperation = operations[Math.floor(Math.random() * operations.length)];
+          $("countdownNumber").textContent = "GO!";
 
-      if (randomOperation === "addition") {
-        a = getRandomInteger(firstTwoDigit);
-        b = getRandomInteger(secondTwoDigit);
+        } else {
+
+          clearInterval(countdownInterval);
+          countdownInterval = null;
+
+          $("countdownOverlay").classList.remove("active");
+
+          $("studentInfo").style.display = "grid";
+          $("quizArea").style.display = "block";
+
+          startTimer();
+          newQuestion();
+
+        }
+
+      }, 1000);
+    }
+
+    /* =========================================================
+       TIMER
+       ========================================================= */
+
+    function startTimer() {
+
+      clearInterval(timerInterval);
+
+      timerInterval = setInterval(() => {
+
+        secondsElapsed++;
+
+        const mins = Math.floor(secondsElapsed / 60);
+        const secs = secondsElapsed % 60;
+
+        $("timerDisplay").textContent =
+          "Time Elapsed: " +
+          mins +
+          ":" +
+          String(secs).padStart(2, "0");
+
+      }, 1000);
+    }
+
+    /* =========================================================
+       RANDOM INTEGER GENERATOR
+       ========================================================= */
+
+    function getRandomInteger(forceTwoDigit = false) {
+
+      let number;
+
+      if (forceTwoDigit) {
+
+        number = Math.floor(Math.random() * 21) + 10;
+
+      } else {
+
+        number = Math.floor(Math.random() * 9) + 1;
+
+      }
+
+      if (Math.random() < 0.5) {
+        number *= -1;
+      }
+
+      return number;
+    }
+
+    /* =========================================================
+       FORMAT NEGATIVE INTEGERS
+       ========================================================= */
+
+    function formatInt(number) {
+
+      return number < 0
+        ? "(" + number + ")"
+        : String(number);
+
+    }
+
+    /* =========================================================
+       GENERATE DIVISION QUESTION
+       ========================================================= */
+
+    function generateDivision(twoDigit = false) {
+
+      const quotient = getRandomInteger(false);
+
+      let divisor;
+
+      do {
+
+        divisor = getRandomInteger(twoDigit);
+
+      } while (
+        divisor === 0 ||
+        Math.abs(divisor * quotient) > 30
+      );
+
+      return {
+        a: divisor * quotient,
+        b: divisor,
+        operation: "÷",
+        answer: quotient
+      };
+    }
+
+    /* =========================================================
+       GENERATE NEW QUESTION
+       ========================================================= */
+
+    function newQuestion() {
+
+      if (quizNumber >= TOTAL_QUESTIONS) {
+        showQuizSummary();
+        return;
+      }
+
+      answered = false;
+
+      $("outAns").style.display = "none";
+      $("outAns").textContent = "";
+
+      $("submitBtn").style.display = "block";
+      $("nextBtn").style.display = "none";
+      $("backToModeBtn").style.display = "none";
+
+      $("quizCount").textContent =
+        "Question: " + (quizNumber + 1) + " / " + TOTAL_QUESTIONS;
+
+      $("score").textContent =
+        "Score: " + score + " / 10";
+
+      let a, b, operation, answer;
+
+      let questionKey = "";
+      let attempts = 0;
+
+      /* =====================================================
+         GENERATE UNIQUE QUESTION
+         ===================================================== */
+
+      while (attempts < 1000) {
+
+        attempts++;
+
+        const firstTwoDigit = (quizNumber + 1) % 2 === 0;
+        const secondTwoDigit = !firstTwoDigit;
+
+        /* ADDITION AND SUBTRACTION */
+
+        if (selectedMode === "add_sub") {
+
+          a = getRandomInteger(firstTwoDigit);
+          b = getRandomInteger(secondTwoDigit);
+
+          operation = Math.random() < 0.5 ? "+" : "−";
+
+          answer = operation === "+"
+            ? a + b
+            : a - b;
+
+          questionKey = "addsub-" + a + operation + b;
+
+        }
+
+        /* MULTIPLICATION */
+
+        else if (selectedMode === "multiplication") {
+
+          a = getRandomInteger(firstTwoDigit);
+          b = getRandomInteger(secondTwoDigit);
+
+          operation = "×";
+          answer = a * b;
+
+          questionKey = "multiply-" + a + "x" + b;
+
+        }
+
+        /* DIVISION */
+
+        else if (selectedMode === "division") {
+
+          const q = generateDivision(quizNumber % 2 === 0);
+
+          a = q.a;
+          b = q.b;
+          operation = q.operation;
+          answer = q.answer;
+
+          questionKey = "division-" + a + "div" + b;
+
+        }
+
+        /* RANDOMIZE ALL OPERATIONS */
+
+        else if (selectedMode === "randomize") {
+
+          const operations = [
+            "addition",
+            "subtraction",
+            "multiplication",
+            "division"
+          ];
+
+          const randomOperation =
+            operations[Math.floor(Math.random() * operations.length)];
+
+          if (randomOperation === "addition") {
+
+            a = getRandomInteger(firstTwoDigit);
+            b = getRandomInteger(secondTwoDigit);
+
+            operation = "+";
+            answer = a + b;
+
+            questionKey = "random-add-" + a + "-" + b;
+
+          } else if (randomOperation === "subtraction") {
+
+            a = getRandomInteger(firstTwoDigit);
+            b = getRandomInteger(secondTwoDigit);
+
+            operation = "−";
+            answer = a - b;
+
+            questionKey = "random-sub-" + a + "-" + b;
+
+          } else if (randomOperation === "multiplication") {
+
+            a = getRandomInteger(firstTwoDigit);
+            b = getRandomInteger(secondTwoDigit);
+
+            operation = "×";
+            answer = a * b;
+
+            questionKey = "random-multiply-" + a + "-" + b;
+
+          } else {
+
+            const q = generateDivision(firstTwoDigit);
+
+            a = q.a;
+            b = q.b;
+            operation = q.operation;
+            answer = q.answer;
+
+            questionKey = "random-division-" + a + "-" + b;
+
+          }
+        }
+
+        if (!usedQuestions.has(questionKey)) {
+
+          usedQuestions.add(questionKey);
+          break;
+
+        }
+      }
+
+      /* FALLBACK IF UNIQUE QUESTION LIMIT IS REACHED */
+
+      if (attempts >= 1000) {
+
+        a = getRandomInteger(false);
+        b = getRandomInteger(false);
+
         operation = "+";
         answer = a + b;
-        questionKey = "random-add-" + a + "-" + b;
-      } else if (randomOperation === "subtraction") {
-        a = getRandomInteger(firstTwoDigit);
-        b = getRandomInteger(secondTwoDigit);
-        operation = "−";
-        answer = a - b;
-        questionKey = "random-sub-" + a + "-" + b;
-      } else if (randomOperation === "multiplication") {
-        a = getRandomInteger(firstTwoDigit);
-        b = getRandomInteger(secondTwoDigit);
-        operation = "×";
-        answer = a * b;
-        questionKey = "random-multiply-" + a + "-" + b;
-      } else {
-        const q = generateDivision(firstTwoDigit);
-        a = q.a;
-        b = q.b;
-        operation = q.operation;
-        answer = q.answer;
-        questionKey = "random-division-" + a + "-" + b;
+
       }
+
+      /* QUIZ CATEGORY LABELS */
+
+      const categoryNames = {
+
+        add_sub: "Addition & Subtraction of Integers",
+
+        multiplication: "Multiplication of Integers",
+
+        division: "Division of Integers",
+
+        randomize: "Randomized Integer Operations"
+
+      };
+
+      $("category").textContent = categoryNames[selectedMode];
+
+      /* DISPLAY MATH QUESTION */
+
+      $("displayGiven").textContent =
+        formatInt(a) + " " + operation + " " + formatInt(b) + " = ?";
+
+      /* CREATE ANSWER INPUT */
+
+      const input = document.createElement("input");
+
+      input.type = "text";
+      input.id = "userAnswer";
+      input.placeholder = "Enter answer";
+      input.inputMode = "numeric";
+      input.autocomplete = "off";
+      input.setAttribute("aria-label", "Your answer");
+
+      $("answerBox").replaceChildren(input);
+
+      correctAnswer = answer;
+
+      input.focus();
     }
 
-    if (!usedQuestions.has(questionKey)) {
-      usedQuestions.add(questionKey);
-      break;
+    /* =========================================================
+       CHECK ANSWER
+       ========================================================= */
+
+    function checkAns() {
+
+      if (answered) return;
+
+      const answerInput = $("userAnswer");
+
+      if (!answerInput) return;
+
+      let answerValue = answerInput.value.trim();
+
+      if (answerValue === "") {
+
+        alert("Please enter your answer.");
+        answerInput.focus();
+        return;
+
+      }
+
+      /* ACCEPT DIFFERENT MINUS CHARACTERS */
+
+      answerValue = answerValue
+        .replace(/−/g, "-")
+        .replace(/–/g, "-");
+
+      /* VALIDATE INTEGER */
+
+      if (!/^-?\d+$/.test(answerValue)) {
+
+        alert("Please enter a valid integer.");
+        answerInput.focus();
+        return;
+
+      }
+
+      const userAnswer = Number(answerValue);
+
+      if (!Number.isSafeInteger(userAnswer)) {
+
+        alert("Please enter a valid whole-number integer.");
+        answerInput.focus();
+        return;
+
+      }
+
+      answered = true;
+
+      const isCorrect = userAnswer === correctAnswer;
+
+      /* CORRECT ANSWER */
+
+      if (isCorrect) {
+
+        score++;
+
+        $("outAns").innerHTML =
+          '<span style="color:#16623d;font-weight:700;">✓ Correct!</span><br>' +
+          "Correct answer: " + correctAnswer;
+
+      }
+
+      /* WRONG ANSWER */
+
+      else {
+
+        $("outAns").innerHTML =
+          '<span style="color:#dc2626;font-weight:700;">✗ Wrong!</span><br>' +
+          "Correct answer: " + correctAnswer;
+
+      }
+
+      $("outAns").style.display = "block";
+
+      quizNumber++;
+
+      $("score").textContent =
+        "Score: " + score + " / 10";
+
+      $("quizCount").textContent =
+        "Question: " + quizNumber + " / " + TOTAL_QUESTIONS;
+
+      $("submitBtn").style.display = "none";
+      $("nextBtn").style.display = "block";
+
+      $("nextBtn").textContent =
+        quizNumber >= TOTAL_QUESTIONS
+          ? "Show Summary Result"
+          : "Next Question";
     }
-  }
 
-  if (attempts >= 1000) {
-    a = getRandomInteger(false);
-    b = getRandomInteger(false);
-    operation = "+";
-    answer = a + b;
-  }
+    /* =========================================================
+       QUIZ SUMMARY
+       ========================================================= */
 
-  const categoryNames = {
-    add_sub: "Addition & Subtraction of Integers",
-    multiplication: "Multiplication of Integers",
-    division: "Division of Integers",
-    randomize: "Randomized Integer Operations"
-  };
+    function showQuizSummary() {
 
-  $("category").textContent = categoryNames[selectedMode];
-  $("displayGiven").textContent = formatInt(a) + " " + operation + " " + formatInt(b) + " = ?";
+      clearInterval(timerInterval);
+      clearInterval(countdownInterval);
 
-  const input = document.createElement("input");
-  input.type = "text";
-  input.id = "userAnswer";
-  input.placeholder = "Enter answer";
-  input.inputMode = "numeric";
-  input.autocomplete = "off";
-  input.setAttribute("aria-label", "Your answer");
+      const mins = Math.floor(secondsElapsed / 60);
+      const secs = secondsElapsed % 60;
 
-  $("answerBox").replaceChildren(input);
-  correctAnswer = answer;
-  input.focus();
-}
+      const finalTime =
+        String(mins).padStart(2, "0") +
+        ":" +
+        String(secs).padStart(2, "0");
 
-function checkAns() {
-  if (answered) return;
+      const quizTypeNames = {
 
-  const answerInput = $("userAnswer");
-  if (!answerInput) return;
+        add_sub: "Addition & Subtraction of Integers",
 
-  let answerValue = answerInput.value.trim();
+        multiplication: "Multiplication of Integers",
 
-  if (answerValue === "") {
-    alert("Please enter your answer.");
-    answerInput.focus();
-    return;
-  }
+        division: "Division of Integers",
 
-  answerValue = answerValue.replace(/−/g, "-").replace(/–/g, "-");
+        randomize: "Randomize (All Operations)"
 
-  if (!/^-?\d+$/.test(answerValue)) {
-    alert("Please enter a valid integer.");
-    answerInput.focus();
-    return;
-  }
+      };
 
-  const userAnswer = Number(answerValue);
-  if (!Number.isSafeInteger(userAnswer)) {
-    alert("Please enter a valid whole-number integer.");
-    answerInput.focus();
-    return;
-  }
+      $("resultName").textContent = studentName;
+      $("resultSection").textContent = studentSection;
+      $("resultQuizType").textContent = quizTypeNames[selectedMode];
+      $("resultScore").textContent = score + "/10";
+      $("resultTime").textContent = finalTime;
 
-  answered = true;
-  const isCorrect = userAnswer === correctAnswer;
+      $("studentInfo").style.display = "none";
+      $("quizArea").style.display = "none";
+      $("quizResult").style.display = "block";
 
-  if (isCorrect) {
-    score++;
-    $("outAns").innerHTML = '<span style="color:#16623d;font-weight:700;">✓ Correct!</span><br>Correct answer: ' + correctAnswer;
-  } else {
-    $("outAns").innerHTML = '<span style="color:#dc2626;font-weight:700;">✗ Wrong!</span><br>Correct answer: ' + correctAnswer;
-  }
+      $("quizResult").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
 
-  $("outAns").style.display = "block";
-  quizNumber++;
+    /* =========================================================
+       BACK TO QUIZ TYPES
+       ========================================================= */
 
-  $("score").textContent = "Score: " + score + " / 10";
-  $("quizCount").textContent = "Question: " + quizNumber + " / " + TOTAL_QUESTIONS;
+    function backToQuizType() {
 
-  $("submitBtn").style.display = "none";
-  $("nextBtn").style.display = "block";
-  $("nextBtn").textContent = quizNumber >= TOTAL_QUESTIONS ? "Show Summary Result" : "Next Question";
-}
+      clearInterval(timerInterval);
+      clearInterval(countdownInterval);
 
-function showQuizSummary() {
-  clearInterval(timerInterval);
-  clearInterval(countdownInterval);
+      $("countdownOverlay").classList.remove("active");
 
-  const mins = Math.floor(secondsElapsed / 60);
-  const secs = secondsElapsed % 60;
-  const finalTime = String(mins).padStart(2, "0") + ":" + String(secs).padStart(2, "0");
+      $("quizArea").style.display = "none";
+      $("studentInfo").style.display = "none";
+      $("quizResult").style.display = "none";
 
-  const quizTypeNames = {
-    add_sub: "Addition & Subtraction of Integers",
-    multiplication: "Multiplication of Integers",
-    division: "Division of Integers",
-    randomize: "Randomize (All Operations)"
-  };
+      $("modeSelect").style.display = "block";
 
-  $("resultName").textContent = studentName;
-  $("resultSection").textContent = studentSection;
-  $("resultQuizType").textContent = quizTypeNames[selectedMode];
-  $("resultScore").textContent = score + "/10";
-  $("resultTime").textContent = finalTime;
+      quizNumber = 0;
+      score = 0;
+      secondsElapsed = 0;
 
-  $("studentInfo").style.display = "none";
-  $("quizArea").style.display = "none";
-  $("quizResult").style.display = "block";
-}
+      selectedMode = "";
+      correctAnswer = null;
+      answered = false;
 
-function backToQuizType() {
-  clearInterval(timerInterval);
-  clearInterval(countdownInterval);
+      usedQuestions.clear();
 
-  $("countdownOverlay").classList.remove("active");
-  $("quizArea").style.display = "none";
-  $("studentInfo").style.display = "none";
-  $("quizResult").style.display = "none";
-  $("modeSelect").style.display = "block";
+      $("score").textContent = "Score: 0 / 10";
+      $("quizCount").textContent = "Question: 1 / 10";
+      $("timerDisplay").textContent = "Time Elapsed: 0:00";
 
-  quizNumber = 0;
-  score = 0;
-  secondsElapsed = 0;
-  selectedMode = "";
-  correctAnswer = null;
-  answered = false;
-  usedQuestions.clear();
+      $("outAns").style.display = "none";
+      $("outAns").textContent = "";
 
-  $("score").textContent = "Score: 0 / 10";
-  $("quizCount").textContent = "Question: 1 / 10";
-  $("timerDisplay").textContent = "Time Elapsed: 0:00";
-  $("outAns").style.display = "none";
-  $("outAns").textContent = "";
+      $("submitBtn").style.display = "block";
+      $("nextBtn").style.display = "none";
+      $("backToModeBtn").style.display = "none";
 
-  $("submitBtn").style.display = "block";
-  $("nextBtn").style.display = "none";
-  $("backToModeBtn").style.display = "none";
-}
+      $("modeSelect").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
 
-function initializeQuiz() {
-  const nextToModeBtn = $("nextToModeBtn");
-  const submitBtn = $("submitBtn");
-  const nextBtn = $("nextBtn");
-  const backToModeBtn = $("backToModeBtn");
-  const resultBackBtn = $("resultBackBtn");
-  const answerBox = $("answerBox");
+    /* =========================================================
+       INITIALIZE QUIZ EVENT LISTENERS
+       ========================================================= */
 
-  if (!nextToModeBtn || !submitBtn || !nextBtn || !backToModeBtn || !resultBackBtn || !answerBox) {
-    return;
-  }
+    function initializeQuiz() {
 
-  nextToModeBtn.addEventListener("click", proceedToModeSelect);
+      const nextToModeBtn = $("nextToModeBtn");
+      const submitBtn = $("submitBtn");
+      const nextBtn = $("nextBtn");
+      const backToModeBtn = $("backToModeBtn");
+      const resultBackBtn = $("resultBackBtn");
+      const answerBox = $("answerBox");
 
-  document.querySelectorAll(".mode-btn").forEach(button => {
-    button.addEventListener("click", function() {
-      const mode = this.getAttribute("data-mode");
-      startQuizWithCountdown(mode);
-    });
-  });
+      if (
+        !nextToModeBtn ||
+        !submitBtn ||
+        !nextBtn ||
+        !backToModeBtn ||
+        !resultBackBtn ||
+        !answerBox
+      ) {
+        return;
+      }
 
-  submitBtn.addEventListener("click", checkAns);
+      /* STUDENT DETAILS BUTTON */
 
-  nextBtn.addEventListener("click", function() {
-    if (quizNumber >= TOTAL_QUESTIONS) {
-      showQuizSummary();
+      nextToModeBtn.addEventListener(
+        "click",
+        proceedToModeSelect
+      );
+
+      /* QUIZ TYPE BUTTONS */
+
+      document.querySelectorAll(".mode-btn").forEach(button => {
+
+        button.addEventListener("click", function () {
+
+          const mode = this.getAttribute("data-mode");
+
+          startQuizWithCountdown(mode);
+
+        });
+
+      });
+
+      /* SUBMIT ANSWER */
+
+      submitBtn.addEventListener("click", checkAns);
+
+      /* NEXT QUESTION */
+
+      nextBtn.addEventListener("click", function () {
+
+        if (quizNumber >= TOTAL_QUESTIONS) {
+
+          showQuizSummary();
+
+        } else {
+
+          newQuestion();
+
+        }
+
+      });
+
+      /* BACK BUTTONS */
+
+      backToModeBtn.addEventListener(
+        "click",
+        backToQuizType
+      );
+
+      resultBackBtn.addEventListener(
+        "click",
+        backToQuizType
+      );
+
+      /* ENTER KEY SUPPORT */
+
+      answerBox.addEventListener("keydown", function (event) {
+
+        if (
+          event.key === "Enter" &&
+          event.target.id === "userAnswer"
+        ) {
+
+          event.preventDefault();
+
+          if (!answered) {
+            checkAns();
+          }
+
+        }
+
+      });
+    }
+
+    /* =========================================================
+       RUN WHEN HTML IS READY
+       ========================================================= */
+
+    if (document.readyState === "loading") {
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        initializeQuiz
+      );
+
     } else {
-      newQuestion();
+
+      initializeQuiz();
+
     }
-  });
 
-  backToModeBtn.addEventListener("click", backToQuizType);
-  resultBackBtn.addEventListener("click", backToQuizType);
+  </script>
 
-  answerBox.addEventListener("keydown", function(event) {
-    if (event.key === "Enter" && event.target.id === "userAnswer") {
-      event.preventDefault();
-      if (!answered) {
-        checkAns();
-      }
-    }
-  });
-}
+  <!-- PROJECTFACTR NAVIGATION SCRIPT -->
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initializeQuiz);
-} else {
-  initializeQuiz();
-}
-</script>
-
-<script src="../../js/helper/navbar.js"></script>
+  <script src="../../js/helper/navbar.js"></script>
 
 </body>
 </html>
