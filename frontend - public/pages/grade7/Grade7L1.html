@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,8 +28,8 @@
   --white:#ffffff;
 }
 
-* {
-  box-sizing:border-box;
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 html {
@@ -432,11 +431,8 @@ button {
   top: 0;
   left: 0;
   z-index: 1000;
-
   width: 100%;
   min-height: 58px;
-  padding: 6px 4%;
-
   background-color: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -444,14 +440,11 @@ button {
   padding: 14px 32px;
   animation: slideDownNav 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
 .nav-btn-toggle.active {
-    color: var(--white);
-    background-color: var(--primary-forest);
-    box-shadow: 0 4px 14px rgba(22, 98, 61, 0.25);
-
-  border-bottom: 1px solid var(--border-color);
-
-  animation: slideDownNav 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  color: var(--white);
+  background-color: var(--primary-forest);
+  box-shadow: 0 4px 14px rgba(22, 98, 61, 0.25);
 }
 
 @keyframes slideDownNav {
@@ -468,11 +461,9 @@ button {
 .nav-container {
   width: 100%;
   min-height: 44px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   position: relative;
 }
 
@@ -495,7 +486,6 @@ button {
   color: var(--primary-forest);
   text-decoration: none;
   white-space: nowrap;
-
   transition: transform 0.3s ease;
 }
 
@@ -515,10 +505,6 @@ button {
   white-space: nowrap;
 }
 
-/* ============================================================
-   DESKTOP NAVIGATION LINKS
-   ============================================================ */
-
 .nav-links {
   display: flex;
   align-items: center;
@@ -534,33 +520,24 @@ button {
 .nav-btn-toggle {
   min-height: 34px;
   padding: 0 10px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
-
   font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1.2;
-
   color: var(--text-body);
   text-decoration: none;
   white-space: nowrap;
-
   border: none;
   border-radius: 5px;
   background: transparent;
-
   position: relative;
   cursor: pointer;
-
-  transition:
-    color 0.2s ease,
-    background-color 0.2s ease,
-    transform 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
 }
 
 .nav-link::after,
@@ -570,11 +547,9 @@ button {
   bottom: 3px;
   left: 10px;
   right: 10px;
-
   height: 2px;
   background-color: var(--primary-accent);
   border-radius: 2px;
-
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.25s ease;
@@ -604,50 +579,24 @@ button {
   display: none;
 }
 
-.nav-link.non-clickable {
-  cursor: default;
-  white-space: nowrap;
-}
-
-.nav-btn-toggle {
-  width: auto;
-  text-align: center;
-  user-select: none;
-}
-
-.nav-btn-toggle i {
-  font-size: 0.62rem;
-  margin-left: 2px;
-}
-
-/* ============================================================
-   DROPDOWN MENU — DESKTOP
-   ============================================================ */
-
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 5px);
   left: 0;
-
   width: max-content;
   min-width: 210px;
   max-width: min(320px, calc(100vw - 24px));
-
   padding: 6px;
   list-style: none;
-
   background-color: var(--white);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow: 0 8px 20px rgba(7, 56, 39, 0.10);
-
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-
   transform: translateY(6px);
   transition: all 0.2s ease;
-
   z-index: 1001;
 }
 
@@ -659,36 +608,16 @@ button {
   transform: translateY(0);
 }
 
-@media (min-width: 901px) {
-  .nav-links > .nav-item.dropdown:last-child > .dropdown-menu {
-    right: 0;
-    left: auto;
-  }
-  .nav-links > .nav-item.dropdown:nth-child(6) > .dropdown-menu {
-    right: -100px;
-    left: auto;
-  }
-}
-
 .dropdown-item {
   display: block;
   width: 100%;
-  min-width: 0;
-
   padding: 8px 11px;
-
   font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 500;
   line-height: 1.5;
-
   color: var(--text-body);
   text-decoration: none;
-
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: normal;
-
   border-radius: 5px;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -698,117 +627,27 @@ button {
   color: var(--primary-forest);
 }
 
-/* ============================================================
-   HAMBURGER BUTTON
-   ============================================================ */
-
 .hamburger-btn {
   display: none;
-
   width: 36px;
   height: 36px;
-
   align-items: center;
   justify-content: center;
-
-  margin: 0;
-  padding: 0;
-
   color: var(--primary-forest);
   background: transparent;
-
   border: none;
   border-radius: 6px;
-
   font-size: 1.25rem;
-  line-height: 1;
-
   cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.hamburger-btn:hover {
-  background-color: var(--tint-light);
 }
 
 @media(max-width:768px) {
   .hamburger-btn {
-    display:block;
+    display:flex;
   }
-
-
   .footer-bottom {
     flex-direction:column;
     text-align:center;
-  }
-}
-
-@media(max-width:600px) {
-  .quiz-section {
-    padding:30px 0 45px;
-  }
-
-  .quiz-title {
-    font-size:22px;
-  }
-
-  #studentStart,
-  #modeSelect,
-  #quizArea,
-  #quizResult {
-    width:94%;
-    padding:24px;
-  }
-
-  #studentInfo {
-    width:94%;
-    padding:15px;
-  }
-
-  #displayGiven {
-    font-size:18px;
-    min-height:65px;
-  }
-
-  #answerBox input {
-    width:100px;
-  }
-
-  .countdown-card {
-    padding:35px 45px;
-  }
-
-  #countdownNumber {
-    font-size:4rem;
-  }
-}
-
-@media(max-width:400px) {
-  .nav-tagline {
-    display:none;
-  }
-
-  #studentInfo {
-    grid-template-columns:1fr;
-  }
-
-  #timerDisplay {
-    grid-column:span 1;
-  }
-
-  #studentStart,
-  #modeSelect,
-  #quizArea,
-  #quizResult {
-    padding:20px;
-  }
-
-  .quiz-title {
-    font-size:20px;
-  }
-
-  #resultScore {
-    font-size:34px;
   }
 }
 </style>
@@ -822,8 +661,9 @@ button {
 
 <section class="cover-section" id="cover">
   <div class="cover-wrapper">
+    <!-- CRITICAL FIX: Ensure file names with spaces or capitalization match exactly on remote servers -->
     <img
-      src="../../assets/img/background/Banner Of Project FACTR.png"
+      src="../../assets/img/background/Banner%20Of%20Project%20FACTR.png"
       alt="ProjectFactr Mathematics Learning Platform Banner"
       class="cover-image"
       id="main-cover-image"
@@ -970,10 +810,6 @@ button {
 <script>
 "use strict";
 
-/* =========================================================
-   QUIZ VARIABLES
-========================================================= */
-
 let studentName = "";
 let studentSection = "";
 let selectedMode = "";
@@ -991,12 +827,7 @@ let countdownInterval = null;
 let usedQuestions = new Set();
 
 const TOTAL_QUESTIONS = 10;
-
 const $ = id => document.getElementById(id);
-
-/* =========================================================
-   STUDENT DETAILS
-========================================================= */
 
 function proceedToModeSelect() {
   studentName = $("fullName").value.trim();
@@ -1011,21 +842,15 @@ function proceedToModeSelect() {
   $("modeSelect").style.display = "block";
 }
 
-/* =========================================================
-   START QUIZ
-========================================================= */
-
 function startQuizWithCountdown(mode) {
   clearInterval(timerInterval);
   clearInterval(countdownInterval);
 
   selectedMode = mode;
-
   quizNumber = 0;
   score = 0;
   secondsElapsed = 0;
   answered = false;
-
   usedQuestions.clear();
 
   $("showName").textContent = studentName;
@@ -1057,7 +882,6 @@ function startQuizWithCountdown(mode) {
       countdownInterval = null;
 
       $("countdownOverlay").classList.remove("active");
-
       $("studentInfo").style.display = "grid";
       $("quizArea").style.display = "block";
 
@@ -1067,16 +891,11 @@ function startQuizWithCountdown(mode) {
   }, 1000);
 }
 
-/* =========================================================
-   TIMER
-========================================================= */
-
 function startTimer() {
   clearInterval(timerInterval);
 
   timerInterval = setInterval(() => {
     secondsElapsed++;
-
     const mins = Math.floor(secondsElapsed / 60);
     const secs = secondsElapsed % 60;
 
@@ -1085,13 +904,8 @@ function startTimer() {
   }, 1000);
 }
 
-/* =========================================================
-   RANDOM INTEGER
-========================================================= */
-
 function getRandomInteger(forceTwoDigit = false) {
   let number;
-
   if (forceTwoDigit) {
     number = Math.floor(Math.random() * 21) + 10;
   } else {
@@ -1101,33 +915,20 @@ function getRandomInteger(forceTwoDigit = false) {
   if (Math.random() < 0.5) {
     number *= -1;
   }
-
   return number;
 }
-
-/* =========================================================
-   FORMAT INTEGER
-========================================================= */
 
 function formatInt(number) {
   return number < 0 ? "(" + number + ")" : String(number);
 }
 
-/* =========================================================
-   GENERATE DIVISION QUESTION
-========================================================= */
-
 function generateDivision(twoDigit = false) {
   const quotient = getRandomInteger(false);
-
   let divisor;
 
   do {
     divisor = getRandomInteger(twoDigit);
-  } while (
-    divisor === 0 ||
-    Math.abs(divisor * quotient) > 30
-  );
+  } while (divisor === 0 || Math.abs(divisor * quotient) > 30);
 
   return {
     a: divisor * quotient,
@@ -1136,10 +937,6 @@ function generateDivision(twoDigit = false) {
     answer: quotient
   };
 }
-
-/* =========================================================
-   NEW QUESTION
-========================================================= */
 
 function newQuestion() {
   if (quizNumber >= TOTAL_QUESTIONS) {
@@ -1156,14 +953,11 @@ function newQuestion() {
   $("nextBtn").style.display = "none";
   $("backToModeBtn").style.display = "none";
 
-  $("quizCount").textContent =
-    "Question: " + (quizNumber + 1) + " / " + TOTAL_QUESTIONS;
-
+  $("quizCount").textContent = "Question: " + (quizNumber + 1) + " / " + TOTAL_QUESTIONS;
   $("score").textContent = "Score: " + score + " / 10";
 
   let a, b, operation, answer;
   let questionKey = "";
-
   let attempts = 0;
 
   while (attempts < 1000) {
@@ -1175,84 +969,50 @@ function newQuestion() {
     if (selectedMode === "add_sub") {
       a = getRandomInteger(firstTwoDigit);
       b = getRandomInteger(secondTwoDigit);
-
       operation = Math.random() < 0.5 ? "+" : "−";
-
       answer = operation === "+" ? a + b : a - b;
-
       questionKey = "addsub-" + a + operation + b;
-    }
-
-    else if (selectedMode === "multiplication") {
+    } else if (selectedMode === "multiplication") {
       a = getRandomInteger(firstTwoDigit);
       b = getRandomInteger(secondTwoDigit);
-
       operation = "×";
       answer = a * b;
-
       questionKey = "multiply-" + a + "x" + b;
-    }
-
-    else if (selectedMode === "division") {
+    } else if (selectedMode === "division") {
       const q = generateDivision(quizNumber % 2 === 0);
-
       a = q.a;
       b = q.b;
       operation = q.operation;
       answer = q.answer;
-
       questionKey = "division-" + a + "div" + b;
-    }
-
-    else if (selectedMode === "randomize") {
-      const operations = [
-        "addition",
-        "subtraction",
-        "multiplication",
-        "division"
-      ];
-
-      const randomOperation =
-        operations[Math.floor(Math.random() * operations.length)];
+    } else if (selectedMode === "randomize") {
+      const operations = ["addition", "subtraction", "multiplication", "division"];
+      const randomOperation = operations[Math.floor(Math.random() * operations.length)];
 
       if (randomOperation === "addition") {
         a = getRandomInteger(firstTwoDigit);
         b = getRandomInteger(secondTwoDigit);
-
         operation = "+";
         answer = a + b;
-
         questionKey = "random-add-" + a + "-" + b;
-      }
-
-      else if (randomOperation === "subtraction") {
+      } else if (randomOperation === "subtraction") {
         a = getRandomInteger(firstTwoDigit);
         b = getRandomInteger(secondTwoDigit);
-
         operation = "−";
         answer = a - b;
-
         questionKey = "random-sub-" + a + "-" + b;
-      }
-
-      else if (randomOperation === "multiplication") {
+      } else if (randomOperation === "multiplication") {
         a = getRandomInteger(firstTwoDigit);
         b = getRandomInteger(secondTwoDigit);
-
         operation = "×";
         answer = a * b;
-
         questionKey = "random-multiply-" + a + "-" + b;
-      }
-
-      else {
+      } else {
         const q = generateDivision(firstTwoDigit);
-
         a = q.a;
         b = q.b;
         operation = q.operation;
         answer = q.answer;
-
         questionKey = "random-division-" + a + "-" + b;
       }
     }
@@ -1263,7 +1023,6 @@ function newQuestion() {
     }
   }
 
-  /* Fallback */
   if (attempts >= 1000) {
     a = getRandomInteger(false);
     b = getRandomInteger(false);
@@ -1279,13 +1038,9 @@ function newQuestion() {
   };
 
   $("category").textContent = categoryNames[selectedMode];
+  $("displayGiven").textContent = formatInt(a) + " " + operation + " " + formatInt(b) + " = ?";
 
-  $("displayGiven").textContent =
-    formatInt(a) + " " + operation + " " + formatInt(b) + " = ?";
-
-  /* Create answer input safely */
   const input = document.createElement("input");
-
   input.type = "text";
   input.id = "userAnswer";
   input.placeholder = "Enter answer";
@@ -1294,21 +1049,14 @@ function newQuestion() {
   input.setAttribute("aria-label", "Your answer");
 
   $("answerBox").replaceChildren(input);
-
   correctAnswer = answer;
-
   input.focus();
 }
-
-/* =========================================================
-   CHECK ANSWER
-========================================================= */
 
 function checkAns() {
   if (answered) return;
 
   const answerInput = $("userAnswer");
-
   if (!answerInput) return;
 
   let answerValue = answerInput.value.trim();
@@ -1319,9 +1067,7 @@ function checkAns() {
     return;
   }
 
-  answerValue = answerValue
-    .replace(/−/g, "-")
-    .replace(/–/g, "-");
+  answerValue = answerValue.replace(/−/g, "-").replace(/–/g, "-");
 
   if (!/^-?\d+$/.test(answerValue)) {
     alert("Please enter a valid integer.");
@@ -1330,7 +1076,6 @@ function checkAns() {
   }
 
   const userAnswer = Number(answerValue);
-
   if (!Number.isSafeInteger(userAnswer)) {
     alert("Please enter a valid whole-number integer.");
     answerInput.focus();
@@ -1338,42 +1083,25 @@ function checkAns() {
   }
 
   answered = true;
-
   const isCorrect = userAnswer === correctAnswer;
 
   if (isCorrect) {
     score++;
-
-    $("outAns").innerHTML =
-      '<span style="color:#16623d;font-weight:700;">✓ Correct!</span><br>' +
-      "Correct answer: " + correctAnswer;
+    $("outAns").innerHTML = '<span style="color:#16623d;font-weight:700;">✓ Correct!</span><br>Correct answer: ' + correctAnswer;
   } else {
-    $("outAns").innerHTML =
-      '<span style="color:#dc2626;font-weight:700;">✗ Wrong!</span><br>' +
-      "Correct answer: " + correctAnswer;
+    $("outAns").innerHTML = '<span style="color:#dc2626;font-weight:700;">✗ Wrong!</span><br>Correct answer: ' + correctAnswer;
   }
 
   $("outAns").style.display = "block";
-
   quizNumber++;
 
   $("score").textContent = "Score: " + score + " / 10";
-
-  $("quizCount").textContent =
-    "Question: " + quizNumber + " / " + TOTAL_QUESTIONS;
+  $("quizCount").textContent = "Question: " + quizNumber + " / " + TOTAL_QUESTIONS;
 
   $("submitBtn").style.display = "none";
   $("nextBtn").style.display = "block";
-
-  $("nextBtn").textContent =
-    quizNumber >= TOTAL_QUESTIONS
-      ? "Show Summary Result"
-      : "Next Question";
+  $("nextBtn").textContent = quizNumber >= TOTAL_QUESTIONS ? "Show Summary Result" : "Next Question";
 }
-
-/* =========================================================
-   SUMMARY
-========================================================= */
 
 function showQuizSummary() {
   clearInterval(timerInterval);
@@ -1381,10 +1109,7 @@ function showQuizSummary() {
 
   const mins = Math.floor(secondsElapsed / 60);
   const secs = secondsElapsed % 60;
-
-  const finalTime =
-    String(mins).padStart(2, "0") + ":" +
-    String(secs).padStart(2, "0");
+  const finalTime = String(mins).padStart(2, "0") + ":" + String(secs).padStart(2, "0");
 
   const quizTypeNames = {
     add_sub: "Addition & Subtraction of Integers",
@@ -1396,7 +1121,6 @@ function showQuizSummary() {
   $("resultName").textContent = studentName;
   $("resultSection").textContent = studentSection;
   $("resultQuizType").textContent = quizTypeNames[selectedMode];
-
   $("resultScore").textContent = score + "/10";
   $("resultTime").textContent = finalTime;
 
@@ -1405,36 +1129,27 @@ function showQuizSummary() {
   $("quizResult").style.display = "block";
 }
 
-/* =========================================================
-   BACK TO QUIZ TYPES
-========================================================= */
-
 function backToQuizType() {
   clearInterval(timerInterval);
   clearInterval(countdownInterval);
 
   $("countdownOverlay").classList.remove("active");
-
   $("quizArea").style.display = "none";
   $("studentInfo").style.display = "none";
   $("quizResult").style.display = "none";
-
   $("modeSelect").style.display = "block";
 
   quizNumber = 0;
   score = 0;
   secondsElapsed = 0;
-
   selectedMode = "";
   correctAnswer = null;
   answered = false;
-
   usedQuestions.clear();
 
   $("score").textContent = "Score: 0 / 10";
   $("quizCount").textContent = "Question: 1 / 10";
   $("timerDisplay").textContent = "Time Elapsed: 0:00";
-
   $("outAns").style.display = "none";
   $("outAns").textContent = "";
 
@@ -1442,11 +1157,6 @@ function backToQuizType() {
   $("nextBtn").style.display = "none";
   $("backToModeBtn").style.display = "none";
 }
-
-/* =========================================================
-   BUTTON EVENT LISTENERS
-   Works whether the script loads before or after DOM ready.
-========================================================= */
 
 function initializeQuiz() {
   const nextToModeBtn = $("nextToModeBtn");
@@ -1456,15 +1166,7 @@ function initializeQuiz() {
   const resultBackBtn = $("resultBackBtn");
   const answerBox = $("answerBox");
 
-  if (
-    !nextToModeBtn ||
-    !submitBtn ||
-    !nextBtn ||
-    !backToModeBtn ||
-    !resultBackBtn ||
-    !answerBox
-  ) {
-    console.error("ProjectFactr quiz: One or more required elements are missing.");
+  if (!nextToModeBtn || !submitBtn || !nextBtn || !backToModeBtn || !resultBackBtn || !answerBox) {
     return;
   }
 
@@ -1491,22 +1193,15 @@ function initializeQuiz() {
   resultBackBtn.addEventListener("click", backToQuizType);
 
   answerBox.addEventListener("keydown", function(event) {
-    if (
-      event.key === "Enter" &&
-      event.target.id === "userAnswer"
-    ) {
+    if (event.key === "Enter" && event.target.id === "userAnswer") {
       event.preventDefault();
-
       if (!answered) {
         checkAns();
       }
     }
   });
-
-  console.log("ProjectFactr Integer Quiz initialized successfully.");
 }
 
-/* Reliable initialization */
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializeQuiz);
 } else {
@@ -1514,7 +1209,6 @@ if (document.readyState === "loading") {
 }
 </script>
 
-<!-- NAVIGATION SCRIPT -->
 <script src="../../js/helper/navbar.js"></script>
 
 </body>
