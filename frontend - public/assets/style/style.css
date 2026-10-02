@@ -280,6 +280,13 @@ body {
   transform: translateY(0);
 }
 
+@media (min-width: 901px) {
+  .nav-links > .nav-item.dropdown:last-child > .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+}
+
 .dropdown-item {
   display: block;
   width: 100%;
