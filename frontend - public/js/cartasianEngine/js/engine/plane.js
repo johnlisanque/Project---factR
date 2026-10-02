@@ -257,6 +257,7 @@ addPoint(x, y) {
                 type="button"
                 id="next-question"
                 class="next-button"
+                hidden
             >
                 Next Question
             </button>
