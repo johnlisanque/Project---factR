@@ -285,6 +285,10 @@ body {
     right: 0;
     left: auto;
   }
+  .nav-links > .nav-item.dropdown:nth-child(6) > .dropdown-menu {
+    right: -100px;
+    left: auto;
+  }
 }
 
 .dropdown-item {

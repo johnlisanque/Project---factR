@@ -2,3181 +2,2880 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project FACTR - Quadrilaterals</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>ProjectFactr — Linear Function Quiz</title>
 
-  <!-- Google Web Fonts (Montserrat & Inter) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
 
-  <!-- Stylesheet link -->
-  <!-- <link rel="stylesheet" href="assets/style/Design.css"> -->
+:root {
+    --primary-dark: #073827;
+    --primary-forest: #16623d;
+    --primary-accent: #339763;
+    --tint-light: #f0f7f3;
+    --card-bg: #fff;
+    --text-main: #073827;
+    --text-body: #334d42;
+    --text-muted: #628273;
+    --border-color: #e2ede6;
 
-    <style>
-        :root {
-    --bg-1: #f7f2e8;
-    --bg-2: #dce9e5;
-    --primary: #164e63;
-    --primary-dark: #102a43;
-    --accent: #e07a5f;
-    --text: #17202a;
-    --muted: #5b6870;
-    --card: #fffdf7;
-    --line: #c7d6d2;
-    --success: #16a34a;
-    --danger: #dc2626;
-    --warning: #f59e0b;
+    --correct-bg: #e7f7ee;
+    --correct-border: #339763;
+    --correct-text: #073827;
+
+    --wrong-bg: #fde8e8;
+    --wrong-border: #e02424;
+    --wrong-text: #9b1c1c;
+
+    --font-brand: "Montserrat", Arial, sans-serif;
+    --font-body: Arial, sans-serif;
+
+    --shadow-sm: 0 2px 4px rgba(7, 56, 39, .03);
+    --shadow-md: 0 10px 25px -5px rgba(7, 56, 39, .08);
+    --shadow-lg: 0 20px 40px -10px rgba(7, 56, 39, .12);
+
+    --radius: 16px;
 }
 
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-}
-
-body {
     margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
     min-height: 100vh;
-    display: grid;
-    place-items: center;
-    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-    background-color: var(--bg-1);
-    background-image:
-        linear-gradient(rgba(22, 78, 99, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(22, 78, 99, 0.08) 1px, transparent 1px),
-        linear-gradient(135deg, var(--bg-1), var(--bg-2));
-    background-size: 28px 28px, 28px 28px, 100% 100%;
-    color: var(--text);
+    background: #f7faf8;
+    font-family: var(--font-body);
+    color: var(--text-body);
+    overflow-x: hidden;
 }
 
-.quiz-shell {
-    width: min(92vw, 900px);
-    padding: 24px;
+/* =============================
+TOP NAVIGATION
+============================= */
+
+.top-nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background: rgba(255, 255, 255, .94);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 32px;
+    backdrop-filter: blur(10px);
 }
 
-.quiz-card {
-    position: relative;
-    overflow: hidden;
-    background: rgba(255, 253, 247, 0.96);
-    border: 1px solid rgba(16, 42, 67, 0.16);
-    border-radius: 14px;
-    box-shadow: 10px 10px 0 rgba(16, 42, 67, 0.1), 0 20px 40px rgba(16, 42, 67, 0.12);
-    padding: 28px 22px;
-}
-
-.quiz-card::before {
-    content: "∠  △  π  =";
-    display: block;
-    padding: 10px 14px;
-    margin: -28px -22px 24px;
-    background: var(--primary-dark);
-    color: #f4c95d;
-    font-family: Georgia, serif;
-    font-size: 0.92rem;
-    letter-spacing: 0.32em;
-    text-align: right;
-}
-
-.header-row {
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 16px;
 }
 
-.badge {
-    display: inline-block;
-    background: var(--accent);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-size: 0.74rem;
-    letter-spacing: 0.12em;
-    font-weight: 700;
-    box-shadow: 4px 4px 0 rgba(16, 42, 67, 0.18);
+.nav-logo {
+    font-family: var(--font-brand);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-forest);
+    text-decoration: none;
 }
 
-.timer {
-    border: 1px solid var(--line);
-    background: #f4c95d;
+.nav-tagline {
+    font-size: .75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-left: 1px solid var(--border-color);
+    padding-left: 12px;
+}
+
+/* =============================
+PAGE TITLE
+============================= */
+
+.page-title {
+    width: 92%;
+    max-width: 600px;
+    margin: 30px auto 15px;
+    font-family: var(--font-brand);
     color: var(--primary-dark);
-    border-radius: 4px;
-    padding: 8px 14px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
+    font-size: 26px;
+    font-weight: 800;
+    text-align: center;
 }
 
-.quiz-title {
-    margin: 0 0 8px;
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    color: var(--primary-dark);
-    font-family: Georgia, "Times New Roman", serif;
-    letter-spacing: 0;
+/* =============================
+MAIN CARDS
+============================= */
+
+#studentStart,
+#modeSelect,
+#categoryScreen,
+#quizArea,
+#finishMessage {
+    width: 92%;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
 }
 
-.subtitle {
-    margin: 0 0 22px;
-    color: var(--muted);
-    font-size: 1.05rem;
-    font-weight: 600;
-}
+/* =============================
+STUDENT DETAILS
+============================= */
 
-.screen {
-    display: none;
-}
-
-.screen.active {
-    display: block;
-}
-
-.form-grid {
-    display: grid;
-    gap: 16px;
-    margin-top: 18px;
-}
-
-.field {
-    display: grid;
-    gap: 8px;
-}
-
-.topic-field {
-    max-width: 420px;
-    margin: 20px 0;
-}
-
-label {
-    font-size: 0.98rem;
-    font-weight: 700;
-    color: var(--primary-dark);
-    letter-spacing: 0.02em;
-}
-
-input, select {
-    width: 100%;
-    padding: 14px 16px;
-    border-radius: 6px;
-    border: 2px solid var(--line);
-    background: #fff;
-    font-size: 1rem;
-    color: var(--text);
-}
-
-input:focus, select:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(224, 122, 95, 0.16);
-}
-
-.button-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+#studentStart {
+    max-width: 440px;
     margin-top: 10px;
+    margin-bottom: 40px;
+    padding: 35px;
 }
 
-button {
-    border: none;
-    border-radius: 6px;
-    background: var(--primary);
-    color: white;
-    padding: 14px 22px;
-    font-size: 1rem;
+#studentStart h2,
+#modeSelect h2,
+#categoryScreen h2 {
+    margin-bottom: 20px;
+    font-family: var(--font-brand);
+    color: var(--primary-dark);
+    font-size: 20px;
     font-weight: 700;
+    text-align: center;
+}
+
+#studentStart input {
+    display: block;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 16px;
+    padding: 10px 16px;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+}
+
+#studentStart input:focus {
+    background: white;
+    border-color: var(--primary-accent);
+}
+
+/* =============================
+BUTTONS
+============================= */
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 16px;
+    padding: 10px 15px;
+    background: var(--primary-forest);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-brand);
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-    box-shadow: 4px 4px 0 rgba(16, 42, 67, 0.18);
+    transition: .2s ease;
 }
 
-button.secondary {
-    background: var(--accent);
-}
-
-button:hover:not(:disabled) {
+.btn-primary:hover {
+    background: var(--primary-dark);
     transform: translateY(-1px);
 }
 
-button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
+.btn-secondary {
+    background: var(--primary-accent);
 }
 
-.summary-box {
-    background: #f5f0e5;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 18px;
-    line-height: 1.8;
-    margin-top: 16px;
+.btn-secondary:hover {
+    background: var(--primary-forest);
 }
 
-.question-box {
-    background-color: #f4f0e5;
-    background-image:
-        linear-gradient(rgba(22, 78, 99, 0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(22, 78, 99, 0.07) 1px, transparent 1px);
-    background-size: 20px 20px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 18px;
-    margin-top: 20px;
+/* =============================
+CHECK DETAILS
+============================= */
+
+#modeSelect {
+    max-width: 440px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    padding: 35px;
 }
 
-#shapeImage {
-    width: min(100%, 420px);
-    height: auto;
-    display: block;
-    margin: 0 auto 18px;
-    border-radius: 16px;
-    box-shadow: 0 10px 18px rgba(17, 24, 39, 0.08);
+/* =============================
+QUESTION COUNT
+============================= */
+
+#categoryScreen {
+    max-width: 440px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    padding: 35px;
+}
+
+#questionCount {
+    width: 100%;
+    height: 48px;
+    padding: 10px 14px;
     background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    color: var(--text-body);
+    outline: none;
+}
+
+#questionCount:focus {
+    border-color: var(--primary-accent);
+}
+
+/* =============================
+SUMMARY ITEMS
+============================= */
+
+.summary-item {
+    margin: 10px 0;
+    padding: 12px;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-body);
+    font-size: 14px;
+}
+
+.summary-item strong {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+/* =============================
+COUNTDOWN
+============================= */
+
+#countdownOverlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(7, 56, 39, .76);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s ease;
+}
+
+#countdownOverlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.countdown-card {
+    padding: 40px 60px;
+    background: white;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+}
+
+.countdown-card h3 {
+    margin-bottom: 8px;
+    font-family: var(--font-brand);
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+#countdownNumber {
+    font-family: var(--font-brand);
+    font-size: 80px;
+    font-weight: 800;
+    color: var(--primary-forest);
+}
+
+/* =============================
+STUDENT INFO
+============================= */
+
+#studentInfo {
+    width: 92%;
+    max-width: 580px;
+    margin: 0 auto 16px;
+    padding: 18px 20px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+#studentInfo p {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+#showName,
+#showSection {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+#score,
+#quizCount {
+    padding: 8px 12px;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--primary-forest);
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+#timerDisplay {
+    grid-column: span 2;
+    padding: 8px 12px;
+    background: var(--primary-dark);
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* =============================
+QUIZ AREA
+============================= */
+
+#quizArea {
+    display: none;
+    margin-bottom: 40px;
+    padding: 35px;
+}
+
+#category {
+    margin-bottom: 16px;
+    font-family: var(--font-brand);
+    color: var(--primary-dark);
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
 }
 
 #displayGiven {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 20px 22px;
     display: block;
-    font-size: clamp(1.05rem, 2vw, 1.35rem);
-    line-height: 1.7;
-    color: var(--text);
-    font-family: Georgia, "Times New Roman", serif;
-}
-
-.controls {
-    margin-top: 22px;
-    display: grid;
-    gap: 12px;
-}
-
-.answer-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-}
-
-input[type="number"] {
-    flex: 1 1 200px;
-    min-width: 150px;
-    padding: 14px 16px;
-    border: 2px solid var(--line);
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
-    font-size: 1rem;
+    color: var(--primary-dark);
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.7;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
-.feedback {
-    min-height: 30px;
-    margin-top: 18px;
-    font-size: 1.06rem;
-    color: var(--text);
+/* =============================
+ANSWER AREA
+============================= */
+
+#answerBox {
+    width: 100%;
+    margin: 18px 0;
 }
 
-.feedback.correct {
-    color: var(--success);
-}
-
-.feedback.incorrect {
-    color: var(--danger);
-}
-
-.results-grid {
-    display: grid;
+.default-answer-box {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
-    margin-top: 14px;
-    font-size: 1.1rem;
 }
 
-.score-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--success), #15803d);
-    color: white;
-    padding: 10px 18px;
-    border-radius: 999px;
+.default-answer-box label {
+    color: var(--primary-dark);
+    font-size: 13px;
     font-weight: 700;
-    margin-top: 8px;
 }
 
-@media print {
-    body {
-        display: block;
-        padding: 0;
-        background: white;
-        color: #17202a;
+.default-answer-box input {
+    width: 100%;
+    height: 48px;
+    padding: 10px 14px;
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+}
+
+.default-answer-box input:focus {
+    border-color: var(--primary-accent);
+}
+
+/* =============================
+FEEDBACK
+============================= */
+
+#outAns {
+    width: 100%;
+    margin: 16px 0;
+    padding: 16px;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--primary-dark);
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+    display: none;
+}
+
+/* =============================
+FINISH SCREEN
+============================= */
+
+#finishMessage {
+    width: 92%;
+    max-width: 580px;
+    margin: 0 auto 40px;
+    padding: 35px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    display: none;
+    text-align: center;
+}
+
+#finishMessage h2 {
+    margin: 0 0 20px;
+    color: var(--primary-dark);
+    font-family: var(--font-brand);
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.final-score {
+    margin: 20px 0;
+    color: var(--primary-forest);
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.final-score small {
+    font-size: 18px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* =============================
+MOBILE
+============================= */
+
+@media(max-width: 600px) {
+
+    .top-nav-bar {
+        padding: 14px 18px;
     }
 
-    .quiz-shell {
-        width: 100%;
-        margin: 0;
-        padding: 0;
+    .nav-tagline {
+        font-size: 10px;
     }
 
-    .quiz-card {
-        border: 0;
-        box-shadow: none;
-        padding: 0;
+    .page-title {
+        font-size: 22px;
+        margin-top: 24px;
     }
 
-    .quiz-card::before,
-    .print-hidden {
-        display: none !important;
+    #studentStart,
+    #modeSelect,
+    #categoryScreen,
+    #quizArea {
+        padding: 25px 20px;
     }
 
-    .screen {
-        display: block !important;
-        page-break-inside: avoid;
-        margin-bottom: 24px;
+    #studentInfo {
+        grid-template-columns: 1fr;
     }
 
-    .button-row,
-    .controls {
-        display: none !important;
+    #timerDisplay {
+        grid-column: span 1;
+    }
+
+    #finishMessage {
+        width: 94%;
+        padding: 24px;
+    }
+
+    #finishMessage h2 {
+        font-size: 20px;
+    }
+
+    .summary-item {
+        font-size: 13px;
+        padding: 11px;
+    }
+
+    .final-score {
+        font-size: 38px;
     }
 }
 
-@media (min-width: 601px) and (max-width: 1024px) {
-    body {
-        padding: 20px 0;
-    }
+@media(max-width: 400px) {
 
-    .quiz-shell {
-        width: min(94vw, 820px);
+    #finishMessage {
         padding: 20px;
     }
 
-    .quiz-card {
-        padding: 28px 24px;
-    }
-
-    .form-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .field:last-child {
-        grid-column: 1 / -1;
-    }
-
-    .question-box {
-        padding: 22px;
+    .final-score {
+        font-size: 34px;
     }
 }
 
-@media (max-width: 600px) {
-    body {
-        display: block;
-        padding: 10px 0;
-    }
-
-    .quiz-shell {
-        width: 100%;
-        padding: 10px;
-    }
-
-    .quiz-card {
-        padding: 22px 16px;
-        border-radius: 20px;
-    }
-
-    .header-row {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .quiz-title {
-        font-size: 2rem;
-    }
-
-    .subtitle {
-        font-size: 0.98rem;
-    }
-
-    .question-box {
-        padding: 14px;
-        margin-top: 16px;
-    }
-
-    #displayGiven {
-        font-size: 1.08rem;
-        line-height: 1.55;
-    }
-
-    .answer-row {
-        display: grid;
-    }
-
-    button, input, select {
-        width: 100%;
-    }
-
-    .button-row {
-        display: grid;
-    }
-
-    .summary-box {
-        padding: 14px;
-        font-size: 0.98rem;
-    }
-}
-    </style>
-
-  <link rel="stylesheet" href="../../assets/style/style.css">
-
+</style>
 </head>
 
 <body>
-    
-  <!-- TOP NAVIGATION BAR -->
-<header class="top-nav-bar" id="navbar">
 
-  </header>
-     <section class="cover-section" id="cover">
-      <div class="cover-wrapper">
-        <img 
-          src="../../assets/img/background/Banner Of Project FACTR.png" 
-          alt="ProjectFactr Mathematics Remedial Learning Platform Banner" 
-          class="cover-image"
-          id="main-cover-image"
-        >
-       <div class="cover-content">
-    <h1>Sides Of Parallelogram</h1>
+<!-- =============================
+TOP NAV
+============================= -->
+
+<div class="top-nav-bar">
+
+    <div class="nav-container">
+
+        <a href="#" class="nav-logo">
+            ProjectFactr
+        </a>
+
+        <span class="nav-tagline">
+            Grade 9 Mathematics
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- =============================
+PAGE TITLE
+============================= -->
+
+<h1 class="page-title">
+    Linear Function Quiz
+</h1>
+
+
+<!-- =============================
+STUDENT DETAILS
+============================= -->
+
+<div id="studentStart">
 
     <h2>
-        <!-- Formative Assessment on Calculation via Task Randomization -->
+        Enter Student Details
     </h2>
+
+    <input
+        type="text"
+        id="fullName"
+        placeholder="Full Name"
+    >
+
+    <input
+        type="text"
+        id="section"
+        placeholder="Grade & Section"
+    >
+
+    <button
+        class="btn-primary"
+        onclick="proceedToModeSelect()"
+    >
+        Check Details
+    </button>
+
 </div>
-      </div>
-    </section>
-<main>
-      
-    <div class="quiz-shell">
-     
-
-    <div class="quiz-card">
 
-        <!-- STUDENT INFORMATION -->
-        <div id="studentScreen" class="screen active">
 
-            <div class="header-row">
-                <span class="badge">PROJECT FACTR</span>
-            </div>
+<!-- =============================
+CHECK DETAILS
+============================= -->
 
-            <h1 class="quiz-title">Student Information</h1>
-            <p class="subtitle">Enter your details before starting the quiz.</p>
+<div id="modeSelect" style="display:none;">
 
-            <div class="form-grid">
+    <h2>
+        Check Your Details
+    </h2>
 
-                <div class="field">
-                    <label for="studentFirstName">First Name</label>
-                    <input
-                        id="studentFirstName"
-                        type="text"
-                        placeholder="Enter first name"
-                    />
-                </div>
+    <div class="summary-item">
+        Name:
+        <strong id="checkName"></strong>
+    </div>
 
-                <div class="field">
-                    <label for="studentLastName">Last Name</label>
-                    <input
-                        id="studentLastName"
-                        type="text"
-                        placeholder="Enter last name"
-                    />
-                </div>
+    <div class="summary-item">
+        Section:
+        <strong id="checkSection"></strong>
+    </div>
 
-                <div class="field">
-                    <label for="studentSection">Section</label>
-                    <input
-                        id="studentSection"
-                        type="text"
-                        placeholder="Enter section"
-                    />
-                </div>
+    <button
+        class="btn-primary"
+        onclick="showQuestionCount()"
+    >
+        Start Quiz
+    </button>
 
-            </div>
+</div>
 
-            <div class="button-row">
-                <button id="confirmStudentBtn">
-                    Confirm Information
-                </button>
-            </div>
 
-        </div>
+<!-- =============================
+QUESTION COUNT
+============================= -->
 
+<div id="categoryScreen" style="display:none;">
 
-        <!-- CONFIRMATION -->
-        <div id="confirmScreen" class="screen">
+    <div class="summary-item">
+        Choose how many questions to answer.
+    </div>
 
-            <div class="header-row">
-                <span class="badge">CONFIRMATION</span>
-            </div>
+    <select id="questionCount">
 
-            <h2
-                class="quiz-title"
-                style="font-size: clamp(1.8rem, 3vw, 2.3rem);"
-            >
-                Please confirm your details
-            </h2>
+        <option value="10">
+            10
+        </option>
 
-            <div class="summary-box">
+        <option value="15">
+            15
+        </option>
 
-                <strong>First Name:</strong>
-                <span id="confirmFirstName"></span>
-                <br />
+        <option value="20" selected>
+            20
+        </option>
 
-                <strong>Last Name:</strong>
-                <span id="confirmLastName"></span>
-                <br />
+        <option value="30">
+            30
+        </option>
 
-                <strong>Section:</strong>
-                <span id="confirmSection"></span>
+    </select>
 
-            </div>
+    <button
+        class="btn-primary btn-secondary"
+        onclick="startSelectedQuiz()"
+    >
+        Start Quiz
+    </button>
 
-            <div class="button-row">
-                <button id="startQuizBtn" class="secondary">
-                    Choose Questions
-                </button>
+</div>
 
-                <button id="editStudentBtn">
-                    Edit Details
-                </button>
-            </div>
 
-        </div>
+<!-- =============================
+COUNTDOWN
+============================= -->
 
+<div id="countdownOverlay">
 
-        <!-- CATEGORY -->
-        <div id="categoryScreen" class="screen">
+    <div class="countdown-card">
 
-            <div class="header-row">
-                <span class="badge">QUESTION SET</span>
-            </div>
+        <h3>
+            GET READY
+        </h3>
 
-            <h2 class="quiz-title">Choose a Topic</h2>
-
-            <p class="subtitle">
-                Select a topic and the number of questions.
-            </p>
-
-            <div class="field topic-field">
-
-                <label for="questionCategory">
-                    Quiz topic
-                </label>
-
-                <select id="questionCategory">
-
-                    <option value="sides">
-                        Sides
-                    </option>
-
-                    <option value="angles">
-                        Angles
-                    </option>
-
-                    <option value="perpendicular">
-                        Perpendicular
-                    </option>
-
-                    <option value="diagonals">
-                        Diagonals
-                    </option>
-
-                </select>
-
-            </div>
-
-            <div class="field">
-
-                <label for="questionCount">
-                    Number of questions
-                </label>
-
-                <select id="questionCount">
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20" selected>20</option>
-                    <option value="30">30</option>
-                </select>
-
-            </div>
-
-            <div class="button-row">
-
-                <button id="beginQuizBtn" class="secondary">
-                    Start Quiz
-                </button>
-
-                <button id="backToConfirmBtn">
-                    Back
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- QUIZ -->
-        <div id="quizScreen" class="screen">
-
-            <div class="header-row">
-
-                <span class="badge">
-                    QUIZ
-                </span>
-
-                <span class="timer" id="timer">
-                    00:00
-                </span>
-
-            </div>
-
-            <h2
-                class="quiz-title"
-                style="font-size: clamp(1.8rem, 3vw, 2.4rem);"
-            >
-                Geometry Quiz
-            </h2>
-
-            <p
-                class="subtitle"
-                id="progressLabel"
-            >
-                Question 1 of 20
-            </p>
-
-            <p
-                class="subtitle"
-                id="quizTopicLabel"
-            >
-                Topic: Sides
-            </p>
-
-            <div class="question-box">
-
-                <img
-                    id="shapeImage"
-                    src=""
-                    alt="Shape diagram"
-                />  
-
-                <span id="displayGiven"></span>
-
-            </div>
-
-            <div class="controls">
-
-                <label for="ans">
-                    Type your answer:
-                </label>
-
-                <div class="answer-row">
-
-                    <input
-                        type="number"
-                        id="ans"
-                        name="ans"
-                        placeholder="Enter a number"
-                    />
-
-                    <button id="submitBtn">
-                        Submit Answer
-                    </button>
-
-                    <button
-                        id="hintBtn"
-                        class="secondary"
-                    >
-                        Show Hint
-                    </button>
-
-                    <button
-                        id="nextBtn"
-                        class="secondary"
-                        style="display: none;"
-                    >
-                        Next Question
-                    </button>
-
-                </div>
-
-            </div>
-
-            <!-- Add your custom hint here -->
-            <div
-                class="feedback"
-                id="hintText"
-                style="display: none;"
-            ></div>     
-
-            <div
-                class="feedback"
-                id="outAns"
-            ></div>
-
-        </div>
-
-
-        <!-- RESULTS -->
-        <div id="resultScreen" class="screen">
-
-            <div class="header-row">
-                <span class="badge">RESULTS</span>
-            </div>
-
-            <h2
-                class="quiz-title"
-                style="font-size: clamp(1.8rem, 3vw, 2.4rem);"
-            >
-                Quiz Summary
-            </h2>
-
-            <div class="summary-box">
-
-                <div class="results-grid">
-
-                    <div>
-                        <strong>Student:</strong>
-                        <span id="resultStudent"></span>
-                    </div>
-
-                    <div>
-                        <strong>Section:</strong>
-                        <span id="resultSection"></span>
-                    </div>
-
-                    <div>
-                        <strong>Score:</strong>
-                        <span id="resultScore"></span>
-                    </div>
-
-                    <div>
-                        <strong>Percentage:</strong>
-                        <span id="resultPercent"></span>
-                    </div>
-
-                    <div>
-                        <strong>Time Used:</strong>
-                        <span id="resultTime"></span>
-                    </div>
-
-                </div>
-
-                <span
-                    class="score-badge"
-                    id="scoreBadge"
-                >
-                    0 / 20
-                </span>
-
-            </div>
-
-            <div class="button-row">
-
-                <button id="retakeQuizBtn">
-                    Retake Quiz
-                </button>
-
-            </div>
-
+        <div id="countdownNumber">
+            3
         </div>
 
     </div>
-</div>
-</main>
-<footer class="site-footer">
-    <div class="footer-bottom">
-      <div>&copy; 2026 ProjectFactr. All rights reserved.</div>
-      <div>Mathematics Learning &amp; Curriculum Platform</div>
-    </div>
-  </footer>
 
-<script src="../../js/helper/navbar.js"></script>
+</div>
+
+
+<!-- =============================
+STUDENT INFO DURING QUIZ
+============================= -->
+
+<div id="studentInfo">
+
+    <p>
+        Name:
+        <span id="showName"></span>
+    </p>
+
+    <p>
+        Section:
+        <span id="showSection"></span>
+    </p>
+
+    <div id="score">
+        Score: 0 / 10
+    </div>
+
+    <div id="quizCount">
+        Question: 1 / 10
+    </div>
+
+    <div id="timerDisplay">
+        Time Elapsed: 0:00
+    </div>
+
+</div>
+
+
+<!-- =============================
+QUIZ AREA
+============================= -->
+
+<div id="quizArea">
+
+    <div id="category">
+        Linear Function
+    </div>
+
+    <!-- Question -->
+
+    <div id="displayGiven">
+        Question prompt goes here
+    </div>
+
+    <!-- =============================
+    ANSWER AREA
+    ============================= -->
+
+    <div id="answerBox">
+    </div>
+
+    <!-- Feedback -->
+
+    <div id="outAns">
+    </div>
+
+    <!-- Next -->
+
+    <button
+        class="btn-primary btn-secondary"
+        id="nextBtn"
+        onclick="nextQuestion()"
+        style="display:none;"
+    >
+        Next Question
+    </button>
+
+    <!-- Show Summary -->
+
+    <button
+        class="btn-primary btn-secondary"
+        id="showSummaryBtn"
+        onclick="finishQuiz()"
+        style="display:none;"
+    >
+        Show Summary
+    </button>
+
+</div>
+
+
+<!-- =============================
+FINISH SCREEN
+============================= -->
+
+<div id="finishMessage">
+
+    <h2>
+        Quiz Finished!
+    </h2>
+
+    <div class="summary-item">
+        Name:
+        <strong id="summaryName"></strong>
+    </div>
+
+    <div class="summary-item">
+        Section:
+        <strong id="summarySection"></strong>
+    </div>
+
+    <div class="summary-item">
+        Quiz Type:
+        <strong id="summaryType"></strong>
+    </div>
+
+    <div class="final-score">
+
+        <span id="finalScore">
+            0
+        </span>
+
+        /<span id="finalTotal">
+            10
+        </span>
+
+    </div>
+
+    <div class="summary-item">
+        Time:
+        <strong id="finalTime">
+            00:00
+        </strong>
+    </div>
+
+    <button
+        class="btn-primary"
+        onclick="backToQuizTypes()"
+    >
+        Restart Quiz
+    </button>
+
+</div>
+
 
 <script>
 
-let quizQuestionCount = 20;
+/* =========================================================
+PROJECT FACTR — LINEAR FUNCTION QUIZ
+========================================================= */
+
+
+/* =========================================================
+QUIZ SETTINGS
+========================================================= */
+
+let TOTAL_QUESTIONS = 10;
+
 const questions = [];
 
-let currentQuestionIndex = 0;
-let correctAnswers = 0;
+let currentIdx = 0;
+let score = 0;
+
+let selectedMode = "";
+
+let studentName = "";
+let studentSection = "";
+
 let elapsedSeconds = 0;
-let timerId = null;
+let timerInterval = null;
 
-let selectedQuestionCategory = "sides";
 
-/* -----------------------------
+/* =========================================================
 RANDOM NUMBER
------------------------------ */
+========================================================= */
 
 function randomNumber(min, max) {
 
-return Math.floor(
-Math.random() * (max - min + 1)
-) + min;
+    return Math.floor(
+        Math.random() * (max - min + 1)
+    ) + min;
 
 }
 
-/* -----------------------------
+
+/* =========================================================
 FORMAT TIMER
------------------------------ */
+========================================================= */
 
 function formatTime(totalSeconds) {
 
-const minutes = Math.floor(
-totalSeconds / 60
-);
+    const minutes =
+        Math.floor(totalSeconds / 60);
 
-const seconds = totalSeconds % 60;
+    const seconds =
+        totalSeconds % 60;
 
-return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    return (
+        `${String(minutes).padStart(2, "0")}:` +
+        `${String(seconds).padStart(2, "0")}`
+    );
 
 }
 
-/* -----------------------------
-TIMER DISPLAY
------------------------------ */
 
-function updateTimerDisplay() {
+/* =========================================================
+GET QUIZ TYPE NAME
+========================================================= */
 
-const timer =
-document.getElementById("timer");
+function getQuizTypeName(mode) {
 
-if (timer) {
-timer.textContent =
-    formatTime(elapsedSeconds);
+    if (mode === "linear") {
+        return "Linear Function Quiz";
+    }
+
+    return "Linear Function Quiz";
+
 }
-}
 
-/* -----------------------------
+
+/* =========================================================
 START TIMER
------------------------------ */
+========================================================= */
 
 function startTimer() {
 
-stopTimer();
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
 
-timerId = setInterval(() => {
+    timerInterval = setInterval(() => {
 
-elapsedSeconds++;
+        elapsedSeconds++;
 
-updateTimerDisplay();
-}, 1000);
+        document
+            .getElementById("timerDisplay")
+            .textContent =
+            `Time Elapsed: ${formatTime(elapsedSeconds)}`;
+
+    }, 1000);
 
 }
 
-/* -----------------------------
+
+/* =========================================================
 STOP TIMER
------------------------------ */
+========================================================= */
 
 function stopTimer() {
 
-if (timerId !== null) {
+    if (timerInterval) {
 
-clearInterval(timerId);
+        clearInterval(timerInterval);
 
-timerId = null;
-}
-}
-
-/* -----------------------------
-STUDENT INFORMATION
------------------------------ */
-
-function getStudentInfo() {
-
-const firstName =
-document
-    .getElementById("studentFirstName")
-    .value
-    .trim();
-
-const lastName =
-document
-    .getElementById("studentLastName")
-    .value
-    .trim();
-
-const section =
-document
-    .getElementById("studentSection")
-    .value
-    .trim();
-
-const fullName =
-`${firstName} ${lastName}`.trim();
-
-return {
-firstName,
-lastName,
-fullName,
-section
-};
-
-}
-
-
-/* -----------------------------
-SCREEN NAVIGATION
------------------------------ */
-
-function showScreen(screenId) {
-
-document
-.querySelectorAll(".screen")
-.forEach(screen => {
-
-    screen.classList.remove("active");
-
-});
-
-const target =
-document.getElementById(screenId);
-
-if (target) {
-    target.classList.add("active");
-}
-
-}
-
-/* -----------------------------
-CONFIRM STUDENT
------------------------------ */
-
-function confirmStudentInfo() {
-
-const info = getStudentInfo();
-
-if (
-!info.firstName ||
-!info.lastName ||
-!info.section
-) {
-
-alert(
-    "Please complete all student details before continuing."
-);
-
-return;
-
-}
-
-document.getElementById(
-"confirmFirstName"
-).textContent = info.firstName;
-
-document.getElementById(
-"confirmLastName"
-).textContent = info.lastName;
-
-document.getElementById(
-"confirmSection"
-).textContent = info.section;
-
-showScreen("confirmScreen");
-
-}
-
-/* -----------------------------
-SHAPE IMAGES
------------------------------ */
-
-function getShapeImage(
-shapeName,
-showDiagonals = false
-) {
-
-const shapeImages = {
-
-parallelogram:
-    "../../assets/img/shape - grade 10/parallelogram.jpg",
-
-rectangle:
-    "../../assets/img/shape - grade 10/rectangle.jpg",
-
-square:
-    "../../assets/img/shape - grade 10/square.jpg",
-
-rhombus:
-    "../../assets/img/shape - grade 10/rhombus.jpg"
-
-};
-
-const diagonalImages = {
-
-parallelogram:
-    "../../assets/img/shape - grade 10/parallelogram with diagonal lines.jpg",
-
-rectangle:
-    "../../assets/img/shape - grade 10/rectangle with diagonal lines.jpg",
-
-square:
-    "../../assets/img/shape - grade 10/square with diagonal lines.jpg",
-
-rhombus:
-    "../../assets/img/shape - grade 10/rhombus with diagonal lines.jpg"
-
-};
-
-if (
-showDiagonals &&
-diagonalImages[shapeName]
-) {
-
-return diagonalImages[shapeName];
-
-}
-
-
-return (
-shapeImages[shapeName] ||
-"../../assets/img/shape - grade 10/parallelogram.jpg"
-);
-
-}
-
-/* -----------------------------
-QUESTION TYPES
------------------------------ */
-
-function getQuestionType(
-shapeName,
-category
-) {
-
-const questionTypes = {
-
-parallelogram: {
-
-    sides: [
-        0, 3, 4, 5, 6, 9, 10
-    ],
-
-    angles: [
-        1, 2, 7, 8,
-        11, 12, 13, 14
-    ]
-
-},
-
-rectangle: {
-
-    sides: [
-        0, 2, 3, 4, 7, 8
-    ],
-
-    angles: [
-        1, 5, 6, 9,
-        10, 11, 12
-    ]
-
-},
-
-square: {
-
-    sides: [
-        0, 2, 3, 4, 7, 8,
-        11, 12
-    ],
-
-    angles: [
-        1, 5, 6, 9, 10
-    ]
-
-},
-
-rhombus: {
-
-    sides: [
-        0, 1, 5, 6,
-        7, 8, 9, 10
-    ],
-
-    angles: [
-        2, 3, 4, 11, 12
-    ]
-
-}
-
-};
-
-const availableTypes =
-questionTypes[shapeName][category];
-
-return availableTypes[
-randomNumber(
-    0,
-    availableTypes.length - 1
-)
-];
-
-}
-
-/* =========================================================
-SPECIAL QUESTIONS
-========================================================= */
-
-function buildSpecialQuestion(category) {
-
-const triples = [
-[3, 4, 5],
-[5, 12, 13],
-[8, 15, 17]
-];
-
-const [
-firstLeg,
-secondLeg,
-hypotenuse
-] =
-triples[
-    randomNumber(
-        0,
-        triples.length - 1
-    )
-];
-
-
-const scale =
-randomNumber(1, 4);
-
-
-/* -----------------------------
-DIAGONALS
------------------------------ */
-
-if (category === "diagonals") {
-
-const shapeNames = [
-    "parallelogram",
-    "rectangle",
-    "square",
-    "rhombus"
-];
-
-const shapeName =
-    shapeNames[
-        randomNumber(
-            0,
-            shapeNames.length - 1
-        )
-    ];
-
-
-if (shapeName === "rectangle") {
-
-    const diagonalLength =
-        hypotenuse * scale;
-
-    return {
-
-        image:
-            getShapeImage(
-                shapeName,
-                true
-            ),
-
-        text:
-            `A <b>rectangle</b> has side lengths <b>${firstLeg}x</b> and <b>${secondLeg}x</b>. Its diagonal AC is <b>${diagonalLength}</b>.<br>Find <b>x</b>.`,
-
-        answer: scale,
-
-    };
-
-}
-
-
-const x =
-    randomNumber(2, 8);
-
-const coefficient =
-    randomNumber(2, 5);
-
-const constant =
-    randomNumber(1, 10);
-
-const givenLength =
-    coefficient * x + constant;
-
-let questionText;
-
-if (shapeName === "square") {
-
-    questionText =
-        `In a square, side AB = <b>${coefficient}x + ${constant}</b> and diagonal AC = <b>${givenLength}√2</b>.<br>Find <b>x</b>.`;
-
-} else {
-
-    questionText =
-        `In a <b>${shapeName}</b>, diagonals AC and BD intersect at E.<br>AE = <b>${coefficient}x + ${constant}</b> and EC = <b>${givenLength}</b>.<br>Find <b>x</b>.`;
-
-}
-
-return {
-
-    image:
-        getShapeImage(
-            shapeName,
-            true
-        ),
-
-    text:
-        questionText,
-
-    answer: x,
-
-};
-
-}
-
-
-/* -----------------------------
-PERPENDICULAR
------------------------------ */
-
-if (category === "perpendicular") {
-
-const shapeNames = [
-    "parallelogram",
-    "rectangle",
-    "square",
-    "rhombus"
-];
-
-const shapeName =
-    shapeNames[
-        randomNumber(
-            0,
-            shapeNames.length - 1
-        )
-    ];
-
-let perpendicularFact;
-let angleName;
-
-if (
-    shapeName === "rectangle" ||
-    shapeName === "parallelogram"
-) {
-
-    const corners = [
-        { vertex: "A", side1: "AB", side2: "AD", angle: "BAD" },
-        { vertex: "B", side1: "AB", side2: "BC", angle: "ABC" },
-        { vertex: "C", side1: "BC", side2: "CD", angle: "BCD" },
-        { vertex: "D", side1: "CD", side2: "AD", angle: "CDA" }
-    ];
-
-    const corner =
-        corners[
-            randomNumber(
-                0,
-                corners.length - 1
-            )
-        ];
-
-    perpendicularFact =
-        shapeName === "rectangle"
-            ? `sides ${corner.side1} and ${corner.side2} meet at ${corner.vertex} and are perpendicular`
-            : `sides ${corner.side1} and ${corner.side2} are given to be perpendicular at ${corner.vertex}`;
-
-    angleName = corner.angle;
-
-} else {
-
-    const intersectionAngles = [
-        "AEB",
-        "BEC",
-        "CED",
-        "DEA"
-    ];
-
-    perpendicularFact =
-        "diagonals AC and BD intersect at E and are perpendicular";
-
-    angleName =
-        intersectionAngles[
-            randomNumber(
-                0,
-                intersectionAngles.length - 1
-            )
-        ];
-
-}
-let x;
-let angleExpression;
-const questionType =
-    randomNumber(1, 3);
-
-if (questionType === 1) {
-
-    x = randomNumber(2, 10);
-
-    const coefficient =
-        randomNumber(2, 6);
-
-    const constant =
-        90 - coefficient * x;
-
-    angleExpression =
-        `${coefficient}x + ${constant}`;
-
-} else if (questionType === 2) {
-
-    const coefficients = [2, 3, 5, 6];
-
-    const coefficient =
-        coefficients[
-            randomNumber(
-                0,
-                coefficients.length - 1
-            )
-        ];
-
-    x = randomNumber(2, 10);
-
-    const offset =
-        90 / coefficient - x;
-
-    angleExpression =
-        `${coefficient}(x + ${offset})`;
-
-} else {
-
-    x = randomNumber(12, 20);
-
-    const minimumCoefficient =
-        Math.ceil(91 / x);
-
-    const coefficient =
-        randomNumber(minimumCoefficient, 8);
-
-    const constant =
-        coefficient * x - 90;
-
-    angleExpression =
-        `${coefficient}x - ${constant}`;
-
-}
-
-return {
-
-    image:
-        getShapeImage(shapeName, true),
-
-    text:
-        `In a <b>${shapeName}</b>, ${perpendicularFact}.<br>If ∠${angleName} = <b>(${angleExpression})°</b>, find <b>x</b>.`,
-
-    answer: x,
-
-};
-
-}
-
-return {
-
-image:
-    getShapeImage("rhombus", true),
-
-text:
-    `In a rhombus, diagonals AC and BD intersect at E. Side AB is <b>${hypotenuse * scale}</b> and AE is <b>${firstLeg * scale}</b>.<br>Find the full length of diagonal BD.`,
-
-answer:
-    secondLeg * scale * 2,
-
-};
-
-}
-
-/* =========================================================
-NORMAL QUESTIONS
-========================================================= */
-
-/* =========================================================
-QUESTION GENERATION
-ORDER:
-1. SIDES
-2. ANGLES
-3. PERPENDICULAR / HEIGHT
-4. DIAGONALS
-========================================================= */
-
-
-/* =========================================================
-1. SIDES ONLY
-========================================================= */
-
-function buildSidesQuestion() {
-
-const shapes = [
-    "parallelogram",
-    "rectangle",
-    "square",
-    "rhombus"
-];
-
-const shapeName =
-    shapes[
-        randomNumber(0, shapes.length - 1)
-    ];
-
-const image =
-    getShapeImage(shapeName);
-
-let questionText = "";
-let answer;
-let questionType;
-
-
-/* ---------------------------------------------------------
-PARALLELOGRAM — SIDES
---------------------------------------------------------- */
-
-if (shapeName === "parallelogram") {
-
-    questionType =
-        randomNumber(1, 3);
-
-    switch (questionType) {
-
-        case 1: {
-
-            const side =
-                randomNumber(5, 30);
-
-            const sides = [
-                "AB",
-                "BC",
-                "CD",
-                "AD"
-            ];
-
-            const oppositeSides = {
-                AB: "CD",
-                CD: "AB",
-                BC: "AD",
-                AD: "BC"
-            };
-
-            const givenSide =
-                sides[
-                    randomNumber(0, sides.length - 1)
-                ];
-
-            const answerSide =
-                oppositeSides[givenSide];
-
-            questionText =
-                `In a parallelogram, ${givenSide} = <b>${side}</b>.<br>
-                Find the length of ${answerSide}.`;
-
-            answer = side;
-
-            break;
-        }
-
-        case 2: {
-
-            const coefficient =
-                randomNumber(2, 10);
-
-            const value =
-                randomNumber(2, 10);
-
-            const constant =
-                randomNumber(1, 10);
-
-            const side =
-                coefficient * value + constant;
-
-            questionText =
-                `In a parallelogram, AB = <b>${coefficient}x + ${constant}</b>
-                and CD = <b>${side}</b>.<br>
-                Solve for <b>x</b>.`;
-
-            answer = value;
-
-            break;
-        }
-
-        case 3: {
-
-            const coefficient =
-                randomNumber(2, 10);
-
-            const value =
-                randomNumber(2, 10);
-
-            const constant =
-                randomNumber(1, 10);
-
-            const side =
-                coefficient * value - constant;
-
-            questionText =
-                `In a parallelogram, AB = <b>${coefficient}x - ${constant}</b>
-                and CD = <b>${side}</b>.<br>
-                Solve for <b>x</b>.`;
-
-            answer = value;
-
-            break;
-        }
-    }
-}
-
-
-/* ---------------------------------------------------------
-RECTANGLE — SIDES
---------------------------------------------------------- */
-
-else if (shapeName === "rectangle") {
-
-    questionType =
-        randomNumber(1, 3);
-
-    switch (questionType) {
-
-        case 1: {
-
-            const side =
-                randomNumber(5, 30);
-
-            const sides = [
-                "AB",
-                "BC",
-                "CD",
-                "AD"
-            ];
-
-            const oppositeSides = {
-                AB: "CD",
-                CD: "AB",
-                BC: "AD",
-                AD: "BC"
-            };
-
-            const givenSide =
-                sides[
-                    randomNumber(0, sides.length - 1)
-                ];
-
-            const answerSide =
-                oppositeSides[givenSide];
-
-            questionText =
-                `In a rectangle, ${givenSide} = <b>${side}</b>.<br>
-                Find the length of ${answerSide}.`;
-
-            answer = side;
-
-            break;
-        }
-
-        case 2: {
-
-            const coefficient =
-                randomNumber(2, 10);
-
-            const value =
-                randomNumber(2, 10);
-
-            const constant =
-                randomNumber(1, 10);
-
-            const side =
-                coefficient * value + constant;
-
-            questionText =
-                `In a rectangle, AB = <b>${coefficient}x + ${constant}</b>
-                and CD = <b>${side}</b>.<br>
-                Solve for <b>x</b>.`;
-
-            answer = value;
-
-            break;
-        }
-
-        case 3: {
-
-            const coefficient =
-                randomNumber(2, 10);
-
-            const value =
-                randomNumber(2, 10);
-
-            const constant =
-                randomNumber(1, 10);
-
-            const side =
-                coefficient * value - constant;
-
-            questionText =
-                `In a rectangle, AB = <b>${coefficient}x - ${constant}</b>
-                and CD = <b>${side}</b>.<br>
-                Solve for <b>x</b>.`;
-
-            answer = value;
-
-            break;
-        }
-    }
-}
-
-
-/* ---------------------------------------------------------
-SQUARE — SIDES
---------------------------------------------------------- */
-
-else if (shapeName === "square") {
-
-    questionType =
-        randomNumber(1, 3);
-
-    switch (questionType) {
-
-        case 1: {
-
-            const side =
-                randomNumber(5, 30);
-
-            const sides = [
-                "AB",
-                "BC",
-                "CD",
-                "AD"
-            ];
-
-            const givenSide =
-                sides[
-                    randomNumber(0, sides.length - 1)
-                ];
-
-            let answerSide;
-
-            do {
-
-                answerSide =
-                    sides[
-                        randomNumber(0, sides.length - 1)
-                    ];
-
-            } while (
-                answerSide === givenSide
-            );
-
-            questionText =
-                `In a square, ${givenSide} = <b>${side}</b>.<br>
-                Find the length of ${answerSide}.`;
-
-            answer = side;
-
-            break;
-        }
-
-        case 2: {
-
-            const coefficient =
-                randomNumber(2, 10);
-
-            const value =
-                randomNumber(2, 10);
-
-            const constant =
-                randomNumber(1, 10);
-
-            const side =
-                coefficient * value + constant;
-
-            questionText =
-                `In a square, AB = <b>${coefficient}x + ${constant}</b>
-                and BC = <b>${side}</b>.<br>
-                Solve for <b>x</b>.`;
-
-            answer = value;
-
-            break;
-        }
-
-        case 3: {
-
-            const coefficient =
-                randomNumber(2, 10);
-
-            const value =
-                randomNumber(2, 10);
-
-            const constant =
-                randomNumber(1, 10);
-
-            const side =
-                coefficient * value - constant;
-
-            questionText =
-                `In a square, AB = <b>${coefficient}x - ${constant}</b>
-                and BC = <b>${side}</b>.<br>
-                Solve for <b>x</b>.`;
-
-            answer = value;
-
-            break;
-        }
-    }
-}
-
-
-/* ---------------------------------------------------------
-RHOMBUS — SIDES
---------------------------------------------------------- */
-
-else if (shapeName === "rhombus") {
-
-    questionType =
-        randomNumber(1, 3);
-
-    switch (questionType) {
-
-        case 1: {
-
-            const side =
-                randomNumber(5, 30);
-
-            const sides = [
-                "AB",
-                "BC",
-                "CD",
-                "AD"
-            ];
-
-            const givenSide =
-                sides[
-                    randomNumber(0, sides.length - 1)
-                ];
-
-            let answerSide;
-
-            do {
-
-                answerSide =
-                    sides[
-                        randomNumber(0, sides.length - 1)
-                    ];
-
-            } while (
-                answerSide === givenSide
-            );
-
-            questionText =
-                `In a rhombus, ${givenSide} = <b>${side}</b>.<br>
-                Find the length of ${answerSide}.`;
-
-            answer = side;
-
-            break;
-        }
-
-        case 2: {
-
-            const coefficient =
-                randomNumber(2, 10);
-
-            const value =
-                randomNumber(2, 10);
-
-            const constant =
-                randomNumber(1, 10);
-
-            const side =
-                coefficient * value + constant;
-
-            questionText =
-                `In a rhombus, AB = <b>${coefficient}x + ${constant}</b>
-                and CD = <b>${side}</b>.<br>
-                Solve for <b>x</b>.`;
-
-            answer = value;
-
-            break;
-        }
-
-        case 3: {
-
-            const coefficient =
-                randomNumber(2, 10);
-
-            const value =
-                randomNumber(2, 10);
-
-            const constant =
-                randomNumber(1, 10);
-
-            const side =
-                coefficient * value - constant;
-
-            questionText =
-                `In a rhombus, AB = <b>${coefficient}x - ${constant}</b>
-                and CD = <b>${side}</b>.<br>
-                Solve for <b>x</b>.`;
-
-            answer = value;
-
-            break;
-        }
-    }
-}
-
-
-return {
-
-    image: image,
-
-    text: questionText,
-
-    answer: answer,
-
-    hint:
-        getSidesHint(shapeName, questionType)
-
-};
-
-}
-
-/* =========================================================
-2. ANGLES ONLY
-========================================================= */
-
-function buildAnglesQuestion() {
-
-const shapes = [
-    "parallelogram",
-    "rectangle",
-    "square",
-    "rhombus"
-];
-
-const shapeName =
-    shapes[
-        randomNumber(0, shapes.length - 1)
-    ];
-
-const image =
-    getShapeImage(shapeName);
-
-let questionText = "";
-let answer;
-let questionType;
-
-/* ---------------------------------------------------------
-PARALLELOGRAM — ANGLES
---------------------------------------------------------- */
-
-if (shapeName === "parallelogram") {
-
-    questionType =
-        randomNumber(1, 3);
-
-    switch (questionType) {
-
-        case 1: {
-
-            const angle =
-                randomNumber(4, 14) * 10;
-
-            const angles = [
-                "A",
-                "B",
-                "C",
-                "D"
-            ];
-
-            const oppositeAngles = {
-                A: "C",
-                B: "D",
-                C: "A",
-                D: "B"
-            };
-
-            const givenAngle =
-                angles[
-                    randomNumber(0, angles.length - 1)
-                ];
-
-            const answerAngle =
-                oppositeAngles[givenAngle];
-
-            questionText =
-                `In a parallelogram, ∠${givenAngle} = <b>${angle}°</b>.<br>
-                Find ∠${answerAngle}.`;
-
-            answer = angle;
-
-            break;
-        }
-
-        case 2: {
-
-            const angle =
-                randomNumber(1, 17) * 10;
-
-            questionText =
-                `In a parallelogram, ∠A = <b>${angle}°</b>.<br>
-                Find the measure of ∠B.`;
-
-            answer =
-                180 - angle;
-
-            break;
-        }
-
-        case 3: {
-
-            const x =
-                randomNumber(2, 8);
-
-            const coefficient =
-                randomNumber(2, 5);
-
-            const constant =
-                randomNumber(5, 20);
-
-            const angle =
-                coefficient * x + constant;
-
-            questionText =
-                `In a parallelogram, ∠A = <b>${coefficient}x + ${constant}°</b>
-                and ∠C = <b>${angle}°</b>.<br>
-                Solve for <b>x</b>.`;
-
-            answer = x;
-
-            break;
-        }
-    }
-}
-
-/* ---------------------------------------------------------
-RECTANGLE — ANGLES
---------------------------------------------------------- */
-
-else if (shapeName === "rectangle") {
-
-    questionType =
-        randomNumber(1, 2);
-
-    if (questionType === 1) {
-
-        const angles = [
-            "A",
-            "B",
-            "C",
-            "D"
-        ];
-
-        const givenAngle =
-            angles[
-                randomNumber(0, angles.length - 1)
-            ];
-
-        questionText =
-            `In a rectangle, ∠${givenAngle} = <b>90°</b>.<br>
-            Find the measure of another angle.`;
-
-        answer = 90;
-
-    } else {
-
-        const x =
-            randomNumber(2, 8);
-
-        const coefficient =
-            randomNumber(2, 5);
-
-        const constant =
-            90 - coefficient * x;
-
-        questionText =
-            `In a rectangle, ∠A =
-            <b>${coefficient}x + ${constant}°</b>.<br>
-            Solve for <b>x</b>.`;
-
-        answer = x;
+        timerInterval = null;
 
     }
-}
-
-/* ---------------------------------------------------------
-SQUARE — ANGLES
---------------------------------------------------------- */
-
-else if (shapeName === "square") {
-
-    const x =
-        randomNumber(2, 8);
-
-    const coefficient =
-        randomNumber(2, 5);
-
-    const constant =
-        90 - coefficient * x;
-
-    questionText =
-        `In a square, ∠B =
-        <b>${coefficient}x + ${constant}°</b>.<br>
-        Solve for <b>x</b>.`;
-
-    answer = x;
-}
-
-/* ---------------------------------------------------------
-RHOMBUS — ANGLES
---------------------------------------------------------- */
-
-else if (shapeName === "rhombus") {
-
-    questionType =
-        randomNumber(1, 3);
-
-    switch (questionType) {
-
-        case 1: {
-
-            const angle =
-                randomNumber(4, 14) * 10;
-
-            const angles = [
-                "A",
-                "B",
-                "C",
-                "D"
-            ];
-
-            const oppositeAngles = {
-                A: "C",
-                B: "D",
-                C: "A",
-                D: "B"
-            };
-
-            const givenAngle =
-                angles[
-                    randomNumber(0, angles.length - 1)
-                ];
-
-            const answerAngle =
-                oppositeAngles[givenAngle];
-
-            questionText =
-                `In a rhombus, ∠${givenAngle} = <b>${angle}°</b>.<br>
-                Find ∠${answerAngle}.`;
-
-            answer = angle;
-
-            break;
-        }
-
-        case 2: {
-
-            const angle =
-                randomNumber(1, 17) * 10;
-
-            questionText =
-                `In a rhombus, ∠A = <b>${angle}°</b>.<br>
-                Determine the measure of ∠B.`;
-
-            answer =
-                180 - angle;
-
-            break;
-        }
-
-        case 3: {
-
-            const x =
-                randomNumber(2, 8);
-
-            const coefficient =
-                randomNumber(2, 5);
-
-            const constant =
-                180 - coefficient * x;
-
-            questionText =
-                `In a rhombus, adjacent angle =
-                <b>${coefficient}x + ${constant}°</b>.<br>
-                Solve for <b>x</b>.`;
-
-            answer = x;
-
-            break;
-        }
-    }
-}
-
-
-return {
-
-    image: image,
-
-    text: questionText,
-
-    answer: answer,
-
-    hint:
-        getAnglesHint(shapeName, questionType)
-
-};
 
 }
 
 
 /* =========================================================
-3. PERPENDICULAR / HEIGHT ONLY
+STUDENT DETAILS
 ========================================================= */
 
-function buildPerpendicularQuestion() {
+function proceedToModeSelect() {
 
-const shapeNames = [
-    "parallelogram",
-    "rectangle",
-    "square",
-    "rhombus"
-];
+    studentName =
+        document
+            .getElementById("fullName")
+            .value
+            .trim();
 
-const shapeName =
-    shapeNames[
-        randomNumber(0, shapeNames.length - 1)
-    ];
-
-const image =
-    getShapeImage(shapeName, true);
-
-let perpendicularFact;
-let angleName;
+    studentSection =
+        document
+            .getElementById("section")
+            .value
+            .trim();
 
 
-/* ---------------------------------------------------------
-PARALLELOGRAM / RECTANGLE
---------------------------------------------------------- */
+    if (!studentName || !studentSection) {
 
-if (
-    shapeName === "rectangle" ||
-    shapeName === "parallelogram"
-) {
-
-    const corners = [
-        {
-            vertex: "A",
-            side1: "AB",
-            side2: "AD",
-            angle: "BAD"
-        },
-        {
-            vertex: "B",
-            side1: "AB",
-            side2: "BC",
-            angle: "ABC"
-        },
-        {
-            vertex: "C",
-            side1: "BC",
-            side2: "CD",
-            angle: "BCD"
-        },
-        {
-            vertex: "D",
-            side1: "CD",
-            side2: "AD",
-            angle: "CDA"
-        }
-    ];
-
-    const corner =
-        corners[
-            randomNumber(0, corners.length - 1)
-        ];
-
-    perpendicularFact =
-        `sides ${corner.side1} and ${corner.side2}
-        are perpendicular at ${corner.vertex}`;
-
-    angleName =
-        corner.angle;
-}
-
-
-/* ---------------------------------------------------------
-SQUARE / RHOMBUS
---------------------------------------------------------- */
-
-else {
-
-    const intersectionAngles = [
-        "AEB",
-        "BEC",
-        "CED",
-        "DEA"
-    ];
-
-    perpendicularFact =
-        "diagonals AC and BD intersect at E and are perpendicular";
-
-    angleName =
-        intersectionAngles[
-            randomNumber(
-                0,
-                intersectionAngles.length - 1
-            )
-        ];
-}
-
-
-/* ---------------------------------------------------------
-CREATE EQUATION
---------------------------------------------------------- */
-
-let x;
-let angleExpression;
-const questionType =
-    randomNumber(1, 3);
-
-
-if (questionType === 1) {
-
-    x =
-        randomNumber(2, 10);
-
-    const coefficient =
-        randomNumber(2, 6);
-
-    const constant =
-        90 - coefficient * x;
-
-    angleExpression =
-        `${coefficient}x + ${constant}`;
-
-}
-
-
-else if (questionType === 2) {
-
-    const coefficients = [
-        2, 3, 5, 6
-    ];
-
-    const coefficient =
-        coefficients[
-            randomNumber(
-                0,
-                coefficients.length - 1
-            )
-        ];
-
-    x = randomNumber(2, 10);
-
-    const offset =
-        90 / coefficient - x;
-
-    angleExpression =
-        `${coefficient}(x + ${offset})`;
-
-}
-
-else {
-
-    x = randomNumber(12, 20);
-
-    const minimumCoefficient =
-        Math.ceil(91 / x);
-
-    const coefficient =
-        randomNumber(
-            minimumCoefficient,
-            8
+        alert(
+            "Please enter your name and section before starting."
         );
 
-    const constant =
-        coefficient * x - 90;
+        return;
+    }
 
-    angleExpression =
-        `${coefficient}x - ${constant}`;
+
+    document
+        .getElementById("studentStart")
+        .style.display = "none";
+
+
+    document
+        .getElementById("checkName")
+        .textContent = studentName;
+
+
+    document
+        .getElementById("checkSection")
+        .textContent = studentSection;
+
+
+    document
+        .getElementById("modeSelect")
+        .style.display = "block";
+
+
+    document
+        .getElementById("modeSelect")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
 
-return {
-
-    image: image,
-
-    text:
-        `In a <b>${shapeName}</b>,
-        ${perpendicularFact}.<br>
-        If ∠${angleName} =
-        <b>(${angleExpression})°</b>,
-        find <b>x</b>.`,
-
-    answer: x,
-
-    hint:
-        getPerpendicularHint(shapeName, questionType)
-
-};
-
-}
 
 /* =========================================================
-4. DIAGONALS ONLY
+LINEAR FUNCTION QUESTION GENERATOR
 ========================================================= */
 
-function buildDiagonalQuestion() {
+function buildLinearFunctionQuestion() {
 
-const triples = [
-    [3, 4, 5],
-    [5, 12, 13],
-    [8, 15, 17]
-];
+    let ansr = {
 
-const [
-    firstLeg,
-    secondLeg,
-    hypotenuse
-] =
-    triples[
-        randomNumber(
-            0,
-            triples.length - 1
-        )
-    ];
+        slope: 0,
+        intercept: 0,
+        value: null,
 
-const scale =
-    randomNumber(1, 4);
+        requiresFunction: false,
+        requiresValue: false,
 
-const shapeNames = [
-    "parallelogram",
-    "rectangle",
-    "square",
-    "rhombus"
-];
+        firstVal: 0,
+        secondVal: 0
 
-const shapeName =
-    shapeNames[
-        randomNumber(
-            0,
-            shapeNames.length - 1
-        )
+    };
+
+
+    const questionTypes = [
+
+        0, 1, 2, 3, 4,
+        5, 6, 7, 8, 9,
+        10, 11, 12, 13, 14,
+
+        0, 2, 4, 6, 7,
+        8, 9, 12, 14,
+
+        4, 7, 9, 11,
+        13, 14
+
     ];
 
 
-/* ---------------------------------------------------------
-RECTANGLE — DIAGONAL
---------------------------------------------------------- */
+    const oper =
+        questionTypes[
+            randomNumber(
+                0,
+                questionTypes.length - 1
+            )
+        ];
 
-if (shapeName === "rectangle") {
 
-    const diagonalLength =
-        hypotenuse * scale;
+    switch (oper) {
 
-    return {
 
-        image:
-            getShapeImage(
-                shapeName,
-                true
-            ),
+        /* =================================================
+        TYPE 0
+        ================================================= */
 
-        text:
-            `A <b>rectangle</b> has side lengths
-            <b>${firstLeg}x</b> and
-            <b>${secondLeg}x</b>.
-            Its diagonal AC is
-            <b>${diagonalLength}</b>.<br>
-            Find <b>x</b>.`,
+        case 0: {
 
-        answer: scale,
+            const allowance =
+                randomHundreds(500, 1000);
 
-        hint:
-            getDiagonalHint(shapeName)
+            const monthlyEarning =
+                randomHundreds(100, 300);
 
-    };
-}
+            const months =
+                randomNumber(2, 10);
 
-/* ---------------------------------------------------------
-SQUARE — DIAGONAL
---------------------------------------------------------- */
+            const totalMoney =
+                allowance +
+                monthlyEarning * months;
 
-if (shapeName === "square") {
 
-    const x =
-        randomNumber(2, 8);
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "Each month, a student receives an additional ₱" +
+                monthlyEarning +
+                ", and the student also starts with ₱" +
+                allowance +
+                ". What linear function shows the student's total money, and how much will the student have after month " +
+                months +
+                "?";
 
-    const coefficient =
-        randomNumber(2, 5);
 
-    const constant =
-        randomNumber(1, 10);
+            ansr = {
 
-    const givenLength =
-        coefficient * x + constant;
+                slope: monthlyEarning,
+                intercept: allowance,
+                value: totalMoney,
 
-    return {
+                requiresFunction: true,
+                requiresValue: false,
 
-        image:
-            getShapeImage(
-                shapeName,
-                true
-            ),
+                firstVal: monthlyEarning,
+                secondVal: allowance
 
-        text:
-            `In a square, side AB =
-            <b>${coefficient}x + ${constant}</b>
-            and diagonal AC =
-            <b>${givenLength}√2</b>.<br>
-            Find <b>x</b>.`,
+            };
 
-        answer: x,
-
-        hint:
-            getDiagonalHint(shapeName)
-
-    };
-}
-
-/* ---------------------------------------------------------
-PARALLELOGRAM / RHOMBUS — DIAGONAL
---------------------------------------------------------- */
-
-const x =
-    randomNumber(2, 8);
-
-const coefficient =
-    randomNumber(2, 5);
-
-const constant =
-    randomNumber(1, 10);
-
-const givenLength =
-    coefficient * x + constant;
-
-return {
-
-    image:
-        getShapeImage(
-            shapeName,
-            true
-        ),
-
-    text:
-        `In a <b>${shapeName}</b>,
-        diagonals AC and BD intersect at E.<br>
-        AE = <b>${coefficient}x + ${constant}</b>
-        and EC = <b>${givenLength}</b>.<br>
-        Find <b>x</b>.`,
-
-    answer: x,
-
-    hint:
-        getDiagonalHint(shapeName)
-
-};
-
-}
-
-// SIDES HINTS
-
-function getSidesHint(shapeName, questionType) {
-    if (shapeName === "parallelogram") {
-        if (questionType === 1) {
-            return "Compare the named side with the side directly across from it.";
-        } else if (questionType === 2) {
-            return "Look for the matching length property shared by opposite sides.";
-        } else {
-            return "Match the expression to the opposite side it describes.";
+            break;
         }
-    }
 
-    if (shapeName === "rectangle") {
-        if (questionType === 1) {
-            return "Compare the named side with the side directly across from it.";
-        } else if (questionType === 2) {
-            return "Recall the length relationship between opposite sides of a rectangle.";
-        } else {
-            return "Match the expression to the opposite side it describes.";
+
+        /* =================================================
+        TYPE 1
+        ================================================= */
+
+        case 1: {
+
+            const x1 =
+                randomNumber(1, 8);
+
+            const x2 =
+                x1 + randomNumber(2, 6);
+
+            const slope =
+                -randomHundreds(200, 400);
+
+            const intercept =
+                Math.abs(slope) * x2 +
+                randomHundreds(200, 500);
+
+            const y1 =
+                slope * x1 + intercept;
+
+            const y2 =
+                y1 +
+                slope * (x2 - x1);
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A worker has ₱" +
+                y1 +
+                " in savings after " +
+                x1 +
+                " months and ₱" +
+                y2 +
+                " after " +
+                x2 +
+                " months because of regular withdrawals. What is the worker's monthly decrease in savings each month?";
+
+
+            ansr = {
+
+                slope: slope,
+                intercept: intercept,
+                value: Math.abs(slope),
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: y1,
+                secondVal: y2
+
+            };
+
+            break;
         }
-    }
-
-    if (shapeName === "square") {
-        return "Think about how the four side lengths of a square compare.";
-    }
-
-    if (shapeName === "rhombus") {
-        return "Think about how the four side lengths of a rhombus compare.";
-    }
-
-    return "Look for the side relationship that matches the given information.";
-}
 
 
-// ANGLES HINTS
+        /* =================================================
+        TYPE 2
+        ================================================= */
 
-function getAnglesHint(shapeName, questionType) {
-    if (shapeName === "parallelogram") {
-        if (questionType === 1) {
-            return "Recall the relationship between opposite angles in this shape.";
-        } else if (questionType === 2) {
-            return "Consider how angles at neighboring corners are related.";
-        } else {
-            return "Notice where the given angles are before choosing the angle property.";
+        case 2: {
+
+            const weeklySavings =
+                randomHundreds(200, 500);
+
+            const startingAmount =
+                randomHundreds(200, 1000);
+
+            const weeks =
+                randomNumber(2, 10);
+
+            const totalSavings =
+                startingAmount +
+                weeklySavings * weeks;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A student saves ₱" +
+                weeklySavings +
+                " each week and already has ₱" +
+                startingAmount +
+                ". What linear function represents the student's savings?";
+
+
+            ansr = {
+
+                slope: weeklySavings,
+                intercept: startingAmount,
+                value: totalSavings,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: weeklySavings,
+                secondVal: startingAmount
+
+            };
+
+            break;
         }
-    }
 
-    if (shapeName === "rectangle") {
-        return "Think about the angle rule that applies at every corner of a rectangle.";
-    }
 
-    if (shapeName === "square") {
-        return "Think about the angle rule that applies at every corner of a square.";
-    }
+        /* =================================================
+        TYPE 3
+        ================================================= */
 
-    if (shapeName === "rhombus") {
-        if (questionType === 1) {
-            return "Recall the relationship between opposite angles in this shape.";
-        } else if (questionType === 2) {
-            return "Consider how angles at neighboring corners are related.";
-        } else {
-            return "Notice where the given angles are before choosing the angle property.";
+        case 3: {
+
+            const weeklyDiscount =
+                randomTens(50, 150);
+
+            const weeks =
+                randomNumber(2, 5);
+
+            const startingPrice =
+                weeklyDiscount * weeks +
+                randomHundreds(200, 500);
+
+            const totalPrice =
+                startingPrice -
+                weeklyDiscount * weeks;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A product costs ₱" +
+                startingPrice +
+                " and its price decreases by ₱" +
+                weeklyDiscount +
+                " each week during a clearance sale. Find the price after " +
+                weeks +
+                " weeks.";
+
+
+            ansr = {
+
+                slope: -weeklyDiscount,
+                intercept: startingPrice,
+                value: totalPrice,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingPrice,
+                secondVal: weeklyDiscount
+
+            };
+
+            break;
         }
+
+
+        /* =================================================
+        TYPE 4
+        ================================================= */
+
+        case 4: {
+
+            const serviceFee =
+                randomHundreds(200, 500);
+
+            const costPerKilowattHour =
+                randomTens(10, 20);
+
+            const kilowattHours =
+                randomNumber(20, 100);
+
+            const totalBill =
+                serviceFee +
+                costPerKilowattHour *
+                kilowattHours;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "An electricity company charges ₱" +
+                costPerKilowattHour +
+                " per kilowatt-hour and a service fee of ₱" +
+                serviceFee +
+                ". What linear function represents the electricity bill?";
+
+
+            ansr = {
+
+                slope: costPerKilowattHour,
+                intercept: serviceFee,
+                value: totalBill,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: costPerKilowattHour,
+                secondVal: serviceFee
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 5
+        ================================================= */
+
+        case 5: {
+
+            const dailyUsage =
+                randomTens(10, 30);
+
+            const days =
+                randomNumber(2, 7);
+
+            const startingData =
+                dailyUsage * days +
+                randomTens(10, 30);
+
+            const remainingData =
+                startingData -
+                dailyUsage * days;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A phone has " +
+                startingData +
+                " gigabytes of data and uses " +
+                dailyUsage +
+                " gigabytes each day. Find the data remaining after " +
+                days +
+                " days.";
+
+
+            ansr = {
+
+                slope: -dailyUsage,
+                intercept: startingData,
+                value: remainingData,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingData,
+                secondVal: dailyUsage
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 6
+        ================================================= */
+
+        case 6: {
+
+            const deliveryFee =
+                randomHundreds(20, 100);
+
+            const pricePerItem =
+                randomTens(100, 300);
+
+            const items =
+                randomNumber(3, 20);
+
+            const totalCost =
+                deliveryFee +
+                pricePerItem * items;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A bakery charges ₱" +
+                pricePerItem +
+                " for each item and a delivery fee of ₱" +
+                deliveryFee +
+                ". What linear function represents the bakery order cost?";
+
+
+            ansr = {
+
+                slope: pricePerItem,
+                intercept: deliveryFee,
+                value: totalCost,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: pricePerItem,
+                secondVal: deliveryFee
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 7
+        ================================================= */
+
+        case 7: {
+
+            const dailyUsage =
+                randomTens(40, 100);
+
+            const days =
+                randomNumber(2, 10);
+
+            const startingWater =
+                dailyUsage * days +
+                randomHundreds(100, 500);
+
+            const remainingWater =
+                startingWater -
+                dailyUsage * days;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A water tank contains " +
+                startingWater +
+                " liters and loses " +
+                dailyUsage +
+                " liters each day. Find the water remaining after " +
+                days +
+                " days.";
+
+
+            ansr = {
+
+                slope: -dailyUsage,
+                intercept: startingWater,
+                value: remainingWater,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingWater,
+                secondVal: dailyUsage
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 8
+        ================================================= */
+
+        case 8: {
+
+            const registrationFee =
+                randomHundreds(30, 100);
+
+            const monthlyFee =
+                randomHundreds(300, 500);
+
+            const months =
+                randomNumber(2, 12);
+
+            const totalCost =
+                registrationFee +
+                monthlyFee * months;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A gym charges a monthly fee of ₱" +
+                monthlyFee +
+                " and a registration fee of ₱" +
+                registrationFee +
+                ". What linear function represents the gym membership cost?";
+
+
+            ansr = {
+
+                slope: monthlyFee,
+                intercept: registrationFee,
+                value: totalCost,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: monthlyFee,
+                secondVal: registrationFee
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 9
+        ================================================= */
+
+        case 9: {
+
+            const itemsSoldPerDay =
+                randomTens(10, 40);
+
+            const days =
+                randomNumber(2, 8);
+
+            const startingStock =
+                itemsSoldPerDay * days +
+                randomHundreds(100, 500);
+
+            const remainingStock =
+                startingStock -
+                itemsSoldPerDay * days;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A store has " +
+                startingStock +
+                " items in stock and sells " +
+                itemsSoldPerDay +
+                " items each day. Find the stock remaining after " +
+                days +
+                " days.";
+
+
+            ansr = {
+
+                slope: -itemsSoldPerDay,
+                intercept: startingStock,
+                value: remainingStock,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingStock,
+                secondVal: itemsSoldPerDay
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 10
+        ================================================= */
+
+        case 10: {
+
+            const drainPerHour =
+                randomTens(10, 20);
+
+            const hours =
+                randomNumber(2, 5);
+
+            const startingCharge =
+                drainPerHour * hours +
+                randomTens(20, 40);
+
+            const remainingCharge =
+                startingCharge -
+                drainPerHour * hours;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A phone starts with " +
+                startingCharge +
+                "% battery and loses " +
+                drainPerHour +
+                "% each hour. Find the remaining battery after " +
+                hours +
+                " hours.";
+
+
+            ansr = {
+
+                slope: -drainPerHour,
+                intercept: startingCharge,
+                value: remainingCharge,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingCharge,
+                secondVal: drainPerHour
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 11
+        ================================================= */
+
+        case 11: {
+
+            const startingTemperature =
+                randomTens(20, 40);
+
+            const coolingRate =
+                randomNumber(1, 4);
+
+            const hours =
+                randomNumber(1, 4);
+
+            const temperature =
+                startingTemperature -
+                coolingRate * hours;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A room starts at " +
+                startingTemperature +
+                " degrees Celsius and cools by " +
+                coolingRate +
+                " degrees each hour. What is the temperature after " +
+                hours +
+                " hours?";
+
+
+            ansr = {
+
+                slope: -coolingRate,
+                intercept: startingTemperature,
+                value: temperature,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingTemperature,
+                secondVal: coolingRate
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 12
+        ================================================= */
+
+        case 12: {
+
+            const fixedPrice =
+                randomHundreds(100, 300);
+
+            const pricePerKilo =
+                randomTens(50, 100);
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A fruit stand charges ₱" +
+                pricePerKilo +
+                " for every kilogram of fruit and a fixed ₱" +
+                fixedPrice +
+                " packaging fee. What linear function represents the total cost?";
+
+
+            ansr = {
+
+                slope: pricePerKilo,
+                intercept: fixedPrice,
+                value: null,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: pricePerKilo,
+                secondVal: fixedPrice
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 13
+        ================================================= */
+
+        case 13: {
+
+            const weeklyExpense =
+                randomHundreds(200, 500);
+
+            const weeks =
+                randomNumber(2, 5);
+
+            const startingBudget =
+                weeklyExpense * weeks +
+                randomHundreds(200, 500);
+
+            const remainingBudget =
+                startingBudget -
+                weeklyExpense * weeks;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A family has a grocery budget of ₱" +
+                startingBudget +
+                " and spends ₱" +
+                weeklyExpense +
+                " each week. How much of the budget remains after " +
+                weeks +
+                " weeks?";
+
+
+            ansr = {
+
+                slope: -weeklyExpense,
+                intercept: startingBudget,
+                value: remainingBudget,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingBudget,
+                secondVal: weeklyExpense
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 14
+        ================================================= */
+
+        case 14: {
+
+            const deliveryFee =
+                randomHundreds(100, 300);
+
+            const mealPrice =
+                randomHundreds(200, 500);
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A food delivery service charges ₱" +
+                mealPrice +
+                " for each meal and ₱" +
+                deliveryFee +
+                " as a delivery fee. What linear function represents the total order cost?";
+
+
+            ansr = {
+
+                slope: mealPrice,
+                intercept: deliveryFee,
+                value: null,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: mealPrice,
+                secondVal: deliveryFee
+
+            };
+
+            break;
+        }
+
     }
 
-    return "Look at the positions of the angles in the quadrilateral.";
+
+    document
+        .getElementById("displayGiven")
+        .innerHTML =
+        addThousandsSeparators(
+            document
+                .getElementById("displayGiven")
+                .innerHTML
+        );
+
+
+    return ansr;
+
 }
 
-// PERPENDICULAR / HEIGHT HINTS
-
-function getPerpendicularHint(shapeName, questionType) {
-    if (shapeName === "parallelogram") {
-        return "Focus on the two named sides at the vertex; their angle is the one described.";
-    }
-
-    if (shapeName === "rectangle") {
-        return "Focus on the two named sides at the vertex; their angle is the one described.";
-    }
-
-    if (shapeName === "square") {
-        return "Look at the angle formed where the diagonals cross.";
-    }
-
-    if (shapeName === "rhombus") {
-        return "Look at the angle formed where the diagonals cross.";
-    }
-
-    return "Focus on the segments identified as perpendicular in the figure.";
-}
-
-// DIAGONAL HINTS
-
-function getDiagonalHint(shapeName, questionType) {
-    if (shapeName === "parallelogram") {
-        return "Focus on the two pieces of the same diagonal created at the intersection.";
-    }
-
-    if (shapeName === "rectangle") {
-        return "Notice which three segments form a triangle inside the rectangle.";
-    }
-
-    if (shapeName === "square") {
-        return "Consider the square's special relationship between a side and its diagonal.";
-    }
-
-    if (shapeName === "rhombus") {
-        return "Focus on the two pieces of the same diagonal created at the intersection.";
-    }
-
-    return "Look at how the diagonal divides the quadrilateral.";
-}
 
 /* =========================================================
-MAIN QUESTION BUILDER
+RANDOM HELPERS
 ========================================================= */
 
-function buildQuestion() {
+function randomTens(min, max) {
 
-// FOR SIDES
-if (
-    selectedQuestionCategory === "sides"
-) {
-
-    return buildSidesQuestion();
+    return randomNumber(
+        min / 10,
+        max / 10
+    ) * 10;
 
 }
 
-// FOR ANGLES
 
-if (
-    selectedQuestionCategory === "angles"
-) {
+function randomHundreds(min, max) {
 
-    return buildAnglesQuestion();
-
-}
-
-// FOR PERPENDICULAR / HEIGHT
-
-if (
-    selectedQuestionCategory === "perpendicular"
-) {
-
-    return buildPerpendicularQuestion();
+    return randomNumber(
+        min / 100,
+        max / 100
+    ) * 100;
 
 }
 
-// FOR DIAGONAL
 
-if (
-    selectedQuestionCategory === "diagonals"
-) {
+function addThousandsSeparators(text) {
 
-    return buildDiagonalQuestion();
-
-}
-
-/* -----------------------------------------
-    DEFAULT
------------------------------------------ */
-
-return buildSidesQuestion();
+    return text.replace(
+        /\b\d{4,}\b/g,
+        (number) =>
+            Number(number).toLocaleString("en-US")
+    );
 
 }
 
-/* -----------------------------
+
+/* =========================================================
 CREATE QUESTION SET
------------------------------ */
+========================================================= */
 
 function createQuestionSet() {
 
-questions.length = 0;
-
-for (
-let i = 0;
-i < quizQuestionCount;
-i++
-) {
-
-questions.push(
-    buildQuestion()
-);
-
-}
-
-}
-
-/* -----------------------------
-SHOW QUESTION
------------------------------ */
-
-function showQuestion() {
-
-const currentQuestion =
-questions[currentQuestionIndex];
-
-const topicLabel =
-document.getElementById("quizTopicLabel");
-
-if (topicLabel) {
-const topicNames = {
-    sides: "Sides",
-    angles: "Angles",
-    perpendicular: "Perpendicular",
-    diagonals: "Diagonals"
-};
-
-topicLabel.textContent =
-    `Topic: ${topicNames[selectedQuestionCategory] || "Quiz"}`;
-}
-
-document.getElementById(
-"shapeImage"
-).src =
-currentQuestion.image;
+    questions.length = 0;
 
 
-document.getElementById(
-"displayGiven"
-).innerHTML =
-currentQuestion.text;
+    for (
+        let i = 0;
+        i < TOTAL_QUESTIONS;
+        i++
+    ) {
 
-const answerInput =
-document.getElementById("ans");
+        if (selectedMode === "linear") {
 
-answerInput.value = "";
+            const question =
+                buildLinearFunctionQuestion();
 
-answerInput.disabled = false;
+            question.category =
+                "Linear Function";
 
-document.getElementById(
-"submitBtn"
-).disabled = false;
+            question.text =
+                document
+                    .getElementById("displayGiven")
+                    .innerHTML;
 
-const hintButton =
-document.getElementById("hintBtn");
+            questions.push(question);
 
+        }
 
-hintButton.disabled = false;
-hintButton.style.display = "inline-block";
-
-document.getElementById(
-"nextBtn"
-).style.display =
-"none";
-
-document.getElementById(
-"hintText"
-).textContent = "";
-
-document.getElementById(
-"hintText"
-).style.display =
-"none";
-
-
-document.getElementById(
-"outAns"
-).innerHTML = "";
-
-
-document.getElementById(
-"progressLabel"
-).textContent =
-`Question ${currentQuestionIndex + 1} of ${quizQuestionCount}`;
-
-
-answerInput.focus();
-
-}
-
-/* -----------------------------
-SHOW HINT
------------------------------ */
-
-function showHint() {
-
-const currentQuestion =
-questions[currentQuestionIndex];
-
-
-const hintText =
-document.getElementById(
-    "hintText"
-);
-
-
-hintText.textContent =
-currentQuestion.hint || "";
-
-
-hintText.style.display =
-"block";
-
-
-document.getElementById(
-"hintBtn"
-).disabled = true;
+    }
 
 }
 
 
-/* -----------------------------
-CHECK ANSWER
------------------------------ */
+/* =========================================================
+START QUIZ WITH COUNTDOWN
+========================================================= */
 
-function checkAns() {
+function showQuestionCount() {
 
-const answerInput =
-document.getElementById("ans");
-
-
-const inputValue =
-answerInput.value.trim();
+    document
+        .getElementById("modeSelect")
+        .style.display = "none";
 
 
-if (inputValue === "") {
-
-document.getElementById(
-    "outAns"
-).innerHTML =
-    "<strong>Please enter a valid number.</strong>";
-
-return;
-
-}
+    document
+        .getElementById("categoryScreen")
+        .style.display = "block";
 
 
-const submittedAnswer =
-Number(inputValue);
-
-
-if (Number.isNaN(submittedAnswer)) {
-
-document.getElementById(
-    "outAns"
-).innerHTML =
-    "<strong>Please enter a valid number.</strong>";
-
-return;
+    document
+        .getElementById("categoryScreen")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
 
 
-const currentQuestion =
-questions[currentQuestionIndex];
+function startSelectedQuiz() {
+
+    TOTAL_QUESTIONS =
+        Number(
+            document
+                .getElementById("questionCount")
+                .value
+        );
 
 
-const isCorrect =
-submittedAnswer ===
-currentQuestion.answer;
-
-
-if (isCorrect) {
-
-correctAnswers++;
-
-
-document.getElementById(
-    "outAns"
-).innerHTML =
-    "<strong>Correct!</strong> Great job.";
-
-} else {
-
-document.getElementById(
-    "outAns"
-).innerHTML =
-    `<strong>Incorrect.</strong> The correct answer is <strong>${currentQuestion.answer}</strong>.`;
+    startQuizWithCountdown("linear");
 
 }
 
-answerInput.disabled = true;
 
-document.getElementById(
-"submitBtn"
-).disabled = true;
+function startQuizWithCountdown(mode) {
+
+    selectedMode = mode;
+
+    currentIdx = 0;
+    score = 0;
+    elapsedSeconds = 0;
 
 
-document.getElementById(
-"hintBtn"
-).disabled = true;
+    document
+        .getElementById("showName")
+        .textContent =
+        studentName;
 
-document.getElementById(
-"nextBtn"
-).style.display =
-"inline-block";
+
+    document
+        .getElementById("showSection")
+        .textContent =
+        studentSection;
+
+
+    document
+        .getElementById("modeSelect")
+        .style.display = "none";
+
+
+    document
+        .getElementById("categoryScreen")
+        .style.display = "none";
+
+
+    document
+        .getElementById("finishMessage")
+        .style.display = "none";
+
+
+    document
+        .getElementById("score")
+        .textContent =
+        `Score: 0 / ${TOTAL_QUESTIONS}`;
+
+
+    document
+        .getElementById("quizCount")
+        .textContent =
+        `Question: 1 / ${TOTAL_QUESTIONS}`;
+
+
+    document
+        .getElementById("showSummaryBtn")
+        .style.display = "none";
+
+
+    document
+        .getElementById("nextBtn")
+        .style.display = "none";
+
+
+    const overlay =
+        document.getElementById(
+            "countdownOverlay"
+        );
+
+
+    const number =
+        document.getElementById(
+            "countdownNumber"
+        );
+
+
+    overlay.classList.add("active");
+
+
+    let count = 3;
+
+    number.textContent = count;
+
+
+    const countdown =
+        setInterval(() => {
+
+            count--;
+
+
+            if (count > 0) {
+
+                number.textContent = count;
+
+            }
+
+            else if (count === 0) {
+
+                number.textContent = "GO!";
+
+            }
+
+            else {
+
+                clearInterval(countdown);
+
+                overlay.classList.remove("active");
+
+                startQuiz();
+
+            }
+
+        }, 1000);
+
 }
 
-/* -----------------------------
-NEXT QUESTION
------------------------------ */
 
-function nextQuestion() {
-
-currentQuestionIndex++;
-
-if (
-currentQuestionIndex <
-quizQuestionCount
-) {
-
-showQuestion();
-
-return;
-
-}
-
-finishQuiz();
-
-}   
-
-/* -----------------------------
-FINISH QUIZ
------------------------------ */
-
-function finishQuiz() {
-
-stopTimer();
-
-
-const info =
-getStudentInfo();
-
-
-
-
-
-const score =
-correctAnswers;
-
-
-const percent =
-Math.round(
-    (score / quizQuestionCount) * 100
-);
-
-
-document.getElementById(
-"resultStudent"
-).textContent =
-info.fullName;
-
-
-document.getElementById(
-"resultSection"
-).textContent =
-info.section;
-
-
-document.getElementById(
-"resultScore"
-).textContent =
-`${score} / ${quizQuestionCount}`;
-
-
-document.getElementById(
-"resultPercent"
-).textContent =
-`${percent}%`;
-
-document.getElementById(
-"resultTime"
-).textContent =
-formatTime(elapsedSeconds);
-
-document.getElementById(
-"scoreBadge"
-).textContent =
-`${score} / ${quizQuestionCount}`;
-
-showScreen("resultScreen");
-
-}
-
-/* -----------------------------
+/* =========================================================
 START QUIZ
------------------------------ */
+========================================================= */
 
 function startQuiz() {
 
-const info =
-getStudentInfo();
+    currentIdx = 0;
+    score = 0;
+    elapsedSeconds = 0;
 
-if (
-!info.firstName ||
-!info.lastName ||
-!info.section
-) {
 
-alert(
-    "Please complete all details before starting the quiz."
-);
+    createQuestionSet();
 
-showScreen("studentScreen");
 
-return;
+    document
+        .getElementById("studentInfo")
+        .style.display = "grid";
+
+
+    document
+        .getElementById("quizArea")
+        .style.display = "block";
+
+
+    document
+        .getElementById("score")
+        .textContent =
+        `Score: 0 / ${TOTAL_QUESTIONS}`;
+
+
+    document
+        .getElementById("quizCount")
+        .textContent =
+        `Question: 1 / ${TOTAL_QUESTIONS}`;
+
+
+    document
+        .getElementById("timerDisplay")
+        .textContent =
+        "Time Elapsed: 0:00";
+
+
+    showQuestion();
+
+
+    startTimer();
+
+
+    document
+        .getElementById("quizArea")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
 
-currentQuestionIndex = 0;
-
-correctAnswers = 0;
-
-elapsedSeconds = 0;
-
-createQuestionSet();
-
-updateTimerDisplay();
-
-showQuestion();
-
-showScreen("quizScreen");
-
-startTimer();
-}
 
 /* =========================================================
-BUTTON EVENTS
+SHOW QUESTION
 ========================================================= */
 
-/* Student confirmation */
+function showQuestion() {
 
-document
-.getElementById("confirmStudentBtn")
-.addEventListener(
-"click",
-confirmStudentInfo
-);
+    const currentQuestion =
+        questions[currentIdx];
 
-/* Go from confirmation to category */
 
-document
-.getElementById("startQuizBtn")
-.addEventListener(
-"click",
-() => {
-
-    showScreen(
-        "categoryScreen"
-    ); 
+    if (!currentQuestion) {
+        return;
     }
-);
 
-/* Start selected quiz */
 
-document
-.getElementById("beginQuizBtn")
-.addEventListener(
-"click",
-() => {
+    document
+        .getElementById("category")
+        .textContent =
+        currentQuestion.category ||
+        getQuizTypeName(selectedMode);
 
-    selectedQuestionCategory =
+
+    document
+        .getElementById("displayGiven")
+        .innerHTML =
+        currentQuestion.text;
+
+
+    document
+        .getElementById("quizCount")
+        .textContent =
+        `Question: ${currentIdx + 1} / ${questions.length}`;
+
+
+    document
+        .getElementById("score")
+        .textContent =
+        `Score: ${score} / ${questions.length}`;
+
+
+    /* RESET FEEDBACK */
+
+    const outAns =
+        document.getElementById("outAns");
+
+
+    outAns.style.display = "none";
+
+    outAns.innerHTML = "";
+
+    outAns.style.background =
+        "var(--tint-light)";
+
+    outAns.style.color =
+        "var(--primary-dark)";
+
+    outAns.style.borderColor =
+        "var(--border-color)";
+
+
+    /* RESET BUTTONS */
+
+    document
+        .getElementById("nextBtn")
+        .style.display = "none";
+
+
+    document
+        .getElementById("showSummaryBtn")
+        .style.display = "none";
+
+
+    /* CREATE ANSWER AREA */
+
+    renderAnswerArea(currentQuestion);
+
+}
+
+
+/* =========================================================
+LINEAR FUNCTION ANSWER HELPERS
+========================================================= */
+
+function formatEquation(slope, intercept) {
+
+    if (intercept === 0) {
+        return `${slope}x`;
+    }
+
+
+    return intercept > 0
+        ? `${slope}x + ${intercept}`
+        : `${slope}x ${intercept}`;
+
+}
+
+
+function formatEquationForms(slope, intercept) {
+
+    const rightSide =
+        formatEquation(
+            slope,
+            intercept
+        );
+
+
+    return `y = ${rightSide} or f(x) = ${rightSide}`;
+
+}
+
+
+function getEquationRightSide(value) {
+
+    const cleanedValue =
+        value
+            .toLowerCase()
+            .replace(/\s+/g, "");
+
+
+    const equationParts =
+        cleanedValue.split("=");
+
+
+    if (
+        equationParts.length !== 2
+    ) {
+        return null;
+    }
+
+
+    const leftSide =
+        equationParts[0];
+
+
+    if (
+        !/^(y|f\(x\))$/.test(leftSide)
+    ) {
+        return null;
+    }
+
+
+    const rightSide =
+        equationParts[1];
+
+
+    let slope = 0;
+    let intercept = 0;
+    let hasX = false;
+
+
+    const terms =
+        rightSide.match(
+            /([+-]?[0-9]+x|[+-]?[0-9]+)/g
+        );
+
+
+    if (!terms) {
+        return null;
+    }
+
+
+    for (const term of terms) {
+
+        if (/x/.test(term)) {
+
+            hasX = true;
+
+            const coeffStr =
+                term.replace("x", "");
+
+
+            if (
+                coeffStr === "" ||
+                coeffStr === "+"
+            ) {
+
+                slope = 1;
+
+            }
+
+            else if (
+                coeffStr === "-"
+            ) {
+
+                slope = -1;
+
+            }
+
+            else {
+
+                slope =
+                    Number(coeffStr);
+
+            }
+
+        }
+
+        else {
+
+            intercept =
+                Number(term);
+
+        }
+
+    }
+
+
+    if (!hasX) {
+        return null;
+    }
+
+
+    return {
+        slope,
+        intercept
+    };
+
+}
+
+
+/* =========================================================
+ANSWER AREA
+========================================================= */
+
+function renderAnswerArea(question) {
+
+    const answerBox =
+        document.getElementById("answerBox");
+
+
+    const label =
+        question.requiresFunction
+            ? "Enter the linear function:"
+            : "Enter your answer:";
+
+
+    const placeholder =
+        question.requiresFunction
+            ? "Example: f(x) = mx + b"
+            : "Enter your answer";
+
+
+    const inputType =
+        question.requiresFunction
+            ? "text"
+            : "number";
+
+
+    answerBox.innerHTML = `
+
+        <div class="default-answer-box">
+
+            <label for="ans">
+                ${label}
+            </label>
+
+            <input
+                type="${inputType}"
+                id="ans"
+                placeholder="${placeholder}"
+                ${question.requiresFunction
+                    ? ""
+                    : 'step="any"'}
+            >
+
+            <button
+                type="button"
+                class="btn-primary"
+                id="submitBtn"
+                onclick="submitAnswer()"
+            >
+                Submit Answer
+            </button>
+
+        </div>
+
+    `;
+
+
+    const answerInput =
+        document.getElementById("ans");
+
+
+    answerInput.focus();
+
+
+    answerInput.addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Enter") {
+
+                submitAnswer();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+SUBMIT ANSWER
+========================================================= */
+
+function submitAnswer() {
+
+    checkAns();
+
+}
+
+
+/* =========================================================
+CHECK ANSWER
+========================================================= */
+
+function checkAns() {
+
+    const answerInput =
+        document.getElementById("ans");
+
+
+    if (!answerInput) {
+        return;
+    }
+
+
+    const inputValue =
+        answerInput.value.trim();
+
+
+    if (inputValue === "") {
+
+        alert(
+            "Please enter your answer."
+        );
+
+        return;
+    }
+
+
+    const currentQuestion =
+        questions[currentIdx];
+
+
+    let isCorrect = false;
+
+
+    if (
+        currentQuestion.requiresFunction
+    ) {
+
+        const parsed =
+            getEquationRightSide(
+                inputValue
+            );
+
+
+        if (parsed) {
+
+            isCorrect =
+                parsed.slope ===
+                    currentQuestion.slope &&
+
+                parsed.intercept ===
+                    currentQuestion.intercept;
+
+        }
+
+    }
+
+    else {
+
+        const submittedAnswer =
+            Number(
+                inputValue.replace(/,/g, "")
+            );
+
+
+        if (
+            Number.isNaN(submittedAnswer)
+        ) {
+
+            alert(
+                "Please enter a valid number."
+            );
+
+            return;
+        }
+
+
+        isCorrect =
+            Math.abs(
+                submittedAnswer -
+                currentQuestion.value
+            ) < 0.0001;
+
+    }
+
+
+    const result =
+        document.getElementById("outAns");
+
+
+    result.style.display = "block";
+
+
+    if (isCorrect) {
+
+        score++;
+
+
         document
-            .getElementById(
-                "questionCategory"
-            )
-            .value;
+            .getElementById("score")
+            .textContent =
+            `Score: ${score} / ${questions.length}`;
 
-    quizQuestionCount = Number(
-        document.getElementById("questionCount").value
-    );
 
-    startQuiz();
+        result.style.background =
+            "var(--correct-bg)";
+
+        result.style.color =
+            "var(--correct-text)";
+
+        result.style.borderColor =
+            "var(--correct-border)";
+
+
+        result.innerHTML = `
+
+            <strong>Correct! 🎉</strong>
+
+            <div
+                style="
+                    margin-top:10px;
+                    padding:8px;
+                    background:white;
+                    border-left:3px solid var(--correct-border);
+                    border-radius:5px;
+                "
+            >
+                Great job! Your answer is correct.
+            </div>
+
+        `;
+
+    }
+
+    else {
+
+        result.style.background =
+            "var(--wrong-bg)";
+
+        result.style.color =
+            "var(--wrong-text)";
+
+        result.style.borderColor =
+            "var(--wrong-border)";
+
+
+        const correctAnswer =
+            currentQuestion.requiresFunction
+
+                ? formatEquationForms(
+                    currentQuestion.slope,
+                    currentQuestion.intercept
+                )
+
+                : Number(
+                    currentQuestion.value
+                ).toLocaleString("en-US");
+
+
+        result.innerHTML = `
+
+            <strong>Incorrect.</strong>
+
+            <div
+                style="
+                    margin-top:10px;
+                    padding:8px;
+                    background:white;
+                    border-left:3px solid var(--wrong-border);
+                    border-radius:5px;
+                "
+            >
+
+                Correct answer:
+
+                <strong>
+                    ${correctAnswer}
+                </strong>
+
+            </div>
+
+        `;
+
+    }
+
+
+    answerInput.disabled = true;
+
+
+    document
+        .getElementById("submitBtn")
+        .style.display = "none";
+
+
+    if (
+        currentIdx <
+        questions.length - 1
+    ) {
+
+        document
+            .getElementById("nextBtn")
+            .style.display = "block";
+
+    }
+
+    else {
+
+        document
+            .getElementById("showSummaryBtn")
+            .style.display = "block";
+
+    }
 
 }
-);
 
-/* Edit student information */
 
-document
-.getElementById("editStudentBtn")
-.addEventListener(
-"click",
-() => {
+/* =========================================================
+NEXT QUESTION
+========================================================= */
 
-    showScreen(
-        "studentScreen"
-    );
+function nextQuestion() {
 
-}
-);
+    currentIdx++;
 
-/* Back to confirmation */
 
-document
-.getElementById("backToConfirmBtn")
-.addEventListener(
-"click",
-() => {
+    if (
+        currentIdx <
+        questions.length
+    ) {
 
-    showScreen(
-        "confirmScreen"
-    );
+        showQuestion();
+
+        return;
+
+    }
+
+
+    finishQuiz();
 
 }
-);
 
 
-/* Submit answer */
+/* =========================================================
+FINISH QUIZ
+========================================================= */
 
-document
-.getElementById("submitBtn")
-.addEventListener(
-"click",
-checkAns
-);
-
-
-/* Hint */
-
-document
-.getElementById("hintBtn")
-.addEventListener(
-"click",
-showHint
-);
-
-
-/* Next */
-
-document
-.getElementById("nextBtn")
-.addEventListener(
-"click",
-nextQuestion
-);
-
-
-/* Retake quiz */
-
-document
-.getElementById("retakeQuizBtn")
-.addEventListener(
-"click",
-() => {
+function finishQuiz() {
 
     stopTimer();
 
-    currentQuestionIndex = 0;
 
-    correctAnswers = 0;
+    document
+        .getElementById("summaryName")
+        .textContent =
+        studentName;
+
+
+    document
+        .getElementById("summarySection")
+        .textContent =
+        studentSection;
+
+
+    document
+        .getElementById("summaryType")
+        .textContent =
+        getQuizTypeName(selectedMode);
+
+
+    document
+        .getElementById("finalScore")
+        .textContent =
+        score;
+
+
+    document
+        .getElementById("finalTotal")
+        .textContent =
+        TOTAL_QUESTIONS;
+
+
+    document
+        .getElementById("finalTime")
+        .textContent =
+        formatTime(elapsedSeconds);
+
+
+    document
+        .getElementById("studentInfo")
+        .style.display = "none";
+
+
+    document
+        .getElementById("quizArea")
+        .style.display = "none";
+
+
+    document
+        .getElementById("finishMessage")
+        .style.display = "block";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* =========================================================
+RESTART QUIZ
+========================================================= */
+
+function backToQuizTypes() {
+
+    stopTimer();
+
+
+    document
+        .getElementById("quizArea")
+        .style.display = "none";
+
+
+    document
+        .getElementById("studentInfo")
+        .style.display = "none";
+
+
+    document
+        .getElementById("finishMessage")
+        .style.display = "none";
+
+
+    document
+        .getElementById("modeSelect")
+        .style.display = "block";
+
+
+    questions.length = 0;
+
+    currentIdx = 0;
+
+    score = 0;
 
     elapsedSeconds = 0;
 
-    updateTimerDisplay();
 
-    showScreen(
-        "categoryScreen"
-    );
+    selectedMode = "";
+
+
+    document
+        .getElementById("timerDisplay")
+        .textContent =
+        "Time Elapsed: 0:00";
+
+
+    document
+        .getElementById("score")
+        .textContent =
+        `Score: 0 / ${TOTAL_QUESTIONS}`;
+
+
+    document
+        .getElementById("quizCount")
+        .textContent =
+        `Question: 1 / ${TOTAL_QUESTIONS}`;
+
+
+    document
+        .getElementById("nextBtn")
+        .style.display = "none";
+
+
+    document
+        .getElementById("showSummaryBtn")
+        .style.display = "none";
+
+
+    document
+        .getElementById("modeSelect")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
-);
 
 
-/* Enter key submits answer */
-
-document
-.getElementById("ans")
-.addEventListener(
-"keydown",
-event => {
-
-    if (
-        event.key === "Enter" &&
-        !document.getElementById(
-            "submitBtn"
-        ).disabled
-    ) {
-
-        checkAns();
-
-    }
-
-}
-);
-
-
-/* -----------------------------
+/* =========================================================
 PAGE LOAD
------------------------------ */
+========================================================= */
 
 window.addEventListener(
-"load",
-() => {
+    "load",
+    () => {
 
-stopTimer();
+        stopTimer();
 
-elapsedSeconds = 0;
+        elapsedSeconds = 0;
 
-updateTimerDisplay();
+        currentIdx = 0;
 
-showScreen(
-    "studentScreen"
+        score = 0;
+
+        questions.length = 0;
+
+        selectedMode = "";
+
+
+        document
+            .getElementById("studentStart")
+            .style.display = "block";
+
+
+        document
+            .getElementById("modeSelect")
+            .style.display = "none";
+
+
+        document
+            .getElementById("categoryScreen")
+            .style.display = "none";
+
+
+        document
+            .getElementById("quizArea")
+            .style.display = "none";
+
+
+        document
+            .getElementById("studentInfo")
+            .style.display = "none";
+
+
+        document
+            .getElementById("finishMessage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("timerDisplay")
+            .textContent =
+            "Time Elapsed: 0:00";
+
+    }
 );
 
-}
-);
 </script>
 
 </body>
