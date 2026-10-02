@@ -47,8 +47,8 @@
 }
 
 .banner-logo-circle {
-  width: 160px;
-  height: 160px;
+  width: 240px;
+  height: 240px;
   background-color: var(--tint-light, #e7f7ee);
   border-radius: 50%;
   border: 4px solid var(--primary-accent, #339763);
@@ -63,6 +63,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
 }
 
 .about-info-side {
@@ -387,4 +388,28 @@
   .dev-card {
     padding: 28px 20px;
   }
+}
+/* JUSTIFY ALL TEXT CONTENT */
+
+.dev-welcome-section p,
+.dev-welcome-section .dev-lead,
+.dev-welcome-section .dev-lead-secondary,
+.dev-welcome-section .dev-lead-tertiary,
+.dev-welcome-section .research-support-container p,
+.dev-welcome-section .adviser-info p,
+.dev-welcome-section .dev-card p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Keep headings and labels centered */
+.dev-welcome-banner h1,
+.developers-section-header h2,
+.developers-section-header p,
+.dev-card h3,
+.dev-card .dev-position,
+.adviser-info h3,
+.adviser-info .adviser-role,
+.section-title-tag {
+  text-align: center;
 }
