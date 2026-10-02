@@ -4272,587 +4272,455 @@ document.addEventListener(
     }
 
 
-    /* =====================================================
-       PDF
-    ===================================================== */
-
-    downloadPdfButton.addEventListener(
-        "click",
-        async function () {
-
-            if (
-                typeof html2pdf ===
-                "undefined"
-            ) {
-
-                alert(
-                    "PDF library is not loaded. Please refresh the page."
-                );
-
-
-                return;
-
-            }
-
-
-            downloadPdfButton.disabled =
-                true;
-
-
-            downloadPdfButton.textContent =
-                "CREATING PDF...";
-
-
-            try {
-
-                const percentage =
-                    Math.round(
-                        (
-                            score /
-                            TOTAL_QUESTIONS
-                        ) * 100
-                    );
-
-
-                let rowsHtml =
-                    "";
-
-
-                quizResults.forEach(
-                    function (
-                        res,
-                        index
-                    ) {
-
-                        const isCorrect =
-                            res.result ===
-                            "CORRECT";
-
-
-                        const resultColor =
-                            isCorrect
-                                ? "#073827"
-                                : "#9b1c1c";
-
-
-                        const resultBackground =
-                            isCorrect
-                                ? "#e7f7ee"
-                                : "#fde8e8";
-
-
-                        rowsHtml += `
-
-                            <tr>
-
-                                <td
-                                    style="
-                                        padding:8px;
-                                        text-align:center;
-                                        font-weight:bold;
-                                        border-bottom:1px solid #e2ede6;
-                                    "
-                                >
-                                    ${index + 1}
-                                </td>
-
-
-                                <td
-                                    style="
-                                        padding:8px;
-                                        font-weight:bold;
-                                        border-bottom:1px solid #e2ede6;
-                                    "
-                                >
-                                    ${res.equation}
-                                </td>
-
-
-                                <td
-                                    style="
-                                        padding:8px;
-                                        border-bottom:1px solid #e2ede6;
-                                    "
-                                >
-                                    ${res.userAnswers}
-                                </td>
-
-
-                                <td
-                                    style="
-                                        padding:8px;
-                                        border-bottom:1px solid #e2ede6;
-                                    "
-                                >
-                                    ${res.correctAnswers}
-                                </td>
-
-
-                                <td
-                                    style="
-                                        padding:8px;
-                                        text-align:center;
-                                        font-weight:bold;
-                                        color:${resultColor};
-                                        background:${resultBackground};
-                                        border-bottom:1px solid #e2ede6;
-                                    "
-                                >
-                                    ${res.result}
-                                </td>
-
-                            </tr>
-
-                        `;
-
-                    }
-                );
-
-
-                const pdfContainer =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                pdfContainer.style.width =
-                    "100%";
-
-
-                pdfContainer.style.maxWidth =
-                    "900px";
-
-
-                pdfContainer.style.padding =
-                    "25px";
-
-
-                pdfContainer.style.background =
-                    "#ffffff";
-
-
-                pdfContainer.style.fontFamily =
-                    "Arial, sans-serif";
-
-
-                pdfContainer.style.color =
-                    "#334d42";
-
-
-                pdfContainer.innerHTML = `
-
-                    <div
-                        style="
-                            text-align:center;
-                            border-bottom:3px solid #16623d;
-                            padding-bottom:12px;
-                            margin-bottom:20px;
-                        "
-                    >
-
-                        <h1
-                            style="
-                                margin:0;
-                                color:#073827;
-                                font-size:22px;
-                            "
-                        >
-                            GRADE 10 MATHEMATICS
-                            QUIZ REPORT
-                        </h1>
-
-
-                        <div
-                            style="
-                                margin-top:6px;
-                                color:#628273;
-                                font-size:14px;
-                            "
-                        >
-                            Solving Quadratic
-                            Inequalities in One Variable
-                        </div>
-
-                    </div>
-
-
-                    <table
-                        style="
-                            width:100%;
-                            border-collapse:collapse;
-                            margin-bottom:20px;
-                            font-size:13px;
-                            background:#f0f7f3;
-                            border:1px solid #e2ede6;
-                        "
-                    >
-
-                        <tr>
-
-                            <td
-                                style="
-                                    padding:10px;
-                                    width:50%;
-                                "
-                            >
-
-                                <strong>
-                                    Student Name:
-                                </strong>
-
-                                ${studentName}
-
-                            </td>
-
-
-                            <td
-                                style="
-                                    padding:10px;
-                                    width:50%;
-                                "
-                            >
-
-                                <strong>
-                                    Section:
-                                </strong>
-
-                                ${studentSection}
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr>
-
-                            <td
-                                style="
-                                    padding:10px;
-                                "
-                            >
-
-                                <strong>
-                                    Final Score:
-                                </strong>
-
-                                ${score}
-                                /
-                                ${TOTAL_QUESTIONS}
-
-                                (${percentage}%)
-
-                            </td>
-
-
-                            <td
-                                style="
-                                    padding:10px;
-                                "
-                            >
-
-                                <strong>
-                                    Total Time:
-                                </strong>
-
-                                ${formatTime(
-                                    elapsedSeconds
-                                )}
-
-                            </td>
-
-                        </tr>
-
-                    </table>
-
-
-                    <div
-                        style="
-                            margin-bottom:18px;
-                            padding:12px;
-                            border:1px solid #e2ede6;
-                            background:#f0f7f3;
-                            border-radius:8px;
-                            font-size:13px;
-                        "
-                    >
-
-                        <strong>
-                            Quiz Summary:
-                        </strong>
-
-                        ${score}
-
-                        correct out of
-
-                        ${TOTAL_QUESTIONS}
-
-                        questions
-
-                        —
-
-                        ${percentage}%
-
-                    </div>
-
-
-                    <h3
-                        style="
-                            color:#073827;
-                            font-size:15px;
-                            margin-bottom:10px;
-                        "
-                    >
-                        Detailed Question Summary
-                    </h3>
-
-
-                    <table
-                        style="
-                            width:100%;
-                            border-collapse:collapse;
-                            border:1px solid #e2ede6;
-                            font-size:10px;
-                        "
-                    >
-
-                        <thead>
-
-                            <tr
-                                style="
-                                    background:#16623d;
-                                    color:white;
-                                "
-                            >
-
-                                <th
-                                    style="
-                                        padding:8px;
-                                    "
-                                >
-                                    #
-                                </th>
-
-
-                                <th
-                                    style="
-                                        padding:8px;
-                                        text-align:left;
-                                    "
-                                >
-                                    Equation
-                                </th>
-
-
-                                <th
-                                    style="
-                                        padding:8px;
-                                        text-align:left;
-                                    "
-                                >
-                                    Student Answer
-                                </th>
-
-
-                                <th
-                                    style="
-                                        padding:8px;
-                                        text-align:left;
-                                    "
-                                >
-                                    Correct Answer
-                                </th>
-
-
-                                <th
-                                    style="
-                                        padding:8px;
-                                    "
-                                >
-                                    Status
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-
-                        <tbody>
-
-                            ${rowsHtml}
-
-                        </tbody>
-
-                    </table>
-
-
-                    <div
-                        style="
-                            margin-top:20px;
-                            text-align:center;
-                            font-size:10px;
-                            color:#628273;
-                        "
-                    >
-                        Generated by Grade 10
-                        Mathematics Quiz
-                    </div>
-
-                `;
-
-
-                pdfContainer.style.position =
-                    "fixed";
-
-
-                pdfContainer.style.left =
-                    "-100000px";
-
-
-                pdfContainer.style.top =
-                    "0";
-
-
-                document.body.appendChild(
-                    pdfContainer
-                );
-
-
-                const safeStudentName =
-                    studentName
-
-                        .replace(
-                            /[^a-zA-Z0-9\s.-]/g,
-                            ""
-                        )
-
-                        .trim()
-
-                        .replace(
-                            /\s+/g,
-                            "_"
-                        );
-
-
-                const options = {
-
-                    margin: [
-                        0.35,
-                        0.35,
-                        0.35,
-                        0.35
-                    ],
-
-                    filename:
-                        `${safeStudentName}_Grade10_Quadratic_Inequalities_Results.pdf`,
-
-                    image: {
-
-                        type:
-                            "jpeg",
-
-                        quality:
-                            0.98
-
-                    },
-
-                    html2canvas: {
-
-                        scale:
-                            2,
-
-                        useCORS:
-                            true,
-
-                        backgroundColor:
-                            "#ffffff"
-
-                    },
-
-                    jsPDF: {
-
-                        unit:
-                            "in",
-
-                        format:
-                            "letter",
-
-                        orientation:
-                            "portrait"
-
-                    },
-
-                    pagebreak: {
-
-                        mode: [
-                            "avoid-all",
-                            "css",
-                            "legacy"
-                        ]
-
-                    }
-
-                };
-
-
-                await html2pdf()
-
-                    .set(
-                        options
-                    )
-
-                    .from(
-                        pdfContainer
-                    )
-
-                    .save();
-
-
-                pdfContainer.remove();
-
-
-                downloadPdfButton.textContent =
-                    "PDF SAVED ✓";
-
-
-                setTimeout(
-                    function () {
-
-                        downloadPdfButton.textContent =
-                            "SAVE RESULTS TO PDF";
-
-                        downloadPdfButton.disabled =
-                            false;
-
-                    },
-                    2000
-                );
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    "PDF generation error:",
-                    error
-                );
-
-
-                alert(
-                    "Hindi ma-create ang PDF. Please try again."
-                );
-
-
-                downloadPdfButton.textContent =
-                    "SAVE RESULTS TO PDF";
-
-
-                downloadPdfButton.disabled =
-                    false;
-
-            }
-
-        }
+ /* =====================================================
+   PDF DOWNLOAD - FIXED VERSION
+   No HTML changes needed
+===================================================== */
+
+function loadHtml2Pdf() {
+  return new Promise((resolve, reject) => {
+
+    // Check if html2pdf.js is already loaded
+    if (typeof window.html2pdf === "function") {
+      resolve(window.html2pdf);
+      return;
+    }
+
+    // Check if html2pdf.js is currently loading
+    const existingScript = document.querySelector(
+      'script[data-html2pdf="true"]'
     );
+
+    if (existingScript) {
+      existingScript.addEventListener(
+        "load",
+        () => {
+          if (typeof window.html2pdf === "function") {
+            resolve(window.html2pdf);
+          } else {
+            reject(new Error("html2pdf loaded but is unavailable."));
+          }
+        },
+        { once: true }
+      );
+
+      existingScript.addEventListener(
+        "error",
+        () => reject(new Error("Failed to load html2pdf.js.")),
+        { once: true }
+      );
+
+      return;
+    }
+
+    // Load html2pdf.js automatically
+    const script = document.createElement("script");
+
+    script.src =
+      "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
+
+    script.async = true;
+    script.dataset.html2pdf = "true";
+
+    script.onload = () => {
+      if (typeof window.html2pdf === "function") {
+        resolve(window.html2pdf);
+      } else {
+        reject(new Error("html2pdf.js loaded but function is unavailable."));
+      }
+    };
+
+    script.onerror = () => {
+      reject(new Error("Could not load html2pdf.js."));
+    };
+
+    document.head.appendChild(script);
+  });
+}
+
+
+/* Escape text before inserting it into the PDF */
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, function (char) {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    };
+
+    return entities[char];
+  });
+}
+
+
+/* PDF DOWNLOAD */
+downloadPdfButton.addEventListener("click", async () => {
+
+  // Make sure the quiz has already been submitted
+  if (hasSubmitted === false || quizResults.length === 0) {
+    alert("Please finish the quiz first.");
+    return;
+  }
+
+  const originalButtonText = downloadPdfButton.textContent;
+
+  try {
+
+    // Disable the button while generating the PDF
+    downloadPdfButton.disabled = true;
+    downloadPdfButton.textContent = "Preparing PDF...";
+
+    // Load the PDF library
+    await loadHtml2Pdf();
+
+    // Prepare student information
+    const safeName =
+      escapeHtml(studentName || "Student");
+
+    const safeSection =
+      escapeHtml(studentSection || "N/A");
+
+    const scoreValue = Number(score) || 0;
+
+    const percentage =
+      TOTAL_QUESTIONS > 0
+        ? ((scoreValue / TOTAL_QUESTIONS) * 100).toFixed(2)
+        : "0.00";
+
+    // Build the question summary rows
+    const rowsHtml = quizResults
+      .map((item, index) => {
+
+        const questionNumber = index + 1;
+
+        const equation =
+          escapeHtml(item.equation || "");
+
+        const userAnswers =
+          escapeHtml(
+            Array.isArray(item.userAnswers)
+              ? item.userAnswers.join(", ")
+              : item.userAnswers || "No answer"
+          );
+
+        const correctAnswers =
+          escapeHtml(
+            Array.isArray(item.correctAnswers)
+              ? item.correctAnswers.join(", ")
+              : item.correctAnswers || ""
+          );
+
+        const resultText =
+          item.result === "correct"
+            ? "Correct"
+            : "Incorrect";
+
+        return `
+          <tr class="pdf-row">
+            <td style="
+              border:1px solid #ccc;
+              padding:8px;
+              text-align:center;
+              vertical-align:top;
+            ">
+              ${questionNumber}
+            </td>
+
+            <td style="
+              border:1px solid #ccc;
+              padding:8px;
+              vertical-align:top;
+            ">
+              ${equation}
+            </td>
+
+            <td style="
+              border:1px solid #ccc;
+              padding:8px;
+              vertical-align:top;
+            ">
+              ${userAnswers}
+            </td>
+
+            <td style="
+              border:1px solid #ccc;
+              padding:8px;
+              vertical-align:top;
+            ">
+              ${correctAnswers}
+            </td>
+
+            <td style="
+              border:1px solid #ccc;
+              padding:8px;
+              text-align:center;
+              vertical-align:top;
+            ">
+              ${resultText}
+            </td>
+          </tr>
+        `;
+      })
+      .join("");
+
+
+    // Create the temporary PDF container
+    const pdfContainer = document.createElement("div");
+
+    pdfContainer.style.position = "absolute";
+    pdfContainer.style.left = "0";
+    pdfContainer.style.top = "0";
+    pdfContainer.style.width = "794px";
+    pdfContainer.style.boxSizing = "border-box";
+    pdfContainer.style.padding = "28px";
+    pdfContainer.style.background = "#ffffff";
+    pdfContainer.style.color = "#222222";
+    pdfContainer.style.fontFamily = "Arial, Helvetica, sans-serif";
+    pdfContainer.style.zIndex = "-1";
+
+    pdfContainer.innerHTML = `
+      <div style="
+        width:100%;
+        background:#fff;
+      ">
+
+        <h1 style="
+          text-align:center;
+          margin:0 0 6px 0;
+          font-size:24px;
+        ">
+          Grade 10 Mathematics
+        </h1>
+
+        <h2 style="
+          text-align:center;
+          margin:0 0 20px 0;
+          font-size:18px;
+        ">
+          Solving Quadratic Inequalities in One Variable
+        </h2>
+
+        <div style="
+          border:1px solid #ccc;
+          padding:14px;
+          margin-bottom:18px;
+          font-size:14px;
+          line-height:1.6;
+        ">
+
+          <div>
+            <strong>Student Name:</strong>
+            ${safeName}
+          </div>
+
+          <div>
+            <strong>Section:</strong>
+            ${safeSection}
+          </div>
+
+          <div>
+            <strong>Score:</strong>
+            ${scoreValue} / ${TOTAL_QUESTIONS}
+          </div>
+
+          <div>
+            <strong>Percentage:</strong>
+            ${percentage}%
+          </div>
+
+          <div>
+            <strong>Time:</strong>
+            ${escapeHtml(
+              typeof formatTime === "function"
+                ? formatTime(elapsedSeconds)
+                : `${elapsedSeconds || 0} seconds`
+            )}
+          </div>
+
+        </div>
+
+        <h3 style="
+          margin:0 0 10px 0;
+          font-size:16px;
+        ">
+          Question Summary
+        </h3>
+
+        <table style="
+          width:100%;
+          border-collapse:collapse;
+          font-size:10px;
+          table-layout:fixed;
+        ">
+
+          <thead>
+            <tr>
+              <th style="
+                border:1px solid #ccc;
+                padding:8px;
+                width:6%;
+                background:#f2f2f2;
+              ">
+                #
+              </th>
+
+              <th style="
+                border:1px solid #ccc;
+                padding:8px;
+                width:24%;
+                background:#f2f2f2;
+              ">
+                Question
+              </th>
+
+              <th style="
+                border:1px solid #ccc;
+                padding:8px;
+                width:25%;
+                background:#f2f2f2;
+              ">
+                Your Answer
+              </th>
+
+              <th style="
+                border:1px solid #ccc;
+                padding:8px;
+                width:25%;
+                background:#f2f2f2;
+              ">
+                Correct Answer
+              </th>
+
+              <th style="
+                border:1px solid #ccc;
+                padding:8px;
+                width:20%;
+                background:#f2f2f2;
+              ">
+                Result
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            ${rowsHtml}
+          </tbody>
+
+        </table>
+
+        <div style="
+          margin-top:20px;
+          padding-top:10px;
+          border-top:1px solid #ccc;
+          text-align:center;
+          font-size:10px;
+          color:#666;
+        ">
+          Generated from Grade 10 Mathematics Quiz
+        </div>
+
+      </div>
+    `;
+
+
+    // Add the PDF container to the page
+    document.body.appendChild(pdfContainer);
+
+
+    // Wait for the browser to finish rendering the content
+    await new Promise(resolve => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(resolve);
+      });
+    });
+
+
+    // Create a safe filename
+    const cleanFileName =
+      String(studentName || "Student")
+        .replace(/[^a-zA-Z0-9 ._-]/g, "")
+        .trim()
+        .replace(/\s+/g, "_") || "Student";
+
+    const fileName =
+      `${cleanFileName}_Grade10_Quadratic_Inequalities_Results.pdf`;
+
+
+    // Configure the PDF settings
+    const options = {
+      margin: [0.35, 0.35, 0.35, 0.35],
+
+      filename: fileName,
+
+      image: {
+        type: "jpeg",
+        quality: 0.98
+      },
+
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: "#ffffff",
+        logging: false,
+        scrollX: 0,
+        scrollY: 0
+      },
+
+      jsPDF: {
+        unit: "in",
+        format: "letter",
+        orientation: "portrait"
+      },
+
+      pagebreak: {
+        mode: ["css", "legacy"],
+        avoid: [".pdf-row", "tr"]
+      }
+    };
+
+
+    // Generate and download the PDF
+    await window
+      .html2pdf()
+      .set(options)
+      .from(pdfContainer)
+      .save();
+
+
+    // Remove the temporary PDF container
+    pdfContainer.remove();
+
+    downloadPdfButton.textContent = "PDF Downloaded!";
+
+    setTimeout(() => {
+      downloadPdfButton.textContent = originalButtonText;
+    }, 2000);
+
+
+  } catch (error) {
+
+    // Display the error in the browser console
+    console.error("PDF generation error:", error);
+
+    alert(
+      "Unable to generate the PDF.\n\n" +
+      "Please make sure you have an internet connection so the PDF library can be loaded."
+    );
+
+  } finally {
+
+    // Re-enable the PDF button
+    downloadPdfButton.disabled = false;
+
+    if (downloadPdfButton.textContent === "Preparing PDF...") {
+      downloadPdfButton.textContent = originalButtonText;
+    }
+  }
+
+});
 
 
     /* =====================================================

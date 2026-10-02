@@ -3612,55 +3612,55 @@ function finishQuiz() {
 
 downloadPdfButton.addEventListener(
     "click",
-    function() {
+    function () {
+
+        /*
+           CREATE PDF CONTAINER
+        */
 
         const pdfContainer =
-            document.createElement(
-                "div"
-            );
+            document.createElement("div");
+
+        pdfContainer.style.padding = "25px";
+        pdfContainer.style.fontFamily = "Arial, sans-serif";
+        pdfContainer.style.color = "#073827";
+        pdfContainer.style.backgroundColor = "#ffffff";
+        pdfContainer.style.width = "100%";
 
 
-        pdfContainer.style.padding =
-            "25px";
-
-
-        pdfContainer.style.fontFamily =
-            "Arial, sans-serif";
-
-
-        pdfContainer.style.color =
-            "#1b5e20";
-
+        /*
+           PERCENTAGE
+        */
 
         const percentage =
             Math.round(
-                (
-                    score /
-                    TOTAL_QUESTIONS
-                ) * 100
+                (score / TOTAL_QUESTIONS) * 100
             );
 
+
+        /*
+           BUILD QUESTION ROWS
+        */
 
         let rowsHtml = "";
 
 
         quizResults.forEach(
-            (res, idx) => {
+            function (res, idx) {
 
                 const isCorrect =
-                    res.result ===
-                    "CORRECT";
+                    res.result === "CORRECT";
 
 
                 const resultColor =
                     isCorrect
-                        ? "#2e7d32"
-                        : "#c62828";
+                        ? "#16623d"
+                        : "#9b1c1c";
 
 
                 const rowBg =
                     idx % 2 === 0
-                        ? "#f9fbf9"
+                        ? "#f0f7f3"
                         : "#ffffff";
 
 
@@ -3669,54 +3669,105 @@ downloadPdfButton.addEventListener(
                     <tr
                         style="
                             background-color:${rowBg};
-                            border-bottom:1px solid #e0e0e0;
-                            font-size:11px;
+                            border-bottom:1px solid #e2ede6;
+                            font-size:10px;
                         "
                     >
+
+                        <!-- NUMBER -->
 
                         <td
                             style="
                                 padding:8px;
                                 text-align:center;
                                 font-weight:bold;
+                                width:5%;
                             "
                         >
                             ${idx + 1}
                         </td>
 
 
+                        <!-- CATEGORY -->
+
                         <td
                             style="
                                 padding:8px;
                                 font-weight:bold;
-                                font-family:monospace;
+                                width:15%;
                             "
                         >
-                            ${res.equation}
+                            ${res.category}
                         </td>
 
+
+                        <!-- DATASET -->
 
                         <td
                             style="
                                 padding:8px;
+                                width:22%;
+                                word-break:break-word;
                             "
                         >
-                            x₁ = ${res.studentSolution1}
-                            <br>
-                            x₂ = ${res.studentSolution2}
+                            ${res.dataset}
                         </td>
 
+
+                        <!-- QUESTION -->
 
                         <td
                             style="
                                 padding:8px;
+                                width:20%;
                             "
                         >
-                            x₁ = ${res.correctSolution1}
-                            <br>
-                            x₂ = ${res.correctSolution2}
+                            ${res.question}
+                            <br><br>
+                            <strong>
+                                Measure:
+                            </strong>
+                            ${res.measure}
                         </td>
 
+
+                        <!-- STUDENT ANSWER -->
+
+                        <td
+                            style="
+                                padding:8px;
+                                width:18%;
+                            "
+                        >
+                            <strong>Position:</strong>
+                            ${formatAnswer(res.positionAnswer)}
+
+                            <br>
+
+                            <strong>Answer:</strong>
+                            ${formatAnswer(res.studentAnswer)}
+                        </td>
+
+
+                        <!-- CORRECT ANSWER -->
+
+                        <td
+                            style="
+                                padding:8px;
+                                width:15%;
+                            "
+                        >
+                            <strong>Position:</strong>
+                            ${res.correctPosition}
+
+                            <br>
+
+                            <strong>Answer:</strong>
+                            ${res.correctAnswer}
+                        </td>
+
+
+                        <!-- STATUS -->
 
                         <td
                             style="
@@ -3724,6 +3775,7 @@ downloadPdfButton.addEventListener(
                                 text-align:center;
                                 font-weight:bold;
                                 color:${resultColor};
+                                width:10%;
                             "
                         >
                             ${res.result}
@@ -3732,18 +3784,22 @@ downloadPdfButton.addEventListener(
                     </tr>
 
                 `;
-
             }
         );
 
 
+        /*
+           PDF HEADER + STUDENT INFORMATION
+        */
 
         pdfContainer.innerHTML = `
+
+            <!-- HEADER -->
 
             <div
                 style="
                     text-align:center;
-                    border-bottom:3px solid #2e7d32;
+                    border-bottom:3px solid #16623d;
                     padding-bottom:12px;
                     margin-bottom:20px;
                 "
@@ -3752,8 +3808,9 @@ downloadPdfButton.addEventListener(
                 <h1
                     style="
                         margin:0;
-                        color:#2e7d32;
+                        color:#073827;
                         font-size:22px;
+                        font-weight:800;
                     "
                 >
                     GRADE 10 MATHEMATICS QUIZ REPORT
@@ -3762,27 +3819,28 @@ downloadPdfButton.addEventListener(
 
                 <h3
                     style="
-                        margin:5px 0 0 0;
-                        color:#388e3c;
+                        margin:6px 0 0 0;
+                        color:#16623d;
                         font-size:14px;
-                        font-weight:normal;
+                        font-weight:700;
                     "
                 >
-                    Solving Absolute Value Equations
+                    Quartiles, Deciles, and Percentiles
                 </h3>
 
             </div>
 
 
+            <!-- STUDENT INFORMATION -->
 
             <table
                 style="
                     width:100%;
                     border-collapse:collapse;
                     margin-bottom:20px;
-                    font-size:13px;
-                    background:#f1f8e9;
-                    border:1px solid #c8e6c9;
+                    font-size:12px;
+                    background:#f0f7f3;
+                    border:1px solid #e2ede6;
                 "
             >
 
@@ -3792,6 +3850,7 @@ downloadPdfButton.addEventListener(
                         style="
                             padding:10px;
                             width:50%;
+                            border-bottom:1px solid #e2ede6;
                         "
                     >
 
@@ -3808,6 +3867,7 @@ downloadPdfButton.addEventListener(
                         style="
                             padding:10px;
                             width:50%;
+                            border-bottom:1px solid #e2ede6;
                         "
                     >
 
@@ -3827,6 +3887,7 @@ downloadPdfButton.addEventListener(
                     <td
                         style="
                             padding:10px;
+                            width:50%;
                         "
                     >
 
@@ -3846,6 +3907,7 @@ downloadPdfButton.addEventListener(
                     <td
                         style="
                             padding:10px;
+                            width:50%;
                         "
                     >
 
@@ -3864,24 +3926,29 @@ downloadPdfButton.addEventListener(
             </table>
 
 
+            <!-- SUMMARY -->
 
             <h3
                 style="
-                    color:#2e7d32;
+                    color:#073827;
                     font-size:14px;
-                    margin-bottom:10px;
+                    margin:0 0 10px 0;
+                    font-weight:800;
                 "
             >
                 Detailed Question Summary
             </h3>
 
 
+            <!-- RESULTS TABLE -->
 
             <table
                 style="
                     width:100%;
                     border-collapse:collapse;
-                    border:1px solid #c8e6c9;
+                    border:1px solid #e2ede6;
+                    font-size:10px;
+                    table-layout:fixed;
                 "
             >
 
@@ -3889,9 +3956,9 @@ downloadPdfButton.addEventListener(
 
                     <tr
                         style="
-                            background-color:#2e7d32;
+                            background-color:#16623d;
                             color:white;
-                            font-size:11px;
+                            font-size:10px;
                         "
                     >
 
@@ -3899,7 +3966,6 @@ downloadPdfButton.addEventListener(
                             style="
                                 padding:8px;
                                 text-align:center;
-                                width:7%;
                             "
                         >
                             #
@@ -3910,10 +3976,9 @@ downloadPdfButton.addEventListener(
                             style="
                                 padding:8px;
                                 text-align:left;
-                                width:28%;
                             "
                         >
-                            Equation
+                            Category
                         </th>
 
 
@@ -3921,10 +3986,9 @@ downloadPdfButton.addEventListener(
                             style="
                                 padding:8px;
                                 text-align:left;
-                                width:25%;
                             "
                         >
-                            Student Solutions
+                            Dataset
                         </th>
 
 
@@ -3932,10 +3996,29 @@ downloadPdfButton.addEventListener(
                             style="
                                 padding:8px;
                                 text-align:left;
-                                width:25%;
                             "
                         >
-                            Correct Solutions
+                            Question
+                        </th>
+
+
+                        <th
+                            style="
+                                padding:8px;
+                                text-align:left;
+                            "
+                        >
+                            Student Answer
+                        </th>
+
+
+                        <th
+                            style="
+                                padding:8px;
+                                text-align:left;
+                            "
+                        >
+                            Correct Answer
                         </th>
 
 
@@ -3943,7 +4026,6 @@ downloadPdfButton.addEventListener(
                             style="
                                 padding:8px;
                                 text-align:center;
-                                width:15%;
                             "
                         >
                             Status
@@ -3962,38 +4044,97 @@ downloadPdfButton.addEventListener(
 
             </table>
 
+
+            <!-- FOOTER -->
+
+            <div
+                style="
+                    margin-top:20px;
+                    padding-top:10px;
+                    border-top:1px solid #e2ede6;
+                    text-align:center;
+                    font-size:10px;
+                    color:#628273;
+                "
+            >
+                ProjectFactr Mathematics Learning &amp; Curriculum Platform
+            </div>
+
         `;
 
+
+        /*
+           PDF OPTIONS
+        */
+
+        const safeStudentName =
+            studentName
+                .replace(
+                    /[^a-zA-Z0-9\s_-]/g,
+                    ""
+                )
+                .trim()
+                .replace(
+                    /\s+/g,
+                    "_"
+                );
 
 
         const opt = {
 
-            margin: 0.4,
+            margin: [
+                0.35,
+                0.35,
+                0.35,
+                0.35
+            ],
 
             filename:
-                `${studentName.replace(
-                    /\s+/g,
-                    "_"
-                )}_Grade10_Absolute_Value_Results.pdf`,
+                `${safeStudentName || "Student"}_Grade10_Quartiles_Deciles_Percentiles_Results.pdf`,
 
             image: {
+
                 type: "jpeg",
+
                 quality: 0.98
+
             },
 
             html2canvas: {
-                scale: 2
+
+                scale: 2,
+
+                useCORS: true,
+
+                backgroundColor: "#ffffff"
+
             },
 
             jsPDF: {
+
                 unit: "in",
+
                 format: "letter",
-                orientation: "portrait"
+
+                orientation: "landscape"
+
+            },
+
+            pagebreak: {
+
+                mode: [
+                    "css",
+                    "legacy"
+                ]
+
             }
 
         };
 
 
+        /*
+           GENERATE PDF
+        */
 
         html2pdf()
             .set(opt)
