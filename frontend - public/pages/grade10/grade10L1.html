@@ -8,8 +8,11 @@
 
 <title>Grade 10 - Solving Absolute Value Equations</title>
 
+<!-- Load the PDF generation library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
+<!-- Load your quiz JavaScript -->
+<script src="script.js"></script>
 <link rel="stylesheet" href="../../assets/style/style.css">
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -3523,545 +3526,249 @@ function finishQuiz() {
     finalCategory.textContent =
         `${TOTAL_QUESTIONS} Questions Completed`;}
 
-/* =====================================================
+   /* =====================================================
    25. PDF EXPORT
 ===================================================== */
 
-downloadPdfButton.addEventListener(
-    "click",
-    function () {
+// Generate and download the student's quiz report.
+downloadPdfButton.addEventListener("click", async function () {
 
-        /*
-           CREATE PDF CONTAINER
-        */
+    // Check whether the PDF library is available.
+    if (typeof window.html2pdf !== "function") {
+        alert("PDF library not loaded. Please check your internet connection.");
+        console.error("html2pdf.js is not available.");
+        return;
+    }
 
-        const pdfContainer =
-            document.createElement("div");
+    // Prevent multiple PDF generation requests.
+    downloadPdfButton.disabled = true;
+    downloadPdfButton.textContent = "GENERATING PDF...";
 
-        pdfContainer.style.padding = "25px";
-        pdfContainer.style.fontFamily = "Arial, sans-serif";
-        pdfContainer.style.color = "#073827";
-        pdfContainer.style.backgroundColor = "#ffffff";
-        pdfContainer.style.width = "100%";
+    let pdfContainer = null;
 
+    try {
+        // Calculate the final score percentage.
+        const questionCount = quizResults.length;
+        const percentage = questionCount > 0
+            ? Math.round((score / questionCount) * 100)
+            : 0;
 
-        /*
-           PERCENTAGE
-        */
+        // Escape text to prevent invalid HTML in the PDF.
+        function escapeHtml(value) {
+            return String(value ?? "").replace(/[&<>"']/g, char => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            }[char]));
+        }
 
-        const percentage =
-            Math.round(
-                (score / TOTAL_QUESTIONS) * 100
-            );
+        // Build the detailed question summary rows.
+        const rowsHtml = quizResults.map((res, idx) => {
+            const isCorrect = res.result === "CORRECT";
+            const resultColor = isCorrect ? "#16623d" : "#c62828";
+            const rowBg = idx % 2 === 0 ? "#f0f7f3" : "#ffffff";
 
+            return `
+                <tr style="background:${rowBg};">
+                    <td>${idx + 1}</td>
+                    <td>${escapeHtml(res.question)}</td>
+                    <td>${escapeHtml(formatAnswer(res.studentAnswer))}</td>
+                    <td>${escapeHtml(res.correctAnswer)}</td>
+                    <td style="color:${resultColor};font-weight:bold;">
+                        ${escapeHtml(res.result)}
+                    </td>
+                </tr>
+            `;
+        }).join("");
 
-        /*
-           BUILD QUESTION ROWS
-        */
+        // Create the temporary PDF report container.
+        pdfContainer = document.createElement("div");
 
-        let rowsHtml = "";
+        pdfContainer.style.cssText = `
+            position: fixed;
+            left: -10000px;
+            top: 0;
+            width: 1000px;
+            padding: 30px;
+            box-sizing: border-box;
+            background: #ffffff;
+            color: #073827;
+            font-family: Arial, sans-serif;
+        `;
 
-
-        quizResults.forEach(
-            function (res, idx) {
-
-                const isCorrect =
-                    res.result === "CORRECT";
-
-
-                const resultColor =
-                    isCorrect
-                        ? "#16623d"
-                        : "#9b1c1c";
-
-
-                const rowBg =
-                    idx % 2 === 0
-                        ? "#f0f7f3"
-                        : "#ffffff";
-
-
-                rowsHtml += `
-
-                    <tr
-                        style="
-                            background-color:${rowBg};
-                            border-bottom:1px solid #e2ede6;
-                            font-size:10px;
-                        "
-                    >
-
-                        <!-- NUMBER -->
-
-                        <td
-                            style="
-                                padding:8px;
-                                text-align:center;
-                                font-weight:bold;
-                                width:5%;
-                            "
-                        >
-                            ${idx + 1}
-                        </td>
-
-
-                        <!-- CATEGORY -->
-
-                        <td
-                            style="
-                                padding:8px;
-                                font-weight:bold;
-                                width:15%;
-                            "
-                        >
-                            ${res.category}
-                        </td>
-
-
-                        <!-- DATASET -->
-
-                        <td
-                            style="
-                                padding:8px;
-                                width:22%;
-                                word-break:break-word;
-                            "
-                        >
-                            ${res.dataset}
-                        </td>
-
-
-                        <!-- QUESTION -->
-
-                        <td
-                            style="
-                                padding:8px;
-                                width:20%;
-                            "
-                        >
-                            ${res.question}
-                            <br><br>
-                            <strong>
-                                Measure:
-                            </strong>
-                            ${res.measure}
-                        </td>
-
-
-                        <!-- STUDENT ANSWER -->
-
-                        <td
-                            style="
-                                padding:8px;
-                                width:18%;
-                            "
-                        >
-                            <strong>Position:</strong>
-                            ${formatAnswer(res.positionAnswer)}
-
-                            <br>
-
-                            <strong>Answer:</strong>
-                            ${formatAnswer(res.studentAnswer)}
-                        </td>
-
-
-                        <!-- CORRECT ANSWER -->
-
-                        <td
-                            style="
-                                padding:8px;
-                                width:15%;
-                            "
-                        >
-                            <strong>Position:</strong>
-                            ${res.correctPosition}
-
-                            <br>
-
-                            <strong>Answer:</strong>
-                            ${res.correctAnswer}
-                        </td>
-
-
-                        <!-- STATUS -->
-
-                        <td
-                            style="
-                                padding:8px;
-                                text-align:center;
-                                font-weight:bold;
-                                color:${resultColor};
-                                width:10%;
-                            "
-                        >
-                            ${res.result}
-                        </td>
-
-                    </tr>
-
-                `;
-            }
-        );
-
-
-        /*
-           PDF HEADER + STUDENT INFORMATION
-        */
-
+        // Build the report layout and student information.
         pdfContainer.innerHTML = `
-
-            <!-- HEADER -->
-
-            <div
-                style="
-                    text-align:center;
-                    border-bottom:3px solid #16623d;
-                    padding-bottom:12px;
-                    margin-bottom:20px;
-                "
-            >
-
-                <h1
-                    style="
-                        margin:0;
-                        color:#073827;
-                        font-size:22px;
-                        font-weight:800;
-                    "
-                >
+            <div style="
+                text-align: center;
+                border-bottom: 3px solid #16623d;
+                padding-bottom: 12px;
+                margin-bottom: 20px;
+            ">
+                <h1 style="
+                    margin: 0;
+                    font-size: 22px;
+                    color: #073827;
+                ">
                     GRADE 10 MATHEMATICS QUIZ REPORT
                 </h1>
 
-
-                <h3
-                    style="
-                        margin:6px 0 0 0;
-                        color:#16623d;
-                        font-size:14px;
-                        font-weight:700;
-                    "
-                >
+                <p style="
+                    margin: 6px 0 0;
+                    font-size: 13px;
+                    color: #16623d;
+                ">
                     Quartiles, Deciles, and Percentiles
-                </h3>
-
+                </p>
             </div>
 
-
-            <!-- STUDENT INFORMATION -->
-
-            <table
-                style="
-                    width:100%;
-                    border-collapse:collapse;
-                    margin-bottom:20px;
-                    font-size:12px;
-                    background:#f0f7f3;
-                    border:1px solid #e2ede6;
-                "
-            >
-
+            <table style="
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+                background: #f0f7f3;
+                border: 1px solid #dce9e0;
+                font-size: 12px;
+            ">
                 <tr>
-
-                    <td
-                        style="
-                            padding:10px;
-                            width:50%;
-                            border-bottom:1px solid #e2ede6;
-                        "
-                    >
-
-                        <strong>
-                            Student Name:
-                        </strong>
-
-                        ${studentName}
-
+                    <td style="padding: 12px;width: 50%;">
+                        <strong>Student Name:</strong>
+                        ${escapeHtml(studentName)}
                     </td>
-
-
-                    <td
-                        style="
-                            padding:10px;
-                            width:50%;
-                            border-bottom:1px solid #e2ede6;
-                        "
-                    >
-
-                        <strong>
-                            Section:
-                        </strong>
-
-                        ${studentSection}
-
+                    <td style="padding: 12px;">
+                        <strong>Section:</strong>
+                        ${escapeHtml(studentSection)}
                     </td>
-
                 </tr>
-
-
                 <tr>
-
-                    <td
-                        style="
-                            padding:10px;
-                            width:50%;
-                        "
-                    >
-
-                        <strong>
-                            Final Score:
-                        </strong>
-
-                        ${score}
-                        /
-                        ${TOTAL_QUESTIONS}
-
-                        (${percentage}%)
-
+                    <td style="padding: 12px;">
+                        <strong>Final Score:</strong>
+                        ${score} / ${questionCount} (${percentage}%)
                     </td>
-
-
-                    <td
-                        style="
-                            padding:10px;
-                            width:50%;
-                        "
-                    >
-
-                        <strong>
-                            Total Time:
-                        </strong>
-
-                        ${formatTime(
-                            elapsedSeconds
-                        )}
-
+                    <td style="padding: 12px;">
+                        <strong>Total Time:</strong>
+                        ${escapeHtml(formatTime(elapsedSeconds))}
                     </td>
-
                 </tr>
-
             </table>
 
-
-            <!-- SUMMARY -->
-
-            <h3
-                style="
-                    color:#073827;
-                    font-size:14px;
-                    margin:0 0 10px 0;
-                    font-weight:800;
-                "
-            >
+            <h3 style="
+                font-size: 14px;
+                margin: 0 0 10px;
+                color: #073827;
+            ">
                 Detailed Question Summary
             </h3>
 
-
-            <!-- RESULTS TABLE -->
-
-            <table
-                style="
-                    width:100%;
-                    border-collapse:collapse;
-                    border:1px solid #e2ede6;
-                    font-size:10px;
-                    table-layout:fixed;
-                "
-            >
-
+            <table style="
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                font-size: 11px;
+            ">
                 <thead>
-
-                    <tr
-                        style="
-                            background-color:#16623d;
-                            color:white;
-                            font-size:10px;
-                        "
-                    >
-
-                        <th
-                            style="
-                                padding:8px;
-                                text-align:center;
-                            "
-                        >
-                            #
-                        </th>
-
-
-                        <th
-                            style="
-                                padding:8px;
-                                text-align:left;
-                            "
-                        >
-                            Category
-                        </th>
-
-
-                        <th
-                            style="
-                                padding:8px;
-                                text-align:left;
-                            "
-                        >
-                            Dataset
-                        </th>
-
-
-                        <th
-                            style="
-                                padding:8px;
-                                text-align:left;
-                            "
-                        >
-                            Question
-                        </th>
-
-
-                        <th
-                            style="
-                                padding:8px;
-                                text-align:left;
-                            "
-                        >
-                            Student Answer
-                        </th>
-
-
-                        <th
-                            style="
-                                padding:8px;
-                                text-align:left;
-                            "
-                        >
-                            Correct Answer
-                        </th>
-
-
-                        <th
-                            style="
-                                padding:8px;
-                                text-align:center;
-                            "
-                        >
-                            Status
-                        </th>
-
+                    <tr style="
+                        background: #16623d;
+                        color: white;
+                    ">
+                        <th style="width: 7%;">#</th>
+                        <th style="width: 29%;">Question</th>
+                        <th style="width: 23%;">Student Answer</th>
+                        <th style="width: 23%;">Correct Solution</th>
+                        <th style="width: 18%;">Status</th>
                     </tr>
-
                 </thead>
-
-
                 <tbody>
-
                     ${rowsHtml}
-
                 </tbody>
-
             </table>
 
-
-            <!-- FOOTER -->
-
-            <div
-                style="
-                    margin-top:20px;
-                    padding-top:10px;
-                    border-top:1px solid #e2ede6;
-                    text-align:center;
-                    font-size:10px;
-                    color:#628273;
-                "
-            >
-                ProjectFactr Mathematics Learning &amp; Curriculum Platform
+            <div style="
+                margin-top: 20px;
+                padding-top: 10px;
+                border-top: 1px solid #dce9e0;
+                text-align: center;
+                color: #628273;
+                font-size: 10px;
+            ">
+                ProjectFactr Mathematics Learning &amp;
+                Curriculum Platform
             </div>
 
+            <style>
+                th, td {
+                    border: 1px solid #dce9e0;
+                    padding: 9px;
+                    text-align: left;
+                    overflow-wrap: break-word;
+                }
+
+                th {
+                    text-align: center;
+                }
+
+                tr {
+                    page-break-inside: avoid;
+                }
+            </style>
         `;
 
+        // Attach the report to the document before rendering.
+        document.body.appendChild(pdfContainer);
 
-        /*
-           PDF OPTIONS
-        */
+        // Configure the PDF output and page layout.
+        const safeStudentName = String(studentName || "Student")
+            .replace(/[^a-zA-Z0-9_-]/g, "_");
 
-        const safeStudentName =
-            studentName
-                .replace(
-                    /[^a-zA-Z0-9\s_-]/g,
-                    ""
-                )
-                .trim()
-                .replace(
-                    /\s+/g,
-                    "_"
-                );
-
-
-        const opt = {
-
-            margin: [
-                0.35,
-                0.35,
-                0.35,
-                0.35
-            ],
-
-            filename:
-                `${safeStudentName || "Student"}_Grade10_Quartiles_Deciles_Percentiles_Results.pdf`,
-
+        const options = {
+            margin: 0.35,
+            filename: `${safeStudentName}_Quiz_Report.pdf`,
             image: {
-
                 type: "jpeg",
-
                 quality: 0.98
-
             },
-
             html2canvas: {
-
                 scale: 2,
-
                 useCORS: true,
-
-                backgroundColor: "#ffffff"
-
+                backgroundColor: "#ffffff",
+                logging: false
             },
-
             jsPDF: {
-
                 unit: "in",
-
                 format: "letter",
-
                 orientation: "landscape"
-
             },
-
             pagebreak: {
-
-                mode: [
-                    "css",
-                    "legacy"
-                ]
-
+                mode: ["css", "legacy"],
+                avoid: ["tr"]
             }
-
         };
 
-
-        /*
-           GENERATE PDF
-        */
-
-        html2pdf()
-            .set(opt)
+        // Generate the PDF and trigger the browser download.
+        await window.html2pdf()
+            .set(options)
             .from(pdfContainer)
             .save();
 
+    } catch (error) {
+        // Log the actual error and notify the user.
+        console.error("PDF generation failed:", error);
+        alert(
+            "Unable to create the PDF. Please try again.\n\n" +
+            "Check the browser console for the exact error."
+        );
+
+    } finally {
+        // Remove the temporary report and restore the button.
+        if (pdfContainer && pdfContainer.parentNode) {
+            pdfContainer.parentNode.removeChild(pdfContainer);
+        }
+
+        downloadPdfButton.disabled = false;
+        downloadPdfButton.textContent = "DOWNLOAD PDF";
     }
-);
-
-
+});
 
 /* =====================================================
    26. RESET QUIZ
