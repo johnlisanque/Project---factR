@@ -1,5 +1,6 @@
 import { DataSet } from "../class/Dataset.js";
 import { StandardDeviation } from "../class/StandardDeviation.js";
+import { saveResultsPdf } from "../helper/resultsPdf.js";
 
 let $question = document.getElementById("question");
 let $studentAnswer = document.getElementById("studentAnswer");
@@ -700,6 +701,13 @@ function endQuiz() {
 
                     <button
                         type="button"
+                        id="downloadResultsPdf"
+                        data-html2canvas-ignore="true">
+                        Download Results PDF
+                    </button>
+
+                    <button
+                        type="button"
                         id="backMenuBtn">
                         Back to Menu
                     </button>
@@ -714,6 +722,12 @@ function endQuiz() {
     document.getElementById("resultStudent").textContent = studentName;
     document.getElementById("resultGradeSection").textContent = studentGradeSection;
     document.getElementById("resultTopic").textContent = $topic.options[$topic.selectedIndex].text.trim();
+    document.getElementById("downloadResultsPdf").addEventListener("click", () => {
+        saveResultsPdf(
+            document.querySelector(".quiz-end"),
+            "grade11-statistics-quiz-results.pdf"
+        );
+    });
 
         // <div class="field-group">
                 //     <label for="topic">topic</label>

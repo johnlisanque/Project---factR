@@ -3406,395 +3406,545 @@ function finishQuiz() {
    25. PDF EXPORT
 ===================================================== */
 
+// Loads html2pdf.js before generating the PDF.
+function loadHtml2Pdf() {
+
+    return new Promise((resolve, reject) => {
+
+        if (typeof html2pdf !== "undefined") {
+            resolve();
+            return;
+        }
+
+        const script =
+            document.createElement("script");
+
+        script.src =
+            "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
+
+        script.onload = () => resolve();
+
+        script.onerror = () =>
+            reject(
+                new Error(
+                    "Failed to load html2pdf.js."
+                )
+            );
+
+        document.head.appendChild(script);
+
+    });
+
+}
+
+
+// Escapes text before inserting it into the PDF.
+function escapeHtml(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
 downloadPdfButton.addEventListener(
     "click",
-    function() {
+    async function() {
 
-        const pdfContainer =
-            document.createElement(
-                "div"
+        try {
+
+            // Load the PDF library first.
+            await loadHtml2Pdf();
+
+
+            const pdfContainer =
+                document.createElement("div");
+
+
+            pdfContainer.style.position =
+                "absolute";
+
+            pdfContainer.style.left =
+                "0";
+
+            pdfContainer.style.top =
+                "0";
+
+            pdfContainer.style.width =
+                "794px";
+
+            pdfContainer.style.padding =
+                "25px";
+
+            pdfContainer.style.boxSizing =
+                "border-box";
+
+            pdfContainer.style.backgroundColor =
+                "#ffffff";
+
+            pdfContainer.style.fontFamily =
+                "Arial, sans-serif";
+
+            pdfContainer.style.color =
+                "#1b5e20";
+
+
+            const percentage =
+                Math.round(
+                    (
+                        score /
+                        TOTAL_QUESTIONS
+                    ) * 100
+                );
+
+
+            let rowsHtml = "";
+
+
+            quizResults.forEach(
+                (res, idx) => {
+
+                    const isCorrect =
+                        res.result ===
+                        "CORRECT";
+
+
+                    const resultColor =
+                        isCorrect
+                            ? "#2e7d32"
+                            : "#c62828";
+
+
+                    const rowBg =
+                        idx % 2 === 0
+                            ? "#f9fbf9"
+                            : "#ffffff";
+
+
+                    rowsHtml += `
+
+                        <tr
+                            style="
+                                background-color:${rowBg};
+                                border-bottom:1px solid #e0e0e0;
+                                font-size:11px;
+                            "
+                        >
+
+                            <td
+                                style="
+                                    padding:8px;
+                                    text-align:center;
+                                    font-weight:bold;
+                                "
+                            >
+                                ${idx + 1}
+                            </td>
+
+
+                            <td
+                                style="
+                                    padding:8px;
+                                    font-weight:bold;
+                                    font-family:monospace;
+                                "
+                            >
+                                ${escapeHtml(res.equation)}
+                            </td>
+
+
+                            <td
+                                style="
+                                    padding:8px;
+                                "
+                            >
+                                x₁ = ${escapeHtml(
+                                    res.studentSolution1
+                                )}
+
+                                <br>
+
+                                x₂ = ${escapeHtml(
+                                    res.studentSolution2
+                                )}
+                            </td>
+
+
+                            <td
+                                style="
+                                    padding:8px;
+                                "
+                            >
+                                x₁ = ${escapeHtml(
+                                    res.correctSolution1
+                                )}
+
+                                <br>
+
+                                x₂ = ${escapeHtml(
+                                    res.correctSolution2
+                                )}
+                            </td>
+
+
+                            <td
+                                style="
+                                    padding:8px;
+                                    text-align:center;
+                                    font-weight:bold;
+                                    color:${resultColor};
+                                "
+                            >
+                                ${escapeHtml(res.result)}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
             );
 
 
-        pdfContainer.style.padding =
-            "25px";
+            pdfContainer.innerHTML = `
 
+                <div
+                    style="
+                        text-align:center;
+                        border-bottom:3px solid #2e7d32;
+                        padding-bottom:12px;
+                        margin-bottom:20px;
+                    "
+                >
 
-        pdfContainer.style.fontFamily =
-            "Arial, sans-serif";
-
-
-        pdfContainer.style.color =
-            "#1b5e20";
-
-
-        const percentage =
-            Math.round(
-                (
-                    score /
-                    TOTAL_QUESTIONS
-                ) * 100
-            );
-
-
-        let rowsHtml = "";
-
-
-        quizResults.forEach(
-            (res, idx) => {
-
-                const isCorrect =
-                    res.result ===
-                    "CORRECT";
-
-
-                const resultColor =
-                    isCorrect
-                        ? "#2e7d32"
-                        : "#c62828";
-
-
-                const rowBg =
-                    idx % 2 === 0
-                        ? "#f9fbf9"
-                        : "#ffffff";
-
-
-                rowsHtml += `
-
-                    <tr
+                    <h1
                         style="
-                            background-color:${rowBg};
-                            border-bottom:1px solid #e0e0e0;
-                            font-size:11px;
+                            margin:0;
+                            color:#2e7d32;
+                            font-size:22px;
                         "
                     >
+                        GRADE 10 MATHEMATICS QUIZ REPORT
+                    </h1>
+
+
+                    <h3
+                        style="
+                            margin:5px 0 0 0;
+                            color:#388e3c;
+                            font-size:14px;
+                            font-weight:normal;
+                        "
+                    >
+                        Solving Quadratic Inequalities in One Variable
+                    </h3>
+
+                </div>
+
+
+                <table
+                    style="
+                        width:100%;
+                        border-collapse:collapse;
+                        margin-bottom:20px;
+                        font-size:13px;
+                        background:#f1f8e9;
+                        border:1px solid #c8e6c9;
+                    "
+                >
+
+                    <tr>
 
                         <td
                             style="
-                                padding:8px;
-                                text-align:center;
-                                font-weight:bold;
+                                padding:10px;
+                                width:50%;
                             "
                         >
-                            ${idx + 1}
+
+                            <strong>
+                                Student Name:
+                            </strong>
+
+                            ${escapeHtml(studentName)}
+
                         </td>
 
 
                         <td
                             style="
-                                padding:8px;
-                                font-weight:bold;
-                                font-family:monospace;
+                                padding:10px;
+                                width:50%;
                             "
                         >
-                            ${res.equation}
-                        </td>
 
+                            <strong>
+                                Section:
+                            </strong>
 
-                        <td
-                            style="
-                                padding:8px;
-                            "
-                        >
-                            x₁ = ${res.studentSolution1}
-                            <br>
-                            x₂ = ${res.studentSolution2}
-                        </td>
+                            ${escapeHtml(studentSection)}
 
-
-                        <td
-                            style="
-                                padding:8px;
-                            "
-                        >
-                            x₁ = ${res.correctSolution1}
-                            <br>
-                            x₂ = ${res.correctSolution2}
-                        </td>
-
-
-                        <td
-                            style="
-                                padding:8px;
-                                text-align:center;
-                                font-weight:bold;
-                                color:${resultColor};
-                            "
-                        >
-                            ${res.result}
                         </td>
 
                     </tr>
 
-                `;
 
-            }
-        );
+                    <tr>
+
+                        <td
+                            style="
+                                padding:10px;
+                            "
+                        >
+
+                            <strong>
+                                Final Score:
+                            </strong>
+
+                            ${score}
+                            /
+                            ${TOTAL_QUESTIONS}
+
+                            (${percentage}%)
+
+                        </td>
 
 
+                        <td
+                            style="
+                                padding:10px;
+                            "
+                        >
 
-        pdfContainer.innerHTML = `
+                            <strong>
+                                Total Time:
+                            </strong>
 
-            <div
-                style="
-                    text-align:center;
-                    border-bottom:3px solid #2e7d32;
-                    padding-bottom:12px;
-                    margin-bottom:20px;
-                "
-            >
+                            ${formatTime(
+                                elapsedSeconds
+                            )}
 
-                <h1
-                    style="
-                        margin:0;
-                        color:#2e7d32;
-                        font-size:22px;
-                    "
-                >
-                    GRADE 10 MATHEMATICS QUIZ REPORT
-                </h1>
+                        </td>
+
+                    </tr>
+
+                </table>
 
 
                 <h3
                     style="
-                        margin:5px 0 0 0;
-                        color:#388e3c;
+                        color:#2e7d32;
                         font-size:14px;
-                        font-weight:normal;
+                        margin-bottom:10px;
                     "
                 >
-                    Solving Absolute Value Equations
+                    Detailed Question Summary
                 </h3>
 
-            </div>
 
+                <table
+                    style="
+                        width:100%;
+                        border-collapse:collapse;
+                        border:1px solid #c8e6c9;
+                    "
+                >
 
+                    <thead>
 
-            <table
-                style="
-                    width:100%;
-                    border-collapse:collapse;
-                    margin-bottom:20px;
-                    font-size:13px;
-                    background:#f1f8e9;
-                    border:1px solid #c8e6c9;
-                "
-            >
-
-                <tr>
-
-                    <td
-                        style="
-                            padding:10px;
-                            width:50%;
-                        "
-                    >
-
-                        <strong>
-                            Student Name:
-                        </strong>
-
-                        ${studentName}
-
-                    </td>
-
-
-                    <td
-                        style="
-                            padding:10px;
-                            width:50%;
-                        "
-                    >
-
-                        <strong>
-                            Section:
-                        </strong>
-
-                        ${studentSection}
-
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td
-                        style="
-                            padding:10px;
-                        "
-                    >
-
-                        <strong>
-                            Final Score:
-                        </strong>
-
-                        ${score}
-                        /
-                        ${TOTAL_QUESTIONS}
-
-                        (${percentage}%)
-
-                    </td>
-
-
-                    <td
-                        style="
-                            padding:10px;
-                        "
-                    >
-
-                        <strong>
-                            Total Time:
-                        </strong>
-
-                        ${formatTime(
-                            elapsedSeconds
-                        )}
-
-                    </td>
-
-                </tr>
-
-            </table>
-
-
-
-            <h3
-                style="
-                    color:#2e7d32;
-                    font-size:14px;
-                    margin-bottom:10px;
-                "
-            >
-                Detailed Question Summary
-            </h3>
-
-
-
-            <table
-                style="
-                    width:100%;
-                    border-collapse:collapse;
-                    border:1px solid #c8e6c9;
-                "
-            >
-
-                <thead>
-
-                    <tr
-                        style="
-                            background-color:#2e7d32;
-                            color:white;
-                            font-size:11px;
-                        "
-                    >
-
-                        <th
+                        <tr
                             style="
-                                padding:8px;
-                                text-align:center;
-                                width:7%;
+                                background-color:#2e7d32;
+                                color:white;
+                                font-size:11px;
                             "
                         >
-                            #
-                        </th>
+
+                            <th
+                                style="
+                                    padding:8px;
+                                    text-align:center;
+                                    width:7%;
+                                "
+                            >
+                                #
+                            </th>
 
 
-                        <th
-                            style="
-                                padding:8px;
-                                text-align:left;
-                                width:28%;
-                            "
-                        >
-                            Equation
-                        </th>
+                            <th
+                                style="
+                                    padding:8px;
+                                    text-align:left;
+                                    width:28%;
+                                "
+                            >
+                                Equation
+                            </th>
 
 
-                        <th
-                            style="
-                                padding:8px;
-                                text-align:left;
-                                width:25%;
-                            "
-                        >
-                            Student Solutions
-                        </th>
+                            <th
+                                style="
+                                    padding:8px;
+                                    text-align:left;
+                                    width:25%;
+                                "
+                            >
+                                Student Solutions
+                            </th>
 
 
-                        <th
-                            style="
-                                padding:8px;
-                                text-align:left;
-                                width:25%;
-                            "
-                        >
-                            Correct Solutions
-                        </th>
+                            <th
+                                style="
+                                    padding:8px;
+                                    text-align:left;
+                                    width:25%;
+                                "
+                            >
+                                Correct Solutions
+                            </th>
 
 
-                        <th
-                            style="
-                                padding:8px;
-                                text-align:center;
-                                width:15%;
-                            "
-                        >
-                            Status
-                        </th>
+                            <th
+                                style="
+                                    padding:8px;
+                                    text-align:center;
+                                    width:15%;
+                                "
+                            >
+                                Status
+                            </th>
 
-                    </tr>
+                        </tr>
 
-                </thead>
-
-
-                <tbody>
-
-                    ${rowsHtml}
-
-                </tbody>
-
-            </table>
-
-        `;
+                    </thead>
 
 
+                    <tbody>
 
-        const opt = {
+                        ${rowsHtml}
 
-            margin: 0.4,
+                    </tbody>
 
-            filename:
-                `${studentName.replace(
-                    /\s+/g,
-                    "_"
-                )}_Grade10_Absolute_Value_Results.pdf`,
+                </table>
 
-            image: {
-                type: "jpeg",
-                quality: 0.98
-            },
-
-            html2canvas: {
-                scale: 2
-            },
-
-            jsPDF: {
-                unit: "in",
-                format: "letter",
-                orientation: "portrait"
-            }
-
-        };
+            `;
 
 
+            document.body.appendChild(
+                pdfContainer
+            );
 
-        html2pdf()
-            .set(opt)
-            .from(pdfContainer)
-            .save();
+
+            // Gives the browser time to render the PDF content.
+            await new Promise(
+                resolve =>
+                    setTimeout(resolve, 300)
+            );
+
+
+            const cleanFileName =
+                String(studentName || "Student")
+                    .replace(
+                        /[\\/:*?"<>|]+/g,
+                        ""
+                    )
+                    .replace(
+                        /\s+/g,
+                        "_"
+                    );
+
+
+            const opt = {
+
+                margin: [
+                    0.35,
+                    0.35,
+                    0.35,
+                    0.35
+                ],
+
+                filename:
+                    `${cleanFileName}_Grade10_Quadratic_Inequalities_Results.pdf`,
+
+                image: {
+                    type: "jpeg",
+                    quality: 0.98
+                },
+
+                html2canvas: {
+
+                    scale: 2,
+
+                    useCORS: true,
+
+                    allowTaint: false,
+
+                    backgroundColor:
+                        "#ffffff",
+
+                    logging: false,
+
+                    scrollX: 0,
+
+                    scrollY: 0
+
+                },
+
+                jsPDF: {
+
+                    unit: "in",
+
+                    format: "letter",
+
+                    orientation: "portrait"
+
+                },
+
+                pagebreak: {
+
+                    mode: [
+                        "css",
+                        "legacy"
+                    ],
+
+                    avoid: [
+                        "tr"
+                    ]
+
+                }
+
+            };
+
+
+            await window
+                .html2pdf()
+                .set(opt)
+                .from(pdfContainer)
+                .save();
+
+
+            // Removes the temporary PDF content.
+            document.body.removeChild(
+                pdfContainer
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "PDF generation error:",
+                error
+            );
+
+            alert(
+                "Unable to generate the PDF. Please check your internet connection and try again."
+            );
+
+        }
 
     }
 );

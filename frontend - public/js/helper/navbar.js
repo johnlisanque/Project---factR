@@ -1,7 +1,4 @@
 
-/* =========================================================
-   NAVIGATION PATH
-========================================================= */
 
 function getNavPath(path) {
     return `${getRootPrefix()}pages/${path}`;
@@ -11,9 +8,7 @@ function getHomePath() {
     return `${getRootPrefix()}index.html`;
 }
 
-/* =========================================================
-   PAGE DETECTION
-========================================================= */
+
 
 function getNormalizedPath() {
     return window.location.pathname
@@ -34,9 +29,6 @@ function getRootPrefix() {
     return "../".repeat(folderDepth + 1);
 }
 
-/* =========================================================
-   CREATE NAVBAR
-========================================================= */
 
 function createNavbarHTML() {
     const homePath = getHomePath();
@@ -95,6 +87,7 @@ function createNavbarHTML() {
                     </button>
 
                     <ul class="dropdown-menu">
+                        <li><a href="${getNavPath("grade7/index.html")}" class="dropdown-item">Grade 7 Overview</a></li>
                         <li><a href="${getNavPath("grade7/grade7L1.html")}#lesson1" class="dropdown-item">Operations on Integers</a></li>
                         <li><a href="${getNavPath("grade7/Grade7L2.html")}#lesson2" class="dropdown-item">Square Roots and Cube Roots</a></li>
                         <li><a href="${getNavPath("grade7/Grade7L3.html")}#lesson3" class="dropdown-item">Comparing & Arranging Irrationals</a></li>
@@ -114,6 +107,7 @@ function createNavbarHTML() {
                     </button>
 
                     <ul class="dropdown-menu">
+                        <li><a href="${getNavPath("grade8/index.html")}" class="dropdown-item">Grade 8 Overview</a></li>
                         <li><a href="${getNavPath("grade8/grade8L1.html")}#lesson1" class="dropdown-item">Simple Monomial Operations</a></li>
                         <li><a href="${getNavPath("grade8/grade8L2.html")}#lesson3" class="dropdown-item">Midpoint of Line Segment</a></li>
                         <li><a href="${getNavPath("grade8/grade8L3.html")}#lesson2" class="dropdown-item">Factoring Quadratics Expressions</a></li>
@@ -132,6 +126,7 @@ function createNavbarHTML() {
                     </button>
 
                     <ul class="dropdown-menu">
+                        <li><a href="${getNavPath("grade9/index.html")}" class="dropdown-item">Grade 9 Overview</a></li>
                         <li><a href="${getNavPath("grade9/grade9L2.html")}#lesson1" class="dropdown-item">Linear Function Problems</a></li>
                         <li><a href="${getNavPath("grade9/grade9L1.html")}#lesson2" class="dropdown-item">Sides of Parallelograms</a></li>
                         <li><a href="${getNavPath("grade9/grade9L3.html")}#lesson3" class="dropdown-item">Angles of Parallelograms</a></li>
@@ -150,6 +145,7 @@ function createNavbarHTML() {
                     </button>
 
                     <ul class="dropdown-menu">
+                        <li><a href="${getNavPath("grade10/index.html")}" class="dropdown-item">Grade 10 Overview</a></li>
                         <li><a href="${getNavPath("grade10/grade10L1.html")}#lesson1" class="dropdown-item">Absolute Value Equations</a></li>
                         <li><a href="${getNavPath("grade10/grade10L2.html")}#lesson2" class="dropdown-item">Quadratic Inequalities</a></li>
                         <li><a href="${getNavPath("grade10/grade10L3.html")}#lesson3" class="dropdown-item">Quartiles, Deciles, and Percentiles</a></li>
@@ -167,6 +163,7 @@ function createNavbarHTML() {
                     </button>
 
                     <ul class="dropdown-menu">
+                        <li><a href="${getNavPath("grade11/index.html")}" class="dropdown-item">Grade 11 Overview</a></li>
                         <li><a href="${getNavPath("grade11/grade11L1.html")}#lesson1" class="dropdown-item">Plotting Points & Graphing Functions</a></li>
                         <li><a href="${getNavPath("grade11/grade11L2.html")}#lesson2" class="dropdown-item">Applying of Piecewise Functions</a></li>
                         <li><a href="${getNavPath("grade11/grade11L3.html")}#lesson3" class="dropdown-item">Central Tendency & Variability</a></li>
