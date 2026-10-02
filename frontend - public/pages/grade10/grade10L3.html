@@ -252,76 +252,243 @@ select {
 
 }
 
-
 /* =========================================================
    START SCREEN
 ========================================================= */
 
 #startScreen {
-
-    align-items:
-        flex-start;
-
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
 }
 
+/* =========================================================
+   START CARD
+========================================================= */
 
 #startScreen .card {
-
-    max-width:
-        440px;
-
-    margin-top:
-        10px;
-
+    display: block;
+    width: 100% !important;
+    max-width: 440px !important;
+    margin: 10px auto 0 !important;
+    padding: 30px 24px !important;
+    box-sizing: border-box;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
 }
 
+/* =========================================================
+   MAIN TITLE
+========================================================= */
 
 #startScreen h1 {
-
-    margin-bottom:
-        6px;
-
-    font-family:
-        var(--font-brand);
-
-    color:
-        var(--primary-dark);
-
-    font-size:
-        26px;
-
-    font-weight:
-        800;
-
-    text-align:
-        center;
-
+    width: 100%;
+    margin: 0 0 6px;
+    font-family: var(--font-brand);
+    color: var(--primary-dark);
+    font-size: 26px;
+    font-weight: 800 !important;
+    line-height: 1.3;
+    text-align: center;
 }
 
+/* =========================================================
+   SUBTITLE
+========================================================= */
 
 #startScreen h2 {
+    width: 100%;
+    margin: 0 0 25px;
+    font-family: var(--font-brand);
+    color: var(--primary-forest);
+    font-size: 17px;
+    font-weight: 700 !important;
+    line-height: 1.4;
+    text-align: center;
+}
 
-    margin-bottom:
-        25px;
+/* =========================================================
+   STUDENT INPUT GROUPS
+========================================================= */
 
-    font-family:
-        var(--font-brand);
+#startScreen .student-info-group {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 18px !important;
+    text-align: left;
+}
 
-    color:
-        var(--primary-forest);
+/* =========================================================
+   LABELS
+========================================================= */
 
-    font-size:
-        17px;
+#startScreen .student-info-group label {
+    display: block !important;
+    width: 100%;
+    margin: 0 0 7px !important;
+    color: var(--primary-dark);
+    font-size: 13px;
+    font-weight: 700 !important;
+    line-height: 1.3;
+    text-align: left;
+}
 
-    font-weight:
-        700;
+/* =========================================================
+   STUDENT NAME AND SECTION INPUTS
+========================================================= */
 
-    line-height:
-        1.4;
+#startScreen .student-info-group input {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    margin: 0 !important;
+    padding: 10px 16px !important;
+    box-sizing: border-box !important;
 
-    text-align:
-        center;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
 
+    color: var(--text-body);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.2;
+    outline: none;
+}
+
+/* =========================================================
+   NUMBER OF QUESTIONS
+========================================================= */
+
+#startScreen #questionLimit {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    margin: 0 !important;
+    padding: 10px 16px !important;
+    box-sizing: border-box !important;
+
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+
+    color: var(--text-body);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.2;
+    outline: none;
+    cursor: pointer;
+}
+
+/* =========================================================
+   INPUT FOCUS
+========================================================= */
+
+#startScreen .student-info-group input:focus,
+#startScreen #questionLimit:focus {
+    background: #ffffff;
+    border-color: var(--primary-accent);
+    box-shadow: none;
+}
+
+/* =========================================================
+   START QUIZ BUTTON
+========================================================= */
+
+#startScreen #startButton {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    margin: 16px 0 0 !important;
+    padding: 10px 15px !important;
+    box-sizing: border-box !important;
+
+    background: var(--primary-forest);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+
+    font-family: var(--font-brand);
+    font-size: 15px;
+    font-weight: 700 !important;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#startScreen #startButton:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+    #startScreen {
+        padding: 24px 14px 30px;
+    }
+
+    #startScreen .card {
+        width: 100% !important;
+        max-width: 440px !important;
+        margin-top: 0 !important;
+        padding: 25px 20px !important;
+    }
+
+    #startScreen h1 {
+        font-size: 22px;
+        font-weight: 800 !important;
+    }
+
+    #startScreen h2 {
+        font-size: 16px;
+        font-weight: 700 !important;
+    }
+
+    #startScreen .student-info-group,
+    #startScreen .student-info-group input,
+    #startScreen #questionLimit,
+    #startScreen #startButton {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    #startScreen .student-info-group input,
+    #startScreen #questionLimit,
+    #startScreen #startButton {
+        height: 48px !important;
+        min-height: 48px !important;
+    }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+    #startScreen .card {
+        padding: 22px 17px !important;
+    }
+
+    #startScreen h1 {
+        font-size: 21px;
+    }
+
+    #startScreen h2 {
+        font-size: 15px;
+    }
 }
 
 
