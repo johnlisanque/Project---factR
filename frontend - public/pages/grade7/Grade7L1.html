@@ -1,592 +1,572 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>PROJECTFACTR — Operations on Integers Quiz</title>
-
 <meta name="description" content="ProjectFactr — Operations on Integers Quiz for Grade 7 Mathematics.">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="../../assets/style/style.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap"
-rel="stylesheet">
-
-<link rel="stylesheet" href="../../assets/style/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --primary-dark: #073827;
-    --primary-forest: #16623d;
-    --primary-accent: #339763;
-    --tint-light: #e7f7ee;
-    --card-bg: #f7faf8;
-    --text-main: #073827;
-    --text-body: #2d473b;
-    --text-muted: #567e6c;
-    --border-color: #d8eade;
-    --white: #ffffff;
+  --primary-dark:#073827;
+  --primary-forest:#16623d;
+  --primary-accent:#339763;
+  --tint-light:#e7f7ee;
+  --card-bg:#f7faf8;
+  --text-main:#073827;
+  --text-body:#2d473b;
+  --text-muted:#567e6c;
+  --border-color:#d8eade;
+  --white:#ffffff;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing:border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior:smooth;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background: var(--card-bg);
-    color: var(--text-body);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    overflow-x: hidden;
+  margin:0;
+  padding:0;
+  min-height:100vh;
+  background:#f7faf8;
+  color:var(--text-body);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  overflow-x:hidden;
 }
 
-button,
-input {
-    font: inherit;
+button,input {
+  font:inherit;
 }
 
 button {
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    cursor: pointer;
-    pointer-events: auto;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  cursor:pointer;
 }
 
 .cover-section,
 .cover-wrapper {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    position: relative;
+  width:100%;
+  margin:0;
+  padding:0;
 }
 
 .cover-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    margin: 0;
+  display:block;
+  width:100%;
+  height:auto;
+  max-width:100%;
+  margin:0;
 }
 
 .quiz-space-bar {
-    width: 100%;
-    height: 32px;
-    background: var(--primary-forest);
+  width:100%;
+  height:32px;
+  background:#16623d;
 }
 
 .quiz-section {
-    width: 100%;
-    min-height: 500px;
-    padding: 45px 15px 60px;
-    background: var(--card-bg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width:100%;
+  min-height:500px;
+  padding:45px 15px 60px;
+  background:#f7faf8;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
 .quiz-title {
-    width: 92%;
-    max-width: 700px;
-    margin: 0 auto 20px;
-    color: var(--primary-dark);
-    font-family: Arial, sans-serif;
-    font-size: 28px;
-    font-weight: 800;
-    text-align: center;
-    line-height: 1.3;
+  width:92%;
+  max-width:700px;
+  margin:0 auto 20px;
+  color:#073827;
+  font-family:Arial,sans-serif;
+  font-size:28px;
+  font-weight:800;
+  text-align:center;
 }
 
 #studentStart,
 #modeSelect,
 #quizArea,
 #quizResult {
-    width: 92%;
-    max-width: 440px;
-    margin: 10px auto 40px;
-    padding: 35px;
-    background: var(--white);
-    border: 1px solid #e2ede6;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px -5px rgba(7,56,39,.07);
-    position: relative;
-    z-index: 1;
+  width:92%;
+  max-width:440px;
+  margin:10px auto 40px;
+  padding:35px;
+  background:#fff;
+  border:1px solid #e2ede6;
+  border-radius:16px;
+  box-shadow:0 10px 25px -5px rgba(7,56,39,.07);
 }
 
 #modeSelect,
 #quizArea,
 #quizResult {
-    display: none;
+  display:none;
 }
 
 #studentStart h2,
 #modeSelect h2 {
-    margin: 0 0 20px;
-    color: var(--primary-dark);
-    font-family: Arial, sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    text-align: center;
+  margin:0 0 20px;
+  color:#073827;
+  font-family:Arial,sans-serif;
+  font-size:20px;
+  font-weight:700;
+  text-align:center;
 }
 
 #studentStart input {
-    display: block;
-    width: 100%;
-    height: 48px;
-    margin-bottom: 16px;
-    padding: 10px 16px;
-    background: #f0f7f3;
-    border: 1px solid #e2ede6;
-    border-radius: 10px;
-    font-size: 15px;
-    outline: none;
+  display:block;
+  width:100%;
+  height:48px;
+  margin-bottom:16px;
+  padding:10px 16px;
+  background:#f0f7f3;
+  border:1px solid #e2ede6;
+  border-radius:10px;
+  font-size:15px;
+  outline:none;
 }
 
 #studentStart input:focus {
-    border-color: var(--primary-accent);
-    background: var(--white);
+  border-color:#339763;
+  background:#fff;
 }
 
 .quiz-btn {
-    display: block;
-    width: 100%;
-    min-height: 48px;
-    margin-top: 16px;
-    padding: 10px 16px;
-    background: var(--primary-forest);
-    color: var(--white);
-    border: 0;
-    border-radius: 10px;
-    font-family: Arial, sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background .2s ease, transform .2s ease;
-    position: relative;
-    z-index: 2;
+  display:block;
+  width:100%;
+  min-height:48px;
+  margin-top:16px;
+  padding:10px 16px;
+  background:#16623d;
+  color:#fff;
+  border:0;
+  border-radius:10px;
+  font-family:Arial,sans-serif;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  transition:background .2s ease, transform .2s ease;
 }
 
 .quiz-btn:hover {
-    background: var(--primary-dark);
+  background:#073827;
 }
 
 .quiz-btn:active {
-    transform: scale(.98);
+  transform:scale(.98);
 }
 
 .quiz-btn:disabled {
-    opacity: .6;
-    cursor: not-allowed;
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 .mode-btn-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 15px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:15px;
 }
 
 .mode-btn {
-    display: block;
-    width: 100%;
-    min-height: 48px;
-    padding: 14px;
-    background: #f0f7f3;
-    border: 2px solid #e2ede6;
-    color: var(--primary-dark);
-    border-radius: 10px;
-    font-family: Arial, sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all .2s ease;
-    position: relative;
-    z-index: 2;
+  width:100%;
+  min-height:48px;
+  padding:14px;
+  background:#f0f7f3;
+  border:2px solid #e2ede6;
+  color:#073827;
+  border-radius:10px;
+  font-family:Arial,sans-serif;
+  font-weight:700;
+  font-size:14px;
+  cursor:pointer;
+  transition:all .2s ease;
 }
 
 .mode-btn:hover {
-    border-color: var(--primary-accent);
-    background: var(--white);
+  border-color:#339763;
+  background:#fff;
 }
 
 .mode-btn:active {
-    transform: scale(.98);
+  transform:scale(.98);
 }
 
 #countdownOverlay {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(7,56,39,.75);
-    z-index: 99999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity .25s ease, visibility .25s ease;
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  background:rgba(7,56,39,.75);
+  z-index:99999;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .25s ease,visibility .25s ease;
 }
 
 #countdownOverlay.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
 }
 
 .countdown-card {
-    background: var(--white);
-    padding: 40px 60px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,.15);
+  background:#fff;
+  padding:40px 60px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
 
 .countdown-card h3 {
-    color: var(--primary-dark);
-    font-family: Arial, sans-serif;
-    margin-bottom: 10px;
-    font-size: 18px;
+  color:#073827;
+  font-family:Arial,sans-serif;
+  margin-bottom:10px;
+  font-size:18px;
 }
 
 #countdownNumber {
-    font-family: Arial, sans-serif;
-    font-size: 5rem;
-    font-weight: 800;
-    color: var(--primary-forest);
+  font-family:Arial,sans-serif;
+  font-size:5rem;
+  font-weight:800;
+  color:#16623d;
 }
 
 #studentInfo {
-    width: 92%;
-    max-width: 580px;
-    margin: 0 auto 16px;
-    padding: 18px 20px;
-    background: var(--white);
-    border: 1px solid #e2ede6;
-    border-radius: 16px;
-    box-shadow: 0 2px 4px rgba(7,56,39,.02);
-    display: none;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+  width:92%;
+  max-width:580px;
+  margin:0 auto 16px;
+  padding:18px 20px;
+  background:#fff;
+  border:1px solid #e2ede6;
+  border-radius:16px;
+  box-shadow:0 2px 4px rgba(7,56,39,.02);
+  display:none;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
 #studentInfo p {
-    font-size: 13px;
-    font-weight: 500;
+  font-size:13px;
+  font-weight:500;
 }
 
 #showName,
 #showSection {
-    color: var(--primary-dark);
-    font-weight: 700;
+  color:#073827;
+  font-weight:700;
 }
 
 #score,
 #quizCount,
 #timerDisplay {
-    background: #f0f7f3;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #e2ede6;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--primary-forest);
+  background:#f0f7f3;
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid #e2ede6;
+  text-align:center;
+  font-size:13px;
+  font-weight:600;
+  color:#16623d;
 }
 
 #timerDisplay {
-    grid-column: span 2;
-    background: var(--primary-dark);
-    color: var(--white);
+  grid-column:span 2;
+  background:#073827;
+  color:#fff;
 }
 
 #quizArea {
-    max-width: 580px;
+  max-width:580px;
 }
 
 #category {
-    font-family: Arial, sans-serif;
-    margin-bottom: 16px;
-    color: var(--primary-dark);
-    font-size: 18px;
-    font-weight: 700;
-    text-align: center;
-    line-height: 1.4;
+  font-family:Arial,sans-serif;
+  margin-bottom:16px;
+  color:#073827;
+  font-size:18px;
+  font-weight:700;
+  text-align:center;
 }
 
 #displayGiven {
-    width: 100%;
-    min-height: 70px;
-    margin-bottom: 20px;
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-dark);
-    background: #f0f7f3;
-    border: 1px solid #e2ede6;
-    border-radius: 12px;
-    font-size: 22px;
-    font-weight: 700;
-    text-align: center;
-    line-height: 1.5;
-    overflow-wrap: anywhere;
+  width:100%;
+  min-height:70px;
+  margin-bottom:20px;
+  padding:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#073827;
+  background:#f0f7f3;
+  border:1px solid #e2ede6;
+  border-radius:12px;
+  font-size:22px;
+  font-weight:700;
+  text-align:center;
+  line-height:1.5;
+  overflow-wrap:anywhere;
 }
 
 #answerBox {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 20px 0 16px;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:20px 0 16px;
 }
 
 #answerBox input {
-    width: 120px;
-    height: 48px;
-    padding: 10px;
-    font-size: 18px;
-    font-weight: 700;
-    text-align: center;
-    border: 2px solid #e2ede6;
-    border-radius: 10px;
-    background: var(--white);
-    outline: none;
+  width:120px;
+  height:48px;
+  padding:10px;
+  font-size:18px;
+  font-weight:700;
+  text-align:center;
+  border:2px solid #e2ede6;
+  border-radius:10px;
+  background:#fff;
+  outline:none;
 }
 
 #answerBox input:focus {
-    border-color: var(--primary-accent);
+  border-color:#339763;
 }
 
 #outAns {
-    width: 100%;
-    margin: 16px 0;
-    padding: 14px;
-    background: #f0f7f3;
-    border: 1px solid #e2ede6;
-    border-radius: 10px;
-    color: var(--primary-dark);
-    font-size: 13px;
-    font-weight: 500;
-    text-align: center;
-    display: none;
-    line-height: 1.5;
+  width:100%;
+  margin:16px 0;
+  padding:14px;
+  background:#f0f7f3;
+  border:1px solid #e2ede6;
+  border-radius:10px;
+  color:#073827;
+  font-size:13px;
+  font-weight:500;
+  text-align:center;
+  display:none;
+  line-height:1.5;
 }
 
 #quizResult {
-    max-width: 580px;
-    display: none;
-    text-align: center;
+  max-width:580px;
+  display:none;
+  text-align:center;
 }
 
 #quizResult h2 {
-    margin: 0 0 20px;
-    color: var(--primary-dark);
-    font-family: Arial, sans-serif;
-    font-size: 22px;
-    font-weight: 800;
+  margin:0 0 20px;
+  color:#073827;
+  font-family:Arial,sans-serif;
+  font-size:22px;
+  font-weight:800;
 }
 
 .result-info {
-    margin: 10px 0;
-    padding: 12px;
-    background: #f0f7f3;
-    border: 1px solid #e2ede6;
-    border-radius: 10px;
-    color: #334d42;
-    font-size: 14px;
-    overflow-wrap: anywhere;
+  margin:10px 0;
+  padding:12px;
+  background:#f0f7f3;
+  border:1px solid #e2ede6;
+  border-radius:10px;
+  color:#334d42;
+  font-size:14px;
 }
 
 .result-info strong {
-    color: var(--primary-dark);
-    font-weight: 700;
+  color:#073827;
+  font-weight:700;
 }
 
 #resultScore {
-    margin: 20px 0;
-    color: var(--primary-forest);
-    font-family: Arial, sans-serif;
-    font-size: 42px;
-    font-weight: 800;
-    line-height: 1;
+  margin:20px 0;
+  color:#16623d;
+  font-family:Arial,sans-serif;
+  font-size:42px;
+  font-weight:800;
+  line-height:1;
 }
 
 .site-footer {
-    width: 100%;
-    background: var(--primary-dark);
-    color: var(--white);
-    padding: 25px 32px;
+  width:100%;
+  background:#073827;
+  color:#fff;
+  padding:25px 32px;
 }
 
 .footer-bottom {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    font-size: .8rem;
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  font-size:.8rem;
 }
 
 @media(max-width:768px) {
-    .hamburger-btn {
-        display: block;
-    }
+  .hamburger-btn {
+    display:block;
+  }
 
-    .nav-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: var(--white);
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: 12px 20px;
-        border-bottom: 1px solid var(--border-color);
-        box-shadow: 0 10px 25px rgba(7,56,39,.1);
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        visibility: hidden;
-        transition: all .3s ease;
-    }
+  .nav-links {
+    position:absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    background:#fff;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding:12px 20px;
+    border-bottom:1px solid #d8eade;
+    box-shadow:0 10px 25px rgba(7,56,39,.1);
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    visibility:hidden;
+    transition:all .3s ease;
+  }
 
-    .nav-links.mobile-open {
-        max-height: 550px;
-        overflow-y: auto;
-        opacity: 1;
-        visibility: visible;
-    }
+  .nav-links.mobile-open {
+    max-height:550px;
+    overflow-y:auto;
+    opacity:1;
+    visibility:visible;
+  }
 
-    .nav-item {
-        width: 100%;
-    }
+  .nav-item {
+    width:100%;
+  }
 
-    .nav-link,
-    .nav-btn-toggle {
-        width: 100%;
-        padding: 10px 14px;
-        justify-content: space-between;
-        font-size: .85rem;
-        border-radius: 6px;
-        margin: 2px 0;
-    }
+  .nav-link,
+  .nav-btn-toggle {
+    width:100%;
+    padding:10px 14px;
+    justify-content:space-between;
+    font-size:.85rem;
+    border-radius:6px;
+    margin:2px 0;
+  }
 
-    .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        border: none;
-        background: var(--tint-light);
-        margin: 4px 0 8px;
-        padding: 4px;
-        width: 100%;
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        visibility: hidden;
-        transform: none;
-        transition: all .3s ease;
-    }
+  .dropdown-menu {
+    position:static;
+    box-shadow:none;
+    border:none;
+    background:#e7f7ee;
+    margin:4px 0 8px;
+    padding:4px;
+    width:100%;
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    visibility:hidden;
+    transform:none;
+    transition:all .3s ease;
+  }
 
-    .nav-item.dropdown.mobile-dropdown-active .dropdown-menu {
-        max-height: 300px;
-        opacity: 1;
-        visibility: visible;
-    }
+  .nav-item.dropdown.mobile-dropdown-active .dropdown-menu {
+    max-height:300px;
+    opacity:1;
+    visibility:visible;
+  }
 
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-    }
+  .footer-bottom {
+    flex-direction:column;
+    text-align:center;
+  }
 }
 
 @media(max-width:600px) {
-    .quiz-section {
-        padding: 30px 0 45px;
-    }
+  .quiz-section {
+    padding:30px 0 45px;
+  }
 
-    .quiz-title {
-        font-size: 22px;
-    }
+  .quiz-title {
+    font-size:22px;
+  }
 
-    #studentStart,
-    #modeSelect,
-    #quizArea,
-    #quizResult {
-        width: 94%;
-        padding: 24px;
-    }
+  #studentStart,
+  #modeSelect,
+  #quizArea,
+  #quizResult {
+    width:94%;
+    padding:24px;
+  }
 
-    #studentInfo {
-        width: 94%;
-        padding: 15px;
-    }
+  #studentInfo {
+    width:94%;
+    padding:15px;
+  }
 
-    #displayGiven {
-        font-size: 18px;
-        min-height: 65px;
-    }
+  #displayGiven {
+    font-size:18px;
+    min-height:65px;
+  }
 
-    #answerBox input {
-        width: 100px;
-    }
+  #answerBox input {
+    width:100px;
+  }
 
-    .countdown-card {
-        padding: 35px 45px;
-    }
+  .countdown-card {
+    padding:35px 45px;
+  }
 
-    #countdownNumber {
-        font-size: 4rem;
-    }
+  #countdownNumber {
+    font-size:4rem;
+  }
 }
 
 @media(max-width:400px) {
-    .nav-tagline {
-        display: none;
-    }
+  .nav-tagline {
+    display:none;
+  }
 
-    #studentInfo {
-        grid-template-columns: 1fr;
-    }
+  #studentInfo {
+    grid-template-columns:1fr;
+  }
 
-    #timerDisplay {
-        grid-column: span 1;
-    }
+  #timerDisplay {
+    grid-column:span 1;
+  }
 
-    #studentStart,
-    #modeSelect,
-    #quizArea,
-    #quizResult {
-        padding: 20px;
-    }
+  #studentStart,
+  #modeSelect,
+  #quizArea,
+  #quizResult {
+    padding:20px;
+  }
 
-    .quiz-title {
-        font-size: 20px;
-    }
+  .quiz-title {
+    font-size:20px;
+  }
 
-    #resultScore {
-        font-size: 34px;
-    }
+  #resultScore {
+    font-size:34px;
+  }
 }
 </style>
 </head>
@@ -598,23 +578,19 @@ button {
 <main>
 
 <section class="cover-section" id="cover">
+  <div class="cover-wrapper">
+    <img
+      src="../../assets/img/background/Banner Of Project FACTR.png"
+      alt="ProjectFactr Mathematics Learning Platform Banner"
+      class="cover-image"
+      id="main-cover-image"
+    >
 
-    <div class="cover-wrapper">
-
-        <img
-            src="../../assets/img/background/Banner Of Project FACTR.png"
-            alt="ProjectFactr Mathematics Learning Platform Banner"
-            class="cover-image"
-            id="main-cover-image"
-        >
-
-        <div class="cover-content">
-            <h1>Operations on Integers</h1>
-            <h2></h2>
-        </div>
-
+    <div class="cover-content">
+      <h1>Operations on Integers</h1>
+      <h2></h2>
     </div>
-
+  </div>
 </section>
 
 <div class="quiz-space-bar"></div>
@@ -624,152 +600,128 @@ button {
 <h1 class="quiz-title">Operations on Integers Quiz</h1>
 
 <div id="studentStart">
+  <h2>Enter Student Details</h2>
 
-    <h2>Enter Student Details</h2>
+  <input
+    type="text"
+    id="fullName"
+    placeholder="Full Name"
+    autocomplete="name"
+  >
 
-    <input
-        type="text"
-        id="fullName"
-        placeholder="Full Name"
-        autocomplete="name"
-    >
+  <input
+    type="text"
+    id="section"
+    placeholder="Grade & Section"
+  >
 
-    <input
-        type="text"
-        id="section"
-        placeholder="Grade & Section"
-    >
-
-    <button type="button" id="nextToModeBtn" class="quiz-btn">
-        Next: Choose Quiz Type
-    </button>
-
+  <button type="button" id="nextToModeBtn" class="quiz-btn">
+    Next: Choose Quiz Type
+  </button>
 </div>
 
 <div id="modeSelect">
+  <h2>Select Quiz Type</h2>
 
-    <h2>Select Quiz Type</h2>
+  <div class="mode-btn-group">
+    <button type="button" class="mode-btn" data-mode="add_sub">
+      Addition &amp; Subtraction of Integers
+    </button>
 
-    <div class="mode-btn-group">
+    <button type="button" class="mode-btn" data-mode="multiplication">
+      Multiplication of Integers
+    </button>
 
-        <button type="button" class="mode-btn" data-mode="add_sub">
-            Addition &amp; Subtraction of Integers
-        </button>
+    <button type="button" class="mode-btn" data-mode="division">
+      Division of Integers
+    </button>
 
-        <button type="button" class="mode-btn" data-mode="multiplication">
-            Multiplication of Integers
-        </button>
-
-        <button type="button" class="mode-btn" data-mode="division">
-            Division of Integers
-        </button>
-
-        <button type="button" class="mode-btn" data-mode="randomize">
-            Randomize (All Operations)
-        </button>
-
-    </div>
-
+    <button type="button" class="mode-btn" data-mode="randomize">
+      Randomize (All Operations)
+    </button>
+  </div>
 </div>
 
 <div id="countdownOverlay">
-
-    <div class="countdown-card">
-        <h3>GET READY</h3>
-        <div id="countdownNumber">3</div>
-    </div>
-
+  <div class="countdown-card">
+    <h3>GET READY</h3>
+    <div id="countdownNumber">3</div>
+  </div>
 </div>
 
 <div id="studentInfo">
+  <p>Name: <span id="showName"></span></p>
+  <p>Section: <span id="showSection"></span></p>
 
-    <p>Name: <span id="showName"></span></p>
-
-    <p>Section: <span id="showSection"></span></p>
-
-    <div id="score">Score: 0 / 10</div>
-
-    <div id="quizCount">Question: 1 / 10</div>
-
-    <div id="timerDisplay">Time Elapsed: 0:00</div>
-
+  <div id="score">Score: 0 / 10</div>
+  <div id="quizCount">Question: 1 / 10</div>
+  <div id="timerDisplay">Time Elapsed: 0:00</div>
 </div>
 
 <div id="quizArea">
+  <div id="category">Topic</div>
+  <div id="displayGiven">Question</div>
 
-    <div id="category">Topic</div>
+  <div id="answerBox"></div>
+  <div id="outAns"></div>
 
-    <div id="displayGiven">Question</div>
+  <button type="button" class="quiz-btn" id="submitBtn">
+    Submit Answer
+  </button>
 
-    <div id="answerBox"></div>
+  <button
+    type="button"
+    class="quiz-btn"
+    id="nextBtn"
+    style="display:none;background:#339763;"
+  >
+    Next Question
+  </button>
 
-    <div id="outAns"></div>
-
-    <button type="button" class="quiz-btn" id="submitBtn">
-        Submit Answer
-    </button>
-
-    <button
-        type="button"
-        class="quiz-btn"
-        id="nextBtn"
-        style="display:none;background:#339763;"
-    >
-        Next Question
-    </button>
-
-    <button
-        type="button"
-        class="quiz-btn"
-        id="backToModeBtn"
-        style="display:none;background:#073827;"
-    >
-        Back to Quiz Type
-    </button>
-
+  <button
+    type="button"
+    class="quiz-btn"
+    id="backToModeBtn"
+    style="display:none;background:#073827;"
+  >
+    Back to Quiz Type
+  </button>
 </div>
 
 <div id="quizResult">
+  <h2>Quiz Finished!</h2>
 
-    <h2>Quiz Finished!</h2>
+  <div class="result-info">
+    Name: <strong id="resultName"></strong>
+  </div>
 
-    <div class="result-info">
-        Name: <strong id="resultName"></strong>
-    </div>
+  <div class="result-info">
+    Section: <strong id="resultSection"></strong>
+  </div>
 
-    <div class="result-info">
-        Section: <strong id="resultSection"></strong>
-    </div>
+  <div class="result-info">
+    Quiz Type: <strong id="resultQuizType"></strong>
+  </div>
 
-    <div class="result-info">
-        Quiz Type: <strong id="resultQuizType"></strong>
-    </div>
+  <div id="resultScore">0/10</div>
 
-    <div id="resultScore">0/10</div>
+  <div class="result-info">
+    Time: <strong id="resultTime">00:00</strong>
+  </div>
 
-    <div class="result-info">
-        Time: <strong id="resultTime">00:00</strong>
-    </div>
-
-    <button type="button" class="quiz-btn" id="resultBackBtn">
-        Back to Quiz Types
-    </button>
-
+  <button type="button" class="quiz-btn" id="resultBackBtn">
+    Back to Quiz Types
+  </button>
 </div>
 
 </section>
 </main>
 
 <footer class="site-footer">
-
-    <div class="footer-bottom">
-
-        <div>&copy; 2026 ProjectFactr. All rights reserved.</div>
-
-        <div>Mathematics Learning &amp; Curriculum Platform</div>
-
-    </div>
-
+  <div class="footer-bottom">
+    <div>&copy; 2026 ProjectFactr. All rights reserved.</div>
+    <div>Mathematics Learning &amp; Curriculum Platform</div>
+  </div>
 </footer>
 
 <script>
@@ -799,589 +751,527 @@ const TOTAL_QUESTIONS = 10;
 
 const $ = id => document.getElementById(id);
 
-
 /* =========================================================
    STUDENT DETAILS
 ========================================================= */
 
 function proceedToModeSelect() {
+  studentName = $("fullName").value.trim();
+  studentSection = $("section").value.trim();
 
-    studentName = $("fullName").value.trim();
-    studentSection = $("section").value.trim();
+  if (!studentName || !studentSection) {
+    alert("Please enter your name and section before choosing a quiz type.");
+    return;
+  }
 
-    if (!studentName || !studentSection) {
-        alert("Please enter your name and section before choosing a quiz type.");
-        return;
-    }
-
-    $("studentStart").style.display = "none";
-    $("modeSelect").style.display = "block";
+  $("studentStart").style.display = "none";
+  $("modeSelect").style.display = "block";
 }
-
 
 /* =========================================================
    START QUIZ
 ========================================================= */
 
 function startQuizWithCountdown(mode) {
+  clearInterval(timerInterval);
+  clearInterval(countdownInterval);
 
-    clearInterval(timerInterval);
-    clearInterval(countdownInterval);
+  selectedMode = mode;
 
-    selectedMode = mode;
+  quizNumber = 0;
+  score = 0;
+  secondsElapsed = 0;
+  answered = false;
 
-    quizNumber = 0;
-    score = 0;
-    secondsElapsed = 0;
+  usedQuestions.clear();
 
-    answered = false;
-    usedQuestions.clear();
+  $("showName").textContent = studentName;
+  $("showSection").textContent = studentSection;
 
-    $("showName").textContent = studentName;
-    $("showSection").textContent = studentSection;
+  $("score").textContent = "Score: 0 / 10";
+  $("quizCount").textContent = "Question: 1 / 10";
+  $("timerDisplay").textContent = "Time Elapsed: 0:00";
 
-    $("score").textContent = "Score: 0 / 10";
-    $("quizCount").textContent = "Question: 1 / 10";
-    $("timerDisplay").textContent = "Time Elapsed: 0:00";
+  $("modeSelect").style.display = "none";
+  $("quizResult").style.display = "none";
+  $("quizArea").style.display = "none";
+  $("studentInfo").style.display = "none";
 
-    $("modeSelect").style.display = "none";
-    $("quizResult").style.display = "none";
-    $("quizArea").style.display = "none";
-    $("studentInfo").style.display = "none";
+  $("countdownOverlay").classList.add("active");
 
-    $("countdownOverlay").classList.add("active");
+  let count = 3;
+  $("countdownNumber").textContent = count;
 
-    let count = 3;
+  countdownInterval = setInterval(() => {
+    count--;
 
-    $("countdownNumber").textContent = count;
+    if (count > 0) {
+      $("countdownNumber").textContent = count;
+    } else if (count === 0) {
+      $("countdownNumber").textContent = "GO!";
+    } else {
+      clearInterval(countdownInterval);
+      countdownInterval = null;
 
-    countdownInterval = setInterval(() => {
+      $("countdownOverlay").classList.remove("active");
 
-        count--;
+      $("studentInfo").style.display = "grid";
+      $("quizArea").style.display = "block";
 
-        if (count > 0) {
-
-            $("countdownNumber").textContent = count;
-
-        } else if (count === 0) {
-
-            $("countdownNumber").textContent = "GO!";
-
-        } else {
-
-            clearInterval(countdownInterval);
-            countdownInterval = null;
-
-            $("countdownOverlay").classList.remove("active");
-
-            $("studentInfo").style.display = "grid";
-            $("quizArea").style.display = "block";
-
-            startTimer();
-            newQuestion();
-        }
-
-    }, 1000);
+      startTimer();
+      newQuestion();
+    }
+  }, 1000);
 }
-
 
 /* =========================================================
    TIMER
 ========================================================= */
 
 function startTimer() {
+  clearInterval(timerInterval);
 
-    clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    secondsElapsed++;
 
-    timerInterval = setInterval(() => {
+    const mins = Math.floor(secondsElapsed / 60);
+    const secs = secondsElapsed % 60;
 
-        secondsElapsed++;
-
-        const mins = Math.floor(secondsElapsed / 60);
-        const secs = secondsElapsed % 60;
-
-        $("timerDisplay").textContent =
-            "Time Elapsed: " +
-            mins + ":" +
-            String(secs).padStart(2, "0");
-
-    }, 1000);
+    $("timerDisplay").textContent =
+      "Time Elapsed: " + mins + ":" + String(secs).padStart(2, "0");
+  }, 1000);
 }
-
 
 /* =========================================================
    RANDOM INTEGER
 ========================================================= */
 
 function getRandomInteger(forceTwoDigit = false) {
+  let number;
 
-    let number;
+  if (forceTwoDigit) {
+    number = Math.floor(Math.random() * 21) + 10;
+  } else {
+    number = Math.floor(Math.random() * 9) + 1;
+  }
 
-    if (forceTwoDigit) {
-        number = Math.floor(Math.random() * 21) + 10;
-    } else {
-        number = Math.floor(Math.random() * 9) + 1;
-    }
+  if (Math.random() < 0.5) {
+    number *= -1;
+  }
 
-    if (Math.random() < 0.5) {
-        number *= -1;
-    }
-
-    return number;
+  return number;
 }
-
 
 /* =========================================================
    FORMAT INTEGER
 ========================================================= */
 
 function formatInt(number) {
-
-    return number < 0
-        ? "(" + number + ")"
-        : String(number);
+  return number < 0 ? "(" + number + ")" : String(number);
 }
-
 
 /* =========================================================
    GENERATE DIVISION QUESTION
 ========================================================= */
 
 function generateDivision(twoDigit = false) {
+  const quotient = getRandomInteger(false);
 
-    const quotient = getRandomInteger(false);
+  let divisor;
 
-    let divisor;
+  do {
+    divisor = getRandomInteger(twoDigit);
+  } while (
+    divisor === 0 ||
+    Math.abs(divisor * quotient) > 30
+  );
 
-    do {
-
-        divisor = getRandomInteger(twoDigit);
-
-    } while (
-        divisor === 0 ||
-        Math.abs(divisor * quotient) > 30
-    );
-
-    return {
-        a: divisor * quotient,
-        b: divisor,
-        operation: "÷",
-        answer: quotient
-    };
+  return {
+    a: divisor * quotient,
+    b: divisor,
+    operation: "÷",
+    answer: quotient
+  };
 }
-
 
 /* =========================================================
    NEW QUESTION
 ========================================================= */
 
 function newQuestion() {
+  if (quizNumber >= TOTAL_QUESTIONS) {
+    showQuizSummary();
+    return;
+  }
 
-    if (quizNumber >= TOTAL_QUESTIONS) {
-        showQuizSummary();
-        return;
+  answered = false;
+
+  $("outAns").style.display = "none";
+  $("outAns").textContent = "";
+
+  $("submitBtn").style.display = "block";
+  $("nextBtn").style.display = "none";
+  $("backToModeBtn").style.display = "none";
+
+  $("quizCount").textContent =
+    "Question: " + (quizNumber + 1) + " / " + TOTAL_QUESTIONS;
+
+  $("score").textContent = "Score: " + score + " / 10";
+
+  let a, b, operation, answer;
+  let questionKey = "";
+
+  let attempts = 0;
+
+  while (attempts < 1000) {
+    attempts++;
+
+    const firstTwoDigit = (quizNumber + 1) % 2 === 0;
+    const secondTwoDigit = !firstTwoDigit;
+
+    if (selectedMode === "add_sub") {
+      a = getRandomInteger(firstTwoDigit);
+      b = getRandomInteger(secondTwoDigit);
+
+      operation = Math.random() < 0.5 ? "+" : "−";
+
+      answer = operation === "+" ? a + b : a - b;
+
+      questionKey = "addsub-" + a + operation + b;
     }
 
-    answered = false;
+    else if (selectedMode === "multiplication") {
+      a = getRandomInteger(firstTwoDigit);
+      b = getRandomInteger(secondTwoDigit);
 
-    $("outAns").style.display = "none";
-    $("outAns").textContent = "";
+      operation = "×";
+      answer = a * b;
 
-    $("submitBtn").style.display = "block";
-    $("nextBtn").style.display = "none";
-    $("backToModeBtn").style.display = "none";
-
-    $("quizCount").textContent =
-        "Question: " + (quizNumber + 1) + " / " + TOTAL_QUESTIONS;
-
-    $("score").textContent =
-        "Score: " + score + " / 10";
-
-    let a, b, operation, answer;
-
-    let questionKey = "";
-    let attempts = 0;
-
-    while (attempts < 1000) {
-
-        attempts++;
-
-        const firstTwoDigit = (quizNumber + 1) % 2 === 0;
-        const secondTwoDigit = !firstTwoDigit;
-
-        if (selectedMode === "add_sub") {
-
-            a = getRandomInteger(firstTwoDigit);
-            b = getRandomInteger(secondTwoDigit);
-
-            operation = Math.random() < 0.5 ? "+" : "−";
-
-            answer = operation === "+"
-                ? a + b
-                : a - b;
-
-            questionKey = "addsub-" + a + operation + b;
-
-        } else if (selectedMode === "multiplication") {
-
-            a = getRandomInteger(firstTwoDigit);
-            b = getRandomInteger(secondTwoDigit);
-
-            operation = "×";
-            answer = a * b;
-
-            questionKey = "multiply-" + a + "x" + b;
-
-        } else if (selectedMode === "division") {
-
-            const q = generateDivision(quizNumber % 2 === 0);
-
-            a = q.a;
-            b = q.b;
-            operation = q.operation;
-            answer = q.answer;
-
-            questionKey = "division-" + a + "div" + b;
-
-        } else if (selectedMode === "randomize") {
-
-            const operations = [
-                "addition",
-                "subtraction",
-                "multiplication",
-                "division"
-            ];
-
-            const randomOperation =
-                operations[Math.floor(Math.random() * operations.length)];
-
-            if (randomOperation === "addition") {
-
-                a = getRandomInteger(firstTwoDigit);
-                b = getRandomInteger(secondTwoDigit);
-
-                operation = "+";
-                answer = a + b;
-
-                questionKey = "random-add-" + a + "-" + b;
-
-            } else if (randomOperation === "subtraction") {
-
-                a = getRandomInteger(firstTwoDigit);
-                b = getRandomInteger(secondTwoDigit);
-
-                operation = "−";
-                answer = a - b;
-
-                questionKey = "random-sub-" + a + "-" + b;
-
-            } else if (randomOperation === "multiplication") {
-
-                a = getRandomInteger(firstTwoDigit);
-                b = getRandomInteger(secondTwoDigit);
-
-                operation = "×";
-                answer = a * b;
-
-                questionKey = "random-multiply-" + a + "-" + b;
-
-            } else {
-
-                const q = generateDivision(firstTwoDigit);
-
-                a = q.a;
-                b = q.b;
-                operation = q.operation;
-                answer = q.answer;
-
-                questionKey = "random-division-" + a + "-" + b;
-            }
-        }
-
-        if (!usedQuestions.has(questionKey)) {
-
-            usedQuestions.add(questionKey);
-            break;
-        }
+      questionKey = "multiply-" + a + "x" + b;
     }
 
-    if (attempts >= 1000) {
+    else if (selectedMode === "division") {
+      const q = generateDivision(quizNumber % 2 === 0);
 
-        a = getRandomInteger(false);
-        b = getRandomInteger(false);
+      a = q.a;
+      b = q.b;
+      operation = q.operation;
+      answer = q.answer;
+
+      questionKey = "division-" + a + "div" + b;
+    }
+
+    else if (selectedMode === "randomize") {
+      const operations = [
+        "addition",
+        "subtraction",
+        "multiplication",
+        "division"
+      ];
+
+      const randomOperation =
+        operations[Math.floor(Math.random() * operations.length)];
+
+      if (randomOperation === "addition") {
+        a = getRandomInteger(firstTwoDigit);
+        b = getRandomInteger(secondTwoDigit);
 
         operation = "+";
         answer = a + b;
+
+        questionKey = "random-add-" + a + "-" + b;
+      }
+
+      else if (randomOperation === "subtraction") {
+        a = getRandomInteger(firstTwoDigit);
+        b = getRandomInteger(secondTwoDigit);
+
+        operation = "−";
+        answer = a - b;
+
+        questionKey = "random-sub-" + a + "-" + b;
+      }
+
+      else if (randomOperation === "multiplication") {
+        a = getRandomInteger(firstTwoDigit);
+        b = getRandomInteger(secondTwoDigit);
+
+        operation = "×";
+        answer = a * b;
+
+        questionKey = "random-multiply-" + a + "-" + b;
+      }
+
+      else {
+        const q = generateDivision(firstTwoDigit);
+
+        a = q.a;
+        b = q.b;
+        operation = q.operation;
+        answer = q.answer;
+
+        questionKey = "random-division-" + a + "-" + b;
+      }
     }
 
-    const categoryNames = {
+    if (!usedQuestions.has(questionKey)) {
+      usedQuestions.add(questionKey);
+      break;
+    }
+  }
 
-        add_sub: "Addition & Subtraction of Integers",
+  /* Fallback */
+  if (attempts >= 1000) {
+    a = getRandomInteger(false);
+    b = getRandomInteger(false);
+    operation = "+";
+    answer = a + b;
+  }
 
-        multiplication: "Multiplication of Integers",
+  const categoryNames = {
+    add_sub: "Addition & Subtraction of Integers",
+    multiplication: "Multiplication of Integers",
+    division: "Division of Integers",
+    randomize: "Randomized Integer Operations"
+  };
 
-        division: "Division of Integers",
+  $("category").textContent = categoryNames[selectedMode];
 
-        randomize: "Randomized Integer Operations"
-    };
+  $("displayGiven").textContent =
+    formatInt(a) + " " + operation + " " + formatInt(b) + " = ?";
 
-    $("category").textContent = categoryNames[selectedMode];
+  /* Create answer input safely */
+  const input = document.createElement("input");
 
-    $("displayGiven").textContent =
-        formatInt(a) + " " + operation + " " + formatInt(b) + " = ?";
+  input.type = "text";
+  input.id = "userAnswer";
+  input.placeholder = "Enter answer";
+  input.inputMode = "numeric";
+  input.autocomplete = "off";
+  input.setAttribute("aria-label", "Your answer");
 
-    const input = document.createElement("input");
+  $("answerBox").replaceChildren(input);
 
-    input.type = "text";
-    input.id = "userAnswer";
-    input.placeholder = "Enter answer";
-    input.inputMode = "numeric";
-    input.autocomplete = "off";
-    input.setAttribute("aria-label", "Your answer");
+  correctAnswer = answer;
 
-    const answerBox = $("answerBox");
-
-    answerBox.innerHTML = "";
-    answerBox.appendChild(input);
-
-    correctAnswer = answer;
-
-    input.focus();
+  input.focus();
 }
-
 
 /* =========================================================
    CHECK ANSWER
 ========================================================= */
 
 function checkAns() {
+  if (answered) return;
 
-    if (answered) return;
+  const answerInput = $("userAnswer");
 
-    const answerInput = $("userAnswer");
+  if (!answerInput) return;
 
-    if (!answerInput) return;
+  let answerValue = answerInput.value.trim();
 
-    let answerValue = answerInput.value.trim();
+  if (answerValue === "") {
+    alert("Please enter your answer.");
+    answerInput.focus();
+    return;
+  }
 
-    if (answerValue === "") {
+  answerValue = answerValue
+    .replace(/−/g, "-")
+    .replace(/–/g, "-");
 
-        alert("Please enter your answer.");
-        answerInput.focus();
+  if (!/^-?\d+$/.test(answerValue)) {
+    alert("Please enter a valid integer.");
+    answerInput.focus();
+    return;
+  }
 
-        return;
-    }
+  const userAnswer = Number(answerValue);
 
-    answerValue = answerValue
-        .replace(/−/g, "-")
-        .replace(/–/g, "-");
+  if (!Number.isSafeInteger(userAnswer)) {
+    alert("Please enter a valid whole-number integer.");
+    answerInput.focus();
+    return;
+  }
 
-    if (!/^-?\d+$/.test(answerValue)) {
+  answered = true;
 
-        alert("Please enter a valid integer.");
-        answerInput.focus();
+  const isCorrect = userAnswer === correctAnswer;
 
-        return;
-    }
+  if (isCorrect) {
+    score++;
 
-    const userAnswer = Number(answerValue);
+    $("outAns").innerHTML =
+      '<span style="color:#16623d;font-weight:700;">✓ Correct!</span><br>' +
+      "Correct answer: " + correctAnswer;
+  } else {
+    $("outAns").innerHTML =
+      '<span style="color:#dc2626;font-weight:700;">✗ Wrong!</span><br>' +
+      "Correct answer: " + correctAnswer;
+  }
 
-    if (!Number.isSafeInteger(userAnswer)) {
+  $("outAns").style.display = "block";
 
-        alert("Please enter a valid whole-number integer.");
-        return;
-    }
+  quizNumber++;
 
-    answered = true;
+  $("score").textContent = "Score: " + score + " / 10";
 
-    const isCorrect = userAnswer === correctAnswer;
+  $("quizCount").textContent =
+    "Question: " + quizNumber + " / " + TOTAL_QUESTIONS;
 
-    if (isCorrect) {
+  $("submitBtn").style.display = "none";
+  $("nextBtn").style.display = "block";
 
-        score++;
-
-        $("outAns").innerHTML =
-            '<span style="color:#16623d;font-weight:700;">✓ Correct!</span><br>' +
-            "Correct answer: " + correctAnswer;
-
-    } else {
-
-        $("outAns").innerHTML =
-            '<span style="color:#dc2626;font-weight:700;">✗ Wrong!</span><br>' +
-            "Correct answer: " + correctAnswer;
-    }
-
-    $("outAns").style.display = "block";
-
-    quizNumber++;
-
-    $("score").textContent =
-        "Score: " + score + " / 10";
-
-    $("quizCount").textContent =
-        "Question: " + quizNumber + " / 10";
-
-    $("submitBtn").style.display = "none";
-    $("nextBtn").style.display = "block";
-
-    $("nextBtn").textContent =
-        quizNumber >= TOTAL_QUESTIONS
-            ? "Show Summary Result"
-            : "Next Question";
+  $("nextBtn").textContent =
+    quizNumber >= TOTAL_QUESTIONS
+      ? "Show Summary Result"
+      : "Next Question";
 }
-
 
 /* =========================================================
    SUMMARY
 ========================================================= */
 
 function showQuizSummary() {
+  clearInterval(timerInterval);
+  clearInterval(countdownInterval);
 
-    clearInterval(timerInterval);
-    clearInterval(countdownInterval);
+  const mins = Math.floor(secondsElapsed / 60);
+  const secs = secondsElapsed % 60;
 
-    const mins = Math.floor(secondsElapsed / 60);
-    const secs = secondsElapsed % 60;
+  const finalTime =
+    String(mins).padStart(2, "0") + ":" +
+    String(secs).padStart(2, "0");
 
-    const finalTime =
-        String(mins).padStart(2, "0") + ":" +
-        String(secs).padStart(2, "0");
+  const quizTypeNames = {
+    add_sub: "Addition & Subtraction of Integers",
+    multiplication: "Multiplication of Integers",
+    division: "Division of Integers",
+    randomize: "Randomize (All Operations)"
+  };
 
-    const quizTypeNames = {
+  $("resultName").textContent = studentName;
+  $("resultSection").textContent = studentSection;
+  $("resultQuizType").textContent = quizTypeNames[selectedMode];
 
-        add_sub: "Addition & Subtraction of Integers",
+  $("resultScore").textContent = score + "/10";
+  $("resultTime").textContent = finalTime;
 
-        multiplication: "Multiplication of Integers",
-
-        division: "Division of Integers",
-
-        randomize: "Randomize (All Operations)"
-    };
-
-    $("resultName").textContent = studentName;
-    $("resultSection").textContent = studentSection;
-    $("resultQuizType").textContent = quizTypeNames[selectedMode];
-
-    $("resultScore").textContent = score + "/10";
-    $("resultTime").textContent = finalTime;
-
-    $("studentInfo").style.display = "none";
-    $("quizArea").style.display = "none";
-    $("quizResult").style.display = "block";
+  $("studentInfo").style.display = "none";
+  $("quizArea").style.display = "none";
+  $("quizResult").style.display = "block";
 }
-
 
 /* =========================================================
    BACK TO QUIZ TYPES
 ========================================================= */
 
 function backToQuizType() {
+  clearInterval(timerInterval);
+  clearInterval(countdownInterval);
 
-    clearInterval(timerInterval);
-    clearInterval(countdownInterval);
+  $("countdownOverlay").classList.remove("active");
 
-    $("countdownOverlay").classList.remove("active");
+  $("quizArea").style.display = "none";
+  $("studentInfo").style.display = "none";
+  $("quizResult").style.display = "none";
 
-    $("quizArea").style.display = "none";
-    $("studentInfo").style.display = "none";
-    $("quizResult").style.display = "none";
+  $("modeSelect").style.display = "block";
 
-    $("modeSelect").style.display = "block";
+  quizNumber = 0;
+  score = 0;
+  secondsElapsed = 0;
 
-    quizNumber = 0;
-    score = 0;
-    secondsElapsed = 0;
+  selectedMode = "";
+  correctAnswer = null;
+  answered = false;
 
-    selectedMode = "";
-    correctAnswer = null;
-    answered = false;
+  usedQuestions.clear();
 
-    usedQuestions.clear();
+  $("score").textContent = "Score: 0 / 10";
+  $("quizCount").textContent = "Question: 1 / 10";
+  $("timerDisplay").textContent = "Time Elapsed: 0:00";
 
-    $("score").textContent = "Score: 0 / 10";
-    $("quizCount").textContent = "Question: 1 / 10";
-    $("timerDisplay").textContent = "Time Elapsed: 0:00";
+  $("outAns").style.display = "none";
+  $("outAns").textContent = "";
 
-    $("outAns").style.display = "none";
-    $("outAns").textContent = "";
-
-    $("submitBtn").style.display = "block";
-    $("nextBtn").style.display = "none";
-    $("backToModeBtn").style.display = "none";
+  $("submitBtn").style.display = "block";
+  $("nextBtn").style.display = "none";
+  $("backToModeBtn").style.display = "none";
 }
 
-
 /* =========================================================
-   EVENT LISTENERS
+   BUTTON EVENT LISTENERS
+   Works whether the script loads before or after DOM ready.
 ========================================================= */
 
 function initializeQuiz() {
+  const nextToModeBtn = $("nextToModeBtn");
+  const submitBtn = $("submitBtn");
+  const nextBtn = $("nextBtn");
+  const backToModeBtn = $("backToModeBtn");
+  const resultBackBtn = $("resultBackBtn");
+  const answerBox = $("answerBox");
 
-    const nextButton = $("nextToModeBtn");
-    const submitButton = $("submitBtn");
-    const nextQuestionButton = $("nextBtn");
-    const resultBackButton = $("resultBackBtn");
-    const answerBox = $("answerBox");
+  if (
+    !nextToModeBtn ||
+    !submitBtn ||
+    !nextBtn ||
+    !backToModeBtn ||
+    !resultBackBtn ||
+    !answerBox
+  ) {
+    console.error("ProjectFactr quiz: One or more required elements are missing.");
+    return;
+  }
 
-    if (!nextButton || !submitButton || !nextQuestionButton ||
-        !resultBackButton || !answerBox) {
+  nextToModeBtn.addEventListener("click", proceedToModeSelect);
 
-        console.error("ProjectFactr Quiz: Required HTML elements are missing.");
-        return;
+  document.querySelectorAll(".mode-btn").forEach(button => {
+    button.addEventListener("click", function() {
+      const mode = this.getAttribute("data-mode");
+      startQuizWithCountdown(mode);
+    });
+  });
+
+  submitBtn.addEventListener("click", checkAns);
+
+  nextBtn.addEventListener("click", function() {
+    if (quizNumber >= TOTAL_QUESTIONS) {
+      showQuizSummary();
+    } else {
+      newQuestion();
     }
+  });
 
-    nextButton.addEventListener("click", proceedToModeSelect);
+  backToModeBtn.addEventListener("click", backToQuizType);
+  resultBackBtn.addEventListener("click", backToQuizType);
 
-    document.addEventListener("click", function(event) {
+  answerBox.addEventListener("keydown", function(event) {
+    if (
+      event.key === "Enter" &&
+      event.target.id === "userAnswer"
+    ) {
+      event.preventDefault();
 
-        const modeButton = event.target.closest(".mode-btn");
+      if (!answered) {
+        checkAns();
+      }
+    }
+  });
 
-        if (modeButton) {
-
-            const mode = modeButton.dataset.mode;
-
-            if (mode) {
-                startQuizWithCountdown(mode);
-            }
-        }
-    });
-
-    submitButton.addEventListener("click", checkAns);
-
-    nextQuestionButton.addEventListener("click", newQuestion);
-
-    $("backToModeBtn").addEventListener("click", backToQuizType);
-
-    resultBackButton.addEventListener("click", backToQuizType);
-
-    answerBox.addEventListener("keydown", function(event) {
-
-        if (
-            event.key === "Enter" &&
-            event.target.id === "userAnswer"
-        ) {
-
-            event.preventDefault();
-
-            if (!answered) {
-                checkAns();
-            }
-        }
-    });
-
-    console.log("ProjectFactr Integer Quiz initialized successfully.");
+  console.log("ProjectFactr Integer Quiz initialized successfully.");
 }
 
+/* Reliable initialization */
 if (document.readyState === "loading") {
-
-    document.addEventListener("DOMContentLoaded", initializeQuiz);
-
+  document.addEventListener("DOMContentLoaded", initializeQuiz);
 } else {
-
-    initializeQuiz();
+  initializeQuiz();
 }
 </script>
 
+<!-- NAVIGATION SCRIPT -->
 <script src="../../js/helper/navbar.js"></script>
 
 </body>
