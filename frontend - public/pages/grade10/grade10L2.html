@@ -14,9 +14,11 @@
     SOLVING QUADRATIC INEQUALITIES
 </title>
 
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">
-</script>
+<!-- Load the PDF generation library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<!-- Load your quiz JavaScript -->
+<script src="script.js"></script>
 
 <style>
 
@@ -4272,454 +4274,248 @@ document.addEventListener(
     }
 
 
- /* =====================================================
-   PDF DOWNLOAD - FIXED VERSION
-   No HTML changes needed
+   /* =====================================================
+   25. PDF EXPORT
 ===================================================== */
 
-function loadHtml2Pdf() {
-  return new Promise((resolve, reject) => {
+// Generate and download the student's quiz report.
+downloadPdfButton.addEventListener("click", async function () {
 
-    // Check if html2pdf.js is already loaded
-    if (typeof window.html2pdf === "function") {
-      resolve(window.html2pdf);
-      return;
+    // Check whether the PDF library is available.
+    if (typeof window.html2pdf !== "function") {
+        alert("PDF library not loaded. Please check your internet connection.");
+        console.error("html2pdf.js is not available.");
+        return;
     }
 
-    // Check if html2pdf.js is currently loading
-    const existingScript = document.querySelector(
-      'script[data-html2pdf="true"]'
-    );
-
-    if (existingScript) {
-      existingScript.addEventListener(
-        "load",
-        () => {
-          if (typeof window.html2pdf === "function") {
-            resolve(window.html2pdf);
-          } else {
-            reject(new Error("html2pdf loaded but is unavailable."));
-          }
-        },
-        { once: true }
-      );
-
-      existingScript.addEventListener(
-        "error",
-        () => reject(new Error("Failed to load html2pdf.js.")),
-        { once: true }
-      );
-
-      return;
-    }
-
-    // Load html2pdf.js automatically
-    const script = document.createElement("script");
-
-    script.src =
-      "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
-
-    script.async = true;
-    script.dataset.html2pdf = "true";
-
-    script.onload = () => {
-      if (typeof window.html2pdf === "function") {
-        resolve(window.html2pdf);
-      } else {
-        reject(new Error("html2pdf.js loaded but function is unavailable."));
-      }
-    };
-
-    script.onerror = () => {
-      reject(new Error("Could not load html2pdf.js."));
-    };
-
-    document.head.appendChild(script);
-  });
-}
-
-
-/* Escape text before inserting it into the PDF */
-function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, function (char) {
-    const entities = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    };
-
-    return entities[char];
-  });
-}
-
-
-/* PDF DOWNLOAD */
-downloadPdfButton.addEventListener("click", async () => {
-
-  // Make sure the quiz has already been submitted
-  if (hasSubmitted === false || quizResults.length === 0) {
-    alert("Please finish the quiz first.");
-    return;
-  }
-
-  const originalButtonText = downloadPdfButton.textContent;
-
-  try {
-
-    // Disable the button while generating the PDF
+    // Prevent multiple PDF generation requests.
     downloadPdfButton.disabled = true;
-    downloadPdfButton.textContent = "Preparing PDF...";
+    downloadPdfButton.textContent = "GENERATING PDF...";
 
-    // Load the PDF library
-    await loadHtml2Pdf();
+    let pdfContainer = null;
 
-    // Prepare student information
-    const safeName =
-      escapeHtml(studentName || "Student");
+    try {
+        // Calculate the final score percentage.
+        const questionCount = quizResults.length;
+        const percentage = questionCount > 0
+            ? Math.round((score / questionCount) * 100)
+            : 0;
 
-    const safeSection =
-      escapeHtml(studentSection || "N/A");
+        // Escape text to prevent invalid HTML in the PDF.
+        function escapeHtml(value) {
+            return String(value ?? "").replace(/[&<>"']/g, char => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            }[char]));
+        }
 
-    const scoreValue = Number(score) || 0;
+        // Build the detailed question summary rows.
+        const rowsHtml = quizResults.map((res, idx) => {
+            const isCorrect = res.result === "CORRECT";
+            const resultColor = isCorrect ? "#16623d" : "#c62828";
+            const rowBg = idx % 2 === 0 ? "#f0f7f3" : "#ffffff";
 
-    const percentage =
-      TOTAL_QUESTIONS > 0
-        ? ((scoreValue / TOTAL_QUESTIONS) * 100).toFixed(2)
-        : "0.00";
+            return `
+                <tr style="background:${rowBg};">
+                    <td>${idx + 1}</td>
+                    <td>${escapeHtml(res.question)}</td>
+                    <td>${escapeHtml(formatAnswer(res.studentAnswer))}</td>
+                    <td>${escapeHtml(res.correctAnswer)}</td>
+                    <td style="color:${resultColor};font-weight:bold;">
+                        ${escapeHtml(res.result)}
+                    </td>
+                </tr>
+            `;
+        }).join("");
 
-    // Build the question summary rows
-    const rowsHtml = quizResults
-      .map((item, index) => {
+        // Create the temporary PDF report container.
+        pdfContainer = document.createElement("div");
 
-        const questionNumber = index + 1;
-
-        const equation =
-          escapeHtml(item.equation || "");
-
-        const userAnswers =
-          escapeHtml(
-            Array.isArray(item.userAnswers)
-              ? item.userAnswers.join(", ")
-              : item.userAnswers || "No answer"
-          );
-
-        const correctAnswers =
-          escapeHtml(
-            Array.isArray(item.correctAnswers)
-              ? item.correctAnswers.join(", ")
-              : item.correctAnswers || ""
-          );
-
-        const resultText =
-          item.result === "correct"
-            ? "Correct"
-            : "Incorrect";
-
-        return `
-          <tr class="pdf-row">
-            <td style="
-              border:1px solid #ccc;
-              padding:8px;
-              text-align:center;
-              vertical-align:top;
-            ">
-              ${questionNumber}
-            </td>
-
-            <td style="
-              border:1px solid #ccc;
-              padding:8px;
-              vertical-align:top;
-            ">
-              ${equation}
-            </td>
-
-            <td style="
-              border:1px solid #ccc;
-              padding:8px;
-              vertical-align:top;
-            ">
-              ${userAnswers}
-            </td>
-
-            <td style="
-              border:1px solid #ccc;
-              padding:8px;
-              vertical-align:top;
-            ">
-              ${correctAnswers}
-            </td>
-
-            <td style="
-              border:1px solid #ccc;
-              padding:8px;
-              text-align:center;
-              vertical-align:top;
-            ">
-              ${resultText}
-            </td>
-          </tr>
+        pdfContainer.style.cssText = `
+            position: fixed;
+            left: -10000px;
+            top: 0;
+            width: 1000px;
+            padding: 30px;
+            box-sizing: border-box;
+            background: #ffffff;
+            color: #073827;
+            font-family: Arial, sans-serif;
         `;
-      })
-      .join("");
 
+        // Build the report layout and student information.
+        pdfContainer.innerHTML = `
+            <div style="
+                text-align: center;
+                border-bottom: 3px solid #16623d;
+                padding-bottom: 12px;
+                margin-bottom: 20px;
+            ">
+                <h1 style="
+                    margin: 0;
+                    font-size: 22px;
+                    color: #073827;
+                ">
+                    GRADE 10 MATHEMATICS QUIZ REPORT
+                </h1>
 
-    // Create the temporary PDF container
-    const pdfContainer = document.createElement("div");
+                <p style="
+                    margin: 6px 0 0;
+                    font-size: 13px;
+                    color: #16623d;
+                ">
+                    Quartiles, Deciles, and Percentiles
+                </p>
+            </div>
 
-    pdfContainer.style.position = "absolute";
-    pdfContainer.style.left = "0";
-    pdfContainer.style.top = "0";
-    pdfContainer.style.width = "794px";
-    pdfContainer.style.boxSizing = "border-box";
-    pdfContainer.style.padding = "28px";
-    pdfContainer.style.background = "#ffffff";
-    pdfContainer.style.color = "#222222";
-    pdfContainer.style.fontFamily = "Arial, Helvetica, sans-serif";
-    pdfContainer.style.zIndex = "-1";
+            <table style="
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+                background: #f0f7f3;
+                border: 1px solid #dce9e0;
+                font-size: 12px;
+            ">
+                <tr>
+                    <td style="padding: 12px;width: 50%;">
+                        <strong>Student Name:</strong>
+                        ${escapeHtml(studentName)}
+                    </td>
+                    <td style="padding: 12px;">
+                        <strong>Section:</strong>
+                        ${escapeHtml(studentSection)}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;">
+                        <strong>Final Score:</strong>
+                        ${score} / ${questionCount} (${percentage}%)
+                    </td>
+                    <td style="padding: 12px;">
+                        <strong>Total Time:</strong>
+                        ${escapeHtml(formatTime(elapsedSeconds))}
+                    </td>
+                </tr>
+            </table>
 
-    pdfContainer.innerHTML = `
-      <div style="
-        width:100%;
-        background:#fff;
-      ">
+            <h3 style="
+                font-size: 14px;
+                margin: 0 0 10px;
+                color: #073827;
+            ">
+                Detailed Question Summary
+            </h3>
 
-        <h1 style="
-          text-align:center;
-          margin:0 0 6px 0;
-          font-size:24px;
-        ">
-          Grade 10 Mathematics
-        </h1>
+            <table style="
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                font-size: 11px;
+            ">
+                <thead>
+                    <tr style="
+                        background: #16623d;
+                        color: white;
+                    ">
+                        <th style="width: 7%;">#</th>
+                        <th style="width: 29%;">Question</th>
+                        <th style="width: 23%;">Student Answer</th>
+                        <th style="width: 23%;">Correct Solution</th>
+                        <th style="width: 18%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${rowsHtml}
+                </tbody>
+            </table>
 
-        <h2 style="
-          text-align:center;
-          margin:0 0 20px 0;
-          font-size:18px;
-        ">
-          Solving Quadratic Inequalities in One Variable
-        </h2>
+            <div style="
+                margin-top: 20px;
+                padding-top: 10px;
+                border-top: 1px solid #dce9e0;
+                text-align: center;
+                color: #628273;
+                font-size: 10px;
+            ">
+                ProjectFactr Mathematics Learning &amp;
+                Curriculum Platform
+            </div>
 
-        <div style="
-          border:1px solid #ccc;
-          padding:14px;
-          margin-bottom:18px;
-          font-size:14px;
-          line-height:1.6;
-        ">
+            <style>
+                th, td {
+                    border: 1px solid #dce9e0;
+                    padding: 9px;
+                    text-align: left;
+                    overflow-wrap: break-word;
+                }
 
-          <div>
-            <strong>Student Name:</strong>
-            ${safeName}
-          </div>
+                th {
+                    text-align: center;
+                }
 
-          <div>
-            <strong>Section:</strong>
-            ${safeSection}
-          </div>
+                tr {
+                    page-break-inside: avoid;
+                }
+            </style>
+        `;
 
-          <div>
-            <strong>Score:</strong>
-            ${scoreValue} / ${TOTAL_QUESTIONS}
-          </div>
+        // Attach the report to the document before rendering.
+        document.body.appendChild(pdfContainer);
 
-          <div>
-            <strong>Percentage:</strong>
-            ${percentage}%
-          </div>
+        // Configure the PDF output and page layout.
+        const safeStudentName = String(studentName || "Student")
+            .replace(/[^a-zA-Z0-9_-]/g, "_");
 
-          <div>
-            <strong>Time:</strong>
-            ${escapeHtml(
-              typeof formatTime === "function"
-                ? formatTime(elapsedSeconds)
-                : `${elapsedSeconds || 0} seconds`
-            )}
-          </div>
+        const options = {
+            margin: 0.35,
+            filename: `${safeStudentName}_Quiz_Report.pdf`,
+            image: {
+                type: "jpeg",
+                quality: 0.98
+            },
+            html2canvas: {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: "#ffffff",
+                logging: false
+            },
+            jsPDF: {
+                unit: "in",
+                format: "letter",
+                orientation: "landscape"
+            },
+            pagebreak: {
+                mode: ["css", "legacy"],
+                avoid: ["tr"]
+            }
+        };
 
-        </div>
+        // Generate the PDF and trigger the browser download.
+        await window.html2pdf()
+            .set(options)
+            .from(pdfContainer)
+            .save();
 
-        <h3 style="
-          margin:0 0 10px 0;
-          font-size:16px;
-        ">
-          Question Summary
-        </h3>
+    } catch (error) {
+        // Log the actual error and notify the user.
+        console.error("PDF generation failed:", error);
+        alert(
+            "Unable to create the PDF. Please try again.\n\n" +
+            "Check the browser console for the exact error."
+        );
 
-        <table style="
-          width:100%;
-          border-collapse:collapse;
-          font-size:10px;
-          table-layout:fixed;
-        ">
+    } finally {
+        // Remove the temporary report and restore the button.
+        if (pdfContainer && pdfContainer.parentNode) {
+            pdfContainer.parentNode.removeChild(pdfContainer);
+        }
 
-          <thead>
-            <tr>
-              <th style="
-                border:1px solid #ccc;
-                padding:8px;
-                width:6%;
-                background:#f2f2f2;
-              ">
-                #
-              </th>
-
-              <th style="
-                border:1px solid #ccc;
-                padding:8px;
-                width:24%;
-                background:#f2f2f2;
-              ">
-                Question
-              </th>
-
-              <th style="
-                border:1px solid #ccc;
-                padding:8px;
-                width:25%;
-                background:#f2f2f2;
-              ">
-                Your Answer
-              </th>
-
-              <th style="
-                border:1px solid #ccc;
-                padding:8px;
-                width:25%;
-                background:#f2f2f2;
-              ">
-                Correct Answer
-              </th>
-
-              <th style="
-                border:1px solid #ccc;
-                padding:8px;
-                width:20%;
-                background:#f2f2f2;
-              ">
-                Result
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            ${rowsHtml}
-          </tbody>
-
-        </table>
-
-        <div style="
-          margin-top:20px;
-          padding-top:10px;
-          border-top:1px solid #ccc;
-          text-align:center;
-          font-size:10px;
-          color:#666;
-        ">
-          Generated from Grade 10 Mathematics Quiz
-        </div>
-
-      </div>
-    `;
-
-
-    // Add the PDF container to the page
-    document.body.appendChild(pdfContainer);
-
-
-    // Wait for the browser to finish rendering the content
-    await new Promise(resolve => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(resolve);
-      });
-    });
-
-
-    // Create a safe filename
-    const cleanFileName =
-      String(studentName || "Student")
-        .replace(/[^a-zA-Z0-9 ._-]/g, "")
-        .trim()
-        .replace(/\s+/g, "_") || "Student";
-
-    const fileName =
-      `${cleanFileName}_Grade10_Quadratic_Inequalities_Results.pdf`;
-
-
-    // Configure the PDF settings
-    const options = {
-      margin: [0.35, 0.35, 0.35, 0.35],
-
-      filename: fileName,
-
-      image: {
-        type: "jpeg",
-        quality: 0.98
-      },
-
-      html2canvas: {
-        scale: 2,
-        useCORS: true,
-        allowTaint: false,
-        backgroundColor: "#ffffff",
-        logging: false,
-        scrollX: 0,
-        scrollY: 0
-      },
-
-      jsPDF: {
-        unit: "in",
-        format: "letter",
-        orientation: "portrait"
-      },
-
-      pagebreak: {
-        mode: ["css", "legacy"],
-        avoid: [".pdf-row", "tr"]
-      }
-    };
-
-
-    // Generate and download the PDF
-    await window
-      .html2pdf()
-      .set(options)
-      .from(pdfContainer)
-      .save();
-
-
-    // Remove the temporary PDF container
-    pdfContainer.remove();
-
-    downloadPdfButton.textContent = "PDF Downloaded!";
-
-    setTimeout(() => {
-      downloadPdfButton.textContent = originalButtonText;
-    }, 2000);
-
-
-  } catch (error) {
-
-    // Display the error in the browser console
-    console.error("PDF generation error:", error);
-
-    alert(
-      "Unable to generate the PDF.\n\n" +
-      "Please make sure you have an internet connection so the PDF library can be loaded."
-    );
-
-  } finally {
-
-    // Re-enable the PDF button
-    downloadPdfButton.disabled = false;
-
-    if (downloadPdfButton.textContent === "Preparing PDF...") {
-      downloadPdfButton.textContent = originalButtonText;
+        downloadPdfButton.disabled = false;
+        downloadPdfButton.textContent = "DOWNLOAD PDF";
     }
-  }
-
 });
 
 
