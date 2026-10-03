@@ -74,7 +74,8 @@ functionality and reusable application functionality. Pages are
 organized by grade level to keep lessons and activities structured
 according to their intended learners. Each page may contain inline
 styles and scripts for layouts, interactions, and calculations
-that are unique to that page.  
+that are unique to that page.\
+
  
  
 Functionality that is shared across multiple pages is instead
