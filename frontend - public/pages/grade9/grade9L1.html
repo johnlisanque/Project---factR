@@ -5,928 +5,578 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Grade 9 Parallelogram Sides Quiz | ProjectFactR</title>
-<link rel="stylesheet" href="../../assets/style/style.css">
+<title>Grade 9 Linear Functions Quiz | ProjectFactR</title>
+<!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Web Fonts (Montserrat & Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
 :root {
---primary-dark: #073827;
---primary-forest: #16623d;
---primary-accent: #339763;
---tint-light: #f0f7f3;
---card-bg: #fff;
---text-body: #334d42;
---text-muted: #628273;
---border-color: #e2ede6;
+    --primary-dark: #073827;
+    --primary-forest: #16623d;
+    --primary-accent: #339763;
+    --tint-light: #f0f7f3;
+    --card-bg: #fff;
+    --text-main: #073827;
+    --text-body: #334d42;
+    --text-muted: #628273;
+    --border-color: #e2ede6;
 
---correct-bg: #e7f7ee;
---correct-border: #339763;
---correct-text: #073827;
+    --correct-bg: #e7f7ee;
+    --correct-border: #339763;
+    --correct-text: #073827;
 
---wrong-bg: #fde8e8;
---wrong-border: #e02424;
---wrong-text: #9b1c1c;
+    --wrong-bg: #fde8e8;
+    --wrong-border: #e02424;
+    --wrong-text: #9b1c1c;
 
---font-brand: "Montserrat", Arial, sans-serif;
---font-body: Arial, sans-serif;
+    --font-brand: "Montserrat", Arial, sans-serif;
+    --font-body: Arial, sans-serif;
 
---shadow-sm: 0 2px 4px rgba(7, 56, 39, .03);
---shadow-md: 0 10px 25px -5px rgba(7, 56, 39, .08);
---shadow-lg: 0 20px 40px -10px rgba(7, 56, 39, .12);
+    --shadow-sm: 0 2px 4px rgba(7, 56, 39, .03);
+    --shadow-md: 0 10px 25px -5px rgba(7, 56, 39, .08);
+    --shadow-lg: 0 20px 40px -10px rgba(7, 56, 39, .12);
 
---radius: 16px;
+    --radius: 16px;
 }
-
 
 *,
 *::before,
 *::after {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-
 
 html,
 body {
-width: 100%;
-min-height: 100vh;
-
-background: #f7faf8;
-
-font-family: var(--font-body);
-
-color: var(--text-body);
-
-overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+    background: #f7faf8;
+    font-family: var(--font-body);
+    color: var(--text-body);
+    overflow-x: hidden;
 }
 
-
-/* =====================================================
+/* =============================
 TOP NAVIGATION
-===================================================== */
+============================= */
 
+.top-nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background: rgba(255, 255, 255, .94);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 32px;
+    backdrop-filter: blur(10px);
+}
 
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-/* =====================================================
+.nav-logo {
+    font-family: var(--font-brand);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-forest);
+    text-decoration: none;
+}
+
+.nav-tagline {
+    font-size: .75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-left: 1px solid var(--border-color);
+    padding-left: 12px;
+}
+
+/* =============================
 PAGE TITLE
-===================================================== */
+============================= */
 
 .page-title {
-width: 92%;
-max-width: 600px;
-
-margin: 30px auto 15px;
-
-font-family: var(--font-brand);
-
-color: var(--primary-dark);
-
-font-size: 26px;
-
-font-weight: 800;
-
-text-align: center;
+    width: 92%;
+    max-width: 600px;
+    margin: 30px auto 15px;
+    font-family: var(--font-brand);
+    color: var(--primary-dark);
+    font-size: 26px;
+    font-weight: 800;
+    text-align: center;
 }
 
-
-/* =====================================================
+/* =============================
 MAIN CARDS
-===================================================== */
+============================= */
 
 #studentStart,
 #modeSelect,
 #categoryScreen,
 #quizArea,
 #finishMessage {
-
-width: 92%;
-
-max-width: 580px;
-
-margin-left: auto;
-margin-right: auto;
-
-background: var(--card-bg);
-
-border: 1px solid var(--border-color);
-
-border-radius: var(--radius);
-
-box-shadow: var(--shadow-md);
+    width: 92%;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
 }
 
-
-/* =====================================================
-SCREEN SYSTEM
-===================================================== */
-
-.screen {
-display: none;
-}
-
-
-.screen.active {
-display: block;
-}
-
-
-/* =====================================================
-STUDENT INFORMATION
-===================================================== */
+/* =============================
+STUDENT DETAILS
+============================= */
 
 #studentStart {
-
-max-width: 440px;
-
-margin-top: 10px;
-
-margin-bottom: 40px;
-
-padding: 35px;
+    max-width: 440px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    padding: 35px;
 }
-
 
 #studentStart h2,
 #modeSelect h2,
 #categoryScreen h2 {
-
-margin-bottom: 20px;
-
-font-family: var(--font-brand);
-
-color: var(--primary-dark);
-
-font-size: 20px;
-
-font-weight: 700;
-
-text-align: center;
+    margin-bottom: 20px;
+    font-family: var(--font-brand);
+    color: var(--primary-dark);
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
 }
-
 
 #studentStart input {
-
-display: block;
-
-width: 100%;
-
-height: 48px;
-
-margin-bottom: 16px;
-
-padding: 10px 16px;
-
-background: var(--tint-light);
-
-border: 1px solid var(--border-color);
-
-border-radius: 10px;
-
-font-size: 15px;
-
-outline: none;
+    display: block;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 16px;
+    padding: 10px 16px;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
 }
-
 
 #studentStart input:focus {
-
-background: white;
-
-border-color: var(--primary-accent);
+    background: white;
+    border-color: var(--primary-accent);
 }
 
-
-/* =====================================================
+/* =============================
 BUTTONS
-===================================================== */
+============================= */
 
 .btn-primary {
-
-display: block;
-
-width: 100%;
-
-min-height: 48px;
-
-margin-top: 16px;
-
-padding: 10px 15px;
-
-background: var(--primary-forest);
-
-color: white;
-
-border: none;
-
-border-radius: 10px;
-
-font-family: var(--font-brand);
-
-font-size: 15px;
-
-font-weight: 600;
-
-cursor: pointer;
-
-transition: .2s ease;
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 16px;
+    padding: 10px 15px;
+    background: var(--primary-forest);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-brand);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s ease;
 }
-
 
 .btn-primary:hover {
-
-background: var(--primary-dark);
-
-transform: translateY(-1px);
+    background: var(--primary-dark);
+    transform: translateY(-1px);
 }
-
-
-.btn-primary:disabled {
-
-opacity: .6;
-
-cursor: not-allowed;
-
-transform: none;
-}
-
 
 .btn-secondary {
-
-background: var(--primary-accent);
+    background: var(--primary-accent);
 }
-
 
 .btn-secondary:hover {
-
-background: var(--primary-forest);
+    background: var(--primary-forest);
 }
 
-
-/* =====================================================
-CONFIRMATION
-===================================================== */
+/* =============================
+CHECK DETAILS
+============================= */
 
 #modeSelect {
-
-max-width: 440px;
-
-margin-top: 10px;
-
-margin-bottom: 40px;
-
-padding: 35px;
+    max-width: 440px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    padding: 35px;
 }
 
-
-.summary-item {
-
-margin: 10px 0;
-
-padding: 12px;
-
-background: var(--tint-light);
-
-border: 1px solid var(--border-color);
-
-border-radius: 10px;
-
-color: var(--text-body);
-
-font-size: 14px;
-}
-
-
-.summary-item strong {
-
-color: var(--primary-dark);
-
-font-weight: 700;
-}
-
-
-/* =====================================================
+/* =============================
 QUESTION COUNT
-===================================================== */
+============================= */
 
 #categoryScreen {
-
-max-width: 440px;
-
-margin-top: 10px;
-
-margin-bottom: 40px;
-
-padding: 35px;
+    max-width: 440px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    padding: 35px;
 }
 
-
-.form-group {
-
-display: grid;
-
-gap: 8px;
+#questionCount {
+    width: 100%;
+    height: 48px;
+    padding: 10px 14px;
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    color: var(--text-body);
+    outline: none;
 }
 
-
-.form-group label {
-
-color: var(--primary-dark);
-
-font-size: 14px;
-
-font-weight: 700;
+#questionCount:focus {
+    border-color: var(--primary-accent);
 }
 
+/* =============================
+SUMMARY ITEMS
+============================= */
 
-.form-group select {
-
-width: 100%;
-
-height: 48px;
-
-padding: 10px 14px;
-
-border: 2px solid var(--border-color);
-
-border-radius: 10px;
-
-background: white;
-
-color: var(--text-body);
-
-font-size: 15px;
-
-outline: none;
+.summary-item {
+    margin: 10px 0;
+    padding: 12px;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-body);
+    font-size: 14px;
 }
 
-
-.form-group select:focus {
-
-border-color: var(--primary-accent);
+.summary-item strong {
+    color: var(--primary-dark);
+    font-weight: 700;
 }
 
-
-/* =====================================================
+/* =============================
 COUNTDOWN
-===================================================== */
+============================= */
 
 #countdownOverlay {
-
-position: fixed;
-
-inset: 0;
-
-width: 100vw;
-
-height: 100vh;
-
-z-index: 9999;
-
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-background: rgba(7, 56, 39, .76);
-
-backdrop-filter: blur(8px);
-
-opacity: 0;
-
-pointer-events: none;
-
-transition: .25s ease;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(7, 56, 39, .76);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s ease;
 }
-
 
 #countdownOverlay.active {
-
-opacity: 1;
-
-pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
-
 
 .countdown-card {
-
-padding: 40px 60px;
-
-background: white;
-
-border-radius: 20px;
-
-text-align: center;
-
-box-shadow: var(--shadow-lg);
+    padding: 40px 60px;
+    background: white;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
 }
-
 
 .countdown-card h3 {
-
-margin-bottom: 8px;
-
-font-family: var(--font-brand);
-
-color: var(--text-muted);
-
-font-size: 14px;
+    margin-bottom: 8px;
+    font-family: var(--font-brand);
+    color: var(--text-muted);
+    font-size: 14px;
 }
-
 
 #countdownNumber {
-
-font-family: var(--font-brand);
-
-font-size: 80px;
-
-font-weight: 800;
-
-color: var(--primary-forest);
+    font-family: var(--font-brand);
+    font-size: 80px;
+    font-weight: 800;
+    color: var(--primary-forest);
 }
 
-
-/* =====================================================
-STUDENT INFO DURING QUIZ
-===================================================== */
+/* =============================
+STUDENT INFO
+============================= */
 
 #studentInfo {
+    width: 92%;
+    max-width: 580px;
+    margin: 0 auto 16px;
+    padding: 18px 20px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
 
-width: 92%;
-
-max-width: 580px;
-
-margin: 0 auto 16px;
-
-padding: 18px 20px;
-
-background: white;
-
-border: 1px solid var(--border-color);
-
-border-radius: var(--radius);
-
-box-shadow: var(--shadow-sm);
-
-display: none;
-
-grid-template-columns: 1fr 1fr;
-
-gap: 12px;
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
 }
-
 
 #studentInfo p {
-
-font-size: 13px;
-
-font-weight: 500;
+    font-size: 13px;
+    font-weight: 500;
 }
-
 
 #showName,
 #showSection {
-
-color: var(--primary-dark);
-
-font-weight: 700;
+    color: var(--primary-dark);
+    font-weight: 700;
 }
-
 
 #score,
 #quizCount {
-
-padding: 8px 12px;
-
-background: var(--tint-light);
-
-border: 1px solid var(--border-color);
-
-border-radius: 8px;
-
-color: var(--primary-forest);
-
-text-align: center;
-
-font-size: 13px;
-
-font-weight: 600;
+    padding: 8px 12px;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--primary-forest);
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
 }
-
 
 #timerDisplay {
-
-grid-column: span 2;
-
-padding: 8px 12px;
-
-background: var(--primary-dark);
-
-border-radius: 8px;
-
-color: white;
-
-text-align: center;
-
-font-size: 13px;
-
-font-weight: 600;
+    grid-column: span 2;
+    padding: 8px 12px;
+    background: var(--primary-dark);
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
 }
 
-
-/* =====================================================
+/* =============================
 QUIZ AREA
-===================================================== */
+============================= */
 
 #quizArea {
-
-display: none;
-
-margin-bottom: 40px;
-
-padding: 35px;
+    display: none;
+    margin-bottom: 40px;
+    padding: 35px;
 }
-
 
 #category {
-
-margin-bottom: 16px;
-
-font-family: var(--font-brand);
-
-color: var(--primary-dark);
-
-font-size: 18px;
-
-font-weight: 700;
-
-text-align: center;
+    margin-bottom: 16px;
+    font-family: var(--font-brand);
+    color: var(--primary-dark);
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
 }
-
-
-/* =====================================================
-QUESTION BOX
-===================================================== */
-
-.question-box {
-
-width: 100%;
-
-margin-top: 0;
-
-padding: 0;
-
-background: transparent;
-
-border: none;
-}
-
-
-#shapeImage {
-
-width: min(100%, 420px);
-
-height: auto;
-
-display: block;
-
-margin: 0 auto 20px;
-
-border-radius: 14px;
-
-background: white;
-
-box-shadow: var(--shadow-sm);
-}
-
 
 #displayGiven {
-
-display: block;
-
-width: 100%;
-
-min-height: 70px;
-
-margin-bottom: 20px;
-
-padding: 20px 22px;
-
-background: var(--tint-light);
-
-border: 1px solid var(--border-color);
-
-border-radius: 12px;
-
-color: var(--primary-dark);
-
-font-family: Arial, sans-serif;
-
-font-size: 15px;
-
-font-weight: 500;
-
-line-height: 1.7;
-
-text-align: left;
-
-white-space: normal;
-
-overflow-wrap: break-word;
-
-word-wrap: break-word;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 20px 22px;
+    display: block;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--primary-dark);
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.7;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
-
-.question-line {
-
-margin-bottom: 10px;
-}
-
-
-.question-task {
-
-margin-top: 14px;
-
-padding-top: 12px;
-
-border-top: 1px solid var(--border-color);
-
-color: var(--primary-dark);
-
-font-weight: 700;
-}
-
-
-/* =====================================================
+/* =============================
 ANSWER AREA
-===================================================== */
+============================= */
 
 #answerBox {
-
-width: 100%;
-
-max-width: 100%;
-
-min-width: 0;
-
-min-height: 0;
-
-margin: 12px 0;
+    width: 100%;
+    margin: 18px 0;
 }
-
 
 .default-answer-box {
-
-display: flex;
-
-width: 100%;
-
-min-width: 0;
-
-flex-direction: column;
-
-gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
-
 
 .default-answer-box label {
-
-color: var(--primary-dark);
-
-font-size: 13px;
-
-font-weight: 700;
+    color: var(--primary-dark);
+    font-size: 13px;
+    font-weight: 700;
 }
-
 
 .default-answer-box input {
-
-width: 100%;
-
-max-width: 100%;
-
-height: 48px;
-
-padding: 10px 14px;
-
-background: white;
-
-border: 2px solid var(--border-color);
-
-border-radius: 10px;
-
-font-size: 15px;
-
-outline: none;
+    width: 100%;
+    height: 48px;
+    padding: 10px 14px;
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
 }
-
 
 .default-answer-box input:focus {
-
-border-color: var(--primary-accent);
+    border-color: var(--primary-accent);
 }
 
-
-.default-answer-box button {
-
-width: 100%;
-
-min-height: 48px;
-}
-
-
-/* =====================================================
+/* =============================
 FEEDBACK
-===================================================== */
-
-.feedback {
-
-min-height: 30px;
-
-margin-top: 18px;
-
-font-size: 13px;
-
-line-height: 1.5;
-}
-
-
-#hintText {
-
-padding: 12px 14px;
-
-background: #f8fbf9;
-
-border: 1px solid var(--border-color);
-
-border-radius: 10px;
-
-color: var(--text-muted);
-
-text-align: left;
-}
-
+============================= */
 
 #outAns {
-
-padding: 12px 14px;
-
-border: 1px solid var(--border-color);
-
-border-radius: 10px;
-
-text-align: center;
+    width: 100%;
+    margin: 16px 0;
+    padding: 16px;
+    background: var(--tint-light);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--primary-dark);
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+    display: none;
 }
 
-
-/* =====================================================
-RESULTS
-===================================================== */
+/* =============================
+FINISH SCREEN
+============================= */
 
 #finishMessage {
-
-display: none;
-
-margin: 0 auto 40px;
-
-padding: 35px;
-
-text-align: center;
+    width: 92%;
+    max-width: 580px;
+    margin: 0 auto 40px;
+    padding: 35px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    display: none;
+    text-align: center;
 }
-
 
 #finishMessage h2 {
-
-margin: 0 0 20px;
-
-color: var(--primary-dark);
-
-font-family: var(--font-brand);
-
-font-size: 22px;
-
-font-weight: 800;
+    margin: 0 0 20px;
+    color: var(--primary-dark);
+    font-family: var(--font-brand);
+    font-size: 22px;
+    font-weight: 800;
 }
-
 
 .final-score {
-
-margin: 20px 0;
-
-color: var(--primary-forest);
-
-font-size: 42px;
-
-font-weight: 800;
-
-line-height: 1;
+    margin: 20px 0;
+    color: var(--primary-forest);
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1;
 }
 
+.final-score small {
+    font-size: 18px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
 
-/* =====================================================
+/* =============================
 MOBILE
-===================================================== */
+============================= */
 
 @media(max-width: 600px) {
 
-.top-nav-bar {
+    .top-nav-bar {
+        padding: 14px 18px;
+    }
 
-padding: 14px 18px;
+    .nav-tagline {
+        font-size: 10px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        margin-top: 24px;
+    }
+
+    #studentStart,
+    #modeSelect,
+    #categoryScreen,
+    #quizArea {
+        padding: 25px 20px;
+    }
+
+    #studentInfo {
+        grid-template-columns: 1fr;
+    }
+
+    #timerDisplay {
+        grid-column: span 1;
+    }
+
+    #finishMessage {
+        width: 94%;
+        padding: 24px;
+    }
+
+    #finishMessage h2 {
+        font-size: 20px;
+    }
+
+    .summary-item {
+        font-size: 13px;
+        padding: 11px;
+    }
+
+    .final-score {
+        font-size: 38px;
+    }
 }
 
+@media(max-width: 400px) {
 
-.nav-tagline {
+    #finishMessage {
+        padding: 20px;
+    }
 
-font-size: 10px;
-}
-
-
-.page-title {
-
-font-size: 22px;
-
-margin-top: 24px;
-}
-
-
-#studentStart,
-#modeSelect,
-#categoryScreen,
-#quizArea,
-#finishMessage {
-
-padding: 25px 20px;
-}
-
-
-#studentInfo {
-
-grid-template-columns: 1fr;
-}
-
-
-#timerDisplay {
-
-grid-column: span 1;
-}
-
-
-#displayGiven {
-
-font-size: 14px;
-
-line-height: 1.6;
-}
-
-
-button,
-input,
-select {
-
-width: 100%;
-}
-
-
-.final-score {
-
-font-size: 38px;
-}
-
-
-.summary-item {
-
-font-size: 13px;
-
-padding: 11px;
-}
-
+    .final-score {
+        font-size: 34px;
+    }
 }
 
 </style>
-<meta name="description" content="Test your understanding of parallelogram side properties with this Grade 9 geometry lesson and interactive quiz on ProjectFactR.">
-</head>
+  <link rel="stylesheet" href="../../assets/style/style.css">
 
+<meta name="description" content="Explore linear functions and solve related problems with this Grade 9 mathematics lesson and quiz on ProjectFactR.">
+</head>
 
 <body>
 
-
-<!-- =====================================================
-TOP NAVIGATION
-===================================================== -->
-
-
+<!-- =============================
+TOP NAV
+============================= -->
 <header class="top-nav-bar" id="navbar">
 
   </header>
-  <script src="../../js/helper/navbar.js"></script>
-
-<script src="../../js/helper/navbar.js"></script>
      <section class="cover-section" id="cover">
       <div class="cover-wrapper">
         <img 
@@ -936,7 +586,7 @@ TOP NAVIGATION
           id="main-cover-image"
         >
        <div class="cover-content">
-    <h1>Absolute Value Equation</h1>
+    <h1>Solving Problems Involving Linear Functions</h1>
 
     <h2>
         <!-- Formative Assessment on Calculation via Task Randomization -->
@@ -944,364 +594,275 @@ TOP NAVIGATION
 </div>
       </div>
     </section>
-<!-- =====================================================
+
+<!-- =============================
 PAGE TITLE
-===================================================== -->
+============================= -->
 
 <h1 class="page-title">
-Quadrilaterals Quiz
+    Linear Function Quiz
 </h1>
 
 
-<!-- =====================================================
-STUDENT INFORMATION
-===================================================== -->
+<!-- =============================
+STUDENT DETAILS
+============================= -->
 
 <div id="studentStart">
 
-<h2>
-Enter Student Details
-</h2>
+    <h2>
+        Enter Student Details
+    </h2>
 
-<input
-type="text"
-id="studentFullName"
-placeholder="Full Name"
->
+    <input
+        type="text"
+        id="fullName"
+        placeholder="Full Name"
+    >
 
-<input
-type="text"
-id="studentSection"
-placeholder="Grade & Section"
->
+    <input
+        type="text"
+        id="section"
+        placeholder="Grade & Section"
+    >
 
-<button
-class="btn-primary"
-id="confirmStudentBtn"
->
-Check Details
-</button>
-
-</div>
-
-
-<!-- =====================================================
-CONFIRMATION
-===================================================== -->
-
-<div
-id="modeSelect"
-class="screen"
->
-
-<h2>
-Please confirm your details
-</h2>
-
-<div class="summary-item">
-
-Name:
-
-<strong id="checkName">
-</strong>
-
-</div>
-
-<div class="summary-item">
-
-Section:
-
-<strong id="checkSection">
-</strong>
-
-</div>
-
-<button
-class="btn-primary btn-secondary"
-id="continueBtn"
->
-Start Quiz
-</button>
-
-<button
-class="btn-primary"
-id="editStudentBtn"
->
-Edit Details
-</button>
+    <button
+        class="btn-primary"
+        onclick="proceedToModeSelect()"
+    >
+        Check Details
+    </button>
 
 </div>
 
 
-<!-- =====================================================
+<!-- =============================
+CHECK DETAILS
+============================= -->
+
+<div id="modeSelect" style="display:none;">
+
+    <h2>
+        Check Your Details
+    </h2>
+
+    <div class="summary-item">
+        Name:
+        <strong id="checkName"></strong>
+    </div>
+
+    <div class="summary-item">
+        Section:
+        <strong id="checkSection"></strong>
+    </div>
+
+    <button
+        class="btn-primary"
+        onclick="showQuestionCount()"
+    >
+        Start Quiz
+    </button>
+
+</div>
+
+
+<!-- =============================
 QUESTION COUNT
-===================================================== -->
+============================= -->
 
-<div
-id="categoryScreen"
-class="screen"
->
+<div id="categoryScreen" style="display:none;">
 
-<h2>
-Sides Quiz
-</h2>
+    <div class="summary-item">
+        Choose how many questions to answer.
+    </div>
 
-<p
-style="
-margin-bottom:20px;
-color:var(--text-muted);
-text-align:center;
-font-size:14px;
-"
->
-Choose how many questions to answer.
-</p>
+    <select id="questionCount">
 
-<div class="form-group">
+        <option value="10">
+            10
+        </option>
 
-<label for="questionCount">
-Number of questions
-</label>
+        <option value="15">
+            15
+        </option>
 
-<select id="questionCount">
+        <option value="20" selected>
+            20
+        </option>
 
-<option value="10">
-10
-</option>
+        <option value="30">
+            30
+        </option>
 
-<option value="15">
-15
-</option>
+    </select>
 
-<option
-value="20"
-selected
->
-20
-</option>
-
-<option value="30">
-30
-</option>
-
-</select>
-
-</div>
-
-<button
-class="btn-primary btn-secondary"
-id="beginQuizBtn"
->
-Start Quiz
-</button>
-
-<button
-class="btn-primary"
-id="backToConfirmBtn"
->
-Back
-</button>
+    <button
+        class="btn-primary btn-secondary"
+        onclick="startSelectedQuiz()"
+    >
+        Start Quiz
+    </button>
 
 </div>
 
 
-<!-- =====================================================
+<!-- =============================
 COUNTDOWN
-===================================================== -->
+============================= -->
 
 <div id="countdownOverlay">
 
-<div class="countdown-card">
+    <div class="countdown-card">
 
-<h3>
-GET READY
-</h3>
+        <h3>
+            GET READY
+        </h3>
 
-<div id="countdownNumber">
-3
+        <div id="countdownNumber">
+            3
+        </div>
+
+    </div>
+
 </div>
 
-</div>
 
-</div>
-
-
-<!-- =====================================================
+<!-- =============================
 STUDENT INFO DURING QUIZ
-===================================================== -->
+============================= -->
 
 <div id="studentInfo">
 
-<p>
+    <p>
+        Name:
+        <span id="showName"></span>
+    </p>
 
-Name:
+    <p>
+        Section:
+        <span id="showSection"></span>
+    </p>
 
-<span id="showName">
-</span>
+    <div id="score">
+        Score: 0 / 10
+    </div>
 
-</p>
+    <div id="quizCount">
+        Question: 1 / 10
+    </div>
 
-<p>
-
-Section:
-
-<span id="showSection">
-</span>
-
-</p>
-
-<div id="score">
-Score: 0 / 20
-</div>
-
-<div id="quizCount">
-Question: 1 / 20
-</div>
-
-<div id="timerDisplay">
-Time Elapsed: 00:00
-</div>
+    <div id="timerDisplay">
+        Time Elapsed: 0:00
+    </div>
 
 </div>
 
 
-<!-- =====================================================
-QUIZ
-===================================================== -->
+<!-- =============================
+QUIZ AREA
+============================= -->
 
 <div id="quizArea">
 
-<div id="category">
-Sides
-</div>
+    <div id="category">
+        Linear Function
+    </div>
 
-<div id="questionBox" class="question-box">
+    <!-- Question -->
 
-<img
-id="shapeImage"
-src=""
-alt="Quadrilateral diagram"
->
+    <div id="displayGiven">
+        Question prompt goes here
+    </div>
 
-<span id="displayGiven">
-Question prompt goes here.
-</span>
+    <!-- =============================
+    ANSWER AREA
+    ============================= -->
 
-</div>
+    <div id="answerBox">
+    </div>
 
+    <!-- Feedback -->
 
-<!-- =====================================================
-SOLVING AREA
-===================================================== -->
+    <div id="outAns">
+    </div>
 
-<div id="answerBox"></div>
+    <!-- Next -->
 
+    <button
+        class="btn-primary btn-secondary"
+        id="nextBtn"
+        onclick="nextQuestion()"
+        style="display:none;"
+    >
+        Next Question
+    </button>
 
-<!-- =====================================================
-HINT
-===================================================== -->
+    <!-- Show Summary -->
 
-<div
-class="feedback"
-id="hintText"
-style="display:none;"
->
-</div>
-
-
-<!-- =====================================================
-ANSWER FEEDBACK
-===================================================== -->
-
-<div
-class="feedback"
-id="outAns"
-style="display:none;"
->
-</div>
-
-
-<button
-class="btn-primary btn-secondary"
-id="nextBtn"
-style="display:none;"
->
-Next Question
-</button>
+    <button
+        class="btn-primary btn-secondary"
+        id="showSummaryBtn"
+        onclick="finishQuiz()"
+        style="display:none;"
+    >
+        Show Summary
+    </button>
 
 </div>
 
 
-<!-- =====================================================
-RESULTS
-===================================================== -->
+<!-- =============================
+FINISH SCREEN
+============================= -->
 
 <div id="finishMessage">
 
-<h2>
-Quiz Finished!
-</h2>
+    <h2>
+        Quiz Finished!
+    </h2>
 
-<div class="summary-item">
+    <div class="summary-item">
+        Name:
+        <strong id="summaryName"></strong>
+    </div>
 
-Name:
+    <div class="summary-item">
+        Section:
+        <strong id="summarySection"></strong>
+    </div>
 
-<strong id="summaryName">
-</strong>
+    <div class="summary-item">
+        Quiz Type:
+        <strong id="summaryType"></strong>
+    </div>
 
-</div>
+    <div class="final-score">
 
-<div class="summary-item">
+        <span id="finalScore">
+            0
+        </span>
 
-Section:
+        /<span id="finalTotal">
+            10
+        </span>
 
-<strong id="summarySection">
-</strong>
+    </div>
 
-</div>
+    <div class="summary-item">
+        Time:
+        <strong id="finalTime">
+            00:00
+        </strong>
+    </div>
 
-<div class="summary-item">
-
-Quiz Type:
-
-<strong id="summaryType">
-</strong>
-
-</div>
-
-<div class="final-score">
-
-<span id="finalScore">
-0
-</span>
-
-/
-
-<span id="finalTotal">
-20
-</span>
-
-</div>
-
-<div class="summary-item">
-
-Time:
-
-<strong id="finalTime">
-00:00
-</strong>
+    <button
+        class="btn-primary"
+        onclick="backToQuizTypes()"
+    >
+        Restart Quiz
+    </button>
 
 </div>
-
-<button
-class="btn-primary"
-id="retakeQuizBtn"
->
-Retake Quiz
-</button>
-
-</div>
-
 <footer class="site-footer">
     <div class="footer-bottom">
       <div>&copy; 2026 ProjectFactr. All rights reserved.</div>
@@ -1312,7 +873,7 @@ Retake Quiz
 <script>
 
 /* =========================================================
-PROJECT FACTR — QUADRILATERALS SIDES QUIZ
+PROJECT FACTR — LINEAR FUNCTION QUIZ
 ========================================================= */
 
 
@@ -1320,40 +881,20 @@ PROJECT FACTR — QUADRILATERALS SIDES QUIZ
 QUIZ SETTINGS
 ========================================================= */
 
-let TOTAL_QUESTIONS = 20;
+let TOTAL_QUESTIONS = 10;
 
 const questions = [];
 
 let currentIdx = 0;
-
 let score = 0;
 
-let studentName = "";
+let selectedMode = "";
 
+let studentName = "";
 let studentSection = "";
 
 let elapsedSeconds = 0;
-
 let timerInterval = null;
-
-
-/* =========================================================
-ELEMENT HELPER
-========================================================= */
-
-const $ = id =>
-document.getElementById(id);
-
-
-/* =========================================================
-QUIZ TYPE
-========================================================= */
-
-function getQuizTypeName() {
-
-return "Sides Quiz";
-
-}
 
 
 /* =========================================================
@@ -1362,1259 +903,983 @@ RANDOM NUMBER
 
 function randomNumber(min, max) {
 
-return Math.floor(
-Math.random() *
-(
-max - min + 1
-)
-) + min;
+    return Math.floor(
+        Math.random() * (max - min + 1)
+    ) + min;
 
 }
 
 
 /* =========================================================
-FORMAT TIME
+FORMAT TIMER
 ========================================================= */
 
 function formatTime(totalSeconds) {
 
-const minutes =
-Math.floor(
-totalSeconds / 60
-);
+    const minutes =
+        Math.floor(totalSeconds / 60);
 
+    const seconds =
+        totalSeconds % 60;
 
-const seconds =
-totalSeconds % 60;
-
-
-return (
-`${String(minutes).padStart(2, "0")}:` +
-`${String(seconds).padStart(2, "0")}`
-);
+    return (
+        `${String(minutes).padStart(2, "0")}:` +
+        `${String(seconds).padStart(2, "0")}`
+    );
 
 }
 
 
 /* =========================================================
-TIMER
+GET QUIZ TYPE NAME
+========================================================= */
+
+function getQuizTypeName(mode) {
+
+    if (mode === "linear") {
+        return "Linear Function Quiz";
+    }
+
+    return "Linear Function Quiz";
+
+}
+
+
+/* =========================================================
+START TIMER
 ========================================================= */
 
 function startTimer() {
 
-stopTimer();
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
 
+    timerInterval = setInterval(() => {
 
-timerInterval =
-setInterval(
-() => {
+        elapsedSeconds++;
 
-elapsedSeconds++;
+        document
+            .getElementById("timerDisplay")
+            .textContent =
+            `Time Elapsed: ${formatTime(elapsedSeconds)}`;
 
-
-$("timerDisplay").textContent =
-`Time Elapsed: ${formatTime(elapsedSeconds)}`;
-
-},
-1000
-);
+    }, 1000);
 
 }
 
+
+/* =========================================================
+STOP TIMER
+========================================================= */
 
 function stopTimer() {
 
-if (
-timerInterval !== null
-) {
+    if (timerInterval) {
 
-clearInterval(
-timerInterval
-);
+        clearInterval(timerInterval);
 
-timerInterval =
-null;
+        timerInterval = null;
 
-}
+    }
 
 }
 
 
 /* =========================================================
-GET STUDENT INFORMATION
-========================================================= */
-
-function getStudentInfo() {
-
-return {
-
-fullName:
-$("studentFullName")
-.value
-.trim(),
-
-section:
-$("studentSection")
-.value
-.trim()
-
-};
-
-}
-
-
-/* =========================================================
-SHOW ONLY ONE SCREEN
-========================================================= */
-
-function showScreen(screenId) {
-
-/* Hide confirmation */
-
-$("modeSelect")
-.style.display =
-"none";
-
-
-/* Hide question count */
-
-$("categoryScreen")
-.style.display =
-"none";
-
-
-/* Show selected screen */
-
-$(screenId)
-.style.display =
-"block";
-
-}
-
-
-/* =========================================================
-CHECK STUDENT DETAILS
+STUDENT DETAILS
 ========================================================= */
 
 function proceedToModeSelect() {
 
-const info =
-getStudentInfo();
+    studentName =
+        document
+            .getElementById("fullName")
+            .value
+            .trim();
+
+    studentSection =
+        document
+            .getElementById("section")
+            .value
+            .trim();
 
 
-if (
-!info.fullName ||
-!info.section
-) {
+    if (!studentName || !studentSection) {
 
-alert(
-"Please complete all student details before continuing."
-);
+        alert(
+            "Please enter your name and section before starting."
+        );
 
-return;
-
-}
+        return;
+    }
 
 
-studentName =
-info.fullName;
-
-studentSection =
-info.section;
+    document
+        .getElementById("studentStart")
+        .style.display = "none";
 
 
-$("checkName")
-.textContent =
-studentName;
+    document
+        .getElementById("checkName")
+        .textContent = studentName;
 
 
-$("checkSection")
-.textContent =
-studentSection;
+    document
+        .getElementById("checkSection")
+        .textContent = studentSection;
 
 
-$("studentStart")
-.style.display =
-"none";
+    document
+        .getElementById("modeSelect")
+        .style.display = "block";
 
 
-showScreen(
-"modeSelect"
-);
-
-
-$("modeSelect")
-.scrollIntoView({
-
-behavior:
-"smooth"
-
-});
+    document
+        .getElementById("modeSelect")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
 
 
 /* =========================================================
-EDIT STUDENT DETAILS
+LINEAR FUNCTION QUESTION GENERATOR
 ========================================================= */
 
-function editStudentDetails() {
+function buildLinearFunctionQuestion() {
 
-$("modeSelect")
-.style.display =
-"none";
+    let ansr = {
+
+        slope: 0,
+        intercept: 0,
+        value: null,
+
+        requiresFunction: false,
+        requiresValue: false,
+
+        firstVal: 0,
+        secondVal: 0
+
+    };
 
 
-$("categoryScreen")
-.style.display =
-"none";
+    const questionTypes = [
+
+        0, 1, 2, 3, 4,
+        5, 6, 7, 8, 9,
+        10, 11, 12, 13, 14,
+
+        0, 2, 4, 6, 7,
+        8, 9, 12, 14,
+
+        4, 7, 9, 11,
+        13, 14
+
+    ];
 
 
-$("studentStart")
-.style.display =
-"block";
+    const oper =
+        questionTypes[
+            randomNumber(
+                0,
+                questionTypes.length - 1
+            )
+        ];
 
 
-$("studentStart")
-.scrollIntoView({
+    switch (oper) {
 
-behavior:
-"smooth"
 
-});
+        /* =================================================
+        TYPE 0
+        ================================================= */
+
+        case 0: {
+
+            const allowance =
+                randomHundreds(500, 1000);
+
+            const monthlyEarning =
+                randomHundreds(100, 300);
+
+            const months =
+                randomNumber(2, 10);
+
+            const totalMoney =
+                allowance +
+                monthlyEarning * months;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "Each month, a student receives an additional ₱" +
+                monthlyEarning +
+                ", and the student also starts with ₱" +
+                allowance +
+                ". What linear function shows the student's total money, and how much will the student have after month " +
+                months +
+                "?";
+
+
+            ansr = {
+
+                slope: monthlyEarning,
+                intercept: allowance,
+                value: totalMoney,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: monthlyEarning,
+                secondVal: allowance
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 1
+        ================================================= */
+
+        case 1: {
+
+            const x1 =
+                randomNumber(1, 8);
+
+            const x2 =
+                x1 + randomNumber(2, 6);
+
+            const slope =
+                -randomHundreds(200, 400);
+
+            const intercept =
+                Math.abs(slope) * x2 +
+                randomHundreds(200, 500);
+
+            const y1 =
+                slope * x1 + intercept;
+
+            const y2 =
+                y1 +
+                slope * (x2 - x1);
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A worker has ₱" +
+                y1 +
+                " in savings after " +
+                x1 +
+                " months and ₱" +
+                y2 +
+                " after " +
+                x2 +
+                " months because of regular withdrawals. What is the worker's monthly decrease in savings each month?";
+
+
+            ansr = {
+
+                slope: slope,
+                intercept: intercept,
+                value: Math.abs(slope),
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: y1,
+                secondVal: y2
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 2
+        ================================================= */
+
+        case 2: {
+
+            const weeklySavings =
+                randomHundreds(200, 500);
+
+            const startingAmount =
+                randomHundreds(200, 1000);
+
+            const weeks =
+                randomNumber(2, 10);
+
+            const totalSavings =
+                startingAmount +
+                weeklySavings * weeks;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A student saves ₱" +
+                weeklySavings +
+                " each week and already has ₱" +
+                startingAmount +
+                ". What linear function represents the student's savings?";
+
+
+            ansr = {
+
+                slope: weeklySavings,
+                intercept: startingAmount,
+                value: totalSavings,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: weeklySavings,
+                secondVal: startingAmount
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 3
+        ================================================= */
+
+        case 3: {
+
+            const weeklyDiscount =
+                randomTens(50, 150);
+
+            const weeks =
+                randomNumber(2, 5);
+
+            const startingPrice =
+                weeklyDiscount * weeks +
+                randomHundreds(200, 500);
+
+            const totalPrice =
+                startingPrice -
+                weeklyDiscount * weeks;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A product costs ₱" +
+                startingPrice +
+                " and its price decreases by ₱" +
+                weeklyDiscount +
+                " each week during a clearance sale. Find the price after " +
+                weeks +
+                " weeks.";
+
+
+            ansr = {
+
+                slope: -weeklyDiscount,
+                intercept: startingPrice,
+                value: totalPrice,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingPrice,
+                secondVal: weeklyDiscount
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 4
+        ================================================= */
+
+        case 4: {
+
+            const serviceFee =
+                randomHundreds(200, 500);
+
+            const costPerKilowattHour =
+                randomTens(10, 20);
+
+            const kilowattHours =
+                randomNumber(20, 100);
+
+            const totalBill =
+                serviceFee +
+                costPerKilowattHour *
+                kilowattHours;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "An electricity company charges ₱" +
+                costPerKilowattHour +
+                " per kilowatt-hour and a service fee of ₱" +
+                serviceFee +
+                ". What linear function represents the electricity bill?";
+
+
+            ansr = {
+
+                slope: costPerKilowattHour,
+                intercept: serviceFee,
+                value: totalBill,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: costPerKilowattHour,
+                secondVal: serviceFee
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 5
+        ================================================= */
+
+        case 5: {
+
+            const dailyUsage =
+                randomTens(10, 30);
+
+            const days =
+                randomNumber(2, 7);
+
+            const startingData =
+                dailyUsage * days +
+                randomTens(10, 30);
+
+            const remainingData =
+                startingData -
+                dailyUsage * days;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A phone has " +
+                startingData +
+                " gigabytes of data and uses " +
+                dailyUsage +
+                " gigabytes each day. Find the data remaining after " +
+                days +
+                " days.";
+
+
+            ansr = {
+
+                slope: -dailyUsage,
+                intercept: startingData,
+                value: remainingData,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingData,
+                secondVal: dailyUsage
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 6
+        ================================================= */
+
+        case 6: {
+
+            const deliveryFee =
+                randomHundreds(20, 100);
+
+            const pricePerItem =
+                randomTens(100, 300);
+
+            const items =
+                randomNumber(3, 20);
+
+            const totalCost =
+                deliveryFee +
+                pricePerItem * items;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A bakery charges ₱" +
+                pricePerItem +
+                " for each item and a delivery fee of ₱" +
+                deliveryFee +
+                ". What linear function represents the bakery order cost?";
+
+
+            ansr = {
+
+                slope: pricePerItem,
+                intercept: deliveryFee,
+                value: totalCost,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: pricePerItem,
+                secondVal: deliveryFee
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 7
+        ================================================= */
+
+        case 7: {
+
+            const dailyUsage =
+                randomTens(40, 100);
+
+            const days =
+                randomNumber(2, 10);
+
+            const startingWater =
+                dailyUsage * days +
+                randomHundreds(100, 500);
+
+            const remainingWater =
+                startingWater -
+                dailyUsage * days;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A water tank contains " +
+                startingWater +
+                " liters and loses " +
+                dailyUsage +
+                " liters each day. Find the water remaining after " +
+                days +
+                " days.";
+
+
+            ansr = {
+
+                slope: -dailyUsage,
+                intercept: startingWater,
+                value: remainingWater,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingWater,
+                secondVal: dailyUsage
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 8
+        ================================================= */
+
+        case 8: {
+
+            const registrationFee =
+                randomHundreds(30, 100);
+
+            const monthlyFee =
+                randomHundreds(300, 500);
+
+            const months =
+                randomNumber(2, 12);
+
+            const totalCost =
+                registrationFee +
+                monthlyFee * months;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A gym charges a monthly fee of ₱" +
+                monthlyFee +
+                " and a registration fee of ₱" +
+                registrationFee +
+                ". What linear function represents the gym membership cost?";
+
+
+            ansr = {
+
+                slope: monthlyFee,
+                intercept: registrationFee,
+                value: totalCost,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: monthlyFee,
+                secondVal: registrationFee
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 9
+        ================================================= */
+
+        case 9: {
+
+            const itemsSoldPerDay =
+                randomTens(10, 40);
+
+            const days =
+                randomNumber(2, 8);
+
+            const startingStock =
+                itemsSoldPerDay * days +
+                randomHundreds(100, 500);
+
+            const remainingStock =
+                startingStock -
+                itemsSoldPerDay * days;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A store has " +
+                startingStock +
+                " items in stock and sells " +
+                itemsSoldPerDay +
+                " items each day. Find the stock remaining after " +
+                days +
+                " days.";
+
+
+            ansr = {
+
+                slope: -itemsSoldPerDay,
+                intercept: startingStock,
+                value: remainingStock,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingStock,
+                secondVal: itemsSoldPerDay
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 10
+        ================================================= */
+
+        case 10: {
+
+            const drainPerHour =
+                randomTens(10, 20);
+
+            const hours =
+                randomNumber(2, 5);
+
+            const startingCharge =
+                drainPerHour * hours +
+                randomTens(20, 40);
+
+            const remainingCharge =
+                startingCharge -
+                drainPerHour * hours;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A phone starts with " +
+                startingCharge +
+                "% battery and loses " +
+                drainPerHour +
+                "% each hour. Find the remaining battery after " +
+                hours +
+                " hours.";
+
+
+            ansr = {
+
+                slope: -drainPerHour,
+                intercept: startingCharge,
+                value: remainingCharge,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingCharge,
+                secondVal: drainPerHour
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 11
+        ================================================= */
+
+        case 11: {
+
+            const startingTemperature =
+                randomTens(20, 40);
+
+            const coolingRate =
+                randomNumber(1, 4);
+
+            const hours =
+                randomNumber(1, 4);
+
+            const temperature =
+                startingTemperature -
+                coolingRate * hours;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A room starts at " +
+                startingTemperature +
+                " degrees Celsius and cools by " +
+                coolingRate +
+                " degrees each hour. What is the temperature after " +
+                hours +
+                " hours?";
+
+
+            ansr = {
+
+                slope: -coolingRate,
+                intercept: startingTemperature,
+                value: temperature,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingTemperature,
+                secondVal: coolingRate
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 12
+        ================================================= */
+
+        case 12: {
+
+            const fixedPrice =
+                randomHundreds(100, 300);
+
+            const pricePerKilo =
+                randomTens(50, 100);
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A fruit stand charges ₱" +
+                pricePerKilo +
+                " for every kilogram of fruit and a fixed ₱" +
+                fixedPrice +
+                " packaging fee. What linear function represents the total cost?";
+
+
+            ansr = {
+
+                slope: pricePerKilo,
+                intercept: fixedPrice,
+                value: null,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: pricePerKilo,
+                secondVal: fixedPrice
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 13
+        ================================================= */
+
+        case 13: {
+
+            const weeklyExpense =
+                randomHundreds(200, 500);
+
+            const weeks =
+                randomNumber(2, 5);
+
+            const startingBudget =
+                weeklyExpense * weeks +
+                randomHundreds(200, 500);
+
+            const remainingBudget =
+                startingBudget -
+                weeklyExpense * weeks;
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A family has a grocery budget of ₱" +
+                startingBudget +
+                " and spends ₱" +
+                weeklyExpense +
+                " each week. How much of the budget remains after " +
+                weeks +
+                " weeks?";
+
+
+            ansr = {
+
+                slope: -weeklyExpense,
+                intercept: startingBudget,
+                value: remainingBudget,
+
+                requiresFunction: false,
+                requiresValue: true,
+
+                firstVal: startingBudget,
+                secondVal: weeklyExpense
+
+            };
+
+            break;
+        }
+
+
+        /* =================================================
+        TYPE 14
+        ================================================= */
+
+        case 14: {
+
+            const deliveryFee =
+                randomHundreds(100, 300);
+
+            const mealPrice =
+                randomHundreds(200, 500);
+
+
+            document
+                .getElementById("displayGiven")
+                .innerHTML =
+                "A food delivery service charges ₱" +
+                mealPrice +
+                " for each meal and ₱" +
+                deliveryFee +
+                " as a delivery fee. What linear function represents the total order cost?";
+
+
+            ansr = {
+
+                slope: mealPrice,
+                intercept: deliveryFee,
+                value: null,
+
+                requiresFunction: true,
+                requiresValue: false,
+
+                firstVal: mealPrice,
+                secondVal: deliveryFee
+
+            };
+
+            break;
+        }
+
+    }
+
+
+    document
+        .getElementById("displayGiven")
+        .innerHTML =
+        addThousandsSeparators(
+            document
+                .getElementById("displayGiven")
+                .innerHTML
+        );
+
+
+    return ansr;
 
 }
 
 
 /* =========================================================
-BACK TO CONFIRMATION
+RANDOM HELPERS
 ========================================================= */
 
-function backToConfirmation() {
+function randomTens(min, max) {
 
-$("categoryScreen")
-.style.display =
-"none";
-
-
-$("modeSelect")
-.style.display =
-"block";
-
-
-$("modeSelect")
-.scrollIntoView({
-
-behavior:
-"smooth"
-
-});
+    return randomNumber(
+        min / 10,
+        max / 10
+    ) * 10;
 
 }
 
 
-/* =========================================================
-SHAPE IMAGES
-========================================================= */
+function randomHundreds(min, max) {
 
-function getShapeImage(shapeName) {
-
-const shapeImages = {
-
-parallelogram:
-"images/Parallelogram.jpg",
-
-rectangle:
-"images/rectangle.jpg",
-
-square:
-"images/square.jpg",
-
-rhombus:
-"images/rhombus.jpg"
-
-};
-
-
-return (
-shapeImages[shapeName] ||
-shapeImages.parallelogram
-);
+    return randomNumber(
+        min / 100,
+        max / 100
+    ) * 100;
 
 }
 
 
-/* =========================================================
-SIDES HINTS
-========================================================= */
-
-function getSidesHint(
-shapeName,
-questionType
-) {
-
-if (
-shapeName ===
-"parallelogram"
-) {
-
-if (
-questionType === 1
-) {
-
-return (
-"Opposite sides are equal. " +
-"Use the given side length for the side " +
-"directly across from it."
-);
-
-}
-
-
-return (
-"Opposite sides are equal. " +
-"Set the two side lengths equal, then solve for x."
-);
-
-}
-
-
-if (
-shapeName ===
-"rectangle"
-) {
-
-if (
-questionType === 1
-) {
-
-return (
-"Opposite sides are equal. " +
-"Use the given side length for the side " +
-"directly across from it."
-);
-
-}
-
-
-return (
-"Opposite sides are equal. " +
-"Set the two side lengths equal, then solve for x."
-);
-
-}
-
-
-if (
-shapeName === "square" ||
-shapeName === "rhombus"
-) {
-
-if (
-questionType === 1
-) {
-
-return (
-`All four sides of a ${shapeName} are equal. ` +
-"Use the given side length for the side being asked about."
-);
-
-}
-
-
-return (
-`All four sides of a ${shapeName} are equal. ` +
-"Set the two side lengths equal, then solve for x."
-);
-
-}
-
-
-return (
-"Look for the side relationship that matches the given information."
-);
-
-}
-
-
-/* =========================================================
-SIDES QUESTION GENERATOR
-========================================================= */
-
-function buildSidesQuestion() {
-
-const shapes = [
-
-"parallelogram",
-"rectangle",
-"square",
-"rhombus"
-
-];
-
-
-const shapeName =
-shapes[
-randomNumber(
-0,
-shapes.length - 1
-)
-];
-
-
-const image =
-getShapeImage(
-shapeName
-);
-
-
-let questionText = "";
-
-let answer;
-
-let questionType;
-
-
-/* =====================================================
-PARALLELOGRAM — SIDES
-===================================================== */
-
-if (
-shapeName ===
-"parallelogram"
-) {
-
-questionType =
-randomNumber(
-1,
-3
-);
-
-
-switch (
-questionType
-) {
-
-
-case 1: {
-
-const side =
-randomNumber(
-5,
-30
-);
-
-
-const sides = [
-
-"AB",
-"BC",
-"CD",
-"AD"
-
-];
-
-
-const oppositeSides = {
-
-AB:
-"CD",
-
-CD:
-"AB",
-
-BC:
-"AD",
-
-AD:
-"BC"
-
-};
-
-
-const givenSide =
-sides[
-randomNumber(
-0,
-sides.length - 1
-)
-];
-
-
-const answerSide =
-oppositeSides[
-givenSide
-];
-
-
-questionText =
-
-`
-In a parallelogram,
-${givenSide} =
-<b>${side}</b>.
-<br>
-Find the length of
-${answerSide}.
-`;
-
-
-answer =
-side;
-
-
-break;
-
-}
-
-
-case 2: {
-
-const coefficient =
-randomNumber(
-2,
-10
-);
-
-
-const value =
-randomNumber(
-2,
-10
-);
-
-
-const constant =
-randomNumber(
-1,
-10
-);
-
-
-const side =
-coefficient *
-value +
-constant;
-
-
-questionText =
-
-`
-In a parallelogram,
-AB =
-<b>${coefficient}x + ${constant}</b>
-and
-CD =
-<b>${side}</b>.
-<br>
-Solve for <b>x</b>.
-`;
-
-
-answer =
-value;
-
-
-break;
-
-}
-
-
-case 3: {
-
-const coefficient =
-randomNumber(
-2,
-10
-);
-
-
-const value =
-randomNumber(
-2,
-10
-);
-
-
-const constant =
-randomNumber(
-1,
-10
-);
-
-
-const side =
-coefficient *
-value -
-constant;
-
-
-questionText =
-
-`
-In a parallelogram,
-AB =
-<b>${coefficient}x - ${constant}</b>
-and
-CD =
-<b>${side}</b>.
-<br>
-Solve for <b>x</b>.
-`;
-
-
-answer =
-value;
-
-
-break;
-
-}
-
-}
-
-}
-
-
-/* =====================================================
-RECTANGLE — SIDES
-===================================================== */
-
-else if (
-shapeName ===
-"rectangle"
-) {
-
-questionType =
-randomNumber(
-1,
-3
-);
-
-
-switch (
-questionType
-) {
-
-
-case 1: {
-
-const side =
-randomNumber(
-5,
-30
-);
-
-
-const sides = [
-
-"AB",
-"BC",
-"CD",
-"AD"
-
-];
-
-
-const oppositeSides = {
-
-AB:
-"CD",
-
-CD:
-"AB",
-
-BC:
-"AD",
-
-AD:
-"BC"
-
-};
-
-
-const givenSide =
-sides[
-randomNumber(
-0,
-sides.length - 1
-)
-];
-
-
-const answerSide =
-oppositeSides[
-givenSide
-];
-
-
-questionText =
-
-`
-In a rectangle,
-${givenSide} =
-<b>${side}</b>.
-<br>
-Find the length of
-${answerSide}.
-`;
-
-
-answer =
-side;
-
-
-break;
-
-}
-
-
-case 2: {
-
-const coefficient =
-randomNumber(
-2,
-10
-);
-
-
-const value =
-randomNumber(
-2,
-10
-);
-
-
-const constant =
-randomNumber(
-1,
-10
-);
-
-
-const side =
-coefficient *
-value +
-constant;
-
-
-questionText =
-
-`
-In a rectangle,
-AB =
-<b>${coefficient}x + ${constant}</b>
-and
-CD =
-<b>${side}</b>.
-<br>
-Solve for <b>x</b>.
-`;
-
-
-answer =
-value;
-
-
-break;
-
-}
-
-
-case 3: {
-
-const coefficient =
-randomNumber(
-2,
-10
-);
-
-
-const value =
-randomNumber(
-2,
-10
-);
-
-
-const constant =
-randomNumber(
-1,
-10
-);
-
-
-const side =
-coefficient *
-value -
-constant;
-
-
-questionText =
-
-`
-In a rectangle,
-AB =
-<b>${coefficient}x - ${constant}</b>
-and
-CD =
-<b>${side}</b>.
-<br>
-Solve for <b>x</b>.
-`;
-
-
-answer =
-value;
-
-
-break;
-
-}
-
-}
-
-}
-
-
-/* =====================================================
-SQUARE — SIDES
-===================================================== */
-
-else if (
-shapeName ===
-"square"
-) {
-
-questionType =
-randomNumber(
-1,
-3
-);
-
-
-switch (
-questionType
-) {
-
-
-case 1: {
-
-const side =
-randomNumber(
-5,
-30
-);
-
-
-const sides = [
-
-"AB",
-"BC",
-"CD",
-"AD"
-
-];
-
-
-const givenSide =
-sides[
-randomNumber(
-0,
-sides.length - 1
-)
-];
-
-
-let answerSide;
-
-
-do {
-
-answerSide =
-sides[
-randomNumber(
-0,
-sides.length - 1
-)
-];
-
-}
-while (
-answerSide ===
-givenSide
-);
-
-
-questionText =
-
-`
-In a square,
-${givenSide} =
-<b>${side}</b>.
-<br>
-Find the length of
-${answerSide}.
-`;
-
-
-answer =
-side;
-
-
-break;
-
-}
-
-
-case 2: {
-
-const coefficient =
-randomNumber(
-2,
-10
-);
-
-
-const value =
-randomNumber(
-2,
-10
-);
-
-
-const constant =
-randomNumber(
-1,
-10
-);
-
-
-const side =
-coefficient *
-value +
-constant;
-
-
-questionText =
-
-`
-In a square,
-AB =
-<b>${coefficient}x + ${constant}</b>
-and
-BC =
-<b>${side}</b>.
-<br>
-Solve for <b>x</b>.
-`;
-
-
-answer =
-value;
-
-
-break;
-
-}
-
-
-case 3: {
-
-const coefficient =
-randomNumber(
-2,
-10
-);
-
-
-const value =
-randomNumber(
-2,
-10
-);
-
-
-const constant =
-randomNumber(
-1,
-10
-);
-
-
-const side =
-coefficient *
-value -
-constant;
-
-
-questionText =
-
-`
-In a square,
-AB =
-<b>${coefficient}x - ${constant}</b>
-and
-BC =
-<b>${side}</b>.
-<br>
-Solve for <b>x</b>.
-`;
-
-
-answer =
-value;
-
-
-break;
-
-}
-
-}
-
-}
-
-
-/* =====================================================
-RHOMBUS — SIDES
-===================================================== */
-
-else if (
-shapeName ===
-"rhombus"
-) {
-
-questionType =
-randomNumber(
-1,
-3
-);
-
-
-switch (
-questionType
-) {
-
-
-case 1: {
-
-const side =
-randomNumber(
-5,
-30
-);
-
-
-const sides = [
-
-"AB",
-"BC",
-"CD",
-"AD"
-
-];
-
-
-const givenSide =
-sides[
-randomNumber(
-0,
-sides.length - 1
-)
-];
-
-
-let answerSide;
-
-
-do {
-
-answerSide =
-sides[
-randomNumber(
-0,
-sides.length - 1
-)
-];
-
-}
-while (
-answerSide ===
-givenSide
-);
-
-
-questionText =
-
-`
-In a rhombus,
-${givenSide} =
-<b>${side}</b>.
-<br>
-Find the length of
-${answerSide}.
-`;
-
-
-answer =
-side;
-
-
-break;
-
-}
-
-
-case 2: {
-
-const coefficient =
-randomNumber(
-2,
-10
-);
-
-
-const value =
-randomNumber(
-2,
-10
-);
-
-
-const constant =
-randomNumber(
-1,
-10
-);
-
-
-const side =
-coefficient *
-value +
-constant;
-
-
-questionText =
-
-`
-In a rhombus,
-AB =
-<b>${coefficient}x + ${constant}</b>
-and
-CD =
-<b>${side}</b>.
-<br>
-Solve for <b>x</b>.
-`;
-
-
-answer =
-value;
-
-
-break;
-
-}
-
-
-case 3: {
-
-const coefficient =
-randomNumber(
-2,
-10
-);
-
-
-const value =
-randomNumber(
-2,
-10
-);
-
-
-const constant =
-randomNumber(
-1,
-10
-);
-
-
-const side =
-coefficient *
-value -
-constant;
-
-
-questionText =
-
-`
-In a rhombus,
-AB =
-<b>${coefficient}x - ${constant}</b>
-and
-CD =
-<b>${side}</b>.
-<br>
-Solve for <b>x</b>.
-`;
-
-
-answer =
-value;
-
-
-break;
-
-}
-
-}
-
-}
-
-
-/* =====================================================
-RETURN QUESTION
-===================================================== */
-
-return {
-
-type:
-"sides",
-
-shape:
-shapeName,
-
-category:
-`${shapeName.charAt(0).toUpperCase() + shapeName.slice(1)} — Sides`,
-
-image:
-image,
-
-text:
-questionText,
-
-answer:
-answer,
-
-hint:
-getSidesHint(
-shapeName,
-questionType
-)
-
-};
-
-}
-
-
-/* =========================================================
-MAIN QUESTION BUILDER
-========================================================= */
-
-function buildQuestion() {
-
-return buildSidesQuestion();
+function addThousandsSeparators(text) {
+
+    return text.replace(
+        /\b\d{4,}\b/g,
+        (number) =>
+            Number(number).toLocaleString("en-US")
+    );
 
 }
 
@@ -2625,20 +1890,33 @@ CREATE QUESTION SET
 
 function createQuestionSet() {
 
-questions.length = 0;
+    questions.length = 0;
 
 
-for (
-let i = 0;
-i < TOTAL_QUESTIONS;
-i++
-) {
+    for (
+        let i = 0;
+        i < TOTAL_QUESTIONS;
+        i++
+    ) {
 
-questions.push(
-buildQuestion()
-);
+        if (selectedMode === "linear") {
 
-}
+            const question =
+                buildLinearFunctionQuestion();
+
+            question.category =
+                "Linear Function";
+
+            question.text =
+                document
+                    .getElementById("displayGiven")
+                    .innerHTML;
+
+            questions.push(question);
+
+        }
+
+    }
 
 }
 
@@ -2647,120 +1925,149 @@ buildQuestion()
 START QUIZ WITH COUNTDOWN
 ========================================================= */
 
-function startQuizWithCountdown() {
+function showQuestionCount() {
 
-currentIdx =
-0;
-
-score =
-0;
-
-elapsedSeconds =
-0;
+    document
+        .getElementById("modeSelect")
+        .style.display = "none";
 
 
-$("showName")
-.textContent =
-studentName;
+    document
+        .getElementById("categoryScreen")
+        .style.display = "block";
 
 
-$("showSection")
-.textContent =
-studentSection;
-
-
-$("categoryScreen")
-.style.display =
-"none";
-
-
-$("finishMessage")
-.style.display =
-"none";
-
-
-$("score")
-.textContent =
-`Score: 0 / ${TOTAL_QUESTIONS}`;
-
-
-$("quizCount")
-.textContent =
-`Question: 1 / ${TOTAL_QUESTIONS}`;
-
-
-$("timerDisplay")
-.textContent =
-"Time Elapsed: 00:00";
-
-
-const overlay =
-$("countdownOverlay");
-
-
-const number =
-$("countdownNumber");
-
-
-overlay.classList.add(
-"active"
-);
-
-
-let count =
-3;
-
-
-number.textContent =
-count;
-
-
-const countdown =
-setInterval(
-() => {
-
-count--;
-
-
-if (
-count > 0
-) {
-
-number.textContent =
-count;
+    document
+        .getElementById("categoryScreen")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
 
 
-else if (
-count === 0
-) {
+function startSelectedQuiz() {
 
-number.textContent =
-"GO!";
-
-}
-
-
-else {
-
-clearInterval(
-countdown
-);
+    TOTAL_QUESTIONS =
+        Number(
+            document
+                .getElementById("questionCount")
+                .value
+        );
 
 
-overlay.classList.remove(
-"active"
-);
-
-
-startQuiz();
+    startQuizWithCountdown("linear");
 
 }
 
-},
-1000
-);
+
+function startQuizWithCountdown(mode) {
+
+    selectedMode = mode;
+
+    currentIdx = 0;
+    score = 0;
+    elapsedSeconds = 0;
+
+
+    document
+        .getElementById("showName")
+        .textContent =
+        studentName;
+
+
+    document
+        .getElementById("showSection")
+        .textContent =
+        studentSection;
+
+
+    document
+        .getElementById("modeSelect")
+        .style.display = "none";
+
+
+    document
+        .getElementById("categoryScreen")
+        .style.display = "none";
+
+
+    document
+        .getElementById("finishMessage")
+        .style.display = "none";
+
+
+    document
+        .getElementById("score")
+        .textContent =
+        `Score: 0 / ${TOTAL_QUESTIONS}`;
+
+
+    document
+        .getElementById("quizCount")
+        .textContent =
+        `Question: 1 / ${TOTAL_QUESTIONS}`;
+
+
+    document
+        .getElementById("showSummaryBtn")
+        .style.display = "none";
+
+
+    document
+        .getElementById("nextBtn")
+        .style.display = "none";
+
+
+    const overlay =
+        document.getElementById(
+            "countdownOverlay"
+        );
+
+
+    const number =
+        document.getElementById(
+            "countdownNumber"
+        );
+
+
+    overlay.classList.add("active");
+
+
+    let count = 3;
+
+    number.textContent = count;
+
+
+    const countdown =
+        setInterval(() => {
+
+            count--;
+
+
+            if (count > 0) {
+
+                number.textContent = count;
+
+            }
+
+            else if (count === 0) {
+
+                number.textContent = "GO!";
+
+            }
+
+            else {
+
+                clearInterval(countdown);
+
+                overlay.classList.remove("active");
+
+                startQuiz();
+
+            }
+
+        }, 1000);
 
 }
 
@@ -2771,77 +2078,53 @@ START QUIZ
 
 function startQuiz() {
 
-currentIdx =
-0;
-
-score =
-0;
-
-elapsedSeconds =
-0;
+    currentIdx = 0;
+    score = 0;
+    elapsedSeconds = 0;
 
 
-createQuestionSet();
+    createQuestionSet();
 
 
-$("studentStart")
-.style.display =
-"none";
+    document
+        .getElementById("studentInfo")
+        .style.display = "grid";
 
 
-$("modeSelect")
-.style.display =
-"none";
+    document
+        .getElementById("quizArea")
+        .style.display = "block";
 
 
-$("categoryScreen")
-.style.display =
-"none";
+    document
+        .getElementById("score")
+        .textContent =
+        `Score: 0 / ${TOTAL_QUESTIONS}`;
 
 
-$("studentInfo")
-.style.display =
-"grid";
+    document
+        .getElementById("quizCount")
+        .textContent =
+        `Question: 1 / ${TOTAL_QUESTIONS}`;
 
 
-$("quizArea")
-.style.display =
-"block";
+    document
+        .getElementById("timerDisplay")
+        .textContent =
+        "Time Elapsed: 0:00";
 
 
-$("finishMessage")
-.style.display =
-"none";
+    showQuestion();
 
 
-$("score")
-.textContent =
-`Score: 0 / ${TOTAL_QUESTIONS}`;
+    startTimer();
 
 
-$("quizCount")
-.textContent =
-`Question: 1 / ${TOTAL_QUESTIONS}`;
-
-
-$("timerDisplay")
-.textContent =
-"Time Elapsed: 00:00";
-
-
-showQuestion();
-
-
-startTimer();
-
-
-$("quizArea")
-.scrollIntoView({
-
-behavior:
-"smooth"
-
-});
+    document
+        .getElementById("quizArea")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
 
@@ -2852,276 +2135,298 @@ SHOW QUESTION
 
 function showQuestion() {
 
-const currentQuestion =
-questions[
-currentIdx
-];
+    const currentQuestion =
+        questions[currentIdx];
 
 
-if (
-!currentQuestion
-) {
-
-return;
-
-}
+    if (!currentQuestion) {
+        return;
+    }
 
 
-/* =====================================================
-CATEGORY
-===================================================== */
-
-$("category")
-.textContent =
-currentQuestion.category ||
-"Sides";
+    document
+        .getElementById("category")
+        .textContent =
+        currentQuestion.category ||
+        getQuizTypeName(selectedMode);
 
 
-/* =====================================================
-IMAGE
-===================================================== */
-
-const shapeImage =
-$("shapeImage");
+    document
+        .getElementById("displayGiven")
+        .innerHTML =
+        currentQuestion.text;
 
 
-if (
-currentQuestion.image
-) {
-
-shapeImage.src =
-currentQuestion.image;
-
-shapeImage.style.display =
-"block";
-
-}
-
-else {
-
-shapeImage.src =
-"";
-
-shapeImage.style.display =
-"none";
-
-}
+    document
+        .getElementById("quizCount")
+        .textContent =
+        `Question: ${currentIdx + 1} / ${questions.length}`;
 
 
-/* =====================================================
-QUESTION
-===================================================== */
-
-$("displayGiven")
-.innerHTML =
-currentQuestion.text;
+    document
+        .getElementById("score")
+        .textContent =
+        `Score: ${score} / ${questions.length}`;
 
 
-/* =====================================================
-QUESTION NUMBER
-===================================================== */
+    /* RESET FEEDBACK */
 
-$("quizCount")
-.textContent =
-`Question: ${currentIdx + 1} / ${TOTAL_QUESTIONS}`;
+    const outAns =
+        document.getElementById("outAns");
 
 
-/* =====================================================
-SCORE
-===================================================== */
+    outAns.style.display = "none";
 
-$("score")
-.textContent =
-`Score: ${score} / ${TOTAL_QUESTIONS}`;
+    outAns.innerHTML = "";
 
+    outAns.style.background =
+        "var(--tint-light)";
 
-/* =====================================================
-RESET FEEDBACK
-===================================================== */
+    outAns.style.color =
+        "var(--primary-dark)";
 
-$("outAns")
-.innerHTML =
-"";
-
-$("outAns")
-.style.display =
-"none";
+    outAns.style.borderColor =
+        "var(--border-color)";
 
 
-$("outAns")
-.style.background =
-"var(--tint-light)";
+    /* RESET BUTTONS */
+
+    document
+        .getElementById("nextBtn")
+        .style.display = "none";
 
 
-$("outAns")
-.style.color =
-"var(--primary-dark)";
+    document
+        .getElementById("showSummaryBtn")
+        .style.display = "none";
 
 
-$("outAns")
-.style.borderColor =
-"var(--border-color)";
+    /* CREATE ANSWER AREA */
 
-
-/* =====================================================
-RESET HINT
-===================================================== */
-
-$("hintText")
-.textContent =
-"";
-
-
-$("hintText")
-.style.display =
-"none";
-
-
-/* =====================================================
-RESET NEXT BUTTON
-===================================================== */
-
-$("nextBtn")
-.style.display =
-"none";
-
-
-/* =====================================================
-RENDER SOLVING AREA
-===================================================== */
-
-renderAnswerArea(
-currentQuestion
-);
+    renderAnswerArea(currentQuestion);
 
 }
 
 
 /* =========================================================
-SOLVING AREA
-=========================================================
-
-This section is designed to be replaced with
-your own solving functions.
-
+LINEAR FUNCTION ANSWER HELPERS
 ========================================================= */
 
-function renderAnswerArea(
-question
-) {
+function formatEquation(slope, intercept) {
 
-const answerBox =
-$("answerBox");
-
-
-answerBox.innerHTML = `
-
-<div class="default-answer-box">
-
-<label for="ans">
-Enter your answer for x:
-</label>
-
-<input
-type="number"
-id="ans"
-placeholder="Enter x"
-step="any"
->
-
-<button
-type="button"
-class="btn-primary"
-id="submitBtn"
->
-Submit Answer
-</button>
-
-<button
-type="button"
-class="btn-primary btn-secondary"
-id="hintButton"
-style="margin-top:4px;"
->
-Show Hint
-</button>
-
-</div>
-
-`;
+    if (intercept === 0) {
+        return `${slope}x`;
+    }
 
 
-$("submitBtn")
-.onclick =
-submitAnswer;
-
-
-$("hintButton")
-.onclick =
-showHint;
-
-
-const answerInput =
-$("ans");
-
-
-answerInput.focus();
-
-
-answerInput.addEventListener(
-"keydown",
-event => {
-
-if (
-event.key ===
-"Enter"
-) {
-
-submitAnswer();
+    return intercept > 0
+        ? `${slope}x + ${intercept}`
+        : `${slope}x ${intercept}`;
 
 }
 
+
+function formatEquationForms(slope, intercept) {
+
+    const rightSide =
+        formatEquation(
+            slope,
+            intercept
+        );
+
+
+    return `y = ${rightSide} or f(x) = ${rightSide}`;
+
 }
-);
+
+
+function getEquationRightSide(value) {
+
+    const cleanedValue =
+        value
+            .toLowerCase()
+            .replace(/\s+/g, "");
+
+
+    const equationParts =
+        cleanedValue.split("=");
+
+
+    if (
+        equationParts.length !== 2
+    ) {
+        return null;
+    }
+
+
+    const leftSide =
+        equationParts[0];
+
+
+    if (
+        !/^(y|f\(x\))$/.test(leftSide)
+    ) {
+        return null;
+    }
+
+
+    const rightSide =
+        equationParts[1];
+
+
+    let slope = 0;
+    let intercept = 0;
+    let hasX = false;
+
+
+    const terms =
+        rightSide.match(
+            /([+-]?[0-9]+x|[+-]?[0-9]+)/g
+        );
+
+
+    if (!terms) {
+        return null;
+    }
+
+
+    for (const term of terms) {
+
+        if (/x/.test(term)) {
+
+            hasX = true;
+
+            const coeffStr =
+                term.replace("x", "");
+
+
+            if (
+                coeffStr === "" ||
+                coeffStr === "+"
+            ) {
+
+                slope = 1;
+
+            }
+
+            else if (
+                coeffStr === "-"
+            ) {
+
+                slope = -1;
+
+            }
+
+            else {
+
+                slope =
+                    Number(coeffStr);
+
+            }
+
+        }
+
+        else {
+
+            intercept =
+                Number(term);
+
+        }
+
+    }
+
+
+    if (!hasX) {
+        return null;
+    }
+
+
+    return {
+        slope,
+        intercept
+    };
 
 }
 
 
 /* =========================================================
-SHOW HINT
+ANSWER AREA
 ========================================================= */
 
-function showHint() {
+function renderAnswerArea(question) {
 
-const currentQuestion =
-questions[
-currentIdx
-];
+    const answerBox =
+        document.getElementById("answerBox");
 
 
-$("hintText")
-.textContent =
-currentQuestion.hint ||
-"No hint is available for this question.";
+    const label =
+        question.requiresFunction
+            ? "Enter the linear function:"
+            : "Enter your answer:";
 
 
-$("hintText")
-.style.display =
-"block";
+    const placeholder =
+        question.requiresFunction
+            ? "Example: f(x) = mx + b"
+            : "Enter your answer";
 
 
-const hintButton =
-$("hintButton");
+    const inputType =
+        question.requiresFunction
+            ? "text"
+            : "number";
 
 
-if (
-hintButton
-) {
+    answerBox.innerHTML = `
 
-hintButton.disabled =
-true;
+        <div class="default-answer-box">
 
-}
+            <label for="ans">
+                ${label}
+            </label>
+
+            <input
+                type="${inputType}"
+                id="ans"
+                placeholder="${placeholder}"
+                ${question.requiresFunction
+                    ? ""
+                    : 'step="any"'}
+            >
+
+            <button
+                type="button"
+                class="btn-primary"
+                id="submitBtn"
+                onclick="submitAnswer()"
+            >
+                Submit Answer
+            </button>
+
+        </div>
+
+    `;
+
+
+    const answerInput =
+        document.getElementById("ans");
+
+
+    answerInput.focus();
+
+
+    answerInput.addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Enter") {
+
+                submitAnswer();
+
+            }
+
+        }
+    );
 
 }
 
@@ -3132,245 +2437,225 @@ SUBMIT ANSWER
 
 function submitAnswer() {
 
-checkAns();
+    checkAns();
 
 }
 
 
 /* =========================================================
 CHECK ANSWER
-=========================================================
-
-This is the current basic answer-checking function.
-Replace this part later with your custom solving
-functions.
-
 ========================================================= */
 
 function checkAns() {
 
-const answerInput =
-$("ans");
+    const answerInput =
+        document.getElementById("ans");
 
 
-if (
-!answerInput
-) {
+    if (!answerInput) {
+        return;
+    }
 
-return;
 
-}
+    const inputValue =
+        answerInput.value.trim();
 
 
-const inputValue =
-answerInput.value.trim();
+    if (inputValue === "") {
 
+        alert(
+            "Please enter your answer."
+        );
 
-if (
-!inputValue
-) {
+        return;
+    }
 
-alert(
-"Please enter your answer."
-);
 
-return;
+    const currentQuestion =
+        questions[currentIdx];
 
-}
 
+    let isCorrect = false;
 
-const submittedAnswer =
-Number(
-inputValue
-);
 
+    if (
+        currentQuestion.requiresFunction
+    ) {
 
-if (
-Number.isNaN(
-submittedAnswer
-)
-) {
+        const parsed =
+            getEquationRightSide(
+                inputValue
+            );
 
-alert(
-"Please enter a valid number."
-);
 
-return;
+        if (parsed) {
 
-}
+            isCorrect =
+                parsed.slope ===
+                    currentQuestion.slope &&
 
+                parsed.intercept ===
+                    currentQuestion.intercept;
 
-const currentQuestion =
-questions[
-currentIdx
-];
+        }
 
+    }
 
-const isCorrect =
-Math.abs(
-submittedAnswer -
-currentQuestion.answer
-) < 0.0001;
+    else {
 
+        const submittedAnswer =
+            Number(
+                inputValue.replace(/,/g, "")
+            );
 
-/* =====================================================
-SHOW FEEDBACK
-===================================================== */
 
-$("outAns")
-.style.display =
-"block";
+        if (
+            Number.isNaN(submittedAnswer)
+        ) {
 
+            alert(
+                "Please enter a valid number."
+            );
 
-/* =====================================================
-CORRECT
-===================================================== */
+            return;
+        }
 
-if (
-isCorrect
-) {
 
-score++;
+        isCorrect =
+            Math.abs(
+                submittedAnswer -
+                currentQuestion.value
+            ) < 0.0001;
 
+    }
 
-$("score")
-.textContent =
-`Score: ${score} / ${TOTAL_QUESTIONS}`;
 
+    const result =
+        document.getElementById("outAns");
 
-$("outAns")
-.style.background =
-"var(--correct-bg)";
 
+    result.style.display = "block";
 
-$("outAns")
-.style.color =
-"var(--correct-text)";
 
+    if (isCorrect) {
 
-$("outAns")
-.style.borderColor =
-"var(--correct-border)";
+        score++;
 
 
-$("outAns")
-.innerHTML = `
+        document
+            .getElementById("score")
+            .textContent =
+            `Score: ${score} / ${questions.length}`;
 
-<strong>
-Correct! 🎉
-</strong>
 
-<div
-style="
-margin-top:10px;
-padding:8px;
-background:white;
-border-left:3px solid var(--correct-border);
-border-radius:5px;
-"
->
-Great job! Your answer is correct.
-</div>
+        result.style.background =
+            "var(--correct-bg)";
 
-`;
+        result.style.color =
+            "var(--correct-text)";
 
-}
+        result.style.borderColor =
+            "var(--correct-border)";
 
 
-/* =====================================================
-INCORRECT
-===================================================== */
+        result.innerHTML = `
 
-else {
+            <strong>Correct! 🎉</strong>
 
-$("outAns")
-.style.background =
-"var(--wrong-bg)";
+            <div
+                style="
+                    margin-top:10px;
+                    padding:8px;
+                    background:white;
+                    border-left:3px solid var(--correct-border);
+                    border-radius:5px;
+                "
+            >
+                Great job! Your answer is correct.
+            </div>
 
+        `;
 
-$("outAns")
-.style.color =
-"var(--wrong-text)";
+    }
 
+    else {
 
-$("outAns")
-.style.borderColor =
-"var(--wrong-border)";
+        result.style.background =
+            "var(--wrong-bg)";
 
+        result.style.color =
+            "var(--wrong-text)";
 
-$("outAns")
-.innerHTML = `
+        result.style.borderColor =
+            "var(--wrong-border)";
 
-<strong>
-Incorrect.
-</strong>
 
-<div
-style="
-margin-top:10px;
-padding:8px;
-background:white;
-border-left:3px solid var(--wrong-border);
-border-radius:5px;
-"
->
-Correct answer:
-<strong>
-${currentQuestion.answer}
-</strong>
-</div>
+        const correctAnswer =
+            currentQuestion.requiresFunction
 
-`;
+                ? formatEquationForms(
+                    currentQuestion.slope,
+                    currentQuestion.intercept
+                )
 
-}
+                : Number(
+                    currentQuestion.value
+                ).toLocaleString("en-US");
 
 
-/* =====================================================
-LOCK INPUT
-===================================================== */
+        result.innerHTML = `
 
-answerInput.disabled =
-true;
+            <strong>Incorrect.</strong>
 
+            <div
+                style="
+                    margin-top:10px;
+                    padding:8px;
+                    background:white;
+                    border-left:3px solid var(--wrong-border);
+                    border-radius:5px;
+                "
+            >
 
-/* =====================================================
-CHANGE SUBMIT TO NEXT
-===================================================== */
+                Correct answer:
 
-const submitButton =
-$("submitBtn");
+                <strong>
+                    ${correctAnswer}
+                </strong>
 
+            </div>
 
-if (
-submitButton
-) {
+        `;
 
-submitButton.textContent =
-"Next Question";
+    }
 
 
-submitButton.onclick =
-nextQuestion;
+    answerInput.disabled = true;
 
-}
 
+    document
+        .getElementById("submitBtn")
+        .style.display = "none";
 
-/* =====================================================
-DISABLE HINT
-===================================================== */
 
-const hintButton =
-$("hintButton");
+    if (
+        currentIdx <
+        questions.length - 1
+    ) {
 
+        document
+            .getElementById("nextBtn")
+            .style.display = "block";
 
-if (
-hintButton
-) {
+    }
 
-hintButton.disabled =
-true;
+    else {
 
-}
+        document
+            .getElementById("showSummaryBtn")
+            .style.display = "block";
+
+    }
 
 }
 
@@ -3381,22 +2666,22 @@ NEXT QUESTION
 
 function nextQuestion() {
 
-currentIdx++;
+    currentIdx++;
 
 
-if (
-currentIdx <
-questions.length
-) {
+    if (
+        currentIdx <
+        questions.length
+    ) {
 
-showQuestion();
+        showQuestion();
 
-return;
+        return;
 
-}
+    }
 
 
-finishQuiz();
+    finishQuiz();
 
 }
 
@@ -3407,258 +2692,147 @@ FINISH QUIZ
 
 function finishQuiz() {
 
-stopTimer();
+    stopTimer();
 
 
-/* =====================================================
-FINAL INFORMATION
-===================================================== */
-
-$("summaryName")
-.textContent =
-studentName;
+    document
+        .getElementById("summaryName")
+        .textContent =
+        studentName;
 
 
-$("summarySection")
-.textContent =
-studentSection;
+    document
+        .getElementById("summarySection")
+        .textContent =
+        studentSection;
 
 
-$("summaryType")
-.textContent =
-getQuizTypeName();
+    document
+        .getElementById("summaryType")
+        .textContent =
+        getQuizTypeName(selectedMode);
 
 
-$("finalScore")
-.textContent =
-score;
+    document
+        .getElementById("finalScore")
+        .textContent =
+        score;
 
 
-$("finalTotal")
-.textContent =
-TOTAL_QUESTIONS;
+    document
+        .getElementById("finalTotal")
+        .textContent =
+        TOTAL_QUESTIONS;
 
 
-$("finalTime")
-.textContent =
-formatTime(
-elapsedSeconds
-);
+    document
+        .getElementById("finalTime")
+        .textContent =
+        formatTime(elapsedSeconds);
 
 
-/* =====================================================
-HIDE QUIZ
-===================================================== */
-
-$("studentInfo")
-.style.display =
-"none";
+    document
+        .getElementById("studentInfo")
+        .style.display = "none";
 
 
-$("quizArea")
-.style.display =
-"none";
+    document
+        .getElementById("quizArea")
+        .style.display = "none";
 
 
-/* =====================================================
-SHOW RESULTS
-===================================================== */
-
-$("finishMessage")
-.style.display =
-"block";
+    document
+        .getElementById("finishMessage")
+        .style.display = "block";
 
 
-window.scrollTo({
+    window.scrollTo({
 
-top:
-0,
+        top: 0,
 
-behavior:
-"smooth"
+        behavior: "smooth"
 
-});
+    });
 
 }
 
 
 /* =========================================================
-RETAKE QUIZ
+RESTART QUIZ
 ========================================================= */
 
 function backToQuizTypes() {
 
-stopTimer();
+    stopTimer();
 
 
-/* =====================================================
-HIDE QUIZ
-===================================================== */
-
-$("quizArea")
-.style.display =
-"none";
+    document
+        .getElementById("quizArea")
+        .style.display = "none";
 
 
-$("studentInfo")
-.style.display =
-"none";
+    document
+        .getElementById("studentInfo")
+        .style.display = "none";
 
 
-$("finishMessage")
-.style.display =
-"none";
+    document
+        .getElementById("finishMessage")
+        .style.display = "none";
 
 
-/* =====================================================
-RESET
-===================================================== */
-
-questions.length =
-0;
-
-currentIdx =
-0;
-
-score =
-0;
-
-elapsedSeconds =
-0;
+    document
+        .getElementById("modeSelect")
+        .style.display = "block";
 
 
-/* =====================================================
-RESET TIMER
-===================================================== */
+    questions.length = 0;
 
-$("timerDisplay")
-.textContent =
-"Time Elapsed: 00:00";
+    currentIdx = 0;
 
+    score = 0;
 
-/* =====================================================
-RESET SCORE
-===================================================== */
-
-$("score")
-.textContent =
-`Score: 0 / ${TOTAL_QUESTIONS}`;
+    elapsedSeconds = 0;
 
 
-/* =====================================================
-RESET QUESTION
-===================================================== */
-
-$("quizCount")
-.textContent =
-`Question: 1 / ${TOTAL_QUESTIONS}`;
+    selectedMode = "";
 
 
-/* =====================================================
-SHOW QUESTION COUNT
-===================================================== */
-
-$("categoryScreen")
-.style.display =
-"block";
+    document
+        .getElementById("timerDisplay")
+        .textContent =
+        "Time Elapsed: 0:00";
 
 
-$("categoryScreen")
-.scrollIntoView({
+    document
+        .getElementById("score")
+        .textContent =
+        `Score: 0 / ${TOTAL_QUESTIONS}`;
 
-behavior:
-"smooth"
 
-});
+    document
+        .getElementById("quizCount")
+        .textContent =
+        `Question: 1 / ${TOTAL_QUESTIONS}`;
+
+
+    document
+        .getElementById("nextBtn")
+        .style.display = "none";
+
+
+    document
+        .getElementById("showSummaryBtn")
+        .style.display = "none";
+
+
+    document
+        .getElementById("modeSelect")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
-
-
-/* =========================================================
-BUTTON EVENTS
-========================================================= */
-
-
-/* =====================================================
-STUDENT DETAILS
-===================================================== */
-
-$("confirmStudentBtn")
-.addEventListener(
-"click",
-proceedToModeSelect
-);
-
-
-/* =====================================================
-START QUIZ FROM CONFIRMATION
-===================================================== */
-
-$("continueBtn")
-.addEventListener(
-"click",
-() => {
-
-showScreen(
-"categoryScreen"
-);
-
-}
-);
-
-
-/* =====================================================
-BEGIN QUIZ
-===================================================== */
-
-$("beginQuizBtn")
-.addEventListener(
-"click",
-() => {
-
-TOTAL_QUESTIONS =
-Number(
-$("questionCount").value
-);
-
-
-startQuizWithCountdown();
-
-}
-);
-
-
-/* =====================================================
-EDIT DETAILS
-===================================================== */
-
-$("editStudentBtn")
-.addEventListener(
-"click",
-editStudentDetails
-);
-
-
-/* =====================================================
-BACK
-===================================================== */
-
-$("backToConfirmBtn")
-.addEventListener(
-"click",
-backToConfirmation
-);
-
-
-/* =====================================================
-RETAKE
-===================================================== */
-
-$("retakeQuizBtn")
-.addEventListener(
-"click",
-backToQuizTypes
-);
 
 
 /* =========================================================
@@ -3666,77 +2840,59 @@ PAGE LOAD
 ========================================================= */
 
 window.addEventListener(
-"load",
-() => {
+    "load",
+    () => {
 
-stopTimer();
+        stopTimer();
 
+        elapsedSeconds = 0;
 
-elapsedSeconds =
-0;
+        currentIdx = 0;
 
-currentIdx =
-0;
+        score = 0;
 
-score =
-0;
+        questions.length = 0;
 
-
-questions.length =
-0;
+        selectedMode = "";
 
 
-$("studentStart")
-.style.display =
-"block";
+        document
+            .getElementById("studentStart")
+            .style.display = "block";
 
 
-$("modeSelect")
-.style.display =
-"none";
+        document
+            .getElementById("modeSelect")
+            .style.display = "none";
 
 
-$("categoryScreen")
-.style.display =
-"none";
+        document
+            .getElementById("categoryScreen")
+            .style.display = "none";
 
 
-$("quizArea")
-.style.display =
-"none";
+        document
+            .getElementById("quizArea")
+            .style.display = "none";
 
 
-$("studentInfo")
-.style.display =
-"none";
+        document
+            .getElementById("studentInfo")
+            .style.display = "none";
 
 
-$("finishMessage")
-.style.display =
-"none";
+        document
+            .getElementById("finishMessage")
+            .style.display = "none";
 
 
-$("countdownOverlay")
-.classList.remove(
-"active"
+        document
+            .getElementById("timerDisplay")
+            .textContent =
+            "Time Elapsed: 0:00";
+
+    }
 );
-
-
-$("timerDisplay")
-.textContent =
-"Time Elapsed: 00:00";
-
-
-$("score")
-.textContent =
-`Score: 0 / ${TOTAL_QUESTIONS}`;
-
-
-$("quizCount")
-.textContent =
-`Question: 1 / ${TOTAL_QUESTIONS}`;
-
-});
 
 </script>
 

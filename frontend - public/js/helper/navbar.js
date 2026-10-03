@@ -127,8 +127,8 @@ function createNavbarHTML() {
 
                     <ul class="dropdown-menu">
                         <li><a href="${getNavPath("grade9/index.html")}" class="dropdown-item">Grade 9 Overview</a></li>
-                        <li><a href="${getNavPath("grade9/grade9L2.html")}#lesson1" class="dropdown-item">Linear Function Problems</a></li>
-                        <li><a href="${getNavPath("grade9/grade9L1.html")}#lesson2" class="dropdown-item">Sides of Parallelograms</a></li>
+                        <li><a href="${getNavPath("grade9/grade9L1.html")}#lesson1" class="dropdown-item">Linear Function Problems</a></li>
+                        <li><a href="${getNavPath("grade9/grade9L2.html")}#lesson2" class="dropdown-item">Sides of Parallelograms</a></li>
                         <li><a href="${getNavPath("grade9/grade9L3.html")}#lesson3" class="dropdown-item">Angles of Parallelograms</a></li>
                         <li><a href="${getNavPath("grade9/grade9L4.html")}#lesson4" class="dropdown-item">Height & Diagonals of Parallelograms</a></li>
                     </ul>
