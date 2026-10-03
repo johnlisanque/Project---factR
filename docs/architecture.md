@@ -55,33 +55,33 @@ The purpose of using inline styles in these cases is to keep
 page-specific styling close to the HTML elements that require it.
 This is useful for pages that have unique layouts or components
 that are not shared across the rest of the application.
+## 2. The Use of Script
 
-## 2. the use of Script
-
- Although the project factR uses reusable JavaScript modules for
+Although the Project FACTR uses reusable JavaScript modules for
 shared functionality, individual pages may contain an inline
-<script> for functionality that is unique to that page.
-The inline script is used when functionality is closely tied to
-the structure and behavior of a specific page. it may also be use as spicific calculation or logic  
- 
-Shared functionality that is used by multiple pages should instead
-be placed in reusable JavaScript modules.  
- 
-Therefore, the architecture can be summarized as:  
- 
- - Project FACTR separates its architecture into page-specific
-functionality and reusable application functionality. Pages are
-organized by grade level to keep lessons and activities structured
-according to their intended learners. Each page may contain inline
-styles and scripts for layouts, interactions, and calculations
-that are unique to that page.
+`<script>` for functionality that is unique to that page.
 
- - Functionality that is shared across multiple pages is instead
-implemented through reusable JavaScript modules, classes, and
-components. This separation keeps page-specific logic close to
-the content that uses it while allowing common functionality to
-be maintained and reused throughout the application.  
- 
+The inline script is used when functionality is closely tied to
+the structure and behavior of a specific page. It may also be used
+for specific calculations or logic.
+
+Shared functionality that is used by multiple pages should instead
+be placed in reusable JavaScript modules.
+
+Therefore, the architecture can be summarized as:
+
+- Project FACTR separates its architecture into page-specific
+  functionality and reusable application functionality. Pages are
+  organized by grade level to keep lessons and activities structured
+  according to their intended learners. Each page may contain inline
+  styles and scripts for layouts, interactions, and calculations
+  that are unique to that page.
+
+- Functionality that is shared across multiple pages is instead
+  implemented through reusable JavaScript modules, classes, and
+  components. This separation keeps page-specific logic close to
+  the content that uses it while allowing common functionality to
+  be maintained and reused throughout the application.
 
 
 
