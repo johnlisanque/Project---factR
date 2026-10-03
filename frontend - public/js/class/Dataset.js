@@ -1,3 +1,13 @@
+
+/**
+ * Represents a collection of numerical data and provides
+ * methods for calculating common measures of central tendency.
+ *
+ * The dataset supports calculations for the mean, median,
+ * mode, and sum of its values.
+ *
+ * @class DataSet
+ */
 export class DataSet{
 
     constructor(set = []){
@@ -20,8 +30,8 @@ export class DataSet{
         return this.dataset.reduce((total, value) => total + value, 0) / this.dataset.length;
     }
     /**
-     * 
-     * @returns returns median
+     *  find the median of dataset. returns median
+     * @returns {Number} Median
      */
     median(){
         const sorted = [...this.dataset].sort((a, b) => a - b);
@@ -34,48 +44,28 @@ export class DataSet{
         return (sorted[n / 2 - 1] + sorted[n / 2]) / 2;
     }
     /**
-     * find the mode
+     * find the mode of the dataset
      * @returns return the most frequent number
      */
-// mode() {
-//         const counts = {};
-//         let maxFreq = 0;
-//         let modes = [];
 
-//         for (let d of this.dataset) {
-//             counts[d] = (counts[d] || 0) + 1;
-            
-//             if (counts[d] > maxFreq) {
-//                 maxFreq = counts[d];
-//                 modes = [d]; // Reset modes if a higher frequency is found
-//             } else if (counts[d] === maxFreq) {
-//                 if (!modes.includes(d)) {
-//                     modes.push(d); // Add to modes if it ties with the max frequency
-//                 }
-//             }
-//         }
-        
-//         // Returns an array of modes to handle ties (e.g., [31, 39])
-//         return modes; 
-//     }
-mode() {
-    const counts = {};
-    let maxFreq = 0;
-    let modes = [];
+    mode() {
+        const counts = {};
+        let maxFreq = 0;
+        let modes = [];
 
-    for (let d of this.dataset) {
-        counts[d] = (counts[d] || 0) + 1;
+        for (let d of this.dataset) {
+            counts[d] = (counts[d] || 0) + 1;
 
-        if (counts[d] > maxFreq) {
-            maxFreq = counts[d];
-            modes = [d];
-        } 
-        else if (counts[d] === maxFreq) {
-            if (!modes.includes(d)) {
-                modes.push(d);
+            if (counts[d] > maxFreq) {
+                maxFreq = counts[d];
+                modes = [d];
+            } 
+            else if (counts[d] === maxFreq) {
+                if (!modes.includes(d)) {
+                    modes.push(d);
+                }
             }
         }
-    }
 
     // If every value occurs only once,
     // there is no mode.

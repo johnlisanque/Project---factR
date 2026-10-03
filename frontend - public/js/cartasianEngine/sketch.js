@@ -15,6 +15,10 @@ let questionAnswered = false;
 let studentName = "";
 let studentSection = "";
 let isQuizing = false
+
+/**
+ * setup variables, canvas, quiz, and event listener
+ */
 window.setup = function () {
 
     const container = document.getElementById("canvas-container");
