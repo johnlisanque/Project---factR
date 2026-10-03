@@ -69,18 +69,14 @@ be placed in reusable JavaScript modules.
  
 Therefore, the architecture can be summarized as:  
  
- 
-Project FACTR separates its architecture into page-specific
+ - Project FACTR separates its architecture into page-specific
 functionality and reusable application functionality. Pages are
 organized by grade level to keep lessons and activities structured
 according to their intended learners. Each page may contain inline
 styles and scripts for layouts, interactions, and calculations
 that are unique to that page.
- 
 
- 
- 
-Functionality that is shared across multiple pages is instead
+ - Functionality that is shared across multiple pages is instead
 implemented through reusable JavaScript modules, classes, and
 components. This separation keeps page-specific logic close to
 the content that uses it while allowing common functionality to
