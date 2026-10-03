@@ -389,7 +389,7 @@ body {
   opacity: 0;
   transform: translateY(25px) scale(0.99);
 
-  animation:s
+  animation:
     entranceCover 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards,
     subtleFloat 6s ease-in-out 1.4s infinite alternate;
 }
