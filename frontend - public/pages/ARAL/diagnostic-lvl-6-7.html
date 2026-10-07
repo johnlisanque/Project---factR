@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ARAL Math - Level 7</title>
+	<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;900&display=swap');
+
+:root {
+  --primary-dark: #073827;
+  --primary-forest: #16623d;
+  --primary-accent: #339763;
+  --tint-light: #e7f7ee;
+  --card-bg: #f7faf8;
+
+  --text-main: #073827;
+  --text-body: #2d473b;
+  --text-muted: #567e6c;
+  --border-color: #d8eade;
+  --white: #ffffff;
+
+  --font-brand: 'Montserrat', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Makes the "hidden" attribute win over any display rule below */
+[hidden] {
+  display: none !important;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--white);
+  font-family: var(--font-body);
+  color: var(--text-body);
+  scroll-behavior: smooth;
+}
+
+/* ---------- Navigation ---------- */
+
+.top-nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 14px 32px;
+  animation: slideDownNav 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideDownNav {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nav-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo {
+  font-family: var(--font-brand);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--primary-forest);
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nav-logo:hover { transform: scale(1.03); }
+
+.nav-tagline {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-left: 1.5px solid var(--border-color);
+  padding-left: 12px;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .nav-tagline { display: inline-block; }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  list-style: none;
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-body);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 7px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background-color: var(--primary-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+
+.nav-link:hover {
+  color: var(--primary-forest);
+  background-color: var(--tint-light);
+  transform: translateY(-2px);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-link.active {
+  color: white;
+  background-color: var(--primary-forest);
+  box-shadow: 0 4px 14px rgba(22, 98, 61, 0.25);
+}
+
+.nav-link.active::after { display: none; }
+
+/* ---------- Cover ---------- */
+
+.cover-section {
+  width: 100vw;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #f7faf8 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.cover-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  line-height: 0;
+}
+
+.cover-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  opacity: 0;
+  transform: translateY(25px) scale(0.99);
+  animation: entranceCover 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards,
+             subtleFloat 6s ease-in-out 1.4s infinite alternate;
+}
+
+@keyframes entranceCover {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes subtleFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-6px); }
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  width: 100%;
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  padding: 24px 32px;
+  margin: 0;
+}
+
+.footer-bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Quiz page layout ---------- */
+
+.level-main {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.level-intro {
+  text-align: center;
+}
+
+.level-intro h1 {
+  font-family: var(--font-brand);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: var(--primary-dark);
+  margin-bottom: 12px;
+}
+
+.level-intro p {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Shared card look for login and quiz */
+
+.student-gate,
+.quiz-panel {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(7, 56, 39, 0.06);
+  animation: riseIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.student-gate h2,
+.quiz-topline h2,
+.record-panel h2 {
+  font-family: var(--font-brand);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--primary-forest);
+}
+
+/* ---------- Login form ---------- */
+
+.student-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.student-form label,
+.answer-field label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-main);
+  background-color: var(--white);
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  padding: 12px 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+input[type="text"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 4px rgba(51, 151, 99, 0.18);
+}
+
+/* ---------- Buttons ---------- */
+
+button {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--white);
+  background-color: var(--primary-forest);
+  border: 1.5px solid var(--primary-forest);
+  border-radius: 10px;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(22, 98, 61, 0.25);
+}
+
+button:active:not(:disabled) { transform: translateY(0); }
+
+button:focus-visible {
+  outline: 3px solid var(--primary-accent);
+  outline-offset: 2px;
+}
+
+button.secondary {
+  color: var(--primary-forest);
+  background-color: var(--white);
+  border-color: var(--border-color);
+}
+
+button.secondary:hover:not(:disabled) {
+  background-color: var(--tint-light);
+  border-color: var(--primary-accent);
+  box-shadow: none;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.student-form button[type="submit"] {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+/* ---------- Quiz panel ---------- */
+
+.quiz-topline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.student-summary {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background-color: var(--tint-light);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.student-summary:empty { display: none; }
+
+.quiz-question {
+  font-family: var(--font-brand);
+  font-size: clamp(1.375rem, 4vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-main);
+  margin-bottom: 24px;
+  min-height: 2.6em;
+}
+
+.answer-field {
+  margin-bottom: 20px;
+}
+
+.answer-field input {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 14px 16px;
+}
+
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.quiz-feedback {
+  min-height: 1.6em;
+  margin-top: 20px;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--primary-forest);
+}
+
+/* ---------- Record panel ---------- */
+
+.record-panel {
+  margin-top: 28px;
+  padding: 24px;
+  background-color: var(--white);
+  border: 1.5px solid var(--primary-accent);
+  border-radius: 14px;
+  animation: riseIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#record-score {
+  font-family: var(--font-brand);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--primary-dark);
+  margin: 12px 0 20px;
+}
+
+.record-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.record-summary {
+  margin-top: 16px;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+.record-summary:empty { display: none; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+  .top-nav-bar { padding: 10px 16px; }
+
+  .nav-container > .hamburger-btn {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .nav-links { gap: 6px; }
+
+  .nav-link {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+  }
+
+  .site-footer { padding: 20px 16px; }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .level-main { padding: 32px 16px 56px; gap: 24px; }
+
+  .student-gate,
+  .quiz-panel { padding: 22px 18px; }
+
+  .quiz-actions button,
+  .record-actions button,
+  .student-form button[type="submit"] {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+</style>
+	<style>
+		.fraction {
+			display: inline-flex;
+			flex-direction: column;
+			vertical-align: middle;
+			text-align: center;
+			line-height: 1.2;
+			margin: 0 0.15em;
+		}
+
+		.fraction span:first-child {
+			border-bottom: 1px solid currentColor;
+		}
+	</style>
+    <link rel="stylesheet" href="../../assets/style/style.css">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+	    <header class="top-nav-bar" id="navbar">
+    
+  </header>
+<script src="../../js/helper/navbar.js"></script>
+<section class="cover-section" id="cover">
+      <div class="cover-wrapper">
+        <img 
+          src="../../assets/img/background/Banner Of Project FACTR.png" 
+          alt="ProjectFactr Mathematics Remedial Learning Platform Banner" 
+          class="cover-image"
+          id="main-cover-image"
+        >
+       <div class="cover-content">
+   <h1>ARAL Math</h1>
+            <h2>Practice integer operations, fraction operations, and basic algebraic operations.</h2>
+</div>
+      </div>
+    </section>
+
+	<main class="level-main">
+		
+
+		<section class="student-gate" id="student-login">
+			<h2>Student Login</h2>
+			<form class="student-form" id="student-form">
+				<label>Student name<input id="student-name" type="text" autocomplete="name" required></label>
+				<label>Grade - Section<input id="student-grade-section" type="text" placeholder="12 - Turing" required></label>
+				<button type="submit">Start Quiz</button>
+			</form>
+			<p class="quiz-feedback" id="login-error" aria-live="polite"></p>
+		</section>
+
+		<section class="quiz-panel" id="quiz-panel" data-quiz="Levels 6-7" data-total="20" hidden>
+			<div class="quiz-topline">
+				<h2 id="level">Level 6 - Integer Operations</h2>
+				<p class="student-summary" id="student-summary"></p>
+				<p id="progress"></p>
+			</div>
+			<h3 class="quiz-question" id="question"></h3>
+
+			<div class="answer-field" id="single-answer">
+				<label for="answer">Your answer</label>
+				<input type="text" id="answer" placeholder="Enter your answer" autocomplete="off">
+			</div>
+			<div class="fraction-answer" id="fraction-answer" style="display: none">
+				<label for="numerator">Numerator
+					<input type="text" id="numerator" inputmode="decimal" autocomplete="off">
+				</label>
+				<span aria-hidden="true">/</span>
+				<label for="denominator">Denominator
+					<input type="text" id="denominator" inputmode="numeric" autocomplete="off">
+				</label>
+			</div>
+			<div class="quiz-actions">
+				<button id="submit" type="button">Submit</button>
+				<button class="secondary" id="next" type="button">Next Question</button>
+			</div>
+			<p class="quiz-feedback" id="result" aria-live="polite"></p>
+
+			<section class="record-panel" id="record-panel" hidden>
+				<h2>Quiz Record</h2>
+				<p id="record-score"></p>
+				<div class="record-actions">
+					<button id="save-record" type="button">Save Record</button>
+					<button class="secondary" id="restart-quiz" type="button">Restart Quiz</button>
+				</div>
+				<p class="record-summary" id="record-status" aria-live="polite"></p>
+			</section>
+		</section>
+	</main>
+
+  <footer class="site-footer">
+
+    <div class="footer-bottom">
+
+      <div>
+        &copy; 2026 ProjectFactr. All rights reserved.
+      </div>
+
+      <div>
+        Mathematics Learning &amp; Curriculum Platform
+      </div>
+
+    </div>
+
+  </footer>
+
+	<script>
+		const totalQuestions = 20;
+	// Finds a page element by its ID.
+	const element = (id) => document.getElementById(id);
+	let questionNumber = 0;
+	let correctAnswer;
+	let answerType;
+
+	// Returns a random integer within the given range.
+	function random(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	// Formats a numerator and denominator as a stacked fraction.
+	function displayFraction(numerator, denominator) {
+		return `<span class="fraction"><span>${numerator}</span><span>${denominator}</span></span>`;
+	}
+
+	// Reduces a fraction to its simplest form.
+	function fraction(numerator, denominator) {
+		if (denominator < 0) [numerator, denominator] = [-numerator, -denominator];
+		let divisor = Math.abs(numerator);
+		let remainder = denominator;
+		while (remainder) [divisor, remainder] = [remainder, divisor % remainder];
+		divisor ||= 1;
+		return { numerator: numerator / divisor, denominator: denominator / divisor };
+	}
+
+	// Generates a Level 6 integer operation question.
+	function integerQuestion() {
+		const operation = ["+", "-", "×", "÷"][questionNumber % 4];
+		let first = random(-10, 10);
+		let second = random(-10, 10);
+
+		if (operation === "÷") {
+			while (!second) second = random(-10, 10);
+			first = second * random(-10, 10);
+			correctAnswer = first / second;
+			answerType = "number";
+			return `${displayFraction(first, second)} = ?`;
+		} else {
+			correctAnswer = operation === "+" ? first + second
+				: operation === "-" ? first - second : first * second;
+		}
+
+		answerType = "number";
+		return `${first} ${operation} ${second} = ?`;
+	}
+
+	// Generates a Level 7 fraction operation question.
+	function fractionQuestion() {
+		const operation = ["+", "-", "×", "÷", "+", "-"][questionNumber - 8];
+		const first = fraction(random(1, 9), random(2, 10));
+		const second = fraction(random(1, 9), random(2, 10));
+		let numerator;
+		let denominator;
+
+		if (operation === "+" || operation === "-") {
+			const sign = operation === "+" ? 1 : -1;
+			numerator = first.numerator * second.denominator + sign * second.numerator * first.denominator;
+			denominator = first.denominator * second.denominator;
+		} else if (operation === "×") {
+			numerator = first.numerator * second.numerator;
+			denominator = first.denominator * second.denominator;
+		} else {
+			numerator = first.numerator * second.denominator;
+			denominator = first.denominator * second.numerator;
+		}
+
+		correctAnswer = fraction(numerator, denominator);
+		answerType = "fraction";
+		const show = (value) => displayFraction(value.numerator, value.denominator);
+		return `${show(first)} ${operation} ${show(second)} = ?`;
+	}
+
+	// Generates a Level 7 algebra operation question.
+	function algebraQuestion() {
+		const type = questionNumber - 14;
+		const variable = ["x", "y", "z", "a", "b", "c"][type];
+		let first;
+		let second;
+		let coefficient;
+		let expression;
+		let square = false;
+
+		if (type < 2) {
+			first = random(2, 9);
+			second = random(2, 9);
+			coefficient = first + second;
+			expression = `${first}${variable} + ${second}${variable}`;
+		} else if (type < 4) {
+			first = random(5, 12);
+			second = random(1, 4);
+			coefficient = first - second;
+			expression = `${first}${variable} - ${second}${variable}`;
+		} else if (type === 4) {
+			first = random(2, 6);
+			second = random(2, 6);
+			coefficient = first * second;
+			square = true;
+			expression = `${first}${variable} × ${second}${variable}`;
+		} else {
+			second = random(2, 6);
+			first = random(2, 6) * second;
+			coefficient = first / second;
+			expression = displayFraction(`${first}${variable}²`, `${second}${variable}`);
+		}
+
+		correctAnswer = `${coefficient}${variable}${square ? "^2" : ""}`;
+		answerType = "algebra";
+		return `${expression} = ?`;
+	}
+
+	// Resets the answer fields and displays the current question.
+	function generateQuestion() {
+		element("answer").value = "";
+		element("numerator").value = "";
+		element("denominator").value = "";
+		element("result").innerText = "";
+		element("next").disabled = true;
+		element("next").style.display = "none";
+
+		if (questionNumber === totalQuestions) {
+			element("level").innerText = "Completed";
+			element("progress").innerText = "You finished all 20 questions!";
+			element("question").innerText = "Well done!";
+			["single-answer", "fraction-answer", "submit", "next"].forEach((id) => element(id).style.display = "none");
+			return;
+		}
+
+		element("progress").innerText = `Question ${questionNumber + 1} of ${totalQuestions}`;
+		if (questionNumber < 8) {
+			element("level").innerText = "Level 6 - Integer Operations";
+			element("question").innerHTML = integerQuestion();
+		} else if (questionNumber < 14) {
+			element("level").innerText = "Level 7 - Fraction Operations";
+			element("question").innerHTML = fractionQuestion();
+		} else {
+			element("level").innerText = "Level 7 - Basic Algebraic Operations";
+			element("question").innerHTML = algebraQuestion();
+		}
+
+		const isFraction = answerType === "fraction";
+		element("single-answer").style.display = isFraction ? "none" : "block";
+		element("fraction-answer").style.display = isFraction ? "flex" : "none";
+	}
+
+	// Parses and reduces a typed fraction or decimal answer.
+	function parseFraction(value) {
+		const parts = value.match(/^(-?\d+)\s*\/\s*(-?\d+)$/);
+		if (parts) return Number(parts[2]) ? fraction(Number(parts[1]), Number(parts[2])) : null;
+		if (!/^-?(?:\d+\.?\d*|\.\d+)$/.test(value)) return null;
+		const denominator = 10 ** ((value.split(".")[1] || "").length);
+		return fraction(Math.round(Number(value) * denominator), denominator);
+	}
+
+	// Checks the answer and displays feedback.
+	function checkAnswer() {
+		let correct;
+		if (answerType === "number") {
+			const value = element("answer").value.trim();
+			if (!value) {
+				element("result").innerText = "Please enter your answer.";
+				return;
+			}
+			correct = Number(value) === correctAnswer;
+		} else if (answerType === "fraction") {
+			const numerator = element("numerator").value.trim();
+			const denominator = element("denominator").value.trim();
+			if (!numerator || !denominator) {
+				element("result").innerText = "Please enter both the numerator and denominator.";
+				return;
+			}
+			const given = parseFraction(`${numerator}/${denominator}`);
+			if (!given) {
+				element("result").innerText = "Enter a valid fraction with a nonzero denominator.";
+				return;
+			}
+			correct = given && given.numerator === correctAnswer.numerator && given.denominator === correctAnswer.denominator;
+		} else {
+			const value = element("answer").value.trim();
+			if (!value) {
+				element("result").innerText = "Please enter your answer.";
+				return;
+			}
+			correct = value.toLowerCase().replace(/\s+/g, "").replace(/\*/g, "×").replace(/²/g, "^2") === correctAnswer.toLowerCase();
+		}
+
+		const expected = answerType === "fraction"
+			? `${correctAnswer.numerator}/${correctAnswer.denominator}`
+			: String(correctAnswer).replace(/\^2/g, "²");
+		element("result").innerText = correct ? "Correct!" : `Incorrect! The correct answer is ${expected}.`;
+		element("next").disabled = false;
+		element("next").style.display = "inline-block";
+	}
+
+	// Advances only when the required answer fields are filled.
+	function nextQuestion() {
+		if (answerType === "fraction") {
+			if (!element("numerator").value.trim() || !element("denominator").value.trim()) return;
+		} else if (!element("answer").value.trim()) {
+			return;
+		}
+
+		if (questionNumber < totalQuestions) {
+			questionNumber++;
+			generateQuestion();
+		}
+	}
+
+	element("submit").addEventListener("click", checkAnswer);
+	element("next").addEventListener("click", nextQuestion);
+	element("answer").addEventListener("keydown", (event) => {
+		if (event.key === "Enter") checkAnswer();
+	});
+	element("numerator").addEventListener("keydown", (event) => {
+		if (event.key === "Enter") checkAnswer();
+	});
+	element("denominator").addEventListener("keydown", (event) => {
+		if (event.key === "Enter") checkAnswer();
+	});
+	generateQuestion();
+	</script>
+	<script>
+		// Sets up student login, scoring, and record actions.
+		(() => {
+			// Finds a page element by its ID.
+			const byId = (id) => document.getElementById(id);
+			const login = byId("student-login");
+			const form = byId("student-form");
+			const quiz = byId("quiz-panel");
+			const recordPanel = byId("record-panel");
+			const question = byId("question");
+			const result = byId("result");
+			const level = byId("level");
+			const total = Number(quiz.dataset.total || 20);
+			const answers = new Map();
+			let student;
+			let saved = false;
+
+			// Updates the score shown in the record panel.
+			function updateScore() {
+				const score = [...answers.values()].filter(Boolean).length;
+				const text = `Score: ${score} / ${total}`;
+				if (byId("record-score").textContent !== text) byId("record-score").textContent = text;
+			}
+
+			// Records whether the current answer was correct.
+			function captureAnswer() {
+				const response = result.textContent.trim();
+				if (response === "Correct!" || response.startsWith("Incorrect!")) {
+					const progress = byId("progress")?.textContent || "";
+					answers.set(`${progress}|${question.textContent}`, response === "Correct!");
+					updateScore();
+				}
+			}
+
+			// Shows the record panel when the quiz ends.
+			function checkCompletion() {
+				const finished = /finished|completed/i.test(level.textContent) ||
+					/finished all \d+ questions/i.test(question.textContent);
+				if (finished && recordPanel.hidden) {
+					recordPanel.hidden = false;
+					updateScore();
+				}
+			}
+
+			// Opens the quiz for the signed-in student.
+			function startQuiz(details) {
+				student = details;
+				login.hidden = true;
+				quiz.hidden = false;
+				byId("student-summary").textContent =
+					`${student.name} | Grade ${student.grade} | Section ${student.section}`;
+			}
+
+			// Splits and normalizes the grade and section input.
+			function parseGradeSection(value) {
+				const match = value.trim().match(/^(\d+)\s*[-–—]\s*(.+)$/);
+				if (!match) return null;
+				const grade = match[1];
+				const section = match[2].trim().replace(/\s+/g, " ");
+				return section ? { grade, section, gradeSection: `${grade} - ${section}` } : null;
+			}
+
+			// Validates and stores the student's login details.
+			form.addEventListener("submit", (event) => {
+				event.preventDefault();
+				const name = byId("student-name").value.trim();
+				const gradeSection = parseGradeSection(byId("student-grade-section").value);
+				if (!name || !gradeSection) {
+					byId("login-error").textContent = "Enter grade and section like 12 - Turing.";
+					return;
+				}
+				byId("login-error").textContent = "";
+				const details = { name, ...gradeSection };
+				try {
+					sessionStorage.setItem("aralMathStudent", JSON.stringify(details));
+				} catch {
+					// Keep the quiz usable when browser storage is unavailable.
+				}
+				startQuiz(details);
+			});
+
+			let savedStudent;
+			try {
+				savedStudent = JSON.parse(sessionStorage.getItem("aralMathStudent"));
+			} catch {
+				savedStudent = null;
+			}
+			const savedGradeSection = parseGradeSection(savedStudent?.gradeSection || "");
+			if (savedStudent?.name && savedGradeSection) {
+				startQuiz({ ...savedStudent, ...savedGradeSection });
+			} else {
+				login.hidden = false;
+				quiz.hidden = true;
+			}
+
+			byId("submit").addEventListener("click", () => setTimeout(captureAnswer, 0));
+			// Downloads a text record and stores a browser copy.
+			byId("save-record").addEventListener("click", () => {
+				if (!student || saved) return;
+				const record = {
+					...student,
+					quiz: quiz.dataset.quiz,
+					score: [...answers.values()].filter(Boolean).length,
+					total,
+					completedAt: new Date().toISOString()
+				};
+
+				const text = [
+					"ARAL Math Quiz Record",
+					`Student: ${record.name}`,
+					`Grade: ${record.grade}`,
+					`Section: ${record.section}`,
+					`Quiz: ${record.quiz}`,
+					`Score: ${record.score}/${record.total}`,
+					`Saved: ${new Date(record.completedAt).toLocaleString()}`
+				].join("\r\n");
+				const file = new Blob([text], { type: "text/plain;charset=utf-8" });
+				const link = document.createElement("a");
+				const fileName = `${record.name}-${record.quiz}`.replace(/[^a-z0-9_-]+/gi, "_");
+				const fileUrl = URL.createObjectURL(file);
+				link.href = fileUrl;
+				link.download = `${fileName}.txt`;
+				document.body.appendChild(link);
+				link.click();
+				link.remove();
+				URL.revokeObjectURL(fileUrl);
+
+				try {
+					const records = JSON.parse(localStorage.getItem("aralMathRecords") || "[]");
+					records.push(record);
+					localStorage.setItem("aralMathRecords", JSON.stringify(records));
+					byId("record-status").textContent =
+						`Downloaded ${link.download} and saved ${record.score}/${record.total}.`;
+				} catch {
+					byId("record-status").textContent = `Downloaded ${link.download}; browser storage was unavailable.`;
+				}
+				saved = true;
+				byId("save-record").disabled = true;
+			});
+
+			// Reloads the quiz while keeping the student session.
+			byId("restart-quiz").addEventListener("click", () => window.location.reload());
+			new MutationObserver(captureAnswer).observe(result, { subtree: true, childList: true, characterData: true });
+			const completionObserver = new MutationObserver(checkCompletion);
+			[question, level].forEach((target) => completionObserver.observe(target, { childList: true, characterData: true }));
+			checkCompletion();
+		})();
+	</script>
+</body>
+
+</html>

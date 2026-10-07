@@ -1,7 +1,7 @@
 
 
 function getNavPath(path) {
-    return `${getRootPrefix()}pages/${path}`;
+    return `${getRootPrefix()}pages/${encodeURI(path)}`;
 }
 
 function getHomePath() {
@@ -169,6 +169,23 @@ function createNavbarHTML() {
                         <li><a href="${getNavPath("grade11/grade11L3.html")}#lesson3" class="dropdown-item">Central Tendency & Variability</a></li>
                     </ul>
                 </li>
+                <!-- ARAL Math Diagnostic Exam -->
+                <li class="nav-item dropdown">
+                    <button type="button"
+                            class="nav-btn-toggle"
+                            data-page="ARAL"
+                            aria-expanded="false">
+                        ARAL Math Diagnostic Exam
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="${getNavPath("ARAL/diagnostic-lvl-1-3.html")}" class="dropdown-item">ARAL Diagnostic Levels 1-3</a></li>
+                        <li><a href="${getNavPath("ARAL/diagnostic-lvl-4-5.html")}" class="dropdown-item">ARAL Diagnostic Levels 4-5</a></li>
+                        <li><a href="${getNavPath("ARAL/diagnostic-lvl-6-7.html")}" class="dropdown-item">ARAL Diagnostic Levels 6-7</a></li>
+
+                    </ul>
+                </li>
 
             </ul>
         </nav>
@@ -191,7 +208,7 @@ function getCurrentPage() {
     if (path.includes("/pages/grade9/")) return "grade9";
     if (path.includes("/pages/grade10/")) return "grade10";
     if (path.includes("/pages/grade11/")) return "grade11";
-
+    if (path.includes("/pages/aral/")) return "ARAL";
     if (path.endsWith("/index.html") || path.endsWith("/")) {
         return "home";
     }

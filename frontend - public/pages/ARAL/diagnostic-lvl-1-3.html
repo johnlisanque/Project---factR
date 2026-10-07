@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARAL Math</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;900&display=swap');
+
+:root {
+  --primary-dark: #073827;
+  --primary-forest: #16623d;
+  --primary-accent: #339763;
+  --tint-light: #e7f7ee;
+  --card-bg: #f7faf8;
+
+  --text-main: #073827;
+  --text-body: #2d473b;
+  --text-muted: #567e6c;
+  --border-color: #d8eade;
+  --white: #ffffff;
+
+  --font-brand: 'Montserrat', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Makes the "hidden" attribute win over any display rule below */
+[hidden] {
+  display: none !important;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--white);
+  font-family: var(--font-body);
+  color: var(--text-body);
+  scroll-behavior: smooth;
+}
+
+/* ---------- Navigation ---------- */
+
+
+
+@keyframes slideDownNav {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/* ---------- Cover ---------- */
+
+.cover-section {
+  width: 100vw;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #f7faf8 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.cover-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  line-height: 0;
+}
+
+.cover-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  opacity: 0;
+  transform: translateY(25px) scale(0.99);
+  animation: entranceCover 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards,
+             subtleFloat 6s ease-in-out 1.4s infinite alternate;
+}
+
+@keyframes entranceCover {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes subtleFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-6px); }
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  width: 100%;
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  padding: 24px 32px;
+  margin: 0;
+}
+
+.footer-bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Quiz page layout ---------- */
+
+.level-main {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.level-intro {
+  text-align: center;
+}
+
+.level-intro h1 {
+  font-family: var(--font-brand);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: var(--primary-dark);
+  margin-bottom: 12px;
+}
+
+.level-intro p {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Shared card look for login and quiz */
+
+.student-gate,
+.quiz-panel {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(7, 56, 39, 0.06);
+  animation: riseIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.student-gate h2,
+.quiz-topline h2,
+.record-panel h2 {
+  font-family: var(--font-brand);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--primary-forest);
+}
+
+/* ---------- Login form ---------- */
+
+.student-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.student-form label,
+.answer-field label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-main);
+  background-color: var(--white);
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  padding: 12px 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+input[type="text"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 4px rgba(51, 151, 99, 0.18);
+}
+
+/* ---------- Buttons ---------- */
+
+button {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--white);
+  background-color: var(--primary-forest);
+  border: 1.5px solid var(--primary-forest);
+  border-radius: 10px;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+button:focus-visible {
+  outline: 3px solid var(--primary-accent);
+  outline-offset: 2px;
+}
+
+button.secondary {
+  color: var(--primary-forest);
+  background-color: var(--white);
+  border-color: var(--border-color);
+}
+
+button.secondary:hover:not(:disabled) {
+  background-color: var(--tint-light);
+  border-color: var(--primary-accent);
+  box-shadow: none;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.student-form button[type="submit"] {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+/* ---------- Quiz panel ---------- */
+
+.quiz-topline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.student-summary {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background-color: var(--tint-light);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.student-summary:empty { display: none; }
+
+.quiz-question {
+  font-family: var(--font-brand);
+  font-size: clamp(1.375rem, 4vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-main);
+  margin-bottom: 24px;
+  min-height: 2.6em;
+}
+
+.answer-field {
+  margin-bottom: 20px;
+}
+
+.answer-field input {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 14px 16px;
+}
+
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.quiz-feedback {
+  min-height: 1.6em;
+  margin-top: 20px;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--primary-forest);
+}
+
+/* ---------- Record panel ---------- */
+
+.record-panel {
+  margin-top: 28px;
+  padding: 24px;
+  background-color: var(--white);
+  border: 1.5px solid var(--primary-accent);
+  border-radius: 14px;
+  animation: riseIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#record-score {
+  font-family: var(--font-brand);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--primary-dark);
+  margin: 12px 0 20px;
+}
+
+.record-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.record-summary {
+  margin-top: 16px;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+.record-summary:empty { display: none; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+  .top-nav-bar { padding: 10px 16px; }
+
+  .nav-container > .hamburger-btn {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .nav-links { gap: 6px; }
+
+  .nav-link {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+  }
+
+  .site-footer { padding: 20px 16px; }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .level-main { padding: 32px 16px 56px; gap: 24px; }
+
+  .student-gate,
+  .quiz-panel { padding: 22px 18px; }
+
+  .quiz-actions button,
+  .record-actions button,
+  .student-form button[type="submit"] {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+</style>
+<link rel="stylesheet" href="../../assets/style/style.css">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+    <header class="top-nav-bar" id="navbar">
+    
+  </header>
+<script src="../../js/helper/navbar.js"></script>
+<section class="cover-section" id="cover">
+      <div class="cover-wrapper">
+        <img 
+          src="../../assets/img/background/Banner Of Project FACTR.png" 
+          alt="ProjectFactr Mathematics Remedial Learning Platform Banner" 
+          class="cover-image"
+          id="main-cover-image"
+        >
+       <div class="cover-content">
+   <h1>ARAL Math</h1>
+            <h2>Practice number names and basic operations.</h2>
+</div>
+      </div>
+    </section>
+
+    <main class="level-main">
+        <section class="level-intro">
+            
+        </section>
+
+        <section class="student-gate" id="student-login">
+            <h2>Student Login</h2>
+            <form class="student-form" id="student-form">
+                <label>Student name<input id="student-name" type="text" autocomplete="name" required></label>
+                <label>Grade - Section<input id="student-grade-section" type="text" placeholder="12 - Turing" required></label>
+                <button type="submit">Start Quiz</button>
+            </form>
+            <p class="quiz-feedback" id="login-error" aria-live="polite"></p>
+        </section>
+
+        <section class="quiz-panel" id="quiz-panel" data-quiz="Levels 1-3" data-total="20" hidden>
+            <div class="quiz-topline">
+                <p id="level"></p>
+                <p class="student-summary" id="student-summary"></p>
+            </div>
+
+            <div id="box">
+                <h3 class="quiz-question" id="questions"></h3>
+
+                <div class="answer-field" id="answer-field">
+                    <label for="answer">Your answer</label>
+                    <input type="text" id="answer" placeholder="Enter your answer" autocomplete="off">
+                </div>
+
+                <div class="quiz-actions">
+                    <button id="submit" type="button">Submit</button>
+                    <button class="secondary" id="next" type="button" onclick="nextQuestion()">Next Question</button>
+                </div>
+
+                <p class="quiz-feedback" id="result" aria-live="polite"></p>
+            </div>
+
+            <section class="record-panel" id="record-panel" hidden>
+                <h2>Quiz Record</h2>
+                <p id="record-score"></p>
+                <div class="record-actions">
+                    <button id="save-record" type="button">Save Record</button>
+                    <button class="secondary" id="restart-quiz" type="button">Restart Quiz</button>
+                </div>
+                <p class="record-summary" id="record-status" aria-live="polite"></p>
+            </section>
+        </section>
+    </main>
+
+  <footer class="site-footer">
+
+    <div class="footer-bottom">
+
+      <div>
+        &copy; 2026 ProjectFactr. All rights reserved.
+      </div>
+
+      <div>
+        Mathematics Learning &amp; Curriculum Platform
+      </div>
+
+    </div>
+
+  </footer>
+
+
+    <script>
+
+        let questionNumber = 1;
+        let correctAnswer;
+
+
+        // =========================
+        // NUMBER WORDS
+        // =========================
+        const ones = [
+                "",
+                "one",
+                "two",
+                "three",
+                "four",
+                "five",
+                "six",
+                "seven",
+                "eight",
+                "nine"
+            ];
+
+        const teens = [
+            "ten",
+            "eleven",
+            "twelve",
+            "thirteen",
+            "fourteen",
+            "fifteen",
+            "sixteen",
+            "seventeen",
+            "eighteen",
+            "nineteen"
+        ];
+
+        const tens = [
+            "",
+            "",
+            "twenty",
+            "thirty",
+            "forty",
+            "fifty",
+            "sixty",
+            "seventy",
+            "eighty",
+            "ninety"
+        ];
+        /**
+         * Converts a numeric value into its corresponding English number word.
+         *
+         * The function handles numbers from 1 to 999 by using the
+         * ones, teens, and tens word lists. For numbers greater than
+         * 99, the function recursively converts the remaining value.
+         *
+         * Examples:
+         *  - 5   -> five
+         *  - 15  ->"fifteen"
+         *  - 42  ->"forty-two"
+         *  - 100 ->"one hundred"
+         *  - 125 ->"one hundred twenty-five"
+         *
+         * @author Lisanque
+         *
+         * @param {number} number the numeric value to convert into a word
+         * @returns {string} the English word representation of the number
+         */
+        function numberToWord(number) { // use this function if needs
+
+            if (number < 10) {
+                return ones[number];
+            }
+
+            if (number < 20) {
+                return teens[number - 10];
+            }
+
+            if (number < 100) {
+                const ten = Math.floor(number / 10);
+                const one = number % 10;
+
+                return one === 0
+                    ? tens[ten]
+                    : `${tens[ten]}-${ones[one]}`;
+            }
+
+            const hundred = Math.floor(number / 100);
+            const remainder = number % 100;
+
+            if (remainder === 0) {
+                return `${ones[hundred]} hundred`;
+            }
+
+            return `${ones[hundred]} hundred ${numberToWord(remainder)}`;
+        }
+
+        // const numberWords = [];
+
+        for (let number = 1; number <= 200; number++) {
+            numberWords.push({
+                number: number,
+                name: numberToWord(number)
+            });
+        }
+    const numberNames = [
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine"
+    ];
+
+        const numberWords = [
+    { number: 10, name: "ten" },
+    { number: 11, name: "eleven" },
+    { number: 12, name: "twelve" },
+    { number: 13, name: "thirteen" },
+    { number: 14, name: "fourteen" },
+    { number: 15, name: "fifteen" },
+    { number: 16, name: "sixteen" },
+    { number: 17, name: "seventeen" },
+    { number: 18, name: "eighteen" },
+    { number: 19, name: "nineteen" },
+    { number: 20, name: "twenty" },
+    { number: 21, name: "twenty-one" },
+    { number: 22, name: "twenty-two" },
+    { number: 23, name: "twenty-three" },
+    { number: 24, name: "twenty-four" },
+    { number: 25, name: "twenty-five" },
+    { number: 26, name: "twenty-six" },
+    { number: 27, name: "twenty-seven" },
+    { number: 28, name: "twenty-eight" },
+    { number: 29, name: "twenty-nine" },
+    { number: 30, name: "thirty" },
+    { number: 31, name: "thirty-one" },
+    { number: 32, name: "thirty-two" },
+    { number: 33, name: "thirty-three" },
+    { number: 34, name: "thirty-four" },
+    { number: 35, name: "thirty-five" },
+    { number: 36, name: "thirty-six" },
+    { number: 37, name: "thirty-seven" },
+    { number: 38, name: "thirty-eight" },
+    { number: 39, name: "thirty-nine" },
+    { number: 40, name: "forty" },
+    { number: 41, name: "forty-one" },
+    { number: 42, name: "forty-two" },
+    { number: 43, name: "forty-three" },
+    { number: 44, name: "forty-four" },
+    { number: 45, name: "forty-five" },
+    { number: 46, name: "forty-six" },
+    { number: 47, name: "forty-seven" },
+    { number: 48, name: "forty-eight" },
+    { number: 49, name: "forty-nine" },
+    { number: 50, name: "fifty" },
+    { number: 51, name: "fifty-one" },
+    { number: 52, name: "fifty-two" },
+    { number: 53, name: "fifty-three" },
+    { number: 54, name: "fifty-four" },
+    { number: 55, name: "fifty-five" },
+    { number: 56, name: "fifty-six" },
+    { number: 57, name: "fifty-seven" },
+    { number: 58, name: "fifty-eight" },
+    { number: 59, name: "fifty-nine" },
+    { number: 60, name: "sixty" },
+    { number: 61, name: "sixty-one" },
+    { number: 62, name: "sixty-two" },
+    { number: 63, name: "sixty-three" },
+    { number: 64, name: "sixty-four" },
+    { number: 65, name: "sixty-five" },
+    { number: 66, name: "sixty-six" },
+    { number: 67, name: "sixty-seven" },
+    { number: 68, name: "sixty-eight" },
+    { number: 69, name: "sixty-nine" },
+    { number: 70, name: "seventy" },
+    { number: 71, name: "seventy-one" },
+    { number: 72, name: "seventy-two" },
+    { number: 73, name: "seventy-three" },
+    { number: 74, name: "seventy-four" },
+    { number: 75, name: "seventy-five" },
+    { number: 76, name: "seventy-six" },
+    { number: 77, name: "seventy-seven" },
+    { number: 78, name: "seventy-eight" },
+    { number: 79, name: "seventy-nine" },
+    { number: 80, name: "eighty" },
+    { number: 81, name: "eighty-one" },
+    { number: 82, name: "eighty-two" },
+    { number: 83, name: "eighty-three" },
+    { number: 84, name: "eighty-four" },
+    { number: 85, name: "eighty-five" },
+    { number: 86, name: "eighty-six" },
+    { number: 87, name: "eighty-seven" },
+    { number: 88, name: "eighty-eight" },
+    { number: 89, name: "eighty-nine" },
+    { number: 90, name: "ninety" },
+    { number: 91, name: "ninety-one" },
+    { number: 92, name: "ninety-two" },
+    { number: 93, name: "ninety-three" },
+    { number: 94, name: "ninety-four" },
+    { number: 95, name: "ninety-five" },
+    { number: 96, name: "ninety-six" },
+    { number: 97, name: "ninety-seven" },
+    { number: 98, name: "ninety-eight" },
+    { number: 99, name: "ninety-nine" },
+
+    { number: 100, name: "one hundred" },
+    { number: 101, name: "one hundred one" },
+    { number: 102, name: "one hundred two" },
+    { number: 103, name: "one hundred three" },
+    { number: 104, name: "one hundred four" },
+    { number: 105, name: "one hundred five" },
+    { number: 106, name: "one hundred six" },
+    { number: 107, name: "one hundred seven" },
+    { number: 108, name: "one hundred eight" },
+    { number: 109, name: "one hundred nine" },
+    { number: 110, name: "one hundred ten" },
+    { number: 111, name: "one hundred eleven" },
+    { number: 112, name: "one hundred twelve" },
+    { number: 113, name: "one hundred thirteen" },
+    { number: 114, name: "one hundred fourteen" },
+    { number: 115, name: "one hundred fifteen" },
+    { number: 116, name: "one hundred sixteen" },
+    { number: 117, name: "one hundred seventeen" },
+    { number: 118, name: "one hundred eighteen" },
+    { number: 119, name: "one hundred nineteen" },
+    { number: 120, name: "one hundred twenty" },
+    { number: 121, name: "one hundred twenty-one" },
+    { number: 122, name: "one hundred twenty-two" },
+    { number: 123, name: "one hundred twenty-three" },
+    { number: 124, name: "one hundred twenty-four" },
+    { number: 125, name: "one hundred twenty-five" },
+    { number: 126, name: "one hundred twenty-six" },
+    { number: 127, name: "one hundred twenty-seven" },
+    { number: 128, name: "one hundred twenty-eight" },
+    { number: 129, name: "one hundred twenty-nine" },
+    { number: 130, name: "one hundred thirty" },
+    { number: 131, name: "one hundred thirty-one" },
+    { number: 132, name: "one hundred thirty-two" },
+    { number: 133, name: "one hundred thirty-three" },
+    { number: 134, name: "one hundred thirty-four" },
+    { number: 135, name: "one hundred thirty-five" },
+    { number: 136, name: "one hundred thirty-six" },
+    { number: 137, name: "one hundred thirty-seven" },
+    { number: 138, name: "one hundred thirty-eight" },
+    { number: 139, name: "one hundred thirty-nine" },
+    { number: 140, name: "one hundred forty" },
+    { number: 141, name: "one hundred forty-one" },
+    { number: 142, name: "one hundred forty-two" },
+    { number: 143, name: "one hundred forty-three" },
+    { number: 144, name: "one hundred forty-four" },
+    { number: 145, name: "one hundred forty-five" },
+    { number: 146, name: "one hundred forty-six" },
+    { number: 147, name: "one hundred forty-seven" },
+    { number: 148, name: "one hundred forty-eight" },
+    { number: 149, name: "one hundred forty-nine" },
+    { number: 150, name: "one hundred fifty" },
+    { number: 151, name: "one hundred fifty-one" },
+    { number: 152, name: "one hundred fifty-two" },
+    { number: 153, name: "one hundred fifty-three" },
+    { number: 154, name: "one hundred fifty-four" },
+    { number: 155, name: "one hundred fifty-five" },
+    { number: 156, name: "one hundred fifty-six" },
+    { number: 157, name: "one hundred fifty-seven" },
+    { number: 158, name: "one hundred fifty-eight" },
+    { number: 159, name: "one hundred fifty-nine" },
+    { number: 160, name: "one hundred sixty" },
+    { number: 161, name: "one hundred sixty-one" },
+    { number: 162, name: "one hundred sixty-two" },
+    { number: 163, name: "one hundred sixty-three" },
+    { number: 164, name: "one hundred sixty-four" },
+    { number: 165, name: "one hundred sixty-five" },
+    { number: 166, name: "one hundred sixty-six" },
+    { number: 167, name: "one hundred sixty-seven" },
+    { number: 168, name: "one hundred sixty-eight" },
+    { number: 169, name: "one hundred sixty-nine" },
+    { number: 170, name: "one hundred seventy" },
+    { number: 171, name: "one hundred seventy-one" },
+    { number: 172, name: "one hundred seventy-two" },
+    { number: 173, name: "one hundred seventy-three" },
+    { number: 174, name: "one hundred seventy-four" },
+    { number: 175, name: "one hundred seventy-five" },
+    { number: 176, name: "one hundred seventy-six" },
+    { number: 177, name: "one hundred seventy-seven" },
+    { number: 178, name: "one hundred seventy-eight" },
+    { number: 179, name: "one hundred seventy-nine" },
+    { number: 180, name: "one hundred eighty" },
+    { number: 181, name: "one hundred eighty-one" },
+    { number: 182, name: "one hundred eighty-two" },
+    { number: 183, name: "one hundred eighty-three" },
+    { number: 184, name: "one hundred eighty-four" },
+    { number: 185, name: "one hundred eighty-five" },
+    { number: 186, name: "one hundred eighty-six" },
+    { number: 187, name: "one hundred eighty-seven" },
+    { number: 188, name: "one hundred eighty-eight" },
+    { number: 189, name: "one hundred eighty-nine" },
+    { number: 190, name: "one hundred ninety" },
+    { number: 191, name: "one hundred ninety-one" },
+    { number: 192, name: "one hundred ninety-two" },
+    { number: 193, name: "one hundred ninety-three" },
+    { number: 194, name: "one hundred ninety-four" },
+    { number: 195, name: "one hundred ninety-five" },
+    { number: 196, name: "one hundred ninety-six" },
+    { number: 197, name: "one hundred ninety-seven" },
+    { number: 198, name: "one hundred ninety-eight" },
+    { number: 199, name: "one hundred ninety-nine" },
+    { number: 200, name: "two hundred" }
+];
+
+
+
+        // =========================
+        // GENERATE QUESTION
+        // =========================
+
+        // Generates the question for the current level.
+        function generateQuestion() {
+
+            document.getElementById("answer").value = "";
+            document.getElementById("result").innerText = "";
+            document.getElementById("next").disabled = true;
+            document.getElementById("next").style.display = "none";
+
+
+            // =========================
+            // LEVEL 1
+            // QUESTIONS 1 - 5
+            // SINGLE DIGIT
+            // =========================
+
+            if (questionNumber <= 5) {
+
+                document.getElementById("level").innerText =
+                    "Level 1";
+
+                let number = Math.floor(Math.random() * 9) + 1;
+
+                document.getElementById("questions").innerText =
+                    "Question " + questionNumber +
+                    ": Spell the number " + number + "?";
+
+                correctAnswer = numberNames[number - 1];
+            }
+
+
+            // =========================
+            // LEVEL 2
+            // QUESTIONS 6 - 10
+            // DOUBLE / TRIPLE DIGIT
+            // =========================
+
+            else if (questionNumber <= 10) {
+
+                document.getElementById("level").innerText =
+                    "Level 2";
+let number = Math.floor(Math.random() * 191) + 10;1
+
+document.getElementById("questions").innerText =
+    "Question " + questionNumber +
+    ": Spell the number " + number + "?";
+
+correctAnswer = numberWords.find(item => item.number === number).name;
+            }
+else if (questionNumber <= 15) {
+
+    document.getElementById("level").innerText =
+        "Level 2";
+
+    let wordEntry = numberWords[Math.floor(Math.random() * numberWords.length)];
+
+    document.getElementById("questions").innerText =
+        "Question " + questionNumber +
+      ": Write the corresponding number for the word: " +
+      wordEntry.name + "?";
+
+    correctAnswer = wordEntry.number;
+}
+
+            // =========================
+            // LEVEL 3
+            // QUESTIONS 11 - 20
+            // ADD / SUBTRACT / MULTIPLY
+            // =========================
+
+            else if (questionNumber <= 20) {
+
+                document.getElementById("level").innerText =
+                    "Level 3";
+
+                let number1 = Math.floor(Math.random() * 15) + 1;
+                let number2 = Math.floor(Math.random() * 15) + 1;
+
+                let operation = Math.floor(Math.random() * 3);
+
+
+                // ADDITION
+                if (operation == 0) {
+
+                    document.getElementById("questions").innerText =
+                        "Question " + questionNumber +
+                        ": " + number1 + " + " + number2 + " = ?";
+
+                    correctAnswer = number1 + number2;
+                }
+
+
+                // SUBTRACTION
+                else if (operation == 1) {
+
+                    // Prevent negative answers
+                    if (number1 < number2) {
+
+                        let temp = number1;
+                        number1 = number2;
+                        number2 = temp;
+                    }
+
+                    document.getElementById("questions").innerText =
+                        "Question " + questionNumber +
+                        ": " + number1 + " - " + number2 + " = ?";
+
+                    correctAnswer = number1 - number2;
+                }
+
+
+                // MULTIPLICATION
+                else {
+
+                    let number1 = Math.floor(Math.random() * 9) + 1;
+                    let number2 = Math.floor(Math.random() * 9) + 1;
+
+                    document.getElementById("questions").innerText =
+                        "Question " + questionNumber +
+                        ": " + number1 + " × " + number2 + " = ?";
+
+                    correctAnswer = number1 * number2;
+                }
+            }
+
+
+            // =========================
+            // QUIZ FINISHED
+            // =========================
+
+            else {
+
+                document.getElementById("level").innerText =
+                    "Finished!";
+
+                document.getElementById("questions").innerText =
+                    "You finished all 20 questions!";
+
+                document.getElementById("answer").style.display =
+                    "none";
+
+                document.getElementById("answer-field").style.display =
+                    "none";
+
+                document.getElementById("submit").style.display =
+                    "none";
+
+                document.getElementById("next").style.display =
+                    "none";
+            }
+        }
+
+
+        // =========================
+        // CHECK ANSWER
+        // =========================
+
+        // Checks the student's answer and displays feedback.
+        function checkAnswer() {
+
+            let userAnswer = document
+                .getElementById("answer")
+                .value
+                .trim()
+                .toLowerCase();
+
+            if (!userAnswer) {
+                document.getElementById("result").innerText =
+                    "Please enter your answer.";
+                return;
+            }
+
+            if (userAnswer == correctAnswer) {
+
+                document.getElementById("result").innerText =
+                    "Correct!";
+
+            } else {
+
+                document.getElementById("result").innerText =
+                    "Incorrect! The correct answer is " +
+                    correctAnswer;
+            }
+
+            document.getElementById("next").disabled = false;
+            document.getElementById("next").style.display = "inline-block";
+        }
+
+
+        // =========================
+        // NEXT QUESTION
+        // =========================
+
+        // Advances after the student enters an answer.
+        function nextQuestion() {
+
+            if (!document.getElementById("answer").value.trim()) return;
+
+            if (questionNumber < 20) {
+
+                questionNumber++;
+
+                generateQuestion();
+
+            } else {
+
+                questionNumber++;
+
+                generateQuestion();
+            }
+        }
+
+
+        // SUBMIT BUTTON
+
+        document.getElementById("submit")
+            .addEventListener("click", checkAnswer);
+
+
+        // START QUIZ
+
+        generateQuestion();
+
+    </script>
+    <script>
+        // Sets up student login, scoring, and record actions.
+        (() => {
+          // Finds a page element by its ID.
+            const byId = (id) => document.getElementById(id);
+            const login = byId("student-login");
+            const form = byId("student-form");
+            const quiz = byId("quiz-panel");
+            const recordPanel = byId("record-panel");
+            const question = document.querySelector("#question, #questions");
+            const result = byId("result");
+            const level = byId("level");
+            const total = Number(quiz.dataset.total || 20);
+            const answers = new Map();
+            let student;
+            let saved = false;
+
+            // Updates the score shown in the record panel.
+            function updateScore() {
+                const score = [...answers.values()].filter(Boolean).length;
+                const text = `Score: ${score} / ${total}`;
+                if (byId("record-score").textContent !== text) byId("record-score").textContent = text;
+            }
+
+            // Records whether the current answer was correct.
+            function captureAnswer() {
+                const response = result.textContent.trim();
+                if (response === "Correct!" || response.startsWith("Incorrect!")) {
+                    const progress = byId("progress")?.textContent || "";
+                    answers.set(`${progress}|${question.textContent}`, response === "Correct!");
+                    updateScore();
+                }
+            }
+
+            // Shows the record panel when the quiz ends.
+            function checkCompletion() {
+                const finished = /finished|completed/i.test(level.textContent) ||
+                    /finished all \d+ questions/i.test(question.textContent);
+                if (finished && recordPanel.hidden) {
+                    recordPanel.hidden = false;
+                    updateScore();
+                }
+            }
+
+            // Opens the quiz for the signed-in student.
+            function startQuiz(details) {
+                student = details;
+                login.hidden = true;
+                quiz.hidden = false;
+                byId("student-summary").textContent =
+                    `${student.name} | Grade ${student.grade} | Section ${student.section}`;
+            }
+
+            // Splits and normalizes the grade and section input.
+            function parseGradeSection(value) {
+                const match = value.trim().match(/^(\d+)\s*[-–—]\s*(.+)$/);
+                if (!match) return null;
+                const grade = match[1];
+                const section = match[2].trim().replace(/\s+/g, " ");
+                return section ? { grade, section, gradeSection: `${grade} - ${section}` } : null;
+            }
+
+            // Validates and stores the student's login details.
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const name = byId("student-name").value.trim();
+                const gradeSection = parseGradeSection(byId("student-grade-section").value);
+                if (!name || !gradeSection) {
+                    byId("login-error").textContent = "Enter grade and section like 12 - Turing.";
+                    return;
+                }
+                byId("login-error").textContent = "";
+                const details = { name, ...gradeSection };
+                try {
+                    sessionStorage.setItem("aralMathStudent", JSON.stringify(details));
+                } catch {
+                    // Keep the quiz usable when browser storage is unavailable.
+                }
+                startQuiz(details);
+            });
+
+            let savedStudent;
+            try {
+                savedStudent = JSON.parse(sessionStorage.getItem("aralMathStudent"));
+            } catch {
+                savedStudent = null;
+            }
+            const savedGradeSection = parseGradeSection(savedStudent?.gradeSection || "");
+            if (savedStudent?.name && savedGradeSection) {
+                startQuiz({ ...savedStudent, ...savedGradeSection });
+            } else {
+                login.hidden = false;
+                quiz.hidden = true;
+            }
+
+            byId("submit").addEventListener("click", () => setTimeout(captureAnswer, 0));
+            // Downloads a text record and stores a browser copy.
+            byId("save-record").addEventListener("click", () => {
+                if (!student || saved) return;
+                const record = {
+                    ...student,
+                    quiz: quiz.dataset.quiz,
+                    score: [...answers.values()].filter(Boolean).length,
+                    total,
+                    completedAt: new Date().toISOString()
+                };
+
+                  const text = [
+                    "ARAL Math Quiz Record",
+                    `Student: ${record.name}`,
+                    `Grade: ${record.grade}`,
+                    `Section: ${record.section}`,
+                    `Quiz: ${record.quiz}`,
+                    `Score: ${record.score}/${record.total}`,
+                    `Saved: ${new Date(record.completedAt).toLocaleString()}`
+                  ].join("\r\n");
+                  const file = new Blob([text], { type: "text/plain;charset=utf-8" });
+                  const link = document.createElement("a");
+                  const fileName = `${record.name}-${record.quiz}`.replace(/[^a-z0-9_-]+/gi, "_");
+                  const fileUrl = URL.createObjectURL(file);
+                  link.href = fileUrl;
+                  link.download = `${fileName}.txt`;
+                  document.body.appendChild(link);
+                  link.click();
+                  link.remove();
+                  URL.revokeObjectURL(fileUrl);
+
+                try {
+                    const records = JSON.parse(localStorage.getItem("aralMathRecords") || "[]");
+                    records.push(record);
+                    localStorage.setItem("aralMathRecords", JSON.stringify(records));
+                    byId("record-status").textContent =
+                      `Downloaded ${link.download} and saved ${record.score}/${record.total}.`;
+                } catch {
+                    byId("record-status").textContent = `Downloaded ${link.download}; browser storage was unavailable.`;
+                }
+                  saved = true;
+                  byId("save-record").disabled = true;
+            });
+
+            // Reloads the quiz while keeping the student session.
+            byId("restart-quiz").addEventListener("click", () => window.location.reload());
+            new MutationObserver(captureAnswer).observe(result, { subtree: true, childList: true, characterData: true });
+            const completionObserver = new MutationObserver(checkCompletion);
+            [question, level].forEach((target) => completionObserver.observe(target, { childList: true, characterData: true }));
+            checkCompletion();
+        })();
+    </script>
+
+</body>
+
+</html>
