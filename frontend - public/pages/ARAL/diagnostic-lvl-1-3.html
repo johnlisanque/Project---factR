@@ -469,7 +469,7 @@ button:disabled {
 
                 <div class="quiz-actions">
                     <button id="submit" type="button">Submit</button>
-                    <button class="secondary" id="next" type="button" onclick="nextQuestion()">Next Question</button>
+                    <button class="secondary" id="next" type="button">Next Question</button>
                 </div>
 
                 <p class="quiz-feedback" id="result" aria-live="polite"></p>
@@ -504,550 +504,128 @@ button:disabled {
   </footer>
 
 
-    <script>
-
-        let questionNumber = 1;
-        let correctAnswer;
-
-
-        // =========================
-        // NUMBER WORDS
-        // =========================
-        const ones = [
-                "",
-                "one",
-                "two",
-                "three",
-                "four",
-                "five",
-                "six",
-                "seven",
-                "eight",
-                "nine"
-            ];
-
-        const teens = [
-            "ten",
-            "eleven",
-            "twelve",
-            "thirteen",
-            "fourteen",
-            "fifteen",
-            "sixteen",
-            "seventeen",
-            "eighteen",
-            "nineteen"
-        ];
-
-        const tens = [
-            "",
-            "",
-            "twenty",
-            "thirty",
-            "forty",
-            "fifty",
-            "sixty",
-            "seventy",
-            "eighty",
-            "ninety"
-        ];
-        /**
-         * Converts a numeric value into its corresponding English number word.
-         *
-         * The function handles numbers from 1 to 999 by using the
-         * ones, teens, and tens word lists. For numbers greater than
-         * 99, the function recursively converts the remaining value.
-         *
-         * Examples:
-         *  - 5   -> five
-         *  - 15  ->"fifteen"
-         *  - 42  ->"forty-two"
-         *  - 100 ->"one hundred"
-         *  - 125 ->"one hundred twenty-five"
-         *
-         * @author Lisanque
-         *
-         * @param {number} number the numeric value to convert into a word
-         * @returns {string} the English word representation of the number
-         */
-        function numberToWord(number) { // use this function if needs
-
-            if (number < 10) {
-                return ones[number];
-            }
-
-            if (number < 20) {
-                return teens[number - 10];
-            }
-
-            if (number < 100) {
-                const ten = Math.floor(number / 10);
-                const one = number % 10;
-
-                return one === 0
-                    ? tens[ten]
-                    : `${tens[ten]}-${ones[one]}`;
-            }
-
-            const hundred = Math.floor(number / 100);
-            const remainder = number % 100;
-
-            if (remainder === 0) {
-                return `${ones[hundred]} hundred`;
-            }
-
-            return `${ones[hundred]} hundred ${numberToWord(remainder)}`;
-        }
-
-        // const numberWords = [];
-
-        for (let number = 1; number <= 200; number++) {
-            numberWords.push({
-                number: number,
-                name: numberToWord(number)
-            });
-        }
-    const numberNames = [
-        "one",
-        "two",
-        "three",
-        "four",
-        "five",
-        "six",
-        "seven",
-        "eight",
-        "nine"
-    ];
-
-        const numberWords = [
-    { number: 10, name: "ten" },
-    { number: 11, name: "eleven" },
-    { number: 12, name: "twelve" },
-    { number: 13, name: "thirteen" },
-    { number: 14, name: "fourteen" },
-    { number: 15, name: "fifteen" },
-    { number: 16, name: "sixteen" },
-    { number: 17, name: "seventeen" },
-    { number: 18, name: "eighteen" },
-    { number: 19, name: "nineteen" },
-    { number: 20, name: "twenty" },
-    { number: 21, name: "twenty-one" },
-    { number: 22, name: "twenty-two" },
-    { number: 23, name: "twenty-three" },
-    { number: 24, name: "twenty-four" },
-    { number: 25, name: "twenty-five" },
-    { number: 26, name: "twenty-six" },
-    { number: 27, name: "twenty-seven" },
-    { number: 28, name: "twenty-eight" },
-    { number: 29, name: "twenty-nine" },
-    { number: 30, name: "thirty" },
-    { number: 31, name: "thirty-one" },
-    { number: 32, name: "thirty-two" },
-    { number: 33, name: "thirty-three" },
-    { number: 34, name: "thirty-four" },
-    { number: 35, name: "thirty-five" },
-    { number: 36, name: "thirty-six" },
-    { number: 37, name: "thirty-seven" },
-    { number: 38, name: "thirty-eight" },
-    { number: 39, name: "thirty-nine" },
-    { number: 40, name: "forty" },
-    { number: 41, name: "forty-one" },
-    { number: 42, name: "forty-two" },
-    { number: 43, name: "forty-three" },
-    { number: 44, name: "forty-four" },
-    { number: 45, name: "forty-five" },
-    { number: 46, name: "forty-six" },
-    { number: 47, name: "forty-seven" },
-    { number: 48, name: "forty-eight" },
-    { number: 49, name: "forty-nine" },
-    { number: 50, name: "fifty" },
-    { number: 51, name: "fifty-one" },
-    { number: 52, name: "fifty-two" },
-    { number: 53, name: "fifty-three" },
-    { number: 54, name: "fifty-four" },
-    { number: 55, name: "fifty-five" },
-    { number: 56, name: "fifty-six" },
-    { number: 57, name: "fifty-seven" },
-    { number: 58, name: "fifty-eight" },
-    { number: 59, name: "fifty-nine" },
-    { number: 60, name: "sixty" },
-    { number: 61, name: "sixty-one" },
-    { number: 62, name: "sixty-two" },
-    { number: 63, name: "sixty-three" },
-    { number: 64, name: "sixty-four" },
-    { number: 65, name: "sixty-five" },
-    { number: 66, name: "sixty-six" },
-    { number: 67, name: "sixty-seven" },
-    { number: 68, name: "sixty-eight" },
-    { number: 69, name: "sixty-nine" },
-    { number: 70, name: "seventy" },
-    { number: 71, name: "seventy-one" },
-    { number: 72, name: "seventy-two" },
-    { number: 73, name: "seventy-three" },
-    { number: 74, name: "seventy-four" },
-    { number: 75, name: "seventy-five" },
-    { number: 76, name: "seventy-six" },
-    { number: 77, name: "seventy-seven" },
-    { number: 78, name: "seventy-eight" },
-    { number: 79, name: "seventy-nine" },
-    { number: 80, name: "eighty" },
-    { number: 81, name: "eighty-one" },
-    { number: 82, name: "eighty-two" },
-    { number: 83, name: "eighty-three" },
-    { number: 84, name: "eighty-four" },
-    { number: 85, name: "eighty-five" },
-    { number: 86, name: "eighty-six" },
-    { number: 87, name: "eighty-seven" },
-    { number: 88, name: "eighty-eight" },
-    { number: 89, name: "eighty-nine" },
-    { number: 90, name: "ninety" },
-    { number: 91, name: "ninety-one" },
-    { number: 92, name: "ninety-two" },
-    { number: 93, name: "ninety-three" },
-    { number: 94, name: "ninety-four" },
-    { number: 95, name: "ninety-five" },
-    { number: 96, name: "ninety-six" },
-    { number: 97, name: "ninety-seven" },
-    { number: 98, name: "ninety-eight" },
-    { number: 99, name: "ninety-nine" },
-
-    { number: 100, name: "one hundred" },
-    { number: 101, name: "one hundred one" },
-    { number: 102, name: "one hundred two" },
-    { number: 103, name: "one hundred three" },
-    { number: 104, name: "one hundred four" },
-    { number: 105, name: "one hundred five" },
-    { number: 106, name: "one hundred six" },
-    { number: 107, name: "one hundred seven" },
-    { number: 108, name: "one hundred eight" },
-    { number: 109, name: "one hundred nine" },
-    { number: 110, name: "one hundred ten" },
-    { number: 111, name: "one hundred eleven" },
-    { number: 112, name: "one hundred twelve" },
-    { number: 113, name: "one hundred thirteen" },
-    { number: 114, name: "one hundred fourteen" },
-    { number: 115, name: "one hundred fifteen" },
-    { number: 116, name: "one hundred sixteen" },
-    { number: 117, name: "one hundred seventeen" },
-    { number: 118, name: "one hundred eighteen" },
-    { number: 119, name: "one hundred nineteen" },
-    { number: 120, name: "one hundred twenty" },
-    { number: 121, name: "one hundred twenty-one" },
-    { number: 122, name: "one hundred twenty-two" },
-    { number: 123, name: "one hundred twenty-three" },
-    { number: 124, name: "one hundred twenty-four" },
-    { number: 125, name: "one hundred twenty-five" },
-    { number: 126, name: "one hundred twenty-six" },
-    { number: 127, name: "one hundred twenty-seven" },
-    { number: 128, name: "one hundred twenty-eight" },
-    { number: 129, name: "one hundred twenty-nine" },
-    { number: 130, name: "one hundred thirty" },
-    { number: 131, name: "one hundred thirty-one" },
-    { number: 132, name: "one hundred thirty-two" },
-    { number: 133, name: "one hundred thirty-three" },
-    { number: 134, name: "one hundred thirty-four" },
-    { number: 135, name: "one hundred thirty-five" },
-    { number: 136, name: "one hundred thirty-six" },
-    { number: 137, name: "one hundred thirty-seven" },
-    { number: 138, name: "one hundred thirty-eight" },
-    { number: 139, name: "one hundred thirty-nine" },
-    { number: 140, name: "one hundred forty" },
-    { number: 141, name: "one hundred forty-one" },
-    { number: 142, name: "one hundred forty-two" },
-    { number: 143, name: "one hundred forty-three" },
-    { number: 144, name: "one hundred forty-four" },
-    { number: 145, name: "one hundred forty-five" },
-    { number: 146, name: "one hundred forty-six" },
-    { number: 147, name: "one hundred forty-seven" },
-    { number: 148, name: "one hundred forty-eight" },
-    { number: 149, name: "one hundred forty-nine" },
-    { number: 150, name: "one hundred fifty" },
-    { number: 151, name: "one hundred fifty-one" },
-    { number: 152, name: "one hundred fifty-two" },
-    { number: 153, name: "one hundred fifty-three" },
-    { number: 154, name: "one hundred fifty-four" },
-    { number: 155, name: "one hundred fifty-five" },
-    { number: 156, name: "one hundred fifty-six" },
-    { number: 157, name: "one hundred fifty-seven" },
-    { number: 158, name: "one hundred fifty-eight" },
-    { number: 159, name: "one hundred fifty-nine" },
-    { number: 160, name: "one hundred sixty" },
-    { number: 161, name: "one hundred sixty-one" },
-    { number: 162, name: "one hundred sixty-two" },
-    { number: 163, name: "one hundred sixty-three" },
-    { number: 164, name: "one hundred sixty-four" },
-    { number: 165, name: "one hundred sixty-five" },
-    { number: 166, name: "one hundred sixty-six" },
-    { number: 167, name: "one hundred sixty-seven" },
-    { number: 168, name: "one hundred sixty-eight" },
-    { number: 169, name: "one hundred sixty-nine" },
-    { number: 170, name: "one hundred seventy" },
-    { number: 171, name: "one hundred seventy-one" },
-    { number: 172, name: "one hundred seventy-two" },
-    { number: 173, name: "one hundred seventy-three" },
-    { number: 174, name: "one hundred seventy-four" },
-    { number: 175, name: "one hundred seventy-five" },
-    { number: 176, name: "one hundred seventy-six" },
-    { number: 177, name: "one hundred seventy-seven" },
-    { number: 178, name: "one hundred seventy-eight" },
-    { number: 179, name: "one hundred seventy-nine" },
-    { number: 180, name: "one hundred eighty" },
-    { number: 181, name: "one hundred eighty-one" },
-    { number: 182, name: "one hundred eighty-two" },
-    { number: 183, name: "one hundred eighty-three" },
-    { number: 184, name: "one hundred eighty-four" },
-    { number: 185, name: "one hundred eighty-five" },
-    { number: 186, name: "one hundred eighty-six" },
-    { number: 187, name: "one hundred eighty-seven" },
-    { number: 188, name: "one hundred eighty-eight" },
-    { number: 189, name: "one hundred eighty-nine" },
-    { number: 190, name: "one hundred ninety" },
-    { number: 191, name: "one hundred ninety-one" },
-    { number: 192, name: "one hundred ninety-two" },
-    { number: 193, name: "one hundred ninety-three" },
-    { number: 194, name: "one hundred ninety-four" },
-    { number: 195, name: "one hundred ninety-five" },
-    { number: 196, name: "one hundred ninety-six" },
-    { number: 197, name: "one hundred ninety-seven" },
-    { number: 198, name: "one hundred ninety-eight" },
-    { number: 199, name: "one hundred ninety-nine" },
-    { number: 200, name: "two hundred" }
-];
-
-
-
-        // =========================
-        // GENERATE QUESTION
-        // =========================
-
-        // Generates the question for the current level.
-        function generateQuestion() {
-
-            document.getElementById("answer").value = "";
-            document.getElementById("result").innerText = "";
-            document.getElementById("next").disabled = true;
-            document.getElementById("next").style.display = "none";
-
-
-            // =========================
-            // LEVEL 1
-            // QUESTIONS 1 - 5
-            // SINGLE DIGIT
-            // =========================
-
-            if (questionNumber <= 5) {
-
-                document.getElementById("level").innerText =
-                    "Level 1";
-
-                let number = Math.floor(Math.random() * 9) + 1;
-
-                document.getElementById("questions").innerText =
-                    "Question " + questionNumber +
-                    ": Spell the number " + number + "?";
-
-                correctAnswer = numberNames[number - 1];
-            }
-
-
-            // =========================
-            // LEVEL 2
-            // QUESTIONS 6 - 10
-            // DOUBLE / TRIPLE DIGIT
-            // =========================
-
-            else if (questionNumber <= 10) {
-
-                document.getElementById("level").innerText =
-                    "Level 2";
-let number = Math.floor(Math.random() * 191) + 10;1
-
-document.getElementById("questions").innerText =
-    "Question " + questionNumber +
-    ": Spell the number " + number + "?";
-
-correctAnswer = numberWords.find(item => item.number === number).name;
-            }
-else if (questionNumber <= 15) {
-
-    document.getElementById("level").innerText =
-        "Level 2";
-
-    let wordEntry = numberWords[Math.floor(Math.random() * numberWords.length)];
-
-    document.getElementById("questions").innerText =
-        "Question " + questionNumber +
-      ": Write the corresponding number for the word: " +
-      wordEntry.name + "?";
-
-    correctAnswer = wordEntry.number;
-}
-
-            // =========================
-            // LEVEL 3
-            // QUESTIONS 11 - 20
-            // ADD / SUBTRACT / MULTIPLY
-            // =========================
-
-            else if (questionNumber <= 20) {
-
-                document.getElementById("level").innerText =
-                    "Level 3";
-
-                let number1 = Math.floor(Math.random() * 15) + 1;
-                let number2 = Math.floor(Math.random() * 15) + 1;
-
-                let operation = Math.floor(Math.random() * 3);
-
-
-                // ADDITION
-                if (operation == 0) {
-
-                    document.getElementById("questions").innerText =
-                        "Question " + questionNumber +
-                        ": " + number1 + " + " + number2 + " = ?";
-
-                    correctAnswer = number1 + number2;
-                }
-
-
-                // SUBTRACTION
-                else if (operation == 1) {
-
-                    // Prevent negative answers
-                    if (number1 < number2) {
-
-                        let temp = number1;
-                        number1 = number2;
-                        number2 = temp;
-                    }
-
-                    document.getElementById("questions").innerText =
-                        "Question " + questionNumber +
-                        ": " + number1 + " - " + number2 + " = ?";
-
-                    correctAnswer = number1 - number2;
-                }
-
-
-                // MULTIPLICATION
-                else {
-
-                    let number1 = Math.floor(Math.random() * 9) + 1;
-                    let number2 = Math.floor(Math.random() * 9) + 1;
-
-                    document.getElementById("questions").innerText =
-                        "Question " + questionNumber +
-                        ": " + number1 + " × " + number2 + " = ?";
-
-                    correctAnswer = number1 * number2;
-                }
-            }
-
-
-            // =========================
-            // QUIZ FINISHED
-            // =========================
-
-            else {
-
-                document.getElementById("level").innerText =
-                    "Finished!";
-
-                document.getElementById("questions").innerText =
-                    "You finished all 20 questions!";
-
-                document.getElementById("answer").style.display =
-                    "none";
-
-                document.getElementById("answer-field").style.display =
-                    "none";
-
-                document.getElementById("submit").style.display =
-                    "none";
-
-                document.getElementById("next").style.display =
-                    "none";
-            }
-        }
-
-
-        // =========================
-        // CHECK ANSWER
-        // =========================
-
-        // Checks the student's answer and displays feedback.
-        function checkAnswer() {
-
-            let userAnswer = document
-                .getElementById("answer")
-                .value
-                .trim()
-                .toLowerCase();
-
-            if (!userAnswer) {
-                document.getElementById("result").innerText =
-                    "Please enter your answer.";
-                return;
-            }
-
-            if (userAnswer == correctAnswer) {
-
-                document.getElementById("result").innerText =
-                    "Correct!";
-
-            } else {
-
-                document.getElementById("result").innerText =
-                    "Incorrect! The correct answer is " +
-                    correctAnswer;
-            }
-
-            document.getElementById("next").disabled = false;
-            document.getElementById("next").style.display = "inline-block";
-        }
-
-
-        // =========================
-        // NEXT QUESTION
-        // =========================
-
-        // Advances after the student enters an answer.
-        function nextQuestion() {
-
-            if (!document.getElementById("answer").value.trim()) return;
-
-            if (questionNumber < 20) {
-
-                questionNumber++;
-
-                generateQuestion();
-
-            } else {
-
-                questionNumber++;
-
-                generateQuestion();
-            }
-        }
-
-
-        // SUBMIT BUTTON
-
-        document.getElementById("submit")
-            .addEventListener("click", checkAnswer);
-
-
-        // START QUIZ
-
-        generateQuestion();
-
-    </script>
-    <script>
-        // Sets up student login, scoring, and record actions.
+        <script>
         (() => {
-          // Finds a page element by its ID.
+            let questionNumber = 1;
+            let correctAnswer = "";
             const byId = (id) => document.getElementById(id);
+
+            const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+            const teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+            const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+            const numberNames = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+            const numberWords = [];
+
+            function numberToWord(number) {
+                if (number < 10) return ones[number];
+                if (number < 20) return teens[number - 10];
+                if (number < 100) {
+                    const ten = Math.floor(number / 10);
+                    const one = number % 10;
+                    return one === 0 ? tens[ten] : `${tens[ten]}-${ones[one]}`;
+                }
+
+                const hundred = Math.floor(number / 100);
+                const remainder = number % 100;
+                if (remainder === 0) return `${ones[hundred]} hundred`;
+                return `${ones[hundred]} hundred ${numberToWord(remainder)}`;
+            }
+
+            for (let number = 1; number <= 200; number++) {
+                numberWords.push({ number, name: numberToWord(number) });
+            }
+
+            function normalizeAnswer(value) {
+                return String(value).trim().toLowerCase().replace(/-/g, " ").replace(/\s+/g, " ");
+            }
+
+            function generateQuestion() {
+                const answerInput = byId("answer");
+                const result = byId("result");
+                const nextButton = byId("next");
+
+                answerInput.value = "";
+                result.textContent = "";
+                nextButton.disabled = true;
+                nextButton.style.display = "none";
+
+                if (questionNumber <= 5) {
+                    byId("level").textContent = "Level 1";
+                    const number = Math.floor(Math.random() * 9) + 1;
+                    byId("questions").textContent = `Question ${questionNumber}: Spell the number ${number}?`;
+                    correctAnswer = numberNames[number - 1];
+                } else if (questionNumber <= 10) {
+                    byId("level").textContent = "Level 2";
+                    const number = Math.floor(Math.random() * 191) + 10;
+                    const entry = numberWords.find((item) => item.number === number);
+                    byId("questions").textContent = `Question ${questionNumber}: Spell the number ${number}?`;
+                    correctAnswer = entry ? entry.name : numberToWord(number);
+                } else if (questionNumber <= 15) {
+                    byId("level").textContent = "Level 2";
+                    const wordEntry = numberWords[Math.floor(Math.random() * numberWords.length)];
+                    byId("questions").textContent = `Question ${questionNumber}: Write the corresponding number for the word: ${wordEntry.name}?`;
+                    correctAnswer = String(wordEntry.number);
+                } else if (questionNumber <= 20) {
+                    byId("level").textContent = "Level 3";
+                    let number1 = Math.floor(Math.random() * 15) + 1;
+                    let number2 = Math.floor(Math.random() * 15) + 1;
+                    const operation = Math.floor(Math.random() * 3);
+
+                    if (operation === 0) {
+                        byId("questions").textContent = `Question ${questionNumber}: ${number1} + ${number2} = ?`;
+                        correctAnswer = number1 + number2;
+                    } else if (operation === 1) {
+                        if (number1 < number2) {
+                            [number1, number2] = [number2, number1];
+                        }
+                        byId("questions").textContent = `Question ${questionNumber}: ${number1} - ${number2} = ?`;
+                        correctAnswer = number1 - number2;
+                    } else {
+                        const multipliedOne = Math.floor(Math.random() * 9) + 1;
+                        const multipliedTwo = Math.floor(Math.random() * 9) + 1;
+                        byId("questions").textContent = `Question ${questionNumber}: ${multipliedOne} × ${multipliedTwo} = ?`;
+                        correctAnswer = multipliedOne * multipliedTwo;
+                    }
+                } else {
+                    byId("level").textContent = "Finished!";
+                    byId("questions").textContent = "You finished all 20 questions!";
+                    byId("answer").style.display = "none";
+                    byId("answer-field").style.display = "none";
+                    byId("submit").style.display = "none";
+                    byId("next").style.display = "none";
+                    return;
+                }
+            }
+
+            function checkAnswer() {
+                const userAnswer = normalizeAnswer(byId("answer").value);
+
+                if (!userAnswer) {
+                    byId("result").textContent = "Please enter your answer.";
+                    return;
+                }
+
+                const expectedAnswer = normalizeAnswer(correctAnswer);
+                const isCorrect = userAnswer === expectedAnswer;
+                byId("result").textContent = isCorrect
+                    ? "Correct!"
+                    : `Incorrect! The correct answer is ${correctAnswer}`;
+
+                byId("next").disabled = false;
+                byId("next").style.display = "inline-block";
+            }
+
+            function nextQuestion() {
+                if (!byId("answer").value.trim()) return;
+                if (questionNumber < 20) {
+                    questionNumber += 1;
+                    generateQuestion();
+                } else {
+                    questionNumber += 1;
+                    generateQuestion();
+                }
+            }
+
             const login = byId("student-login");
             const form = byId("student-form");
             const quiz = byId("quiz-panel");
@@ -1060,14 +638,12 @@ else if (questionNumber <= 15) {
             let student;
             let saved = false;
 
-            // Updates the score shown in the record panel.
             function updateScore() {
                 const score = [...answers.values()].filter(Boolean).length;
                 const text = `Score: ${score} / ${total}`;
                 if (byId("record-score").textContent !== text) byId("record-score").textContent = text;
             }
 
-            // Records whether the current answer was correct.
             function captureAnswer() {
                 const response = result.textContent.trim();
                 if (response === "Correct!" || response.startsWith("Incorrect!")) {
@@ -1077,26 +653,22 @@ else if (questionNumber <= 15) {
                 }
             }
 
-            // Shows the record panel when the quiz ends.
             function checkCompletion() {
-                const finished = /finished|completed/i.test(level.textContent) ||
-                    /finished all \d+ questions/i.test(question.textContent);
+                const finished = /finished|completed/i.test(level.textContent) || /finished all \d+ questions/i.test(question.textContent);
                 if (finished && recordPanel.hidden) {
                     recordPanel.hidden = false;
                     updateScore();
                 }
             }
 
-            // Opens the quiz for the signed-in student.
             function startQuiz(details) {
                 student = details;
                 login.hidden = true;
                 quiz.hidden = false;
-                byId("student-summary").textContent =
-                    `${student.name} | Grade ${student.grade} | Section ${student.section}`;
+                byId("student-summary").textContent = `${student.name} | Grade ${student.grade} | Section ${student.section}`;
+                generateQuestion();
             }
 
-            // Splits and normalizes the grade and section input.
             function parseGradeSection(value) {
                 const match = value.trim().match(/^(\d+)\s*[-–—]\s*(.+)$/);
                 if (!match) return null;
@@ -1105,7 +677,6 @@ else if (questionNumber <= 15) {
                 return section ? { grade, section, gradeSection: `${grade} - ${section}` } : null;
             }
 
-            // Validates and stores the student's login details.
             form.addEventListener("submit", (event) => {
                 event.preventDefault();
                 const name = byId("student-name").value.trim();
@@ -1139,7 +710,9 @@ else if (questionNumber <= 15) {
             }
 
             byId("submit").addEventListener("click", () => setTimeout(captureAnswer, 0));
-            // Downloads a text record and stores a browser copy.
+            byId("submit").addEventListener("click", checkAnswer);
+            byId("next").addEventListener("click", nextQuestion);
+
             byId("save-record").addEventListener("click", () => {
                 if (!student || saved) return;
                 const record = {
@@ -1150,7 +723,7 @@ else if (questionNumber <= 15) {
                     completedAt: new Date().toISOString()
                 };
 
-                  const text = [
+                const text = [
                     "ARAL Math Quiz Record",
                     `Student: ${record.name}`,
                     `Grade: ${record.grade}`,
@@ -1158,40 +731,38 @@ else if (questionNumber <= 15) {
                     `Quiz: ${record.quiz}`,
                     `Score: ${record.score}/${record.total}`,
                     `Saved: ${new Date(record.completedAt).toLocaleString()}`
-                  ].join("\r\n");
-                  const file = new Blob([text], { type: "text/plain;charset=utf-8" });
-                  const link = document.createElement("a");
-                  const fileName = `${record.name}-${record.quiz}`.replace(/[^a-z0-9_-]+/gi, "_");
-                  const fileUrl = URL.createObjectURL(file);
-                  link.href = fileUrl;
-                  link.download = `${fileName}.txt`;
-                  document.body.appendChild(link);
-                  link.click();
-                  link.remove();
-                  URL.revokeObjectURL(fileUrl);
+                ].join("\r\n");
+
+                const file = new Blob([text], { type: "text/plain;charset=utf-8" });
+                const link = document.createElement("a");
+                const fileName = `${record.name}-${record.quiz}`.replace(/[^a-z0-9_-]+/gi, "_");
+                const fileUrl = URL.createObjectURL(file);
+                link.href = fileUrl;
+                link.download = `${fileName}.txt`;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                URL.revokeObjectURL(fileUrl);
 
                 try {
                     const records = JSON.parse(localStorage.getItem("aralMathRecords") || "[]");
                     records.push(record);
                     localStorage.setItem("aralMathRecords", JSON.stringify(records));
-                    byId("record-status").textContent =
-                      `Downloaded ${link.download} and saved ${record.score}/${record.total}.`;
+                    byId("record-status").textContent = `Downloaded ${link.download} and saved ${record.score}/${record.total}.`;
                 } catch {
                     byId("record-status").textContent = `Downloaded ${link.download}; browser storage was unavailable.`;
                 }
-                  saved = true;
-                  byId("save-record").disabled = true;
+
+                saved = true;
+                byId("save-record").disabled = true;
             });
 
-            // Reloads the quiz while keeping the student session.
             byId("restart-quiz").addEventListener("click", () => window.location.reload());
             new MutationObserver(captureAnswer).observe(result, { subtree: true, childList: true, characterData: true });
             const completionObserver = new MutationObserver(checkCompletion);
             [question, level].forEach((target) => completionObserver.observe(target, { childList: true, characterData: true }));
             checkCompletion();
         })();
-    </script>
-
-</body>
+    </script></body>
 
 </html>
