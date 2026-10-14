@@ -669,9 +669,9 @@ button:disabled {
                 let number1 = Math.floor(Math.random() * 200) + 10;
                 let number2 = Math.floor(Math.random() * 9) + 1;
 
-                document.getElementById("question").innerText =
+                document.getElementById("question").innerHTML =
                     "Question " + questionNumber +
-                    ": " + number1 + " × " + number2 + " = ?";
+                    ": <br>" + number1 + " × " + number2 + " = ?";
 
                 correctAnswer = number1 * number2;
 
@@ -688,9 +688,9 @@ button:disabled {
                     dividend = divisor * answer;
                 }
 
-                document.getElementById("question").innerText =
-                    "Question " + questionNumber +
-                    ": " + dividend + " ÷ " + divisor + " = ?";
+                document.getElementById("question").innerHTML =
+                    "Question" + questionNumber +
+                    ":<br> " + dividend + " ÷ " + divisor + " = ?";
 
                 correctAnswer = answer;
 
@@ -699,9 +699,9 @@ button:disabled {
                 let number1 = Math.floor(Math.random() * 90) + 10;
                 let number2 = Math.floor(Math.random() * 9) + 2;
 
-                document.getElementById("question").innerText =
+                document.getElementById("question").innerHTML =
                     "Question " + questionNumber +
-                    ": " + number1 + " × " + number2 + " = ?";
+                    ": <br>" + number1 + " × " + number2 + " = ?";
 
                 correctAnswer = number1 * number2;
 
@@ -717,15 +717,15 @@ button:disabled {
                     dividend = divisor * answer;
                 }
 
-                document.getElementById("question").innerText =
+                document.getElementById("question").innerHTML =
                     "Question " + questionNumber +
-                    ": " + dividend + " ÷ " + divisor + " = ?";
+                    ":<br> " + dividend + " ÷ " + divisor + " = ?";
 
                 correctAnswer = answer;
 
             } else {
 
-                document.getElementById("question").innerText =
+                document.getElementById("question").innerHTML =
                     "You finished Level 5!";
 
                 ["answer-field", "submit", "next"].forEach((id) => {
@@ -753,8 +753,8 @@ button:disabled {
 
             } else {
 
-                document.getElementById("result").innerText =
-                    "Incorrect! The correct answer is " + correctAnswer;
+                document.getElementById("result").innerHTML =
+                    `<span style="color: red;">Incorrect! The correct answer is: <strong>${correctAnswer}</strong>. </span>`;
             }
 
             document.getElementById("next").disabled = false;
