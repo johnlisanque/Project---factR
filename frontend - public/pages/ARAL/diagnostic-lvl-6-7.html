@@ -48,115 +48,6 @@ html, body {
   scroll-behavior: smooth;
 }
 
-/* ---------- Navigation ---------- */
-
-.top-nav-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-color);
-  padding: 14px 32px;
-  animation: slideDownNav 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideDownNav {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.nav-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.nav-logo {
-  font-family: var(--font-brand);
-  font-size: 1.25rem;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  color: var(--primary-forest);
-  text-decoration: none;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.nav-logo:hover { transform: scale(1.03); }
-
-.nav-tagline {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  border-left: 1.5px solid var(--border-color);
-  padding-left: 12px;
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .nav-tagline { display: inline-block; }
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  list-style: none;
-}
-
-.nav-link {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--text-body);
-  text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 7px;
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 4px;
-  left: 10px;
-  right: 10px;
-  height: 2px;
-  background-color: var(--primary-accent);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 2px;
-}
-
-.nav-link:hover {
-  color: var(--primary-forest);
-  background-color: var(--tint-light);
-  transform: translateY(-2px);
-}
-
-.nav-link:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.nav-link.active {
-  color: white;
-  background-color: var(--primary-forest);
-  box-shadow: 0 4px 14px rgba(22, 98, 61, 0.25);
-}
-
-.nav-link.active::after { display: none; }
-
 /* ---------- Cover ---------- */
 
 .cover-section {
@@ -349,6 +240,26 @@ button:hover:not(:disabled) {
   box-shadow: 0 6px 16px rgba(22, 98, 61, 0.25);
 }
 
+.top-nav-bar .nav-btn-toggle,
+.top-nav-bar .hamburger-btn {
+  background: transparent;
+  border: none;
+  color: var(--primary-forest);
+  box-shadow: none;
+  transform: none;
+}
+
+.top-nav-bar .nav-btn-toggle:hover,
+.top-nav-bar .hamburger-btn:hover,
+.top-nav-bar .nav-btn-toggle:focus-visible,
+.top-nav-bar .hamburger-btn:focus-visible {
+  background-color: var(--tint-light);
+  border-color: transparent;
+  color: var(--primary-forest);
+  box-shadow: none;
+  transform: none;
+}
+
 button:active:not(:disabled) { transform: translateY(0); }
 
 button:focus-visible {
@@ -435,6 +346,14 @@ button:disabled {
   font-weight: 700;
   line-height: 1.5;
   color: var(--primary-forest);
+}
+
+.quiz-feedback.correct {
+  color: var(--primary-forest);
+}
+
+.quiz-feedback.incorrect {
+  color: #d32f2f;
 }
 
 /* ---------- Record panel ---------- */
@@ -745,6 +664,7 @@ button:disabled {
 		element("numerator").value = "";
 		element("denominator").value = "";
 		element("result").innerText = "";
+		element("result").classList.remove("correct", "incorrect");
 		element("next").disabled = true;
 		element("next").style.display = "none";
 
@@ -757,16 +677,18 @@ button:disabled {
 		}
 
 		element("progress").innerText = `Question ${questionNumber + 1} of ${totalQuestions}`;
+		let prompt = "";
 		if (questionNumber < 8) {
 			element("level").innerText = "Level 6 - Integer Operations";
-			element("question").innerHTML = integerQuestion();
+			prompt = integerQuestion();
 		} else if (questionNumber < 14) {
 			element("level").innerText = "Level 7 - Fraction Operations";
-			element("question").innerHTML = fractionQuestion();
+			prompt = fractionQuestion();
 		} else {
 			element("level").innerText = "Level 7 - Basic Algebraic Operations";
-			element("question").innerHTML = algebraQuestion();
+			prompt = algebraQuestion();
 		}
+		element("question").innerHTML = `Question ${questionNumber + 1}:<br>${prompt}`;
 
 		const isFraction = answerType === "fraction";
 		element("single-answer").style.display = isFraction ? "none" : "block";
@@ -818,6 +740,8 @@ button:disabled {
 			? `${correctAnswer.numerator}/${correctAnswer.denominator}`
 			: String(correctAnswer).replace(/\^2/g, "²");
 		element("result").innerText = correct ? "Correct!" : `Incorrect! The correct answer is ${expected}.`;
+		element("result").classList.toggle("correct", correct);
+		element("result").classList.toggle("incorrect", !correct);
 		element("next").disabled = false;
 		element("next").style.display = "inline-block";
 	}
